@@ -1,0 +1,132 @@
+<div class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+        data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+        <div ui-butterbar></div>
+        <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+        <div class="md-content page_content_wrapper" id="top">
+
+            <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+                <h1 class="m-n font-thin h3">Category</h1>
+            </div>
+            <div class="wrapper-md ng-scope">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form id="knowledge-category-form">
+                            <div class="row">
+                                <form id="knowledge-category-form">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Category Name</label>
+                                            <input type="text" class="form-control" placeholder="Enter Category Name"
+                                                name="category_name" ng-model="category.category_name"
+                                                ng-disabled="category.category_name=='Getting started'" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label>Category Description</label>
+                                            <textarea class="form-control" name="description"
+                                                ng-model="category.description" style="resize: none;"
+                                                required></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                                <form id="knowledge-category-icon-form">
+                                    <div class="col-sm-4" click-outside>
+                                        <div class="form-group">
+                                            <label>Category Icon {{test}}</label>
+
+                                            <!-- search icon form -->
+                                            <input ng-focus="iconFocus(iconList)" ng-change="iconChange(categoryIcon)"
+                                                type="text" class="form-control" placeholder="Search icons"
+                                                autocomplete="off" name="category_name" ng-model="categoryIcon"
+                                                required="">
+                                            <button class="searchResult none" ng-click="searchIcon(categoryIcon)"><i
+                                                    class="fa fa-search"></i></button>
+
+                                            <span ng-show="searchLoader">
+                                                <i ng-show="!category.icon"
+                                                    class="fa fa-search fa-circle-o-notch fa-spin searchLoader"></i>
+                                                <i ng-show="category.icon"
+                                                    class="fa fa-search fa-circle-o-notch fa-spin searchLoader"
+                                                    style="top:24%;"></i>
+                                            </span>
+
+                                            <!-- search icon -->
+                                            <span ng-hide="searchLoader">
+
+                                                <!-- dispaly icon before -->
+                                                <img width="25" class="searchResult" ng-show="!category.icon"
+                                                    ng-src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-512.png">
+
+                                                <!-- dispaly icon after -->
+                                                <img width="25" class="searchResult" ng-show="category.icon"
+                                                    style="top:21%;"
+                                                    ng-src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-512.png">
+                                            </span>
+
+                                            <!-- icon image -->
+                                            <div class="select2-wrapper">
+                                                <div class="iconResults" ng-show="iconSet">
+                                                    <img ng-repeat="icons in iconList" ng-src="{{icons}}" alt=""
+                                                        width="64" data-icon-id="317727" style="padding: 5px;"
+                                                        ng-click="iconSelect(icons)">
+                                                    <span ng-show="!iconList.length" ng-bind="dataNotFound"></span>
+                                                </div>
+                                                <div class="select2-wrapper" ng-show="category.icon"
+                                                    style="padding: 5px">
+                                                    <img ng-src="{{category.icon}}" alt="" width="64"
+                                                        data-icon-id="317727">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="panel-footer pl-0 pr-0">
+                                <button class="btn m-b-xs w-xs btn-info"
+                                    ng-click="save('knowledge-category-form');"><i class="fa fa-floppy-o"
+                                        aria-hidden="true"></i> Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <table class="table table-striped b-t b-b table-bordered" datatable="ng">
+                        <thead>
+                            <th>#</th>
+                            <th>Category Name</th>
+                            <th>Category Icon</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="cat in categoryList"
+                                ng-class="(cat.category_id == category.category_id) ? 'rowactivate' : ''">
+                                <td ng-bind="$index + 1"></td>
+                                <td ng-bind="cat.category_name"></td>
+                                <td><img ng-src="{{cat.icon}}" alt="" width="30"></td>
+                                <td ng-if="cat.category_name!='Getting started'"><a href="javascript:void(0)"
+                                        ng-click="getCategory(cat.category_id, 'top');" title="edit"><i
+                                            class="glyph-icon fa-edit"></i></a> <a href="javascript:void(0)"
+                                        ng-click="deleteModel(cat.category_id)" title="delete"><i
+                                            class="iconDelete glyph-icon fa-times"></i></a></td>
+                                <td ng-if="cat.category_name=='Getting started'"><a href="javascript:void(0)"
+                                        ng-click="getCategory(cat.category_id, 'top');" title="edit"><i
+                                            class="glyph-icon fa-edit"></i></a> <span class="disableColor"></span> <a
+                                        href="javascript:void(0)" title="delete"><i
+                                            class="iconDelete glyph-icon fa-times disableColor"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- footer copy right -->
+                <div data-ng-include="'tpl/copyRight.html'"></div>
+
+            </div>
+        </div>
+    </div>

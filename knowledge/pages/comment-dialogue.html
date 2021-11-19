@@ -1,0 +1,43 @@
+<style type="text/css">
+  .modal{
+    display: block !important; /* I added this to see the modal, you don't need this */
+}
+
+/* Important part */
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-body{
+    height: 250px;
+    overflow-y: auto;
+}
+</style>
+<div class="modal-dialog" id="myModal">
+  <div class="modal-content">
+      <form id="comment-form" name="commentForm">    
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">&times;</button>
+            <h4 ng-if="commentList.length" class="modal-title" style="margin-left: 203px;">Comment ({{commentList.length}})</h4>
+            <h4 ng-if="!commentList.length" class="modal-title" style="margin-left: 203px;">Comment (0)</h4>
+        </div>
+            
+        <div class="modal-body">
+            <div class="col-md-12" scroll-glue>
+              <div ng-repeat = "commentDisplay in commentList" class="comment-list">
+                  <span class="fontWeight">{{commentDisplay.user_name}} Posted on   {{ commentDisplay.created_date | globalDtFormat}}</span><br>
+                  <span>{{commentDisplay.comment}}</span>
+                  <hr width="100%">
+              </div>
+            </div>
+        </div>
+        <md-input-container class="md-block" style="padding: 20px;border-top: 1px solid #dddddd;">
+              <label></label>
+              <textarea style="border:1px solid #ccc;" id="commentInput" ng-model="modal.comment1" md-maxlength="50" rows="5"  placeholder="Write your comment"></textarea>
+            </md-input-container>
+        <div class="modal-footer">
+          <md-button class="md-default md-raised" ng-click="cancel()">Close</md-button>
+          <md-button class="md-primary md-raised" ng-disabled="!modal.comment1" ng-click="commentSave('comment-form',modal.comment1)">Send</md-button>
+        </div>
+      </form>
+  </div><!-- /.modal-content -->
+</div>

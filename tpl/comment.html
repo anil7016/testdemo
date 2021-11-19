@@ -1,0 +1,396 @@
+<style type="text/css">
+  .jquery-comments .commenting-field.main {
+    /* position: absolute;
+    bottom: -130px;
+    width: 95%;
+    opacity: 1;
+    z-index: 1; */
+  }
+
+  ul#comment-list,
+  #attachment-list {
+    max-height: 320px;
+    overflow-y: scroll;
+    position: relative;
+    margin-bottom: 10px !important;
+  }
+
+  /* width Style for scroll*/
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .arrow.left:after {
+    /*    border-right-color: #edf1f2;*/
+  }
+
+  .commenting-field.main .profile-picture {
+    float: left;
+  }
+
+  .jquery-comments ul.main li.comment {
+    width: auto;
+    float: right;
+    position: relative;
+    margin-bottom: 50px;
+    color: #fff;
+    min-width: 220px;
+  }
+
+  .jquery-comments ul.main li.comment .wrapper .content a.attachment>* {
+    max-width: 80px;
+    max-height: 80px;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .jquery-comments ul.main li.comment .comment-wrapper {
+    border-top: none;
+    padding: 0;
+  }
+
+  .userpic {
+    width: 40px;
+    float: left;
+    margin-left: 10px;
+  }
+
+  .cmtright .name {
+    margin-right: 5px;
+  }
+
+  .cmtright .attachment {
+    color: #FFF;
+  }
+
+  .cmtright .profile-picture,
+  .cmtright .name {
+    float: right;
+  }
+
+  .cmtleft .profile-picture,
+  .cmtleft .name {
+    float: left !important;
+  }
+
+  .livemsg .profile-picture,
+  .livemsg .name {
+    float: right;
+  }
+
+  .textcomplete-item .details .name {
+    float: none;
+    margin-right: auto;
+  }
+
+  .jquery-comments ul.navigation li[data-sort-key="attachments"] {
+    float: none;
+  }
+
+  .jquery-comments ul.main li.comment .wrapper {
+    background-color: #4285F4;
+    border-radius: 25px 25px 0px 025px;
+    margin-right: 55px;
+    width: auto;
+    float: right;
+  }
+
+  .jquery-comments ul.main li.comment.pull-left .wrapper {
+    margin-right: 0;
+    margin-left: 55px;
+    border-radius: 25px 25px 25px 0px;
+    float: left;
+    color: #333;
+    background-color: #e3eaf2;
+  }
+
+  .jquery-comments ul.main li.comment .wrapper a {
+    color: #fff;
+  }
+
+  .jquery-comments ul.main li.comment.pull-left .wrapper a {
+    color: #333;
+  }
+
+  .livemsg .profile-picture {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  .livemsg .pull-left .profile-picture {
+    left: 0;
+    margin-left: 1rem;
+    margin-right: 0;
+  }
+
+  .jquery-comments ul.main li.comment time {
+    position: absolute;
+    top: 100%;
+    margin-top: 5px;
+  }
+
+  .livemsg .name {
+    position: absolute;
+    top: 100%;
+    right: 55px;
+    margin-top: 3px;
+    font-weight: 500;
+    margin-right: 0;
+    min-width: 100px;
+    text-align: right;
+  }
+
+  .livemsg .pull-left .name {
+    right: auto;
+    left: 55px;
+    text-align: left;
+  }
+
+  .jquery-comments ul.main li.comment.pull-left time {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 5px;
+  }
+
+  .jquery-comments .textarea-wrapper .close {
+    display: none !important;
+  }
+
+  .textcomplete-item .details .name {
+    float: none;
+    margin-right: auto;
+    position: relative;
+    right: initial;
+    top: initial;
+    text-align: initial;
+    margin-top: auto;
+  }
+
+  .textcomplete-item .profile-picture {
+    position: relative;
+  }
+
+  .commenting-field .profile-picture {
+    position: relative;
+    float: left;
+  }
+
+  .control-row .send {
+    border-radius: 0px 2px 2px 15px;
+    padding: 5px 20px !important;
+  }
+
+  .control-row .upload {
+    padding: 5px 20px !important;
+    margin-right: 15px;
+  }
+
+  li[data-sort-key='oldest'] {
+    margin-left: -27px;
+  }
+
+  .emojionearea-editor {
+    /*display: none !important;*/
+    width: 0px;
+  }
+
+  .emojionearea,
+  .emojionearea.form-control {
+    -moz-box-shadow: initial;
+    -webkit-box-shadow: initial;
+    box-shadow: initial;
+    -moz-transition: none;
+    -o-transition: none;
+    -webkit-transition: none;
+    transition: none;
+    border: none;
+    float: right;
+    width: auto;
+  }
+
+  .emojionearea.emojionearea-inline {
+    height: auto;
+  }
+/* date seperator */
+.seperatordate {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+.seperatordate::before,
+.seperatordate::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #b4b6b9;
+}
+.seperatordate:not(:empty)::before {
+  margin-right: .25em;
+}
+
+.seperatordate:not(:empty)::after {
+  margin-left: .25em;
+}
+li.seperatordate.comment {
+    width: 100% !important;
+    margin: 0 0 30px 0 !important;
+    max-width: initial !important;
+    color: #b4b6b9 !important;
+}
+.hideusername{
+ display: none;
+}
+</style>
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+  data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+  <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+    data-ng-include=" 'tpl/material.aside.html' ">
+  </div>
+  <div flex layout="column">
+    <div ui-butterbar></div>
+    <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+    <div class="md-content discussion_page page_content_wrapper">
+
+      <!-- <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+        <a href="javascript:history.back()" class="btn btn-info pull-right"> Back</a>
+        <h1 class="m-n font-thin h3">
+            Jobs -
+          <span id="itemCode" ng-bind="projectOrderName"></span>
+          <span>{{indirectCustomerName}}</span>
+        </h1>
+      </div> -->
+      <div class="wrapper-md ng-scope">
+
+        <div class="panel panel-default">
+          <div class="row panel-heading font-bold" style="padding-top: 0;">
+            <a href="javascript:history.back()" class="btn btn-back fa fa-angle-left"></a>
+            <h4>Discussion Board</h4>
+          </div>
+          <div class="panel-body">
+            <div class="row d-flex">
+              <div class="col-sm-8 livemsg w-100">
+                  <div id="comments-container"></div>
+              </div>
+              <div class="col-md-4 statusBox">
+                <span style="display: inline-block; padding:0px 20px 10px 20px"><b>Status</b></span> 
+                <div class="navside white r box-shadow-z0 nav-center" layout="column">
+                  <div flex-no-shrink=""
+                    style="background:#fff; border-radius: 5px;">
+                    <nav ui-nav="">
+                      <ul class="nav">
+                        <li>
+                            <span class="nav-text">
+                              <span class="projstatus m-t-sm"><i class="fa fa-circle text-xs" style="color: {{general.status_color}}"></i> {{general.project_status}}</span>
+                              <small class="block text-muted"> </small></span>
+                        </li>
+                        <!-- <li>
+                            <span class="nav-icon"><i class="fa fa-clock-o"></i></span>
+                            <span class="nav-text">{{general.due_date}}<small class="block text-muted">Deadline</small></span>
+                        </li>
+                        <li>
+                            <span class="nav-icon"><i class="fa fa-user"></i></span>
+                            <span class="nav-text"><span id="manager"></span><small class="block text-muted">Project Manager</small></span>
+                        </li>
+                        <li>
+                            <span class="nav-icon"><i class="fa fa-indent"></i></span>
+                            <span class="nav-text">{{general.project_price | currencyCommaformat}} USD<small class="block text-muted">Project Price</small></span>
+                        </li> -->
+                        <li class="projectName">
+                          <i class="fa fa-tasks"></i>
+                          <div class="caption">
+                            <div class="name">{{general.project_name}}<label>Project Name</label></div>
+                          </div>
+                        </li>
+                        <li class="deadline">
+                          <i class="fa fa-flag-checkered" aria-hidden="true"></i>
+                          <div class="caption">
+                            <div class="Delivery-date">{{general.due_date }}<label>Estimated delivery</label></div>
+                            <div class="startDate"><strong>Started:</strong> {{general.expected_start_date}}</div>
+                          </div>
+                        </li>
+                        <li class="task-price">
+                          <div class="caption">
+                            <i class="fa fa-snowflake-o" aria-hidden="true"></i>
+                            <label>Project Price</label>
+                          </div>
+                          <span class="price">{{projectPriceChat | CurrencyNumbersCommaformat}}</span>
+                        </li>
+                        <li class="userSection">
+                          <span class="sec-title">Project Members:</span>
+                          <div class="top">
+                            <figure class="managerIcon"></figure>
+                            <div class="user-info">
+                              <div class="user-name"><span id="managerDesignation">Mayank Vadiya</span><span class="designation">Project Manager</span></div>
+                            </div>
+                          </div>
+                          <div class="projectTeam">
+                            <div class="team-list">
+                              <div class="list-item">
+                                <figure class="coordinatorIcon"></figure>
+                                <div class="right">
+                                  <strong id="coordinatorIcon"> </strong>
+                                  <span class="designation">Project Coordinator</span>
+                                </div>
+                              </div>
+                              <div class="list-item">
+                                <figure class="QAIcon"></figure>
+                                <div class="right">
+                                  <strong id="QASpecialist"> - </strong>
+                                  <span class="designation">QA Specialist</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="team-list">
+                              <div class="list-item" ng-repeat="linguist in jobLinguist" >
+                                <figure style="background: url(uploads/profilePic/{{linguist.resourcePic}}) no-repeat center;background-size: cover;">  </figure>
+                                <div class="right">
+                                  <strong>{{linguist.vUserName}}</strong>
+                                  <span class="designation">Linguist</span>
+                                </div>
+                              </div>
+                              
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  
+  $( document ).ready(function() {  
+    setTimeout(() => {
+      // jQuery('#comment-list').scrollTop(jQuery('#comment-list')[0].scrollHeight);
+      // jQuery('#attachment-list').scrollTop(jQuery('#attachment-list')[0].scrollHeight);
+    }, 100);
+  });
+
+</script>

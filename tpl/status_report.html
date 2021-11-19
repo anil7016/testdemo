@@ -1,0 +1,446 @@
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+   data-ng-include=" 'tpl/material.header.html' "></div>
+<div layout="row">
+   <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+      data-ng-include=" 'tpl/material.aside.html' ">
+   </div>
+   <div flex layout="column">
+      <div ui-butterbar></div>
+      <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+      <div class="md-content page_content_wrapper" id="top">
+         <div class="content_head bg-light wrapper-md ng-scope">
+            <a href="javascript:history.back()" class="btn m-b-xs btn-info pull-right"><span
+                  class="fa fa-arrow-left"></span> Back</a>
+            <!-- <h1 class="m-n font-thin h3">Resource Type</h1> -->
+         </div>
+         <div class="wrapper-md ng-scope">
+            <div class="panel panel-default">
+               <div class="panel-body">
+                  <form id="order-status-report">
+                     <!--   TAB1 -->
+                     <div class="row">
+                        <div class="col-sm-12">
+                           <div class="panel panel-default">
+                              <div class="panel-heading font-bold">Select</div>
+                              <div class="">
+                                 <div class="col-sm-6 form-group">
+                                    <div class="row">
+                                    <div class="col-sm-11">
+                                       <label>Company code (rights)</label>
+                                       <input type="text" select2-center-client data-typeid="2" id="companyCode1"
+                                          class="form-control" name="companyCode" ng-model="orderReport.companyCode" />
+                                    </div>
+                                    <div class="col-sm-1" style="margin:33px 0 0 -14px;">
+                                       <a href="javascript:void(0)"
+                                          ng-click="clearCode('order-status-report','companyCode')"
+                                          ng-if="orderReport.companyCode"><i class="iconDelete glyph-icon fa-times"
+                                             aria-hidden="true"></i></a>
+                                    </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-sm-6 form-group">
+                                    <div class="row">
+                                    <div class="col-sm-11">
+                                       <label>
+                                          <!-- Customers -->Client
+                                       </label>
+                                       <input type="text" select2-client data-typeid="2" id="customer1"
+                                          class="form-control" name="customer" ng-model="orderReport.customer"
+                                          ng-change="getContact(orderReport.customer, 'conatct-person')" />
+                                    </div>
+                                    <div class="col-sm-1" style="margin:33px 0 0 -14px;">
+                                       <a href="javascript:void(0)"
+                                          ng-click="clearCode('order-status-report','customer')"
+                                          ng-if="orderReport.customer"><i class="iconDelete glyph-icon fa-times"
+                                             aria-hidden="true"></i></a>
+                                    </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-sm-6 form-group">
+                                    <div class="row">
+                                    <div class="col-sm-11">
+                                       <label>Contact Person(Client)</label>
+                                       <input type="text" ng-select2-usertype data-typeid="2" id="conatct-person"
+                                          class="form-control" name="contactPerson" ng-model="orderReport.contactPerson"
+                                          ng-disabled="!orderReport.customer" />
+                                    </div>
+                                    <div class="col-sm-1" style="margin:33px 0 0 -14px;">
+                                       <a href="javascript:void(0)"
+                                          ng-click="clearCode('order-status-report','contactPerson')"
+                                          ng-if="orderReport.contactPerson"><i class="iconDelete glyph-icon fa-times"
+                                             aria-hidden="true"></i></a>
+                                    </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-sm-6 form-group">
+                                    <div class="row">
+                                    <div class="col-sm-11">
+                                       <label>Scoop Status</label>
+                                       <input type="text" select2-job-detailitm-status data-typeid="2" id="itemStatus"
+                                          class="form-control" name="itemStatus" ng-model="orderReport.itemStatus" />
+                                    </div>
+                                    <div class="col-sm-1" style="margin:33px 0 0 -14px;">
+                                       <a href="javascript:void(0)"
+                                          ng-click="clearCode('order-status-report','itemStatus')"
+                                          ng-if="orderReport.itemStatus"><i class="iconDelete glyph-icon fa-times"
+                                             aria-hidden="true"></i></a>
+                                    </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-sm-6 form-group">
+                                    <div class="row">
+                                    <div class="col-sm-11">
+                                       <label>Project Status</label>
+                                       <input type="text" select2-proj-jobs data-typeid="2" id="projectStatus"
+                                          class="form-control" name="projectStatus"
+                                          ng-model="orderReport.projectStatus" />
+                                    </div>
+                                    <div class="col-sm-1" style="margin:33px 0 0 -14px;">
+                                       <a href="javascript:void(0)"
+                                          ng-click="clearCode('order-status-report','projectStatus')"
+                                          ng-if="orderReport.projectStatus"><i class="iconDelete glyph-icon fa-times"
+                                             aria-hidden="true"></i></a>
+                                    </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-sm-6 form-group">
+                                    <div class="row">
+                                    <div class="col-sm-11">
+                                       <label>Project Types</label>
+                                       <input type="text" select2-proj-type data-typeid="2" id="projectType"
+                                          class="form-control" name="projectType" ng-model="orderReport.projectType" />
+                                    </div>
+                                    <div class="col-sm-1" style="margin:33px 0 0 -14px;">
+                                       <a href="javascript:void(0)"
+                                          ng-click="clearCode('order-status-report','projectType')"
+                                          ng-if="orderReport.projectType"><i class="iconDelete glyph-icon fa-times"
+                                             aria-hidden="true"></i></a>
+                                    </div>
+                                 </div>
+                                 </div>
+                                 <div class="col-sm-6 form-group">
+                                    <div class="row">
+                                    <div class="col-sm-11">
+                                       <label>Source Language</label>
+                                       <input type="text" select2-order-languages-data data-typeid="2"
+                                          id="sourceLanguage" class="form-control" name="sourceLanguage"
+                                          ng-model="orderReport.sourceLanguage" />
+                                    </div>
+                                    <div class="col-sm-1" style="margin:33px 0 0 -14px;">
+                                       <a href="javascript:void(0)"
+                                          ng-click="clearCode('order-status-report','sourceLanguage')"
+                                          ng-if="orderReport.sourceLanguage"><i class="iconDelete glyph-icon fa-times"
+                                             aria-hidden="true"></i></a>
+                                    </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-sm-6 form-group">
+                                    <div class="row">
+                                    <div class="col-sm-11">
+                                       <label>Target Language</label>
+                                       <input type="text" select2-order-languages-data data-typeid="2"
+                                          id="targetLanguage" class="form-control" name="targetLanguage"
+                                          ng-model="orderReport.targetLanguage" />
+                                    </div>
+                                    <div class="col-sm-1" style="margin:33px 0 0 -14px;">
+                                       <a href="javascript:void(0)"
+                                          ng-click="clearCode('order-status-report','targetLanguage')"
+                                          ng-if="orderReport.targetLanguage"><i class="iconDelete glyph-icon fa-times"
+                                             aria-hidden="true"></i></a>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!--   TAB1 -->
+                     <div class="panel-footer" id='middle'>
+                        <a class="btn btn-info btn-leftside"
+                           ng-click="statusReportsearch('order-status-report','middle')">Update search</a>
+                        <button class="btn btn-info btn-leftside"
+                           ng-click="reseteSearch('order-status-report',orderReport)">Delete Search</button>
+                     </div>
+                  </form>
+               </div>
+            </div>
+            <div class="panel panel-default">
+               <div class="panel-body">
+                  <div class="">
+                     <div class="panel panel-default">
+                        <div class="panel-heading font-bold">
+                           <h4>Result</h4>
+                        </div>
+                        <div class="panel-body">
+                           <div class="col-sm-12">
+                              <div class="row wrapper" ng-show="staturRes.length">
+                                 <div class="col-sm-6 m-b-xs">
+                                    <div class="col-sm-4">
+                                       <select class="input-sm form-control w-sm inline v-middle" ng-model="action"
+                                          ng-change="statucOrderAction(action)">
+                                          <option>Change project status</option>
+                                          <option>Change item status</option>
+                                          <option>Export to excel</option>
+                                          <!-- <option>Remove selection</option> -->
+                                          <option>Select all</option>
+                                       </select>
+                                    </div>
+                                    <div class="col-sm-5" ng-show="projectStatus">
+                                       <input type="text" select2-proj-jobs data-typeid="2" id="projectStatusdata"
+                                          class="input-sm form-control w-sm inline v-middle" ng-model="projectStatus" />
+                                    </div>
+                                    <div class="col-sm-5" ng-show="itemStatus">
+                                       <input type="text" select2-job-detailitm-status data-typeid="2"
+                                          id="itemStatusdata" class="input-sm form-control w-sm inline v-middle"
+                                          ng-model="itemStatus" />
+                                    </div>
+                                    <div class="col-sm-1">
+                                       <button class="btn btn-sm btn-info"
+                                          ng-click="statusAction(action,projectStatus)"><i
+                                             class="glyphicon glyphicon-ok"></i></button>
+                                    </div>
+                                 </div>
+                                 <div>
+                                    <button ng-show="staturRes.length" class="btn m-b-xs btn-info pull-right"
+                                       ng-click="exportData('result')">Excel</button>
+                                 </div>
+                              </div>
+                              <div class="table-responsive">
+                                 <table class="table m-b-none default footable-loaded footable">
+                                    <thead>
+                                       <th>#</th>
+                                       <th>Orders Number</th>
+                                       <!-- <th>Order Date</th> -->
+                                       <th>
+                                          <!-- Customers -->Client
+                                       </th>
+                                       <!-- <th>Project name</th> -->
+                                       <th>Status</th>
+                                       <th>Prices</th>
+                                       <th>Price in selected currency</th>
+                                    </thead>
+                                    <tbody>
+                                       <tr ng-repeat="result in staturRes=(statusResult | filter : orderReport)"
+                                          class="orderRClass">
+                                          <td>
+                                             <input type="checkbox" id="orderCheck{{$index}}"
+                                                name="orderCheck{{$index}}" ng-model="checkor"
+                                                ng-checked="checkdata=='ordercheck'">
+                                             <input type="text" id="orderCheckData{{$index}}"
+                                                name="orderCheckData{{$index}}" style="display: none;"
+                                                ng-model="result.orderId">
+                                          </td>
+                                          <td><a href="#/viewProject/{{result.orderId}}"
+                                                class="summeryColor">{{result.orderNumber}}</a></td>
+                                          <!-- <td ng-bind="result.orderDate | globalDtFormat"></td> -->
+                                          <td><a href="#/viewdirect/{{result.customer}}"
+                                                class="summeryColor"><span>{{result.contactName}}</span></a></td>
+                                          <!-- <td ng-bind="result.projectName"></td> -->
+                                          <td ng-bind="result.clientStatus"></td>
+                                          <td ng-bind="result.totalAmount | customNumber">--</td>
+                                          <td>--</td>
+                                       </tr>
+                                       <tr ng-show="!staturRes.length">
+                                          <td colspan="8" ng-bind="dataNotFound"></td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                              <!-- use for export excel -->
+                              <div class="table-responsive" id="exportable" style="display: none">
+                                 <table class="table m-b-none default footable-loaded footable">
+                                    <thead>
+                                       <th>#</th>
+                                       <th>Orders Number</th>
+                                       <th>Order Date</th>
+                                       <th>Customers</th>
+                                       <!-- <th>Project name</th> -->
+                                       <th>Status</th>
+                                       <th>Prices</th>
+                                       <th>Price in selected currency</th>
+                                    </thead>
+                                    <tbody>
+                                       <tr ng-repeat="result in statusResult | filter : orderReport">
+                                          <td>{{$index + 1}}</td>
+                                          <td ng-bind="result.orderNumber"></td>
+                                          <td ng-bind="result.orderDate"></td>
+                                          <td ng-bind="result.contactName"></td>
+                                          <!-- <td ng-bind="result.projectName"></td> -->
+                                          <td ng-bind="result.clientStatus"></td>
+                                          <td ng-bind="result.totalAmount | customNumber"></td>
+                                          <td>--</td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="panel panel-default">
+               <div class="panel-body">
+                  <div class="panel panel-default">
+                     <div class="panel-heading font-bold">
+                        <h4>Month</h4>
+                     </div>
+                     <div class="panel-body">
+                        <div class="col-sm-12" ng-show="checkOrderItem!=0 && checkOrderItem!=undefined">
+                           <div class="col-sm-5" id="itemExport">
+                              <table class="table m-b-none default footable-loaded footable">
+                                 <thead>
+                                    <th>Month</th>
+                                    <th>Total</th>
+                                    <th>%Share</th>
+                                 </thead>
+                                 <tbody>
+                                    <div>
+                                       <tr ng-repeat="d in Dateobject" class="itemData">
+                                          <td id="itemDate{{$index}}" ng-bind="d.id"></td>
+                                          <td id="itemAmount{{$index}}"></td>
+                                          <td id="itemShare{{$index}}"></td>
+                                       </tr>
+                                    </div>
+                                    <tr>
+                                       <td>Total (EUR)</td>
+                                       <td id="totalItemAmout" ng-bind="totalItemAmout | customNumber"></td>
+                                       <td id="totalItemPer"><span ng-if='totalItemAmout'>100%</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td>Average Month (Quantity - 12)</td>
+                                       <td ng-bind="totalItemAvg | customNumber"></td>
+                                       <td id="totalAvgPer"><span ng-if="totalItemAvg">12%</span></td>
+                                    </tr>
+                                    <tr>
+                                       <td colspan="3" class="even"><button class="btn btn-info"
+                                             ng-click="exportData('month')">Excel</button> </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                           <div class="col-sm-7">
+                              <div id="monthChart" style="height: 400px" ng-bind="chart"></div>
+                           </div>
+                           <table class="table m-b-none default footable-loaded footable none">
+                              <thead>
+                                 <th>Month</th>
+                                 <th>Total</th>
+                                 <th>%Share</th>
+                              </thead>
+                              <tbody>
+                                 <tr ng-repeat="s in statusInfo | filter : orderReport" class="itemData">
+                                    <td id="masterQDate{{$index}}">{{s.QuentityDate}}</td>
+                                    <td id="masterQAmount{{$index}}">{{s.TotalAmount | customNumber}}</td>
+                                 </tr>
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="panel panel-default">
+               <div class="panel-body">
+                  <div class=" " id='middle'>
+                     <div class="panel panel-default">
+                        <div class="panel-heading font-bold">
+                           <h4>Project types</h4>
+                        </div>
+                        <div class="panel-body">
+                           <div class="col-sm-12" ng-show="checkOrderItem!=0 && checkOrderItem!=undefined">
+                              <div class="col-sm-5" id="ProjectTypeexport">
+                                 <table class="table m-b-none default footable-loaded footable">
+                                    <thead>
+                                       <th>Project types</th>
+                                       <th>Total</th>
+                                       <th>%Share</th>
+                                    </thead>
+                                    <tbody>
+                                       <!-- (key, value) in players | groupBy: 'team' -->
+                                       <tr ng-repeat="result in statusProjectType | filter : orderReport"
+                                          class="orderRClass">
+                                          <td id="projectTypeName{{$index}}" ng-bind="result.projectTypeName"></td>
+                                          <td id="projectTypeAmount{{$index}}" ng-bind="result.TotalAmount"></td>
+                                          <td id="projectTypeShare{{$index}}"></td>
+                                       </tr>
+                                       <tr>
+                                          <td>Total (EUR)</td>
+                                          <td ng-bind="ProjectTypetotal | customNumber"></td>
+                                          <td><span ng-if="ProjectTypetotal">100%</span></td>
+                                       </tr>
+                                       <tr>
+                                          <td>Average Project types (Quantity - {{projectAverage}})</td>
+                                          <td ng-bind="ProjectTypeAverage | customNumber"></td>
+                                          <td>{{projectAverage}}%</td>
+                                       </tr>
+                                       <tr>
+                                          <td colspan="3" class="even"><button class="btn btn-info"
+                                                ng-click="exportData('projectType')">Excel</button> </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                              <div class="col-sm-7">
+                                 <div id="projectTyp" ng-bind="chart"></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="panel panel-default">
+               <div class="panel-body">
+                  <div class="col-sm-12" id='middle'>
+                     <div class="panel panel-default">
+                        <div class="panel-heading font-bold">
+                           <h4>Customers</h4>
+                        </div>
+                        <div class="panel-body">
+                           <div class="col-sm-12" ng-show="checkOrderItem!=0 && checkOrderItem!=undefined">
+                              <div class="col-sm-5" id="customersExports">
+                                 <table class="table m-b-none default footable-loaded footable">
+                                    <thead>
+                                       <th>Customers</th>
+                                       <th>Total</th>
+                                       <th>%Share</th>
+                                    </thead>
+                                    <tbody>
+                                       <tr ng-repeat="cust in statusCustomerType | filter : orderReport"
+                                          class="orderRClass">
+                                          <td id="CustomersName{{$index}}" ng-bind="cust.contactName"></td>
+                                          <td id="CustomersAmount{{$index}}" ng-bind="cust.TotalAmount"></td>
+                                          <td id="customersShare{{$index}}"></td>
+                                       </tr>
+                                       <tr>
+                                          <td>Total (EUR)</td>
+                                          <td id="CustomersTypeTotal" ng-bind="CustomersTypeTotal | customNumber"></td>
+                                          <td><span ng-if="CustomersTypeTotal">100%</span></td>
+                                       </tr>
+                                       <tr>
+                                          <td>Average Project types (Quantity - {{TotalCustomer}})</td>
+                                          <td ng-bind="customersAverage"></td>
+                                          <td>{{TotalCustomer}}%</td>
+                                       </tr>
+                                       <tr>
+                                          <td colspan="3" class="even"><button class="btn btn-info"
+                                                ng-click="exportData('customers')">Excel</button> </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                              <div class="col-sm-7">
+                                 <div id="CustomerType" ng-bind="chart"></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- footer copy right -->
+            <div data-ng-include="'tpl/copyRight.html'"></div>
+
+         </div>
+      </div>
+   </div>

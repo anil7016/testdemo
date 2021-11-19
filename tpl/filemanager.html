@@ -1,0 +1,152 @@
+<form id="message_form">
+    <div class="modal-header">
+        <h3 class="modal-title">Filemanager</h3>
+    </div>
+    <div class="wrapper-md">
+            <div class="panel panel-default">
+                <div class="tab-content">
+                    <div id="w4-tab1" class="tab-pane active">
+                        <form id="customer-form">
+                            <div class="panel panel-default" ng-hide="statusName=='Requested' && userRight=='2' || statussource == 'source' && userRight=='2'">
+                                <div class="panel-heading filehead">
+                                  Upload data
+                                </div>
+                                <div class="table-responsive">
+                                  <div class="col-md-4">
+                                    <input name="files" type="file" multiple="multiple" id="our-test" ng-model="imageSrc" ng-file-select="onFileSelect($files)"/>
+                                    <span id="filename" class="none">{{filename}}</span>
+                                    <span id="filetype" class="none">{{filetype}}</span>
+                                    <span id="filesize" class="none">{{filesize}}</span>
+                                  </div>
+                                  <div class="col-sm-12">
+                                      <div class="form-group workfolw">
+                                          <a href="javascript:void(0)" ng-click="uploadFile(imageSrc)"
+                                             class="btn btn-info">Update</a>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading filehead">
+                                </div>
+                                <div class="table-responsive">
+                                  <table class="table table-striped b-t b-light">
+                                    <thead>
+                                      <tr>
+                                        <th style="width:30px;"></th>
+                                        <th>Name</th>
+                                        <th>Date</th>
+                                        <th>File type</th>
+                                        <th>Size</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        <td colspan="5">
+                                            <a href="javascript:void(0)" ng-click="higherlevelFolder(folid)">
+                                                    <img src="assets/img/_dirupper.gif">&nbsp;<span class="summeryColor">Switch to higher folder level</span>
+                                            </a>
+                                        </td>
+                                    </tbody>
+                                  </table>  
+                                  <table class="table table-striped b-t b-light">
+                                    <thead>
+                                      <tr>
+                                        <th style="width:30px;">
+                                            <div ng-show="rootshow" class="fileimgfolder"></div>
+                                        </th>
+                                        <th colspan="4">        
+                                            <span ng-show="rootshow" ng-bind="parentName"></span>
+                                        </th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr ng-repeat="display in displayfolder | orderBy:'f_id'">
+                                        <td>
+                                              <label class="i-checks m-b-none" ng-show="userRight=='2'"> 
+                                                 <input type="checkbox" id="fcheck{{$index}}" ng-model="flodercheck" name="foldercheck{{$index}}" ng-disabled="display.role_id!='2'"><i></i>
+                                              </label>
+                                              <label class="i-checks m-b-none" ng-show="userRight=='1'"> 
+                                                 <input type="checkbox" id="fcheck{{$index}}" ng-model="flodercheck" name="foldercheck{{$index}}"><i></i>
+                                              </label>
+                                        </td>
+                                        <td>
+                                          <span ng-if="display.f_id=='0'">
+                                            <a href="javascript:void(0)" ng-click="findfile(display.fmanager_id,display.name)"><div class="fileimgfolder"></div>
+                                            &nbsp;<span ng-bind="display.name"></span></a>
+                                          </span>
+                                          <span ng-if="display.ext == 'zip'">
+                                            <a href="uploads/fileupload/{{display.name}}" download><div class="fileimgimagezip"></div>
+                                            &nbsp;<span ng-bind="display.name"></span></a>
+                                          </span>
+                                          <span ng-if="display.ext == 'xlsx'">
+                                            <a href="uploads/fileupload/{{display.name}}" download><div class="fileimgimagexl"></div>
+                                            &nbsp;<span ng-bind="display.name"></span></a>
+                                          </span>
+                                          <span ng-if="display.ext == 'doc'">
+                                            <a href="uploads/fileupload/{{display.name}}" download><div class="fileimgimagedoc"></div>
+                                            &nbsp;<span ng-bind="display.name"></span></a>
+                                          </span>
+                                          <span ng-if="display.ext == 'pdf'">
+                                            <a href="uploads/fileupload/{{display.name}}" download><div class="fileimgimagepdf"></div>
+                                            &nbsp;<span ng-bind="display.name"></span></a>
+                                          </span>
+                                          <span ng-show="display.ext == 'jpg' || display.ext == 'png' || display.ext == 'gif'  || display.ext == 'jfif' || display.ext == 'jpeg'">
+                                            <a href="uploads/fileupload/{{display.name}}" download><img id="new_profile_pic"  ng-src="uploads/fileupload/{{display.name}}" width="30px" class="img-thumbnail" alt="Add a Picture">
+                                            &nbsp;<span ng-bind="display.name"></span></a>
+                                          </span>
+                                          <span ng-show="display.f_id!='0' && display.ext != 'jpg' && display.ext != 'png' && display.ext != 'gif' &&  display.ext != 'jfif' && display.ext != 'xlsx' && display.ext != 'zip' && display.ext != 'pdf' && display.ext != 'doc' && display.ext != 'jpeg'">
+                                            <a href="uploads/fileupload/{{display.name}}" download><div class="fileimgimagetxt"></div>
+                                            &nbsp;<span ng-bind="display.name"></span></a>
+                                          </span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="folderCheckdata{{$index}}" name="disp{{$index}}" value="{{display.fmanager_id}}" class="none" ng-if="flodercheck==true">
+                                            <input type="text" id="folderCheckfile{{$index}}" name="disp{{$index}}" value="{{display.name}}" class="none" ng-if="flodercheck==true">
+                                            <span ng-bind="display.created_date | dateFormat" ng-if="display.ext"></span>
+                                        </td>
+                                        <td><span>{{display.ext}}</span></td>
+                                        <td><span>{{display.size}}</span></td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                  <table class="table table-striped b-t b-light">
+                                    <thead>
+                                      <tr>
+                                        <td colspan="6">
+                                            <div ng-if="displayfolder==''" style="padding: 0px 0px 10px 0px;" ng-bind="dataNotFound">
+                                            </div>      
+                                            <div class="col-sm-12">
+                                              <select class="input-sm form-control w-sm inline v-middle" ng-init="selectAction = '--Action for selection--'" ng-model="selectAction" ng-change="changefolderAction(selectAction)">
+                                                <option>--Action for selection--</option>
+                                                <option>Rename as</option>
+                                                <option ng-if="userRight=='1'">New folder</option>
+                                                <option>Delete</option>
+                                              </select>
+                                              <input ng-show="renameshow" type="text" name="tax_id" class="input-sm" ng-model="nameaction" placeholder="Enter Name">
+                                              <input ng-show="selectAction == 'New folder'" type="text" name="tax_id" class="input-sm" ng-model="nameaction" placeholder="Enter Name">
+                                              
+                                              <button class="btn btn-sm btn-default" ng-click="folderAction(selectAction,nameaction)">Ok</button>
+                                               <button class="btn btn-sm btn-default" ng-click="folderCopy()">Copy</button>   
+                                               <button class="btn btn-sm btn-default" ng-click="folderPaste()">Paste</button>
+                                               <button class="btn btn-sm btn-default" ng-click="folderDelete()">Delete</button>   
+                                            </div>
+                                        </td>
+                                      </tr>
+                                    </thead>
+                                  </table>
+                                </div>
+                              </div>
+                            </div> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="panel-footer">
+        <button class="btn btn-info" type="button"
+                style="background-color: purple;"
+                ng-click="ok('message_form', message)">ok</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</form>

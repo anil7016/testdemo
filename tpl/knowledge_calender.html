@@ -1,0 +1,69 @@
+  <div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' " >
+  </div>
+  <div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs" data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+      <div ui-butterbar></div>
+      <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside" ></a>
+      <div class="md-content page_content_wrapper" id="top">
+      
+        <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+          <h1 class="m-n font-thin h3">Calendar Events</h1>
+        </div>
+        <div class="wrapper-md ng-scope">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <form id="knowledge-caledar-event-form">
+              <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Event Title</label>
+                                                <input type="text" class="form-control" placeholder="Enter Event Title" name="event_title" ng-model="calendar.event_title" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Start Date</label>
+                                               <input type="text" class="form-control" id="StartDate" ng-upcomming-date name="StartDate" ng-change="dateMatch(calendar.event_startdate, calendar.event_enddate)" ng-model="calendar.event_startdate" onkeydown="return false" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>End Date</label>
+                                                <input type="text" class="form-control" id="endDate" ng-event-end-date name="endDate" ng-blur="dateMatch(calendar.event_startdate, calendar.event_enddate)" ng-model="calendar.event_enddate" onkeydown="return false" required>
+                                            </div>
+                                        </div>
+                                    </div>  
+              
+                  <div class="panel-footer pl-0 pr-0">
+                                    <button class="btn m-b-xs w-xs btn-info btnSave" ng-click="save('knowledge-caledar-event-form');"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                                </div>
+            </form>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <table class="table table-striped b-t b-b table-bordered" datatable="ng">
+              <thead>
+                                        <th>#</th>
+                                        <th>Event Title</th>
+                                        <th>Event Start date</th>
+                                        <th>Event End date</th>
+                                        <th>Action</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="event in eventList" ng-class="(event.event_id == calendar.event_id) ? 'rowactivate' : ''">
+                                                <td ng-bind="$index + 1"></td>
+                                                <td ng-bind="event.event_title"></td>
+                                                <td ng-bind="event.event_startdate"></td>
+                                                <td ng-bind="event.event_enddate"></td>
+                                                <td><a href="javascript:void(0)" ng-click="getEvent(event.event_id, 'top');" title="edit"><i class="glyph-icon fa-edit"></i></a>  <a href="javascript:void(0)" ng-click="deleteModel(event.event_id)" title="delete"><i class="iconDelete glyph-icon fa-times"></i></a></td>
+                                            </tr>
+                                        </tbody>
+            </table>
+          </div>
+
+        </div>
+    </div>
+    </div>
+  </div>

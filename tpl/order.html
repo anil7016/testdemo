@@ -1,0 +1,51 @@
+  <div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' " >
+  </div>
+  <div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs" data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+      <div ui-butterbar></div>
+      <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside" ></a>
+      <div class="md-content page_content_wrapper">
+        
+        <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+            <a href="#/general" class="btn btn-info pull-right btn-sm">Create Project <!-- <span class="glyphicon glyphicon-plus"></span> --></a>
+          <h1 class="m-n font-thin h3">Project Management</h1>
+        </div>
+        <div class="wrapper-md ng-scope">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <table  class="table table-striped b-t b-b table-bordered" datatable="ng" id="example">
+                        <thead>
+                        <th>#</th>
+                        <th>Project Details</th>
+                        <th>Action</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="order in orders">
+                                <td ng-bind="$index+1"></td>
+                                <td>
+                                    {{order.abbrivation}}{{order.order_number | numberFixedLen:4}}</br>
+                                    <span ng-if="order.customer">{{order.customer}}</span>
+                                </td>
+                                <td>
+                                     
+                                        <a href="#/viewProject/{{order.order_id}}" title="View" class="trActionIcon"><i class="fa fa-eye"></i></a>
+                                        <a href="javascript:void(0)" ng-click="edit(order.order_id)" title="Edit" class="trActionIcon"><i class="glyph-icon fa-edit"></i></a>
+                                    
+                                   <!--  <div class="trActiontitle">
+                                        <a href="javascript:void(0)" ng-click="jobDetail(order.order_id)" title="Jobs" class="trActionIcon"><i class="fa fa-briefcase"></i></a>
+                                        </br>
+                                        <strong>Jobs</strong>
+                                    </div> -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>

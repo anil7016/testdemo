@@ -1,0 +1,666 @@
+<style type="text/css">
+    .tab-content>.active {
+        margin-left: -15px;
+    }
+
+    .fa-times:before {
+        color: #ffffff !important;
+    }
+
+    .fa-edit:before {
+        color: #fff !important;
+    }
+
+    .nav>li>a {
+        padding: 10px 10px;
+    }
+</style>
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+    data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+        data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+        <div ui-butterbar></div>
+        <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+        <div class="md-content viewExternalPage page_content_wrapper">
+            <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+                <a href="javascript:history.back()" style="margin-top:-15px"
+                    class="btn btn-info pull-right btn-sm"><span class="fa fa-arrow-left"></span> Back</a>
+            </div>
+            <div class="wrapper-md ng-scope">
+                <div class="panel panel-default">
+                    <div class="panel-body" style="background:#e4e7ea;">
+                        <div class="userSection">
+                            <div class="left">
+                                <img id="new_profile_pic"
+                                    ng-src="uploads/profilePic/{{viewExternalCommunicational.vProfilePic}}"
+                                    style="width:175px;border: 7px solid #fff;padding: 8px;height:150px">
+                            </div>
+                            <div class="right">
+                                <div class="user-info">
+                                    <span
+                                        class="profileTitleh">{{viewExternalCommunicational.vFirstName}}&nbsp;{{viewExternalCommunicational.vLastName}}</span>
+                                    <span class="profileTitle">I am a <span
+                                            ng-bind="viewExternalCommunicational.vResourceType">.</span></span>
+                                    </span>
+                                </div>
+                                <div class="btn-group d-flex">
+                                    <button class="btn btn-info" ng-click="emailSent(viewExternalCommunicational.iUserId,'External','1')" title="Email"><i class="fa fa-envelope-o"></i> Email</button>
+                                    <a class="btn btn-info" href="#/user-profile/{{viewExternalCommunicational.iUserId}}" title="edit"><i class="glyph-icon fa-edit-white"></i>Edit</a>
+                                    <a href="javascript:void(0)" class="btn btn-info" ng-click="viewFileManager(viewExternalCommunicational.iUserId)" title="File Manager"><i class="fa fa-folder-open"></i>File Manager</a>
+                                    <button class="btn btn-info" ng-click="deleteUser(viewExternalCommunicational.iUserId,viewExternalCommunicational.vProfilePic,viewExternalCommunicational.vUserName, viewExternalCommunicational.iFkUserTypeId)" title="Delete"><i class="glyph-icon fa-times-white"></i> Delete</button>
+                                    <button ng-show="loginUserId == 1 && viewExternalCommunicational.iUserId != 1" class="btn btn-info" ng-click="changeUserStatus(viewExternalCommunicational.eUserStatus)" title="Active/inActive External Resource.">
+                                        <span ng-if="viewExternalCommunicational.eUserStatus == 3">Set As InActive</span>
+                                        <span ng-if="viewExternalCommunicational.eUserStatus != 3">Set As Active</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 p-0">
+                    <tabset active="active">
+                        <tab index="3">
+                            <tab-heading>
+                                <i class="fa fa-address-card"></i>
+                                <span>System</span>
+                            </tab-heading>
+                            <div class="col-sm-4">
+                                <table class="table table-striped b-t b-b">
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="TblSpan">Username</span></td>
+                                            <td><span ng-bind="viewExternalCommunicational.vUserName"></span></td>
+                                        </tr>
+                                        <!-- <tr>
+                                            <td><span class="TblSpan">Password</span></td>
+                                            <td>{{viewExternalCommunicational.org_pass}}</td>
+                                        </tr> -->
+                                        <tr>
+                                            <td><span class="TblSpan">Resourse Number</span></td>
+                                            <td><span
+                                                    ng-bind="viewExternalCommunicational.iResourceNumber | numberFixedLen:4"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="TblSpan">Creation Date</span></td>
+                                            <td><span ng-bind="viewExternalCommunicational.dtCreatedDate"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="TblSpan">Creator</span></td>
+                                            <td><span ng-bind="viewExternalCommunicational.createdBy"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </tab>
+                        <tab index="0">
+                            <tab-heading>
+                                <i class="fa fa-info-circle"></i>
+                                <span>Basic Information</span>
+                            </tab-heading>
+                            <div class="col-sm-6">
+                                <table class="table table-striped b-t b-b">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="2" ng-bind="viewExternalCommunicational.freelancer | uppercase">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="TblSpan">Name</span></td>
+                                            <td>{{viewExternalCommunicational.vFirstName}}
+                                                {{viewExternalCommunicational.vLastName}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="TblSpan">Gender</td>
+                                            <td>
+                                                <label ng-if="viewExternalCommunicational.iGender==1">Male</label>
+                                                <label ng-if="viewExternalCommunicational.iGender==2">Female</label>
+                                                <label ng-if="viewExternalCommunicational.iGender==3">Other</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="TblSpan">Time Zone</td>
+                                            <td><span ng-bind="viewExternalCommunicational.vTimeZone"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="TblSpan">Resource Status</td>
+                                            <td><span ng-bind="viewExternalCommunicational.eUserStatus"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="TblSpan">Date of Birth</td>
+                                            <td>
+                                                {{viewExternalCommunicational.dtBirthDate}}, Age({{Age}})
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+    
+                        </tab>
+                        <tab index="1">
+                            <tab-heading>
+                                <i class="fa fa-id-card-o"></i>
+                                <span>Contact Information</span>
+                            </tab-heading>
+                            <div class="col-sm-6">
+                                <table class="table table-striped b-t b-b">
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="TblSpan">Email Address</span></td>
+                                            <td>
+                                                <span ng-bind="viewExternalCommunicational.vEmailAddress"></span>
+                                                <a href="javascript:void(0)"
+                                                    ng-click="emailSent(viewExternalCommunicational.iUserId,'External','1')"
+                                                    title="Email" class="trActionIcon"><i class="fa fa-envelope-o"
+                                                        style="font-size:15px;"></i></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="TblSpan">Secondary Email Address</span></td>
+                                            <td>
+                                                <span ng-bind="viewExternalCommunicational.vSecondaryEmailAddress"></span>
+                                                <a href="javascript:void(0)"
+                                                    ng-click="emailSent(viewExternalCommunicational.iUserId,'External','1','toSecondaryEmail')"
+                                                    title="Email" class="trActionIcon"><i class="fa fa-envelope-o"
+                                                        style="font-size:15px;"></i></a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="TblSpan">Website</span></td>
+                                            <td>
+                                                <a href="http://{{viewExternalCommunicational.vWebsite}}"
+                                                    target="_blank">{{viewExternalCommunicational.vWebsite}}</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="TblSpan">Mobile</span></td>
+                                            <td><span ng-bind="viewExternalCommunicational.iMobile"></span></td>
+                                        </tr>
+                                        <!-- <tr>
+                                                                <td>Phone Number</td>
+                                                                <td><span ng-bind="viewExternalCommunicational.vPhoneNumber"></span></td>
+                                                            </tr> -->
+                                        <tr>
+                                            <td><span class="TblSpan">Skype Name</span></td>
+                                            <td>
+                                                <a href="skype:{{viewExternalCommunicational.vSkypeName}}?chat">
+                                                    {{viewExternalCommunicational.vSkypeName}}
+                                                </a>
+                                                <!-- <span ng-bind="viewExternalCommunicational.vSkypeName"></span> -->
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </tab>
+                        <tab index="3">
+                            <tab-heading>
+                                <i class="fa fa-address-card"></i>
+                                <span>Address</span>
+                            </tab-heading>
+                            <div class="col-sm-6">
+                                <table class="table table-striped b-t b-b">
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="TblSpan">Address</span></td>
+                                            <td><span id="address1"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="TblSpan">City</span></td>
+                                            <td><span id="address1_locality" ng-bind="vCity1"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="TblSpan">State</span></td>
+                                            <td><span id="address1_administrative_area_level_1" ng-bind="add1.state"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="TblSpan">Country</span></td>
+                                            <td><span id="address1_country" ng-bind="add1.zipcode"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="TblSpan">Zip Code</span></td>
+                                            <td><span id="address1_postal_code"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </tab>
+                        <tab index="4" ng-if="viewExternalCommunicational.freelancer=='translation'">
+                            <tab-heading>
+                                <i class="fa fa-male"></i>
+                                <span>Contact Person</span>
+                            </tab-heading>
+                            <div class="col-sm-6">
+                                <table class="table table-striped b-t b-b">
+                                    <thead>
+                                        <th>#</th>
+                                        <th>Contact Person</th>
+                                        <th>Email</th>
+                                        <th>Department</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="contact in contactList1">
+                                            <td ng-bind="$index + 1"></td>
+                                            <td>{{contact.vFirstName}}&nbsp;{{contact.vLastName}}</td>
+                                            <td>{{contact.vEmail}}</td>
+                                            <td>{{contact.vDepartment}}</td>
+                                        </tr>
+                                        <tr ng-show="!contactList1.length">
+                                            <td colspan="4" ng-bind="dataNotFound"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </tab>
+                        <tab index="5">
+                            <tab-heading>
+                                <i class="fa fa-building"></i>
+                                <span>Property List</span>
+                            </tab-heading>
+                            <div class="col-sm-6">
+                                <table class="table table-striped b-t b-b">
+                                    <thead>
+                                        <th>#</th>
+                                        <th>Property Name</th>
+                                        <th>Values</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="t in propList">
+                                            <td ng-bind="$index + 1"></td>
+                                            <td ng-bind="t.property_name"></td>
+                                            <td ng-bind="t.values_names"></td>
+                                        </tr>
+                                        <tr ng-show="!propList.length">
+                                            <td colspan="3" ng-bind="dataNotFound"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </tab>
+                        <tab index="6">
+                            <tab-heading>
+                                <i class="fa fa-lock"></i>
+                                <span>Account Information</span>
+                            </tab-heading>
+                            <div class="col-sm-6">
+                                <table class="table table-striped b-t b-b">
+                                    <tbody>
+                                        <tr>
+                                            <td><span class="TblSpan">VAT Number</span></td>
+                                            <td><span ng-bind="payment.tax_id"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><span class="TblSpan">Taxation Type</span></td>
+                                            <td><span ng-bind="payment.tax_type"></span></td>
+                                        </tr>
+                                        <!--  <tr>
+                                           <td><span class="TblSpan">Accounting notes</span></td>
+                                           <td><span ng-bind="payment.memos"></span></td>
+                                       </tr> -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </tab>
+                        <tab index="7">
+                            <tab-heading>
+                                <i class="fa fa-university"></i>
+                                <span>Bank Details</span>
+                            </tab-heading>
+                            <div class="col-sm-6">
+                                <table class="table table-striped b-t b-b">
+                                    <tbody>
+                                        <tr ng-if="bank.payment_method=='Bank Transfer'">
+                                            <td><span class="TblSpan">Payment Method</span></td>
+                                            <td><span ng-bind="bank.payment_method"></span></td>
+                                        </tr>
+                                        <tr ng-if="bank.payment_method=='Bank Transfer'">
+                                            <td><span class="TblSpan">Bank Name</span></td>
+                                            <td><span ng-bind="bank.bank_name"></span></td>
+                                        </tr>
+                                        <tr ng-if="bank.payment_method=='Bank Transfer'">
+                                            <td><span class="TblSpan">Bank Address</span></td>
+                                            <td><span ng-bind="bank.address"></span></td>
+                                        </tr>
+                                        <tr ng-if="bank.payment_method=='Bank Transfer'">
+                                            <td><span class="TblSpan">Account Holder</span></td>
+                                            <td><span ng-bind="bank.holder_name"></span></td>
+                                        </tr>
+                                        <tr ng-if="bank.payment_method=='Bank Transfer'">
+                                            <td><span class="TblSpan">Currency</span></td>
+                                            <td><span ng-bind="bank.currency_code"></span></td>
+                                        </tr>
+                                        <tr ng-if="bank.payment_method=='Bank Transfer'">
+                                            <td><span class="TblSpan">IBAN</span></td>
+                                            <td><span ng-bind="bank.iban"></span></td>
+                                        </tr>
+                                        <tr ng-if="bank.payment_method=='Bank Transfer'">
+                                            <td><span class="TblSpan">SWIFT/BIC</span></td>
+                                            <td><span ng-bind="bank.bic"></span></td>
+                                        </tr>
+                                        <tr ng-if="bank.payment_method=='Paypal'">
+                                            <td><span class="TblSpan">PayPal address</span></td>
+                                            <td><span ng-bind="bank.paypal_address"></span></td>
+                                        </tr>
+                                        <tr ng-if="bank.payment_method=='Bank Transfer'">
+                                            <td><span class="TblSpan">Routing Number</span></td>
+                                            <td><span ng-bind="bank.bank_code"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </tab>
+                        <tab index="8">
+                            <tab-heading>
+                                <i class="fa fa-star"></i>
+                                <span>Review</span>
+                            </tab-heading>
+                            <div class="col-sm-12">
+                                <div class="col-sm-4">
+                                    <div id="overAllRateDisplay" class="progress-bar1 position" data-percent="0" data-duration="1000" data-color="#ccc,#2cb1da"></div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <table class=" table m-b-none default footable-loaded footable">
+                                        <tr>
+                                            <td style="width:36% !important;">Language</td>
+                                            <td>
+                                                <ng-rate-it ng-model="overAllRate.language" min="0" max="5" resetable="false"
+                                                    read-only="model.readonly_enables"></ng-rate-it>
+                                            </td>
+                                            <td>
+                                                <div id="overAllRate_language"><span
+                                                        ng-if="overAllRate.language">{{overAllRate.language * 20}} %</span><span
+                                                        ng-if="!overAllRate.language">Not rated</span></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:36% !important;">Specialist</td>
+                                            <td>
+                                                <ng-rate-it ng-model="overAllRate.specialist" min="0" max="5" resetable="false"
+                                                    read-only="model.readonly_enables"></ng-rate-it>
+                                            </td>
+                                            <td>
+                                                <div id="rate_specialist"><span
+                                                        ng-if="overAllRate.specialist">{{overAllRate.specialist * 20}}
+                                                        %</span><span ng-if="!overAllRate.specialist">Not rated</span></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:36% !important;">Technical</td>
+                                            <td>
+                                                <ng-rate-it ng-model="overAllRate.technical" min="0" max="5" resetable="false"
+                                                    read-only="model.readonly_enables"></ng-rate-it>
+                                            </td>
+                                            <td>
+                                                <div id="rate_technical"><span
+                                                        ng-if="overAllRate.technical">{{overAllRate.technical * 20}}
+                                                        %</span><span ng-if="!overAllRate.technical">Not rated</span></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:36% !important;">Deadlines</td>
+                                            <td>
+                                                <ng-rate-it ng-model="overAllRate.deadlines" min="0" max="5" resetable="false"
+                                                    read-only="model.readonly_enables"></ng-rate-it>
+                                            </td>
+                                            <td>
+                                                <div id="rate_deadlines"><span
+                                                        ng-if="overAllRate.deadlines">{{overAllRate.deadlines * 20}}
+                                                        %</span><span ng-if="!overAllRate.deadlines">Not rated</span></div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:36% !important;">Flexibility</td>
+                                            <td>
+                                                <ng-rate-it ng-model="overAllRate.flexibility" min="0" max="5" resetable="false"
+                                                    read-only="model.readonly_enables"></ng-rate-it>
+                                            </td>
+                                            <td>
+                                                <div id="rate_flexibility"><span
+                                                        ng-if="overAllRate.flexibility">{{overAllRate.flexibility * 20}}
+                                                        %</span><span ng-if="!overAllRate.flexibility">Not rated</span></div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div class="text-right m-t-sm">
+                                        <a class="btn btn-info" ng-click="newfeedback('scrollToNew')">New feedback</a>
+                                        <!-- <a class="btn btn-info" ng-click="viewfeedback('scrollToNew')">view feedback</a> -->
+                                        <a class="btn btn-info" ng-click="viewfeedbackPoup()">view feedback</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="panel-footer" ng-show="overAllshow">
+                                <a class="btn btn-info btn-rightside btn-sm" href="#/payment">Save & Next <i class="fa fa-angle-right"></i></a>
+                            </div> -->
+                            <form id="resource-assets-form" ng-hide="overAllshow">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="panel panel-default" id="scrollToNew">
+                                            <div class="panel-heading font-bold">
+                                                <h4>Add Feedback</h4>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="col-sm-6">
+                                                    <table class="table m-b-none default footable-loaded footable">
+                                                        <tr>
+                                                            <td colspan="3" ng-hide="newFeedBack">New feedback</td>
+                                                            <td colspan="3" ng-show="newFeedBack" id="scrollToView">View
+                                                                feedback</td>
+                                                            <a class="btn btn-info" ng-click="overallFeedback()">Over all
+                                                                feedback</a>
+                                                        </tr>
+                                                        <tr ng-hide="newFeedBack">
+                                                            <td>Date</td>
+                                                            <td colspan="2">
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label>From</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="StartDate" ng-upcomming-date name="fromDate"
+                                                                            ng-change="assetsCurrentDate(fromDate,toDate)"
+                                                                            ng-model="fromDate" required
+                                                                            onkeydown="return false">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label>To</label>
+                                                                        <input type="text" class="form-control" id="endDate"
+                                                                            ng-event-end-date name="toDate"
+                                                                            ng-change="assetsCurrentDate(fromDate,toDate)"
+                                                                            ng-model="toDate" required
+                                                                            onkeydown="return false">
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Jobs</td>
+                                                            <td colspan="2">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-group">
+                                                                        <input type="text" class="form-control" id="job_id"
+                                                                            name="job_id"
+                                                                            ng-change="selectAsset(rate.period, job_id)"
+                                                                            ng-model="job_id" required />
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr ng-if="!setactive">
+                                                            <td>Period</td>
+                                                            <td colspan="2">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-group">
+                                                                        <select class="form-control m-b" id="resourcePeriod"
+                                                                            ng-model="rate.period"
+                                                                            ng-change="selectAsset(rate.period, job_id)"
+                                                                            required>
+                                                                            <option ng-hide="newFeedBack"
+                                                                                value="{{currentDate}}"
+                                                                                ng-if="fromDate && toDate">{{currentDate}} -
+                                                                                Current</option>
+                                                                            <option ng-show="newFeedBack"
+                                                                                ng-repeat="asset in assetsOpt  | orderBy:'resourceId'"
+                                                                                value="{{asset.period}},{{asset.resourceId}}">
+                                                                                {{asset.period}}</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Language</td>
+                                                            <td>
+                                                                <ng-rate-it ng-model="rate.language" min="0" max="5"
+                                                                    resetable="false" ng-click="calculateRate()">
+                                                                </ng-rate-it>
+                                                            </td>
+                                                            <td>
+                                                                <div id="rate_language"><span
+                                                                        ng-if="rate.language">{{rate.language * 20}}
+                                                                        %</span><span ng-if="!rate.language">Not
+                                                                        rated</span></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Specialist</td>
+                                                            <td>
+                                                                <ng-rate-it ng-model="rate.specialist" min="0" max="5"
+                                                                    resetable="false" ng-click="calculateRate()">
+                                                                </ng-rate-it>
+                                                            </td>
+                                                            <td>
+                                                                <div id="rate_specialist"><span
+                                                                        ng-if="rate.specialist">{{rate.specialist * 20}}
+                                                                        %</span><span ng-if="!rate.specialist">Not
+                                                                        rated</span></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Technical</td>
+                                                            <td>
+                                                                <ng-rate-it ng-model="rate.technical" min="0" max="5"
+                                                                    resetable="false" ng-click="calculateRate()">
+                                                                </ng-rate-it>
+                                                            </td>
+                                                            <td>
+                                                                <div id="rate_technical"><span
+                                                                        ng-if="rate.technical">{{rate.technical * 20}}
+                                                                        %</span><span ng-if="!rate.technical">Not
+                                                                        rated</span></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Deadlines</td>
+                                                            <td>
+                                                                <ng-rate-it ng-model="rate.deadlines" min="0" max="5"
+                                                                    resetable="false" ng-click="calculateRate()">
+                                                                </ng-rate-it>
+                                                            </td>
+                                                            <td>
+                                                                <div id="rate_deadlines"><span
+                                                                        ng-if="rate.deadlines">{{rate.deadlines * 20}}
+                                                                        %</span><span ng-if="!rate.deadlines">Not
+                                                                        rated</span></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Flexibility</td>
+                                                            <td>
+                                                                <ng-rate-it ng-model="rate.flexibility" min="0" max="5"
+                                                                    resetable="false" ng-click="calculateRate()">
+                                                                </ng-rate-it>
+                                                            </td>
+                                                            <td>
+                                                                <div id="rate_flexibility"><span
+                                                                        ng-if="rate.flexibility">{{rate.flexibility * 20}}
+                                                                        %</span><span ng-if="!rate.flexibility">Not
+                                                                        rated</span></div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="2">
+                                                                Overall rating in percent (weighted)
+                                                                <!--  <button type="button" class="btn btn-info btn-xs" ng-click="calculateRate()">Calculate</button> -->
+                                                            </th>
+                                                            <td>
+                                                                <div id="totalCalculate"><span
+                                                                        ng-if="totalRate">{{totalRate}} %</span><span
+                                                                        ng-if="!totalRate">0.0%</span></div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Carried out by : </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <div class="form-group">
+                                                            <!-- <input ng-hide="newFeedBack" select2-contactsummery  type="text" class="form-control" id="contactPerson" name="contactPerson" ng-model="rate.carryOut"/> -->
+                                                            <label ng-show="newFeedBack"><strong
+                                                                    ng-bind="rate.carryOut">d</strong></label>
+                                                            <label ng-hide="newFeedBack"><strong
+                                                                    ng-model="rate.carryOut">{{loginUserName}}</strong></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group" ng-show="setactive">
+                                                            <label class="control-label">Memo Comment on this
+                                                                assessment</label>
+                                                            <textarea class="form-control" name="tMemo"
+                                                                ng-model="rate.review_memo"
+                                                                style="resize: none;"></textarea>
+                                                        </div>
+                                                        <div class="form-group" ng-hide="setactive">
+                                                            <label class="control-label">Memo Comment on this
+                                                                assessment</label>
+                                                            <label><strong ng-bind="rate.review_memo"></strong></label>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <div style="background-color: #fcfad1;">
+                                                                <div class="col-sm-12">
+                                                                    <label class="control-label">Assessment dossier</label>
+                                                                    <textarea class="form-control" name="Assestment" ng-model="rate.assestment" style="resize: none;"></textarea>
+                                                                    <label class="control-label">Regardless of individual period-specific assessments</label>
+                                                                </div>
+                                                                <labe>&nbsp;</labe>
+                                                            </div>
+                                                        </div>
+                                                    </div> -->
+                                                </div>
+                                                <div class="pull-right" style="margin-top: 22% !important;">
+                                                    <a ng-hide="newFeedBack" class="btn btn-info pull-right"
+                                                        ng-click="resetResource();" ng-show="setactive"
+                                                        style="margin-right: 27px !important;">Cancel</a>
+                                                    <a ng-hide="newFeedBack" class="btn btn-info 
+                                                     pull-right"
+                                                        ng-click="newResource('resource-assets-form', rate.job_id)"
+                                                        ng-show="setactive" style="margin-right:5px;">Save</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                </div>
+                <!-- footer copy right -->
+                <div data-ng-include="'tpl/copyRight.html'"></div>
+            </div>
+            
+            
+            </tab>
+            </tabset>
+
+        </div>
+    </div>
+</div>

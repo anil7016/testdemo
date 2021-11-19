@@ -1,0 +1,72 @@
+<style type="text/css">
+    .modal-dialog {
+        position: relative;
+        display: table;
+        overflow-y: auto;    
+        overflow-x: auto;
+        width: auto;
+        min-width: 300px;
+    }
+</style>
+<form id="jobitem_form">
+    <div class="modal-header">
+        <h3 class="modal-title">Job status</h3>
+    </div>
+    <div style="float: right; margin-right: 35px;">
+        <h5><span>{{percent}}</span>% Progress</h5>
+    </div>
+    <div class="panel-body">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <table class="table">
+                    <thead>
+                    <th>Sr.No</th>
+                    <th>Job Number</th>
+                    <!-- <th>Job Type</th> -->
+                    <!-- <th>Resource</th> -->
+                    <th>Start date</th>
+                    <th>Due date</th>
+                    <th>Status</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="jobItem in jobitemStatus">
+                            <td>{{$index+1}}</td>
+                            <!-- <td>{{jobItem.job_code}}{{jobItem.job_no | numberFixedLen:3}}</td> -->
+                            <td>{{jobItem.po_number}}</td>
+                            <!-- <td></td> -->
+                            <!-- <td></td> -->
+                            <td>{{jobItem.created_date | globalDtFormat}}</td>
+                            <td ng-if="jobItem.due_date =='0000-00-00 00:00:00'">-</td>
+                            <td ng-if="jobItem.due_date !='0000-00-00 00:00:00'">{{jobItem.due_date | globalDtFormat}}</td>
+                            <td>
+                                <div class="job-table-status btn completedColor" ng-if="jobItem.item_status == 'Completed'"></div>
+                                <div class="job-table-status btn inpreprartionColor" ng-if="jobItem.item_status == 'In preparation'"></div>
+                                <div class="job-table-status btn requestedColor" ng-if="jobItem.item_status == 'Requested'"></div>
+                                <div class="job-table-status btn newJob" ng-if="jobItem.item_status == 'New'"></div>
+                                <div class="job-table-status btn assignedwaitongColor" ng-if="jobItem.item_status == 'Assigned-waiting'"></div>
+                                <div class="job-table-status btn inprogressColor" ng-if="jobItem.item_status == 'In-progress'"></div>
+                                <div class="job-table-status btn overdueColor" ng-if="jobItem.item_status == 'Overdue'"></div>
+                                <div class="job-table-status btn deliveredColor" ng-if="jobItem.item_status == 'Delivered'"></div>
+                                <div class="job-table-status btn approvedColor" ng-if="jobItem.item_status == 'Approved'"></div>
+                                <div class="job-table-status btn invoicecreatedColor" ng-if="jobItem.item_status == 'Invoice created'"></div>
+                                <div class="job-table-status btn invoiceckedColor" ng-if="jobItem.item_status == 'Invoice checked'"></div>
+                                <div class="job-table-status btn invoiceacceptedColor" ng-if="jobItem.item_status == 'Invoice Accepted'"></div>
+                                <div class="job-table-status btn paidColor" ng-if="jobItem.item_status == 'Paid'"></div>
+                                <div class="job-table-status btn canceledColor" ng-if="jobItem.item_status == 'Canceled'"></div>
+                                <div class="job-table-status btn withoutInvoiceColor" ng-if="jobItem.item_status == 'Without invoice'"></div>
+                                &nbsp;{{jobItem.item_status}}
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr ng-show="!jobitemStatus.length">
+                            <td colspan="4" ng-bind="dataNotFound"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</form>

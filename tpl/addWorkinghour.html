@@ -1,0 +1,238 @@
+<form id="event_form" name="eventForm">
+    <div class="modal-header">
+        <h3 ng-show="data.wh_id" class="modal-title" >Update Working Hour</h3>  
+        <h3 ng-show="!data.wh_id" class="modal-title" >Add Working Hour</h3>
+    <div>
+         <div class="col-lg-6"  >
+            <div class="form-group" >
+                <div class="checkbox">
+                    <label class="i-checks" >
+                        <input type="checkbox"  id="checkAll" ng-model="selectedAll" ng-click="checkAll()" ng-true-value="1" ng-false-value="0">                                    
+                        <i></i>
+                       Check all
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- extra-->
+        <p><label ><input type="hidden"  id="checkAll" /> </label></p>
+    <!-- extra-->
+<script>
+//    $("#checkAll").change(function () {
+//    $("input:checkbox").prop('checked', $(this).prop("checked"));
+//});
+</script>
+    </div>
+    </div>
+    <div class="panel-body" >
+<!--       <div  ng-repeat="role in roles">
+     <div class="col-lg-6"  >
+            <div class="form-group" >
+                <div class="checkbox">
+                    <label class="i-checks" >
+                        <input type="checkbox" ng-true-value="1" ng-false-value="0"  ng-model="user.value" ng-checked="user.value == '1'"    checklist-model="user.roles" checklist-value="role">
+
+                        <i></i>
+                        {{role}}
+                    </label>
+                </div>
+            </div>
+        </div>
+    <div class="col-lg-6">
+            <div class="form-group">
+                <div class='input-group date'>
+                    <span class="input-group-addon">From</span>
+                    <input ng-from-time type='text' class="form-control from-time" ng-true-value="1" ng-false-value="0" id="monday_from" value="{{datafrom}}" ng-model="user.from"  />
+                    <span class="input-group-addon">To</span>
+                    <input ng-to-time type='text' class="form-control to-time" id="monday_to" ng-model="user.to" value="{{datato}}"  />
+                </div>
+            </div>
+        </div>
+        </div>-->
+    <div class="col-lg-6">
+            <div class="form-group" >
+                <div class="checkbox">
+                    <label class="i-checks">
+                        <input data-value="0" id="day1" type="checkbox" value="" ng-model="working[0].value" ng-true-value="1" ng-false-value="0" ng-checked="working[0].value == '1'">
+                        <i></i>
+                        Sunday
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <div class='input-group date'>
+                    <span class="input-group-addon">From</span>
+                    <input ng-from-time type='text' class="form-control from-time" id="monday_from" ng-model="working[0].from" ng-bind="from" ng-required="working[0].value"/>
+                    <span class="input-group-addon">To</span>
+                    <input ng-from-time type='text' class="form-control to-time" id="monday_to" ng-model="working[0].to" ng-bind="to" />
+                </div>
+            </div>
+        </div>
+             <div class="col-lg-6">
+            <div class="form-group" >
+                <div class="checkbox">
+                    <label class="i-checks">
+                        <input data-value="1" type="checkbox" value="" ng-model="working[1].value" ng-true-value="1" ng-false-value="0" ng-checked="working[1].value == '1'">
+                        <i></i>
+                        Monday          
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <div class='input-group date'>
+                    <span class="input-group-addon">From</span>
+                    <input ng-from-time type='text' class="form-control from-time" id="tuesday_from" ng-model="working[1].from" ng-bind="from" ng-required="working[1].value"/>
+                    <span class="input-group-addon">To</span>
+                    <input ng-from-time type='text' class="form-control to-time" id="tuesday_to" ng-model="working[1].to" ng-bind="to" ng-required="working[1].value"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group" >
+                <div class="checkbox">
+                    <label class="i-checks">
+                        <input data-value="2" type="checkbox" value="" ng-model="working[2].value" ng-true-value="1" ng-false-value="0" ng-checked="working[2].value == '1'">
+                        <i></i>
+                        Tuesday
+                        
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <div class='input-group date'>
+                    <span class="input-group-addon">From</span>
+                    <input ng-from-time type='text' class="form-control from-time" ng-model="working[2].from" ng-required="working[2].value"/>
+                    <span class="input-group-addon">To</span>
+                    <input ng-from-time type='text' class="form-control to-time" ng-model="working[2].to" ng-required="working[2].value"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group" >
+                <div class="checkbox">
+                    <label class="i-checks">
+                        <input data-value="3" type="checkbox" value="" ng-model="working[3].value" ng-true-value="1" ng-false-value="0" ng-checked="working[3].value == '1'">
+                        <i></i>
+                        Wednesday
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <div class='input-group date'>
+                    <span class="input-group-addon">From</span>
+                    <input ng-from-time type='text' class="form-control from-time" ng-model="working[3].from" ng-required="working[3].value"/>
+                    <span class="input-group-addon">To</span>
+                    <input ng-from-time type='text' class="form-control to-time" ng-model="working[3].to" ng-required="working[3].value"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group" >
+                <div class="checkbox">
+                    <label class="i-checks">
+                        <input data-value="4" type="checkbox" value="" ng-model="working[4].value" ng-true-value="1" ng-false-value="0" ng-checked="working[4].value == '1'">
+                        <i></i>
+                        Thursday
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <div class='input-group date'>
+                    <span class="input-group-addon">From</span>
+                    <input ng-from-time type='text' class="form-control from-time" ng-model="working[4].from" ng-required="working[4].value"/>
+                    <span class="input-group-addon">To</span>
+                    <input ng-from-time type='text' class="form-control to-time" ng-model="working[4].to" ng-required="working[4].value"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group" >
+                <div class="checkbox">
+                    <label class="i-checks">
+                        <input data-value="5" type="checkbox" value="" ng-model="working[5].value" ng-true-value="1" ng-false-value="0" ng-checked="working[5].value == '1'">
+                        <i></i>
+                        Friday
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <div class='input-group date'>
+                    <span class="input-group-addon">From</span>
+                    <input ng-from-time type='text' class="form-control from-time" ng-model="working[5].from" ng-required="working[5].value"/>
+                    <span class="input-group-addon">To</span>
+                    <input ng-from-time type='text' class="form-control to-time" ng-model="working[5].to" ng-required="working[5].value"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group" >
+                <div class="checkbox">
+                    <label class="i-checks">
+                        <input data-value="6" type="checkbox" value="" ng-model="working[6].value" ng-true-value="1" ng-false-value="0" ng-checked="working[6].value == '1'">
+                        <i></i>
+                        Saturday
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <div class='input-group date'>
+                    <span class="input-group-addon">From</span>
+                    <input ng-from-time type='text' class="form-control from-time" ng-model="working[6].from" ng-required="working[6].value"/>
+                    <span class="input-group-addon">To</span>
+                    <input ng-from-time type='text' class="form-control to-time" ng-model="working[6].to" ng-required="working[6].value"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group" >
+                <div class="checkbox">
+                    <label class="i-checks">
+                        <input type="radio" value="1" ng-model="for_type" ng-true-value="1" ng-false-value="0" ng-checked="for_type == '1'">
+                        <i></i>
+                       For this Week
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group" >
+                <div class="checkbox">
+                    <label class="i-checks">
+                        <input type="radio" value="2" ng-model="for_type" ng-true-value="1" ng-false-value="0" ng-checked="for_type == '2'">
+                        <i></i>
+                        For this Month
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group" >
+                <div class="checkbox">
+                    <label class="i-checks">
+                        <input type="radio" value="3" ng-model="for_type" ng-true-value="1" ng-false-value="0" ng-checked="for_type == '3'">
+                        <i></i>
+                        For all Weeks
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer"><!-- ng-disabled="!eventForm.$valid" -->
+        <button class="btn btn-info"  type="button" ng-click="ok('event_form')">OK</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</form>

@@ -1,0 +1,96 @@
+  <div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' " >
+  </div>
+  <div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs" data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+      <div ui-butterbar></div>
+      <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside" ></a>
+      <div class="md-content page_content_wrapper" id="top">
+      
+        <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+          <h1 class="m-n font-thin h3">Resource Type</h1>
+        </div>
+        <div class="wrapper-md ng-scope">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <form id="user-type-form">
+              <div class="col-sm-12">
+                <div class="col-sm-3">
+                      <div class="form-group">
+                          <label>Resource Type</label>
+                          <select class="form-control m-b" ng-init="type.iResourceType='select'" name="iResourceType" id="iResourceType" ng-model="type.iResourceType" required>
+                              <option value="select">-Select resource type-</option>
+                              <option value="1">External</option>
+                              <option value="2">Internal</option>
+
+                          </select>                     
+                      </div>
+                  </div>
+      
+                  <div class="col-sm-3">
+                      <div class="form-group">
+                          <label>Name</label>
+                          <input type="text" class="form-control" placeholder="Enter Name" name="Name" ng-model="type.vType" required>
+                      </div>
+                  </div>
+                  
+                  <div class="col-sm-3">
+                      <div class="checkbox">
+                          <label class="i-checks i-checks-sm" style="padding-top: 20px;">
+                              <input type="checkbox" name="iResourceType" ng-true-value="1" ng-false-value="0" ng-model="type.iDefault" ng-checked="type.iDefault == 1">
+                              <i></i>
+                              Default (Set as Default type)
+                          </label>
+                      </div>
+                  </div>
+
+                  <div class="col-sm-3">
+                      <div class="form-group">
+                          <label>Status</label>
+                          <select name="eTypeStatus" class="form-control m-b" ng-init="type.eTypeStatus='select'" ng-model="type.eTypeStatus" required>
+                              <option value="select">-Select status-</option>
+                              <option>Active</option>
+                              <option>Inactive</option>
+
+                          </select>      
+                      </div>
+                  </div>
+              </div>
+              
+                  <div class="panel-footer">
+                      <button ng-if="type.iTypeId == '' || type.iTypeId == undefined" class="btn m-b-xs w-xs btn-info" style="margin-left:15px;" ng-click="saveType('user-type-form');"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                      <button ng-if="type.iTypeId != '' && type.iTypeId != undefined" class="btn m-b-xs w-xs btn-info" style="margin-left:15px;" ng-click=" updateType('user-type-form', type.iTypeId);"><i class="fa fa-floppy-o" aria-hidden="true"></i> Update</button>
+                  </div>
+            </form>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <table st-table="rowCollectionBasic" class="table table-bordered table-striped">
+              <thead>
+              <th>#</th>
+              <th>Resource Type</th>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Action</th>
+              </thead>
+              <tbody>
+                  <tr ng-repeat="t in usertype" ng-class="(t.iTypeId == type.iTypeId) ? 'rowactivate' : ''">
+                      <td ng-bind="$index + 1"></td>
+                      <td ng-if="t.iResourceType == '1'">External</td>
+                      <td ng-if="t.iResourceType == '2'">Internal</td>
+                      <td ng-bind="t.vType"></td>
+                      <td ng-bind="t.eTypeStatus"></td>
+                      <td><span ng-if="t.iTypeId=='1' || t.iTypeId=='2' || t.iTypeId=='3' || t.iTypeId=='4'"><i class="fa fa-edit disableColor"></i> <span class="disableColor">/ </span><i class="fa fa-times disableColor"></i></span>
+                      <span ng-if="t.iTypeId!='1' && t.iTypeId!='2' && t.iTypeId!='3' && t.iTypeId!='4'"><a href="javascript:void(0)" ng-click="getType(t.iTypeId,'top')"><i class="glyph-icon fa-edit"></i></a>  <a href="javascript:void(0)" ng-click="deleteType(t.iTypeId)"><i class="iconDelete glyph-icon fa-times"></i></a></span></td>
+                  </tr>
+                  <tr ng-show="usertype.length==0">
+                      <td colspan="4" ng-bind="dataNotFound"></td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+    </div>
+  </div>

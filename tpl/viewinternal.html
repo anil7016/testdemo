@@ -1,0 +1,155 @@
+  <style type="text/css">
+    .tab-content > .active {
+        margin-left: -15px;
+    }
+    .fa-times:before {
+        font-size: 15px;
+        color: #ffffff !important;
+        content: "\e0fc";
+        margin-left: 0;
+    }
+    .fa-times{
+        color:#ffffff !important;
+    }
+    .fa-edit:before{
+        color:#fff !important;
+    }
+  </style>
+  <div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' " >
+  </div>
+  <div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs" data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+      <div ui-butterbar></div>
+      <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside" ></a>
+      <div class="md-content page_content_wrapper">
+        
+        <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+          <a href="javascript:history.back()" class="btn btn-info pull-right btn-sm" style="font-size:14px;margin-top:-15px;">Back</a>
+        </div>
+        <div class="wrapper-md ng-scope">
+          <div class="panel panel-default">
+            <div class="panel-body" style="background:#e6e9ef;">
+                <div class="row">
+                    <div class="col-sm-2">
+                       <img id="new_profile_pic" ng-src="uploads/profilePic/{{userprofiledata.vProfilePic}}" style="width:175px;border: 7px solid #fff;padding: 8px;">
+                    </div>
+                    <div class="col-sm-3">
+                        <span class="profileTitleh">{{userprofiledata.vFirstName}}&nbsp;{{userprofiledata.vLastName}}</span>
+                        <span class="profileTitle">I am a <span ng-bind="userprofiledata.vResourceType">.</span></span></span>
+                    </div><br><br>
+                    <div class="col-sm-7">
+                        <button class="btn btn-info" ng-click="emailSent(userprofiledata.iUserId,'External','1')" title="Email" style="margin-left:5px;margin-top: 50px;"><i class="fa fa-envelope-o"></i> Email</button>
+                        
+                        <a class="btn btn-info" href="#/internal/{{userprofiledata.iUserId}}" title="edit" style="margin-left:0px;margin-top: 50px;"><i class="glyph-icon fa-edit-white" style="margin-right:5px"></i>Edit</a>
+                        
+                        <a href="javascript:void(0)" class="btn btn-info" ng-click="viewFileManagerInternal(userprofiledata.iUserId)" title="File Manager" style="margin-left:0px;margin-top: 50px;"><i class="fa fa-folder-open" style="margin-right:5px"></i>File Manager</a>
+                        
+                        <button ng-hide="userprofiledata.iUserId == 1" class="btn btn-info" ng-click="deleteUser(userprofiledata.iUserId,userprofiledata.vProfilePic,userprofiledata.vUserName, userprofiledata.iFkUserTypeId)" title="Delete" style="margin-left:0px;margin-top: 50px;"><i class="iconDelete glyph-icon fa-times-white"></i> Delete</button> 
+
+                         <button ng-show="loginUserId == 1 && userprofiledata.iUserId != 1" class="btn btn-info" ng-click="changeUserStatus(userprofiledata.eUserStatus)" title="Active/inActive Internal Resource." style="margin-left:0px;margin-top: 50px;">
+                                    <span ng-if="userprofiledata.eUserStatus == 3">Set As InActive</span>
+                                    <span ng-if="userprofiledata.eUserStatus != 3">Set As Active</span>
+                                </button>
+
+                    </div>
+                </div>
+              
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-sm-12">
+                    <tabset active="active">
+                            <tab index="0">
+                                <tab-heading>
+                                    <i class="fa fa-info-circle"></i>
+                                    <span>Basic Information</span>
+                                </tab-heading>
+                                <div class="col-sm-6">
+                                    <table class="table table-striped b-t b-b table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td><span style="color:#636e7b;font-weight:600;">Name</span></td>
+                                                <td>
+                                                    <span>{{userprofiledata.vFirstName}} {{userprofiledata.vLastName}}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                    <td><span style="color:#636e7b;font-weight:600;">Department</span></td>
+                                                    <td colspan="2" ng-bind="userprofiledata.vResourceType"></td>
+                                            </tr>
+                                            <tr>
+                                                    <td><span style="color:#636e7b;font-weight:600;">Gender</span></td>
+                                                    <td>
+                                                        <label ng-if="userprofiledata.iGender==1">Male</label>
+                                                        <label ng-if="userprofiledata.iGender==2">Female</label>
+                                                        <label ng-if="userprofiledata.iGender==3">Other</label>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td>
+                                                    <span style="color:#636e7b;font-weight:600;">Date of Birth</span>
+                                                    </td>
+                                                    <td>
+                                                        <span ng-bind="userprofiledata.dtBirthDate | date:'dd.MM.yyyy'"></span>
+                                                        <span> Age({{Age}})</span>
+                                                    </td>
+                                            </tr>
+                                        </tbody>
+                                </table>
+                                </div> 
+                            </tab>
+                            <tab index="0">
+                                <tab-heading>
+                                    <i class="fa fa-id-card-o"></i>
+                                    <span>Contact Information</span>
+                                </tab-heading>
+                                <div class="col-sm-6">
+                                    <table class="table table-striped m-b-none">
+                              <tbody>
+                                <!-- <tr>
+                                    <td>Username</td>
+                                    <td><span ng-bind="userprofiledata.vUserName"></span></td>
+                                </tr> -->
+                                <tr>
+                                    <td><span style="color:#636e7b;font-weight:600;">Resourse Number</span></td>
+                                    <td><span ng-bind="userprofiledata.iResourceNumber | numberFixedLen:4"></span></td>
+                                </tr>
+                                <tr>
+                                    <td><span style="color:#636e7b;font-weight:600;">Email Address</span></td>
+                                    <td>
+                                        <span ng-bind="userprofiledata.vEmailAddress"></span>
+                                        <a href="javascript:void(0)" ng-click="emailSent(userprofiledata.iUserId,'External','1')" title="Email" class="trActionIcon"><i class="fa fa-envelope-o" style="font-size:18px;"></i></a>   
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span style="color:#636e7b;font-weight:600;">Mobile</span></td>
+                                    <td><span>{{userprofiledata.iMobile}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span style="color:#636e7b;font-weight:600;">Skype Name</span></td>
+                                    <td>
+                                        <a href="skype:{{userprofiledata.vSkypeName}}?chat">{{userprofiledata.vSkypeName}}</a>
+                                        <!-- <span ng-bind="userprofiledata.vSkypeName"></span> -->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span style="color:#636e7b;font-weight:600;">Creation Date</span></td>
+                                    <td><span ng-bind="userprofiledata.dtCreatedDate | globalDtFormat"></span></td>
+                                </tr>
+                                <tr>
+                                    <td><span style="color:#636e7b;font-weight:600;">Creator</span></td>
+                                    <td><span ng-bind="userprofiledata.createdBy"></span></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                                </div>
+                            </tab>
+                    </tabset>
+                </div>
+                      <!-- footer copy right -->
+      <div class="wrapper-md" data-ng-include="'tpl/copyRight.html'"></div>
+    </div>
+  </div>

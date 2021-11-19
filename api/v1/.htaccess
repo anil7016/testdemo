@@ -1,0 +1,37 @@
+RewriteEngine On 
+RewriteCond %{REQUEST_FILENAME} !-f 
+RewriteRule ^(.*)$ %{ENV:BASE}index.php [QSA,L]
+
+<IfModule mod_deflate.c>
+<FilesMatch "\.(html|txt|css|js|php|pl|ico|jpg)$">
+SetOutputFilter DEFLATE
+</FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+    # Enable expirations.
+    ExpiresActive On
+    # Default directive 
+    ExpiresDefault “access plus 1 month”
+    ExpiresByType image/x-icon “access plus 1 year”
+    ExpiresByType image/gif “access plus 1 month” 
+    ExpiresByType image/png “access plus 1 month”
+    ExpiresByType image/jpg “access plus 1 month” 
+    ExpiresByType image/jpeg “access plus 1 month”
+    ExpiresByType text/css “access plus 1 month”
+    ExpiresByType application/javascript “access plus 1 year”
+</IfModule>
+
+<IfDefine ReverseProxy>
+LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_http_module modules/mod_proxy_http.so
+<IfDefine UseCache>
+LoadModule cache_module modules/mod_cache.so
+<IfDefine MemCache>
+LoadModule mem_cache_module modules/mod_mem_cache.so
+</IfDefine>
+<IfDefine !MemCache>
+LoadModule disk_cache_module modules/mod_disk_cache.so
+</IfDefine>
+</IfDefine>
+</IfDefine>

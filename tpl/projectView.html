@@ -1,0 +1,136 @@
+<div class="header" data-ng-include="'html/header.html'"></div>
+<div id="content" class="app-content" role="main">
+    <div class="app-content-body ">
+
+        <div class="bg-light lter b-b wrapper-md" id="userprofile-ctrl" >
+            <section class="panel form-wizard" id="w4" ng-stepform="dynamic">
+
+                <div class="panel-body">
+                    <div class="bg-light lter wrapper-md" >
+                        <h1 class="m-n font-thin h3 hleft">{{viewExternalCommunicational.vFirstName}}&nbsp;{{viewExternalCommunicational.vLastName}}</h1>                        
+                    </div>
+                    
+                    <div class="tab-content">
+                        <div id="w4-tab1" class="tab-pane active">
+                            <form id="userprofileform" >
+                                   <div class="panel-heading font-bold"><a href='' class="btn btn-success" ng-click="Calender()" id="clander">Calender</a>  <a  id='WorkingHours' href="" class="btn btn-success" ng-click="Working()">Working Hours</a></div>
+					                    <div class="tab-content" ng-hide="calender" >
+					                        <div id="w4-tab7" class="tab-pane active">
+					                            <!--   TAB7 -->
+					                            <div class="row">
+					                                <div class="col-sm-12">
+					                                    <div class="panel panel-default">
+					                                       
+					                                        <div class="panel-body">
+					
+					                                            <div>
+					                                                <div class="row-fluid">
+					                                                    <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
+					                                                        <h4>{{alertMessage}}</h4>
+					                                                    </div>
+					                                                    <div class="span8">
+					                                                        <div class="fc-toolbar">
+					                                                            <div class="fc-left">
+					<!--                                                                <button class="btn btn-success" ng-click="changeView('agendaDay', 'myCalendar3')">Day</button>
+					                                                                <button class="btn btn-success" ng-click="changeView('agendaWeek', 'myCalendar3')">Week</button>
+					                                                                <button class="btn btn-success" ng-click="changeView('month', 'myCalendar3')">Month</button>-->
+					                                                                <button ng-show="data.wh_id" class="btn btn-success" ng-click="workingHour()">Update Working Hour</button>
+					                                                                <button ng-show="!data.wh_id" class="btn btn-success" ng-click="workingHour()">Add Working Hour</button>
+					                                                            </div>
+					                                                        </div>
+					                                                        <div class="calendar" ng-model="eventSources2" calendar="myCalendar3" ui-calendar="uiConfig.calendar"></div>
+																						
+					                                                    </div>
+					                                                </div>
+					                                            </div>
+					                                        </div>
+					                                    </div>
+					                                </div>
+					                                
+					                            </div>
+					                        </div>
+					                    </div>
+											
+					                    <div class="tab-content" ng-show="workinghours" >
+					                        <div id="w4-tab7" class="tab-pane active">
+					                            <!--   TAB7 -->
+					                            <div class="row" >
+					                                <div class="col-sm-12">
+					                                    <div class="panel panel-default">
+					                                      
+					                                        <div class="panel-body">
+					
+					                                            <div>
+					                                                <div class="row-fluid">
+																		<!--<div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
+					                                                        <h4>{{alertMessage}}</h4>
+					                                                    </div>
+					                                                    <div class="span8">
+					                                                        <div class="fc-toolbar">
+					                                                            <div class="fc-left">
+					                                                                <button class="btn btn-success" ng-click="changeView('agendaDay', 'myCalendar3')">Day</button>
+					                                                                <button class="btn btn-success" ng-click="changeView('agendaWeek', 'myCalendar3')">Week</button>
+					                                                                <button class="btn btn-success" ng-click="changeView('month', 'myCalendar3')">Month</button>
+					                                                                <button ng-show="data.wh_id" class="btn btn-success" ng-click="workingHour()">Update Working Hour</button>
+					                                                                <button ng-show="!data.wh_id" class="btn btn-success" ng-click="workingHour()">Add Working Hour</button>
+					                                                            </div>
+					                                                        </div>
+					                                                        <div class="calendar" ng-model="eventSources2" calendar="myCalendar3" ui-calendar="uiConfig.calendar"></div>
+					
+					                                                    </div>-->
+																		<!--{{wh_data_forfront[1]}}-->
+																		<table  class='table' >
+																		<tr>
+																			<td></td><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th>
+																		</tr>
+																		<tr>
+																			 <td>Working Hour:</td>
+									                                         <td style='font-size:1em;' ng-hide="blankworkinghours">{{wh_data_forfront[0].from+" "+"to"+" "+wh_data_forfront[0].to}}</td>
+																			 <td style='font-size:1em;'>{{wh_data_forfront[1].from+" "+"to"+" "+wh_data_forfront[1].to}}</td>
+																			 <td style='font-size:1em;'>{{wh_data_forfront[2].from+" "+"to"+" "+wh_data_forfront[2].to}}</td>
+						                                                     <td style='font-size:1em;'>{{wh_data_forfront[3].from+" "+"to"+" "+wh_data_forfront[3].to}}</td>
+						                                                     <td style='font-size:1em;'>{{wh_data_forfront[4].from+" "+"to"+" "+wh_data_forfront[4].to}}</td>
+						                                                     <td style='font-size:1em;'>{{wh_data_forfront[5].from+" "+"to"+" "+wh_data_forfront[5].to}}</td>
+						                                                     <td style='font-size:1em;'>{{wh_data_forfront[6].from+" "+"to"+" "+wh_data_forfront[6].to}}</td>		
+																		</tr>
+																		</table>
+					                                                    <table  class='table' >
+																			<tr>
+																				<th>Leave Name</th><th>Leave Start Date</th><th>Leave End Date</th><th class="fc-event-container">Action</th>
+																			</tr>
+																			<tr ng-repeat="events in event" >
+																				<td  style='font-size:1em;'>{{events.title}}</td>
+							                                                    <td  style='font-size:1em;'>{{events.start | limitTo:10 | date:'dd/MM/yyyy'}}</td>
+							                                                    <td  style='font-size:1em;'>{{events.end | limitTo:10 | date:'dd/MM/yyyy'}}</td>
+							                                                    <td  ng-hide="btn_resource_add"><!--<a href="#/internal/{{user.iUserId}}" title="edit"><i class="glyph-icon fa-edit"></i></a> /--> <a href="javascript:void(0)" ng-click="deleteEvent(events.event_id)" title="delete"><i class="iconDelete glyph-icon fa-times"></i></a></td>
+																			</tr>
+																		</table>
+					                                                </div>
+					                                            </div>
+					                                        </div>
+					                                    </div>
+					                                </div>
+					                            </div>
+					                        </div>
+					                    </div>
+                                        
+                            </form>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </div>
+</div>
+<div class="footer" data-ng-include="'html/footer.html'"></div>
+<script language="JavaScript">
+    var client = new ZeroClipboard(document.getElementById("vPass"));
+
+    client.on("ready", function(readyEvent) {
+
+        client.on("aftercopy", function(event) {
+
+            alert("Copied text to clipboard: " + event.data["text/plain"]);
+        });
+    });
+</script>

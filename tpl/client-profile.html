@@ -1,0 +1,497 @@
+<style type="text/css">
+.nav-pills.nav-wizard>>ul>li {
+    border-right: 78px solid #eef5fa !important;
+}
+
+.hrght {
+    float: right;
+    color: red;
+    margin-top: -1.5%;
+}
+</style>
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs" data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+        <div ui-butterbar></div>
+        <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+        <div class="md-content page_content_wrapper">
+            <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+                <h1 class="m-n font-thin h3 hleft">{{currentUserName}}</h1>
+                <a href="javascript:history.back()" style="margin-top: -4px !important;" class="btn btn-info pull-right btn-sm"><span class="fa fa-arrow-left"></span> Back</a>
+                <div class="hrght1" >
+                    <h5 ng-if="showEditedByName">This record is currently edited by {{UpdateClientName}}<h5>
+                </div>
+        </div>
+        <div class="wrapper-md ng-scope">
+
+          <ul class="nav nav-pills nav-wizard" style="width: 69%;margin: auto;">
+                        <li class="active">
+                            <a href="#/client-profile">Basic Information</a>
+                            <div class="nav-arrow"></div>
+                        </li>
+                        <li>
+                            <div class="nav-wedge"></div>
+                            <a href="#/contact-person">Contacts</a>
+                            <div class="nav-arrow"></div>
+                        </li>
+                        <li>
+                            <div class="nav-wedge"></div>
+                            <a href="#/price-list">Prices</a>
+                            <div class="nav-arrow"></div>
+                        </li>
+                        <li>
+                            <div class="nav-wedge"></div>
+                            <a href="#/payment_client">Payment Information</a>
+                            <div class="nav-arrow"></div>
+                        </li>
+                        <li>
+                            <div class="nav-wedge"></div>
+                            <a href="#/login-detail">Login Details</a>
+                        </li>
+                    </ul>
+          <div class="panel panel-default" style="margin-top:1%">
+
+            <div class="panel-body">
+              <form id="client-profile">
+                                <!--   TAB1 -->
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading font-bold">
+                                                <h4>Basic Information</h4>
+                                            </div>                                          
+                                            <div class="panel-body">
+                                                <div class="col-sm-12">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Client number</label><br> 
+                                                            <!-- <input type="text" class="form-control" readonly
+                                                            name="iResourceNumber" ng-model="info.vClientNumber | numberFixedLen : 3"> -->
+                                                            <strong name="iResourceNumber" ng-model="info.vClientNumber | numberFixedLen : 3">{{info.vClientNumber | numberFixedLen : 3}}</strong>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Creation Date</label>
+                                                            <!-- <input type="text" class="form-control" name="dtCreationDate" ng-model="info.dtCreationDate" readonly> -->
+                                                            <br><strong name="dtCreationDate" ng-model="info.dtCreationDate">{{info.dtCreationDate | globalDtFormat}}</strong>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Creator name</label>
+                                                            <!-- <input type="text" class="form-control" name="dtCreationDate" ng-model="info.dtCreationDate" readonly> -->
+                                                            <br>
+
+                                                            <strong ng-if="!isNewClient" name="creator" ng-model="info.created_id">{{info.created_id}}</strong>
+                                                            <strong ng-if="isNewClient" name="creator" ng-model="info.created_id">{{displayCreatorName}}</strong>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Company Name</label> <input capitalize-first type="text"
+                                                                class="form-control" name="vFirstName"
+                                                                ng-model="info.vUserName" required
+                                                                ng-blur="checkClientname()">
+                                                        </div>
+                                                        <!-- <div class="form-group">
+                                                        <label>Company Code (rights)</label>
+                                                        <input type="text" class="form-control" name="vLastName" ng-model="info.vCodeInvoice" required>
+                                                    </div>-->
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Business Unit</label> <input
+                                                                type="text" select2-center-client id="comapanyBranch"
+                                                                class="form-control" name="vResourceType"
+                                                                ng-model="info.vCodeRights" ng-change="comapanyBranchError()" required />
+                                                                <span for="comapanyBranch" class="help-block comapanyBranch">This field is required.</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                          <div class="form-group">
+                                                        <label for="Phone" class="control-label">phone</label>
+                                                        <div class="input-group" style="width:100% !important">
+                                                            <input type="text" class="form-control" id="userphone" name="phone"  ng-model="info.vPhone" international-phone-number  default-country=""  required />
+                                                        </div>
+                                                        <label for="userphone" class="error"></label>
+                                                        <span id="valid-msg" class="hide" style="color:green">✓ Valid</span>
+                                                        <span id="error-msg" class="hide" style="color:#a94442">Invalid number</span>
+                                                    </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Website</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" name="website"  ng-model="info.vWebsite" required> 
+                                                                    <span class="input-group-addon">
+                                                                    <a target="_blank" href="http://{{info.vWebsite}}">
+                                                                    <i class="fa fa-external-link"></i></a>
+                                                                    </span>
+                                                            </div>
+                                                            <label for="website" class="error"></label>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Email</label>
+                                                            <div class="input-group">
+                                                                <input type="email" class="form-control"
+                                                                    name="vEmailAddress" ng-model="info.vEmailAddress"
+                                                                    ng-blur="checkemailaddress(info.vEmailAddress)"
+                                                                    required> <span class="input-group-addon"><a ng-if="info.vEmailAddress"
+                                                                    href="javascript:void(0)" ng-click="workingHour(info.iClientId,'direct')"><i
+                                                                        class="fa fa-inbox"></i></a><i ng-if="!info.vEmailAddress"
+                                                                        class="fa fa-inbox"></i></span>
+                                                            </div>
+                                                            <span for="vEmailAddress" class="help-block">This field is required.</span>
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Status</label>
+                                                            <!--                                                    <select class="form-control m-b" name="eUserStatus" ng-model="info.vStatus" required ng-options="statusObj.name as statusObj.name group by statusObj.gr for statusObj in clientStatus">
+                                                                <option value="">Select status</option>
+                                                            </select>                    -->
+                                                            <input class="form-control" name="eUserStatus" id="eUserStatus" select2-client-status ng-model="info.vStatus" required />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-4">
+                                                                <div class="thumb-info mb-md">
+                                                                    <img id="new_profile_pic" ng-show="imgshow"
+                                                                        ng-if="info.vLogo != undefined"
+                                                                        ng-src="uploads/logo/{{info.vLogo}}"
+                                                                        class="img-thumbnail" alt="Add a logo"> 
+                                                                        <img id="new_profile_pic" ng-show="imgshow"
+                                                                        ng-if="info.vLogo == undefined" ng-src="assets/img/blank.png" class="img-thumbnail"
+                                                                        alt="Add a logo"> <img id="new_profile_pic" ng-show="!imgshow" ng-src="{{imageSrc ? imageSrc : 'assets/img/blank.png'}}"
+                                                                        class="img-thumbnail" alt="Add a logo">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-8">
+                                                                <label>Select Logo</label> <input type="file"
+                                                                    ng-model="info.vLogo"
+                                                                    ng-file-select="onFileSelect($files)" ng-required='!imageSrc && !info.vLogo'>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Responsible Sales
+                                                                Person</label> <input type="text" select2-user
+                                                                class="form-control" name="iBussinessDeveloper"
+                                                                ng-model="info.iBussinessDeveloper">
+                                                        </div>
+                                                    </div> -->
+                                                    
+                                                    
+                                                    <!-- <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Skype</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" name="vSkype"
+                                                                    ng-model="info.vSkype" required> <span
+                                                                    class="input-group-addon"><a target="_blank"
+                                                                    ng-href="skype:{{info.vSkype}}"><i
+                                                                        class="fa fa-skype"></i></a></span>
+                                                            </div>
+                                                            <span for="vSkype" class="help-block">This field is required.</span>
+                                                        </div>
+                                                    </div> -->
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    
+                                                    
+                                                    <!-- <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Customer Types</label> 
+                                                            <input type="text" select2-customer-group class="form-control" name="customer_group" ng-model="info.customer_group" />
+                                                        </div>
+                                                    </div> -->
+                                                    
+                                                    
+                                                    <!-- <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Company Branch (Project)</label> <input type="text" select2-center-client id="comapanyBranchProject" class="form-control" name="comapanyBranchProject" ng-model="info.company_branch_project" required />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Company Branch (Invoice)</label> <input type="text" select2-center-client id="comapanyBranchInvoice" class="form-control" name="comapanyBranchInvoice" ng-model="info.company_branch_invoice" required />
+                                                        </div>
+                                                    </div> -->
+                                                    <!-- <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>VAT Number</label>
+                                                            <input type="text" class="form-control"  name="tax_id" ng-model="info.vVatNumber" required >
+                                                        </div>
+                                                    </div> -->
+                                                    <!-- <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Taxation Type</label>
+                                                            <select class="form-control m-b" name="tax_type" ng-model="info.vTextType" required>
+                                                                <option>EU without VAT</option>
+                                                                <option>EU with VAT</option>
+                                                                <option>non-taxable</option>
+                                                            </select>  
+                                                        </div>
+                                                    </div> -->
+                                                    <!-- <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Taxation Type</label>
+                                                            <input type="text" select2-taxation class="
+                                                            form-control"
+                                                            name="taxationList" id="taxationList" ng-model="info.vTextType" /> 
+                                                        </div>
+                                                    </div> -->
+                                                    <!-- <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Currency Code</label>
+                                                            <input type="text" select2-currency-convert data-typeid="1" id="currencyCode" class="form-control" name="currencyCode"   ng-model="info.client_currency" required />
+                                                        </div>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="panel panel-default">
+                                    <div class="panel-heading font-bold"><h4>Email</h4></div>
+                                    <div class="panel-body">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                            <div class="invocedata1 invoiceCount" id="invoiceCou0" ng-if="!email">
+                                                    <div class="col-sm-5">
+                                                        <div class="form-group">
+                                                            <select class="form-control m-b selectEmail"
+                                                                name="eUserStatus" id="selectEmail_opetion_0"
+                                                                onchange="changeOption(this.id)">
+                                                                <option value="--Select Invoice--">Select Invoice</option>
+                                                                <option value="invoice email" class="sub-status val-1">invoice email</option>
+                                                                <option value="contact email" class="sub-status val-2">contact
+                                                                email</option>
+                                                                <option value="vendor email" class="sub-status val-3">vendor
+                                                                email</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-5">
+                                                        <div class="form-group">
+                                                            <input type="email" name="test" autocomplete="off" class="form-control m-b invoice" id="selectEmail_invoice_0">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="invocedata invoiceCount1"
+                                                    id="invoiceCou{{$index}}"
+                                                    ng-repeat="em in email track by $index" ng-if="email">
+                                                    <div class="col-sm-5">
+                                                        <div class="form-group">
+                                                            <select class="form-control m-b selectEmail"
+                                                                name="eUserStatus" id="selectEmail_opetion_{{$index}}"
+                                                                onchange="changeOption(this.id)">
+                                                                <option class="sub-status val-1">{{em.invoiceid}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-5">
+                                                        <div class="form-group">
+                                                            <input type="email" name="test" autocomplete="off"
+                                                                class="form-control m-b invoice"
+                                                                ng-model="em.invoiceValue"
+                                                                id="selectEmail_invoice_{{$index}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2" ng-if="$index!=0">
+                                                        <a href="javascript:void(0)" ng-click="removeinvoice($index);"><i class="fa fa-times fa-lg invoicedelete"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <moreinvoice ng-if="!email">
+                                            <div ng-show="invoice">
+                                                <a class="btn btn-info btn-leftside invoice btn-sm"
+                                                    ng-click="invoiceClassget('invoiceCount');">Add New <span class="glyphicon glyphicon-plus"></span></a>
+                                            </div>
+                                            <div ng-hide="invoice">
+                                                <button class="btn btn-info btn-leftside invoice btn-sm"
+                                                    ng-click="invoiceClassget('invoiceCount');">Add New <span class="glyphicon glyphicon-plus"></span></button>
+                                            </div>
+                                        </moreinvoice>
+                                        <moreinvoiceedit ng-if="email">
+                                            <div ng-show="invoice">
+                                                <a class="btn btn-info btn-leftside invoice btn-sm"
+                                                    ng-click="invoiceClassget('invoiceCount1');">Add New <span class="glyphicon glyphicon-plus"></span></a>
+                                            </div>
+                                            <div ng-hide="invoice">
+                                                <button class="btn btn-info btn-leftside invoice btn-sm"
+                                                    ng-click="invoiceClassget('invoiceCount1');">Add
+                                                    New <span class="glyphicon glyphicon-plus"></span></button>
+                                            </div>
+                                        </moreinvoiceedit>
+                                    </div>
+                                </div> -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading font-bold"><h4>Address</h4></div>
+                                            <div class="panel-body">
+                                                <div class="col-lg-12">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Address</label> <input
+                                                                class="form-control" id="address1"
+                                                                ng-model="info.vAddress1" details="address1" googleplace required/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4 none">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Street</label> <input
+                                                                type="text" class="form-control street_number"
+                                                                id="address1_street_number" name="vStreet1"
+                                                                ng-model="add1.street" disabled>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label">City</label> <input
+                                                                type="text" class="form-control city"
+                                                                id="address1_locality" name="route" ng-model="vCity1"
+                                                                 required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label">State</label> <input
+                                                                type="text" class="form-control locality"
+                                                                id="address1_administrative_area_level_1" name="vState"
+                                                                ng-model="add1.state"  required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Country</label> <input
+                                                                type="text" class="form-control country" name="vCountry"
+                                                                id="address1_country" ng-model="add1.country"  required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Zipcode</label> <input
+                                                                type="text" class="form-control postal_code"
+                                                                id="address1_postal_code" name="vZipcode"
+                                                                ng-model="add1.zipcode"  required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Timezone</label>
+                                                            <input type="text" class="form-control postal_code" id="address1_vTimezone" 
+                                                                ng-model="add1.timezone" disabled="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--                                    <div class="col-md-2">
+                                                                        <div class="text-center pt-95"><a href="javascript:void(0)" ng-click="copytoship();"><img src="assets/img/forward.png" /></a></div>
+                                                                        </div>
+                                                                        <div class="col-md-5 pl-0">
+                                                                            <div class="panel panel-default">
+                                                                                <div class="panel-heading font-bold">
+                                                                                    Billing Address
+                                                                                </div>
+                                                                                <div class="panel-body">
+                                                                                     <form id="other_info"> 
+                                                                                    <div class="col-lg-12">
+                                                                                        <div class="col-sm-6">
+                                                                                            <div class="form-group">
+                                                                                                <label class="control-label">Address </label>
+                                                                                                <input type="text" id="address2" class="form-control" name="vAddress2" ng-model="info.vAddress2" details="address2" googleplace/>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <div class="form-group">
+                                                                                                <label class="control-label">Street </label>
+                                                                                                <input type="text" class="form-control" id="address2_street_number" name="vStreet2" ng-model="add2.street" disabled>          
+                                                                                            </div>              
+                                    
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <div class="form-group">
+                                                                                                <label class="control-label">City</label>
+                                                                                                <input type="text" class="form-control route" id="address2_locality" name="route" ng-model="vCity2"  disabled>          
+                                                                                            </div>              
+                                    
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <div class="form-group">
+                                                                                                <label class="control-label">State</label>
+                                                                                                <input type="text" class="form-control" id="address2_administrative_area_level_1" name="vState" ng-model="add2.state" disabled>   
+                                                                                            </div>                     
+                                    
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <div class="form-group">
+                                                                                                <label class="control-label">Country</label>
+                                                                                                <input type="text" class="form-control" id="address2_country" name="vCountry" ng-model="add2.country" disabled> 
+                                                                                            </div>                       
+                                    
+                                                                                        </div>
+                                                                                        <div class="col-sm-6">
+                                                                                            <div class="form-group">
+                                                                                                <label class="control-label">Zipcode</label>
+                                                                                                <input type="text" class="form-control" id="address2_postal_code" name="vZipcode" ng-model="add2.zipcode" disabled> 
+                                                                                            </div>                       
+                                    
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>-->
+                                </div>
+                                
+                                <div class="panel panel-default">
+                                    <!-- <div class="panel-heading font-bold"><h4>File Manager</h4></div> -->
+
+                                    <div class="panel-body">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <a href="javascript:void(0);" ng-click="directClientFilemanager(info.iClientId,'client-profile')" title="File Manager"><i class="filefolder"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--   TAB1 -->
+                                <div class="panel-footer">
+                                    <a class="btn btn-info btn-rightside"
+                                        ng-click="saveClientProfile('client-profile');">Save &
+                                        Next <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </div>
+
+                            </form>
+            </div>
+          </div>
+          <!-- footer copy right -->
+      <div data-ng-include="'tpl/copyRight.html'"></div>
+        </div>
+      
+
+      </div>
+    </div>
+  </div>

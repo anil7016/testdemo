@@ -1,0 +1,68 @@
+  <div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' " >
+  </div>
+  <div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs" data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+      <div ui-butterbar></div>
+      <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside" ></a>
+      <div class="md-content page_content_wrapper" id="top">
+      
+        <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+          <h1 class="m-n font-thin h3">Client Types</h1>
+        </div>
+        <div class="wrapper-md ng-scope">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <form id="customer-group-form">
+              <div class="col-sm-12">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Name of Client Types</label>
+                                                <input type="text" class="form-control" placeholder="Enter Name of Client Types" name="group_name" ng-model="group.group_name" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="checkbox">
+                                                <label class="i-checks i-checks-sm" style="padding-top: 20px;">
+                                                    <input type="checkbox" name="is_active" ng-true-value="1" ng-false-value="0" ng-model="group.is_active" ng-checked="group.is_active == 1">
+                                                    <i></i>
+                                                    Active(check to active)
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+              
+                  <div class="panel-footer">
+                      <button class="btn btn-info " ng-click="save('customer-group-form');" style="margin-left:15px;"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                  </div>
+            </form>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <table st-table="rowCollectionBasic" class="table table-bordered table-striped">
+              <thead>
+                                        <th>#</th>
+                                        <th>Name of Client Types</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="customer in customergrouplist" ng-class="(customer.group_id == group.group_id) ? 'rowactivate' : ''">
+                                                <td ng-bind="$index + 1"></td>
+                                                <td ng-bind="customer.group_name"></td>
+                                                <td ng-if="customer.is_active == '1'"><span class="label bg-success" title="active">Active</span></td>
+                                                <td ng-if="customer.is_active == '0'"><span class="label bg-danger" title="Inactive">Inactive</span></td> 
+                                                <td><a href="javascript:void(0)" ng-click="customerGroupEdit(customer.group_id,'top');" title="edit"><i class="glyph-icon fa-edit"></i></a>   <a href="javascript:void(0)" ng-click="deleteCustomerGroup(customer.group_id)" title="delete"><i class="iconDelete glyph-icon fa-times"></i></a></td>
+                                            </tr>
+                                            <tr ng-show="customertypeEmpty">
+                                                <td colspan="4" ng-bind="dataNotFound"></td>
+                                            </tr>
+                                        </tbody>
+            </table>
+          </div>
+
+        </div>
+    </div>
+  </div>

@@ -1,0 +1,179 @@
+  <div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' " >
+  </div>
+  <div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs" data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+      <div ui-butterbar></div>
+      <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside" ></a>
+      <div class="md-content page_content_wrapper">
+        
+        <div class="wrapper-md ng-scope">
+          <!-- <h1 class="m-n font-thin h3">Resource Type</h1> -->
+            <div ng-if="redirectToUserViewId">
+              <a href="javascript:history.back()" class="btn btn-info pull-right btn-sm"><span class="fa fa-arrow-left"></span> Back</a>
+            </div>
+            <div ng-if="!redirectToUserViewId">
+              <a href="javascript:history.back()" class="btn btn-info pull-right btn-sm"><span class="fa fa-arrow-left"></span> Back</a>
+            </div>
+        </div>
+        <div class="wrapper-md ng-scope">
+          <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="bg-light lter wrapper-md">
+                        <h1 class="m-n font-thin h3 hleft" style="margin: -7px !important;">{{userprofiledata.vFirstName}}&nbsp;{{userprofiledata.vLastName}}</h1>
+                        <h5 class="hright" ng-if="UpdateUserName">This record is currently edited by {{UpdateUserName}}<h5>
+                    </div>
+                    <div class="tab-content">
+                        <div id="w4-tab1" class="tab-pane active">
+                            <form id="userprofileform" >              
+                                <!--   TAB1 -->
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading font-bold"><h4>Basic Information</h4></div>
+                                            <div class="panel-body">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Profile Number</label>
+                                                        <input type="text" class="form-control" name="profileNummber" ng-model="userprofiledata.iResourceNumber|numberFixedLen:4" readonly>
+                                                    </div>     
+                                                    <div class="form-group">
+                                                        <label>Resource Status</label>
+                                                        <input type="text" select2-userstatus class="form-control" name="eUserStatus" id="eUserStatus" ng-model="userprofiledata.eUserStatus" required />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>First Name</label>
+                                                        <input capitalize-first type="text" class="form-control" name="vFirstName" ng-model="userprofiledata.vFirstName" ng-change="setUsername(userprofiledata.vFirstName)" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Last Name</label>
+                                                        <input capitalize-first type="text" class="form-control"  name="vLastName" ng-model="userprofiledata.vLastName" ng-change="setUsername2(userprofiledata.vLastName)" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Gender</label>
+                                                        <input type="text" select2-gender class="form-control" name="iGender" id="iGender"  ng-model="userprofiledata.iGender"  required />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Date of Birth</label>
+                                                        <input type="text" class="form-control" id="dtBirthDate" ng-outgoing name="dtBirthDate" ng-model="userprofiledata.dtBirthDate" required onkeydown="return false">
+                                                    </div>
+                                                   <!--  <div class="form-group">
+                                                        <label>Position</label>
+                                                        <input type="text" class="form-control">
+                                                    </div> -->
+                                                    <div class="form-group" ng-show="!userprofiledata.iUserId">
+                                                        <label>Position</label>
+                                                        <input type="text" ng-select2-userposition data-typeid="2" id="vResourcePosition" class="form-control" name="vResourcePosition"  ng-model="userprofiledata.vResourcePosition" required />
+                                                    </div>
+                                                    <div class="form-group" ng-show="userprofiledata.iUserId">
+                                                        <label>Position</label>
+                                                        <input type="text" ng-select2-userposition data-typeid="2" id="vResourcePosition" class="form-control" name="vResourcePosition"  ng-model="userprofiledata.vResourcePosition" required />
+                                                    </div>
+                                                    <div class="form-group" ng-show="!userprofiledata.iUserId">
+                                                        <label>Department</label>
+                                                        <input type="text" ng-select2-usertype data-typeid="2" id="vResourceType" class="form-control" name="vResourceType" ng-model="userprofiledata.vResourceType" required/>
+                                                    </div>
+                                                    <div class="form-group" ng-show="userprofiledata.iUserId">
+                                                        <label>Department</label>
+                                                        <input type="text" ng-select2-usertype data-typeid="2" id="vResourceType" class="form-control" name="vResourceType"  ng-model="userprofiledata.vResourceType" required />
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-8">
+                                                            <label>Profile Picture</label>
+                                                            <input type="file"  ng-model="userprofiledata.vProfilePic" ng-file-select="onFileSelect($files)"  ng-required='!imageSrc && !userprofiledata.vProfilePic'/>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <div class="thumb-info mb-md">
+                                                                <img id="new_profile_pic" ng-show="imgshow" ng-if="userprofiledata.vProfilePic != undefined" ng-src="uploads/profilePic/{{userprofiledata.vProfilePic}}" class="img-thumbnail" alt="Add a Picture">
+                                                                <img id="new_profile_pic" ng-show="imgshow" ng-if="userprofiledata.vProfilePic == undefined" ng-src="assets/img/blank.png" class="img-thumbnail" alt="Add a Picture">
+                                                                <img id="new_profile_pic" ng-show="!imgshow" ng-src="{{imageSrc ? imageSrc : 'assets/img/blank.png'}}" class="img-thumbnail" alt="Add a Picture">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading font-bold"><h4>Contact Information</h4></div>
+                                            <div class="panel-body">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Username</label>
+                                                        <input type="text" class="form-control" name="vUserName" ng-model="userprofiledata.vUserName" required ng-blur="checkusername()">
+                                                    </div>
+                                                    <div class="form-group" ng-show="!userprofiledata.iUserId">
+                                                        <label>Password</label>
+                                                        <input type="password" class="form-control" data-clipboard-text="{{userprofiledata.vPassword}}" id="vPass"  name="vPassword" ng-model="userprofiledata.vPassword" required />
+                                                    </div>
+                                                    <div class="form-group" ng-show="!userprofiledata.iUserId">
+                                                        <label>Confirm Password</label>
+                                                        <input type="password" class="form-control"  id="cPass"  name="cPassword" ng-change="ConfirmPass(userprofiledata.vPassword,matchPassword)" ng-model="matchPassword" ng-required="!userprofiledata.iUserId"/>
+                                                        <span id="passNotMatch" style="color:#a94442;display:none">Password does not match</span>
+                                                        <span id="passMatch" style="color:green;display:none;">Password match</span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Email Address</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><a  ng-if="userprofiledata.vEmailAddress" href="javascript:void(0)" ng-click="workingHour(userprofiledata.iUserId,'internal','2')"><i class="fa fa-inbox"></i></a><i class="fa fa-inbox" ng-if="!userprofiledata.vEmailAddress"></i></span>
+                                                            <input type="email" class="form-control"  name="vEmailAddress" ng-model="userprofiledata.vEmailAddress" required ng-blur="checkemailaddress()">
+                                                        </div>
+                                                        <label for="vEmailAddress" class="error cusVal"></label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="Mobile" class="control-label">Mobile</label>
+                                                        <div class="input-group" style="width:100% !important">
+                                                            <input type="text" class="form-control" id="iMobile" name="iMobile"  ng-model="userprofiledata.iMobile" international-phone-number  default-country=""  required />
+                                                        </div>
+                                                        <label for="iMobile" class="error"></label>
+                                                        <span id="valid-msg" class="hide" style="color:green">✓ Valid</span>
+                                                        <span id="error-msg" class="hide" style="color:#a94442">Invalid number</span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="vSkypeName" class="control-label">Skype Name</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><a target="_blank" ng-href="skype:{{userprofiledata.vSkypeName}}"><i class="fa fa-skype"></i></a></span>
+                                                              <input  type="text" class="form-control"  name="vSkypeName" ng-model="userprofiledata.vSkypeName" required>
+                                                        </div>
+                                                        <label for="vSkypeName" class="error"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                   <!--  <div class="panel-heading font-bold">
+                                       <h4>File Manager</h4>
+                                   </div> -->
+                                    <div class="panel-body">
+                                        <div class="col-lg-12">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                <a href="javascript:void(0);" ng-click="userInternalFileManager(userprofiledata.iUserId,'userprofileform')" title="File Manager"><i class="filefolder"></i></a>
+                                                    <!-- <button class="btn btn-info" >Select File</button> -->
+                                                </div>
+                                            </div>                                               
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--   TAB1 -->
+                                <div class="panel-footer">
+                                    <a class="btn btn-info pull-right" ng-click="saveUserProfileInternal('userprofileform','1');"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save & Close</a>
+                                    <a class="btn btn-info pull-right" style="margin-right: 15px;" ng-click="saveUserProfileInternal('userprofileform');"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</a>
+                                </div>
+                              
+                            </form>
+                        </div>
+                    </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+  </div>

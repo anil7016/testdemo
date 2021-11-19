@@ -1,0 +1,140 @@
+<div class="ht-sitecontainer ht-sitecontainer--wide header"  ng-controller="headerController">
+    <div class="site-header">
+        <header class="site-header__banner" role="banner" itemtype="http://schema.org/WPHeader" itemscope="itemscope">
+            <div class="ht-container">
+                <div class="site-logo">
+                        <a title="KnowAll" href="#/" ng-if="adminRule!=2">
+                            <img src="assets/img/logo.png" alt="" width="200"/>
+                        </a>
+                        <a title="KnowAll" href="#/home" ng-if="adminRule==2">
+                            <img src="assets/img/logo.png" alt="" width="200"/>
+                        </a>
+                    </div>
+                <nav class="nav-header" role="navigation" itemtype="http://schema.org/SiteNavigationElement" itemscope="itemscope">
+                    <button id="ht-navtoggle" class="nav-header__mtoggle"><span>Menu</span></button>
+                    <ul id="menu-header-menu" class="nav-header__menuwrapper">
+                        <li id="menu-item-285" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-285" >
+                            <a ng-if="adminRule!=2" href="#/">Dashboard</a>
+                            <a ng-if="adminRule==2" ng-click="pagePermission()" href="javascript:void(0)">Dashboard</a>
+                        </li>
+                        <li id="menu-item-285" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-285">
+                            <a href="#/home">Knowledge Base</a>
+                        </li>
+                        <li id="menu-item-285" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-285">
+                            <a ng-if="adminRule!=2" href="#/news">News</a>
+                            <a ng-if="adminRule==2" ng-click="pagePermission()" href="javascript:void(0)">News</a>
+                        </li>
+                        <li id="menu-item-285" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-285">
+                            <a href="#/member">Members</a>
+                            <!-- <a ng-if="adminRule!=2" href="#/member">Members</a>
+                            <a ng-if="adminRule==2" ng-click="pagePermission()" href="javascript:void(0)">Members</a> -->
+                        </li>
+                        <li id="menu-item-285" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-285">
+                            <a ng-if="adminRule!=2" href="#/calendar">Calendar</a>
+                            <a ng-if="adminRule==2" ng-click="pagePermission()" href="javascript:void(0)">Calendar</a>
+                        </li>
+                    </ul>  
+                </nav>
+            </div> 
+        </header>
+        <div class="site-header__search">
+            <div class="ht-container">
+                <h2 class="site-header__title">Knowledge Base</h2>
+                <form class="hkb-site-search" method="get">
+                    <label class="hkb-screen-reader-text" for="s">Search For</label> 
+                    <input class="hkb-site-search__field" id="autoComplete" auto-complete ng-model="allSearch"  type="text" value="" placeholder="Search the knowledge base..." name="s"> 
+                     <input type="hidden" name="ht-kb-search" id="autoCompleteID" ng-model="autoId"/> 
+                    <button class="hkb-site-search__button" ng-click="searchResult()"><span>Search</span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <span us-spinner="{radius:15, width:2, length: 10}"></span>
+    <div class="ht-page ht-page--sidebarright">
+        <div class="ht-container">
+            <div md-scroll-shrink class="contentHeadTitle">
+                <div class="md-toolbar-tools">Getting started</div>
+            </div>
+            </br>
+            <div class="col-md-12">
+                    <ul class="hkb-archive hkb-archive--2cols hkb-archive--style2">
+                    <li ng-repeat = "cat in categoryDetailList">
+                        <div class="hkb-category hkb-category--hasdesc"> 
+                            <a href="#/article/{{cat.category}}/{{cat.article_id}}" title="View all posts in Getting Started">
+                                <div class="hkb-category__wrap">
+                                    <h2 class="hkb-category__title" ng-bind="cat.article_discription | limitTo: 50""></h2>
+                                    <!-- <div class="hkb-category__description" ng-bind="category.description | limitTo: 50"></div> -->
+                                </div> 
+                            </a>
+                        </div>
+                    </li>
+                    <!-- <li>
+                        <div class="hkb-category hkb-category--hasdesc"> 
+                            <a href="#/home" title="View all posts in Getting Started">
+                                    <div class="hkb-category__iconwrap">
+                                            <img src="assets/uploads/sites/23/2016/03/04-1.png" class="hkb-category__icon" />
+                                    </div>
+                                    <div class="hkb-category__wrap">
+                                            <h2 class="hkb-category__title"> Getting Started</h2>
+                                            <div class="hkb-category__description"> Articles to get you up and running, quick and easy.</div>
+                                    </div>
+                            </a>
+                        </div>
+                    </li>  -->
+                </ul>
+            </div>
+            </br></br></br></br>
+            <div class="ht-page__content content" id="content">
+                <div md-scroll-shrink class="contentHeadTitle">
+                    <div class="md-toolbar-tools">Category</div>
+                </div>
+                <ul class="hkb-archive hkb-archive--2cols hkb-archive--style2">
+                    <li ng-repeat = "category in categoryList" ng-if="category.category_name!='Getting started'">
+                        <div class="hkb-category hkb-category--hasdesc"> 
+                            <a href="#/getStarted/{{category.category_id}}" title="View all posts in Getting Started">
+                                <div class="hkb-category__iconwrap">
+                                    <img ng-src="{{category.icon}}" alt="" width="40">
+                                </div>
+                                <div class="hkb-category__wrap">
+                                    <h2 class="hkb-category__title" ng-bind="category.category_name"></h2>
+                                    <div class="hkb-category__description" ng-bind="category.description | limitTo: 50"></div>
+                                </div> 
+                            </a>
+                        </div>
+                    </li>
+                    <!-- <li>
+                        <div class="hkb-category hkb-category--hasdesc"> 
+                            <a href="#/home" title="View all posts in Getting Started">
+                                    <div class="hkb-category__iconwrap">
+                                            <img src="assets/uploads/sites/23/2016/03/04-1.png" class="hkb-category__icon" />
+                                    </div>
+                                    <div class="hkb-category__wrap">
+                                            <h2 class="hkb-category__title"> Getting Started</h2>
+                                            <div class="hkb-category__description"> Articles to get you up and running, quick and easy.</div>
+                                    </div>
+                            </a>
+                        </div>
+                    </li>  -->
+                </ul>
+            </div> 
+            <div id="scroller-anchor"></div>
+            <aside class="sidebar" id="sidebar" role="complementary" itemtype="http://schema.org/WPSideBar" itemscope="itemscope"> 
+                <div class="sidebar__innercontainer" data-spy="affix" data-offset-top="248" data-offset-bottom="160"> 
+                    <section id="ht-kb-toc-widget-2" class="widget hkb_widget_toc">
+                        <h1 class="widget__title">Contents</h1> 
+                        <nav id="navtoc" role="navigation">
+                            <ol class="nav">
+                                <li class="hkb-widget-article__format-standard" ng-repeat="category in categoryList" ng-if="category.category_name!='Getting started'">
+                                    <a class="hkb-widget__entry-title" href="#/getStarted/{{category.category_id}}" ng-bind="category.category_name"></a>
+                                </li>
+                                <!-- <li class="hkb-widget-article__format-standard" ng-repeat="">
+                                        <a class="hkb-widget__entry-title" href="knowall/knowledge-base/how-to-create-an-account/index.html">How to Create an Account</a>
+                                </li> -->
+                            </ol>
+                    </section> 	
+            </aside>
+        </div>
+    </div>
+    <div ng-include="'pages/footer.html'">
+
+

@@ -1,0 +1,190 @@
+<style type="text/css">
+   .nav-pills.nav-wizard>>ul>li {
+      border-right: 78px solid #eef5fa !important;
+   }
+
+   .hrght {
+      float: right;
+      color: red;
+      margin-top: -1.5%;
+   }
+</style>
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+   data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+   <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+      data-ng-include=" 'tpl/material.aside.html' ">
+   </div>
+   <div flex layout="column">
+      <div ui-butterbar></div>
+      <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+      <div class="md-content page_content_wrapper">
+
+         <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+            <h1 class="m-n font-thin h3 hleft">{{currentUserName}}</h1>
+            <a href="javascript:history.back()" style="margin-top: -4px !important;"
+               class="btn btn-info pull-right btn-sm"><span class="fa fa-arrow-left"></span> Back</a>
+            <div class="hrght1">
+               <h5 ng-if="user_name!=' '">This record is currently edited by {{user_name}}<h5>
+            </div>
+         </div>
+         <div class="wrapper-md ng-scope">
+            <ul class="nav nav-pills nav-wizard" style="width:71%;margin: auto;">
+               <li ng-if="uType == '1'">
+                  <a href="#/user-profile/{{user_Id}}">1.Communication</a>
+                  <div class="nav-arrow"></div>
+               </li>
+               <li ng-if="uType == '1' && ContactPersonName=='translation'">
+                  <div class="nav-wedge"></div>
+                  <a href="#/user-contact-person">2.Contact Person</a>
+                  <div class="nav-arrow"></div>
+               </li>
+               <li ng-if="uType == '2'">
+                  <div class="nav-wedge"></div>
+                  <a href="#/contact-person">2.Contact Person</a>
+                  <div class="nav-arrow"></div>
+               </li>
+               <li ng-if="uType == '1' && ContactPersonName=='translation'">
+                  <div class="nav-wedge"></div>
+                  <a href="#/properties">3.Properties</a>
+                  <div class="nav-arrow"></div>
+               </li>
+               <li ng-if="uType == '1' && ContactPersonName!='translation'">
+                  <div class="nav-wedge"></div>
+                  <a href="#/properties">2.Properties</a>
+                  <div class="nav-arrow"></div>
+               </li>
+               <li ng-if="uType == '1' && ContactPersonName=='translation'">
+                  <div class="nav-wedge"></div>
+                  <a href="#/price-list1">4.Price List</a>
+                  <div class="nav-arrow"></div>
+               </li>
+               <li ng-if="uType == '1' && ContactPersonName!='translation'">
+                  <div class="nav-wedge"></div>
+                  <a href="#/price-list1">3.Price List</a>
+                  <div class="nav-arrow"></div>
+               </li>
+               <li class="active" ng-if="uType == '1' && ContactPersonName=='translation'">
+                  <div class="nav-wedge"></div>
+                  <a href="#/payment">5.Payment Information</a>
+               </li>
+               <li class="active" ng-if="uType == '1' && ContactPersonName!='translation'">
+                  <div class="nav-wedge"></div>
+                  <a href="#/payment">4.Payment Information</a>
+               </li>
+
+            </ul>
+            <form id="payment_form">
+               <div class="panel panel-default" style="margin-top:1%">
+                  <div class="panel-body">
+                     <div class="col-sm-6">
+                        <div class="panel panel-default">
+                           <div class="panel-heading font-bold">
+                              <h4>Account Information</h4>
+                           </div>
+                           <div class="panel-body">
+                              <div class="col-sm-10 p-0">
+                                 <div class="form-group">
+                                    <label>Vat Number</label>
+                                    <input type="text" id="VatNumber" name="VatNumber" class="form-control"
+                                       placeholder="Including country code (i.e. NO997189248)" ng-model="payment.tax_id"
+                                       required />
+                                 </div>
+                                 <md-progress-linear id="vatLoader" md-mode="indeterminate" class="m-b">
+                                 </md-progress-linear>
+                              </div>
+                              <button type="button" ng-disabled="!payment.tax_id" style="margin-top:25px;width:13%;"
+                                 class="btn btn-info m-l" ng-click="vatCount(payment)">Check</button>
+                              <div class="col-sm-12 vatNumberValid p-0">
+                              </div>
+                              <div class="col-sm-12 p-0">
+                                 <div class="form-group" style="margin-top:16px;">
+                                    <label>Taxation Type</label>
+                                    <select class="form-control m-b" name="tax_type" ng-model="payment.tax_type"
+                                       ng-options="opt for opt in ['EU without VAT','EU with VAT','non-taxable']"
+                                       required>
+                                       <option value="" disabled selected>Select Taxation Type</option>
+                                    </select>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-sm-6">
+                        <div class="panel panel-default">
+                           <div class="panel-heading font-bold">
+                              <h4>Bank</h4>
+                           </div>
+                           <div class="panel-body">
+                              <div class="col-sm-12 p-0">
+                                 <div class="form-group">
+                                    <label>Payment Method</label>
+                                    <select class="form-control m-b" id="paymentMethod" ng-change="paymentChange();"
+                                       name="payment_method" ng-model="bank.payment_method"
+                                       ng-options="opt1 for opt1 in ['Bank Transfer','Paypal']" required>
+                                       <option value="" disabled selected>Select Payment Method</option>
+                                    </select>
+                                 </div>
+                                 <div class="form-group" ng-if="displaybankOption">
+                                    <label>Bank Name</label>
+                                    <input type="text" class="form-control" name="bank_name" ng-model="bank.bank_name"
+                                       required>
+                                 </div>
+                                 <div class="form-group" ng-if="displaybankOption">
+                                    <label>Bank Address</label>
+                                    <input type="text" class="form-control" name="address" ng-model="bank.address"
+                                       required>
+                                 </div>
+                                 <div class="form-group" ng-if="displaybankOption">
+                                    <label>Account Holder</label>
+                                    <input type="text" class="form-control" name="holder_name"
+                                       ng-model="bank.holder_name" required>
+                                 </div>
+                                 <div class="form-group" ng-if="displaybankOption">
+                                    <label>Currency</label>
+                                    <input type="text" select2-currency-convert data-typeid="1" id="currencyCoded"
+                                       class="form-control" name="currencyCoded" ng-model="bank.currency_code"
+                                       required />
+                                 </div>
+                                 <div class="form-group" ng-if="displaybankOption">
+                                    <label>IBAN</label>
+                                    <input type="text" class="form-control" name="iban" ng-model="bank.iban" required>
+                                 </div>
+                                 <div class="form-group" ng-if="displaybankOption">
+                                    <label>SWIFT/BIC</label>
+                                    <input type="text" class="form-control" name="bic" ng-model="bank.bic" required>
+                                 </div>
+                                 <div class="form-group" ng-if="displayPaypalOption">
+                                    <label>Paysera Account</label>
+                                    <input type="email" class="form-control" name="paypal_address"
+                                       ng-model="bank.paypal_address" required>
+                                 </div>
+                                 <div class="form-group" ng-if="displaybankOption">
+                                    <label>Routing Number</label>
+                                    <input type="text" class="form-control" name="bank_code" ng-model="bank.bank_code">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="panel-footer" ng-if="uType == '1'">
+                        <a class="btn btn-info pull-right" ng-click="savePayment('payment_form','1');"><i
+                              class="fa fa-floppy-o" aria-hidden="true"></i> Save</a>
+                     </div>
+                     <div class="panel-footer" ng-if="uType == '2'">
+                        <a class="btn btn-info pull-right" ng-click="savePaymentdirect('payment_form','2');">Save&
+                           Next <i class="fa fa-angle-right"></i></a>
+                     </div>
+                  </div>
+               </div>
+            </form>
+            <!-- footer copy right -->
+            <div data-ng-include="'tpl/copyRight.html'"></div>
+         </div>
+
+
+      </div>
+   </div>
+
+</div>

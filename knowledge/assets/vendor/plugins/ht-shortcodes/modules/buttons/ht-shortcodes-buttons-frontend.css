@@ -1,0 +1,10 @@
+/* Buttons CSS */
+.ht-shortcodes-button {
+    display: inline-block;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+}
+
+.ht-shortcodes-button{
+    text-decoration: none;
+}

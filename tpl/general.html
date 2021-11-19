@@ -1,0 +1,213 @@
+<style type="text/css">
+.nav-pills.nav-wizard>>ul>li {
+    border-right: 78px solid #eef5fa !important;
+}
+
+.hrght {
+    float: right;
+    color: red;
+    margin-top: -1.5%;
+}
+</style>
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs" data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+        <div ui-butterbar></div>
+        <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+        <div class="md-content page_content_wrapper">
+            <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+                <h1 class="m-n font-thin h3">
+            Project Details -
+            <span id="itemCode" ng-bind="projectOrderName"></span>
+            <span>{{indirectCustomerName}}</span>
+        </h1>
+                <div class="hrght1" ng-if="showEditedByName">
+                    <h5>This record is currently edited by {{UpdateClientName}}<h5></div>
+        </div>
+        <div class="wrapper-md ng-scope">
+
+          <ul class="nav nav-pills nav-wizard" style="display: flex;justify-content: center;">
+                        <li class="active">
+                            <a href="#/general">General</a>
+                            <div class="nav-arrow"></div>
+                        </li>
+                        <li>
+                            <div class="nav-wedge"></div>
+                            <a ng-if="isNewProject=='true'" href="">Scoop</a>
+                            <a ng-if="isNewProject=='false'" href="#/items">Scoop</a>
+                            <div class="nav-arrow"></div>
+                        </li>
+                        <li>
+                            <div class="nav-wedge"></div>
+                            <a ng-if="isNewProject=='true'" href="">Jobs</a>
+                            <a ng-if="isNewProject=='false'" href="javascript:void(0)" ng-click="goTojobDetail()">Jobs</a>
+                            <div class="nav-arrow"></div>
+                        </li>
+                        <li>
+                            <div class="nav-wedge"></div>
+                            <a ng-if="isNewProject=='true'" href="">Job Discussion</a>
+                            <a ng-if="isNewProject=='false'" href="javascript:void(0)" ng-click="jobDiscussion()">Job Discussion</a>
+                        </li>
+                    </ul>
+          <div class="panel panel-default boxgtr">
+
+            <div class="panel-body w-100">
+              <form id="item-form">
+                        <div class="d-flex w-100 col-sm-12" style="margin: 15px 0 30px;">
+                            <div class="d-flex align-center w-100" style="max-width: 250px;">
+                                <label class="no-wrap m-0">Project Number:</label>
+                                <input style="border: none;background-color: #fff;font-weight: bold;cursor: text; padding: 0; margin-left: 10px;" type="text" class="form-control" name="order_number_id" id="order_number_id" ng-model="general.order_no" readonly />
+                            </div>
+                            <div class="d-flex align-center w-100" style="max-width: 250px;">
+                                <label class="no-wrap m-0">Project Date:</label>
+                                <input style="border: none;background-color: #fff;font-weight: bold;cursor: text; padding: 0; margin-left: 10px;" type="text" class="form-control" name="order_date" id="order_date" ng-model="general.order_date" readonly/>
+                            </div>
+                            <div class="d-flex align-center w-100" style="max-width: 150px;">
+                                <label class="no-wrap m-0">Heads-up</label>
+                                <label class="i-checks i-checks-sm" style="margin-left: 10px;">
+                                    <input type="checkbox" name="heads_up" ng-true-value="1" ng-false-value="0" ng-model="general.heads_up" ng-click="headsUpClick()" ng-checked="general.heads_up == 1" class="ng-pristine ng-untouched ng-valid" ng-disabled="general.expected_start_date">
+                                    <i></i>
+                                </label>
+                            </div>
+                            <div class="d-flex align-center" ng-if="general.heads_up == 1">
+                                <label class="no-wrap m-0">Expected Project Start Date</label>
+                                <input style="margin-left: 10px;" ng-datetimepicker1 id="expected_start_date" type="text" class="form-control end-date" name="expected_start_date" ng-model="general.expected_start_date" required onkeydown="return false" ng-disabled="general.expected_start_date"/>
+                            </div>
+                        </div>
+                         
+                        <div class="tab-content">
+                            <div class="col-md-12">
+                                <div class="row d-flex justify-space-between" style="margin-top:5px;">
+                                    <div class="col-md-6">
+                                        <div class="panel panel-default panel-labeled mb-0">
+                                            <div class="panel-body p-0 projectDetailsbox">
+                                                <div class="form-group">
+                                                    <div class="left">
+                                                        <label>Client</label>
+                                                        <input type="text" select2-client class="form-control" name="client" ng-model="customer.client" ng-change="getContact(customer.client, 'conatct-person')" required ng-hide="customerField" />
+                                                        <input type="text" select2-client class="form-control" name="client" ng-model="customer.client" ng-change="getContact(customer.client, 'conatct-person')" readonly ng-show="customerField" />
+                                                    </div>
+                                                    <div class="right">
+                                                        <div ng-if="customer.client">
+                                                            <a href="javascript:void(0);" ng-click="openProfile(customer.client)"><i class="glyphicon glyphicon-th glyphicon-lock"></i></a>
+                                                        </div>
+                                                        <div ng-if="!customer.client">
+                                                            <i class="fa fa-user fa-lg"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="left">
+                                                        <label>Contact Person</label>
+                                                        <input type="text" id="conatct-person" class="form-control" name="contact" ng-model="customer.contact" ng-disabled="!customer.client" required/>
+                                                    </div>
+                                                    <div class="right">
+                                                        <a href="javascript:void(0)" ng-click="customerCntactpersonEmail('contactperson',customer.contact)"><i class="fa fa-envelope fa-lg"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="left">
+                                                        <label>Account</label>
+                                                        <input type="text" select2-indirect class="form-control" name="indirect_customer" id="indirect_customer" ng-model="customer.indirect_customer" ng-change="AccountChange()" required />
+                                                    </div>
+                                                    <div class="right"></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="left">
+                                                        <label>Specialization</label>
+                                                        <input select2-specialization-project type="text" class="form-control" name="specialization" id="specialization" ng-model="general.specialization" required>
+                                                    </div>
+                                                    <div class="right"></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="left">
+                                                        <label>Project Name</label>
+                                                        <input type="text" class="form-control" name="project_name" id="project_name" ng-model="general.project_name" required />
+                                                    </div>
+                                                    <div class="right"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="panel panel-default panel-labeled" style="min-height:425px;margin-left:0px">
+                                            <div class="row p-0">
+                                                <div class="col-sm-12">
+                                                    <div class="form-group" style="margin-top:2px;">
+                                                        <label>Project Manager</label>
+                                                        <input type="text" id="projectManager" class="form-control" id="projectManager" name="vProjectManager" select2-manager ng-model="customer.project_manager" required/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Project Coordinator</label>
+                                                        <input type="text" class="form-control" id="projectCoordinator" name="vProjectCoordinator" select2-coordinator ng-model="customer.project_coordinator" required/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Quality Assurance Specialist</label>
+                                                        <input type="text" select2-qaspa id="qaSpecialist" class="form-control" name="vProjectSpecialist" ng-model="customer.QA_specialist" required/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Due Date</label>
+                                                        <input ng-Datepicker2 id="due_date" type="text" class="form-control" name="due_date" ng-model="general.due_date" required onkeydown="return false"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Due Time</label>
+                                                        <input timepicker1 id="due_time" type="text" class="form-control" name="due_time" 
+                                                        ng-model="due_time" required onkeydown="return true"/>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Project Price</label>
+                                                        <input type="number" id="project_price" class="form-control" name="project_price" ng-model="general.project_price" />
+                                                    </div> 
+                                                </div>-->
+                                                <!-- <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Project status</label>
+                                                        <input select2-proj-jobs type="text" class="form-control" name="project_status" id="project_status" ng-model="general.project_status" data-ng-disabled="proStatusDisabled()" required>
+                                                    </div>
+                                                </div> -->
+                                                <!-- <div class="col-sm-12">
+                                                    <div class="form-group">
+                                                        <label>Project Type</label>
+                                                        <input select2-proj-type type="text" class="form-control" name="project_type" id="project_type" ng-model="general.project_type" required>
+                                                    </div>
+                                                </div> -->
+                                                <!-- <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>No.of Items</label>
+                                        <input type="number" min="1" max="5" class="form-control" name="no_of_items" id="no_of_items" ng-model="general.no_of_items" required ng-disabled="customerField" ng-keyup="keydownevt()">
+                                    </div>
+                                </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                <div style="padding: 1%;">
+
+                <!-- <a href="javascript:void(0);" class="btn btn-info pull-right" ng-click="startProject(general.project_start_status);" style="margin-left:5px;">Start project</a> -->
+                <a href="#/dashboard1" class="btn btn-info pull-right" style="margin-left:5px;">Cancel</a>
+                <a class="pull-right btn btn-info" ng-click="saveGeneral('item-form');" style="margin-left:0px;">Next</a>
+                </div>
+                </div>
+                </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>

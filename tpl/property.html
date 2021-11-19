@@ -1,0 +1,157 @@
+<style type="text/css">
+    .nav-pills.nav-wizard>>ul>li {
+        border-right: 78px solid #eef5fa !important;
+    }
+
+    .hrght {
+        float: right;
+        color: red;
+        margin-top: -1.5%;
+    }
+</style>
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+    data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+        data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+        <div ui-butterbar></div>
+        <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+        <div class="md-content page_content_wrapper">
+
+            <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+                <h1 class="m-n font-thin h3 hleft">{{currentUserName}}</h1>
+                <a href="javascript:history.back()" style="margin-top: -4px !important;"
+                    class="btn btn-info pull-right btn-sm"><span class="fa fa-arrow-left"></span> Back</a>
+                <div class="hrght1">
+                    <h5 ng-if="user_name!=' '">This record is currently edited by {{user_name}}<h5>
+                </div>
+            </div>
+            <div class="wrapper-md ng-scope">
+                <ul class="nav nav-pills nav-wizard" style="width:71%;margin: auto;">
+                    <li ng-if="uType == '1'">
+                        <a href="#/user-profile/{{user_Id}}">1.Communication</a>
+                        <div class="nav-arrow"></div>
+                    </li>
+                    <li ng-if="uType == '1' && ContactPersonName=='translation'">
+                        <div class="nav-wedge"></div>
+                        <a href="#/user-contact-person">2.Contact Person</a>
+                        <div class="nav-arrow"></div>
+                    </li>
+                    <li ng-if="uType == '2'">
+                        <div class="nav-wedge"></div>
+                        <a href="#/contact-person">2.Contact Person</a>
+                        <div class="nav-arrow"></div>
+                    </li>
+                    <li class="active" ng-if="uType == '1' && ContactPersonName=='translation'">
+                        <div class="nav-wedge"></div>
+                        <a href="#/properties">3.Properties</a>
+                        <div class="nav-arrow"></div>
+                    </li>
+                    <li class="active" ng-if="uType == '1' && ContactPersonName!='translation'">
+                        <div class="nav-wedge"></div>
+                        <a href="#/properties">2.Properties</a>
+                        <div class="nav-arrow"></div>
+                    </li>
+                    <li ng-if="uType == '1' && ContactPersonName=='translation'">
+                        <div class="nav-wedge"></div>
+                        <a href="#/price-list1">4.Price List</a>
+                        <div class="nav-arrow"></div>
+                    </li>
+                    <li ng-if="uType == '1' && ContactPersonName!='translation'">
+                        <div class="nav-wedge"></div>
+                        <a href="#/price-list1">3.Price List</a>
+                        <div class="nav-arrow"></div>
+                    </li>
+                    <li ng-if="uType == '1' && ContactPersonName=='translation'">
+                        <div class="nav-wedge"></div>
+                        <a href="#/payment">5.Payment Information</a>
+                    </li>
+                    <li ng-if="uType == '1' && ContactPersonName!='translation'">
+                        <div class="nav-wedge"></div>
+                        <a href="#/payment">4.Payment Information</a>
+                    </li>
+
+                </ul>
+                <div class="panel panel-default" style="margin-top:1%">
+                    <div class="panel-body">
+                        <div class="panel panel-default">
+                            <div class="panel-heading font-bold">
+                                <h4>Properties</h4>
+                            </div>
+                            <div class="panel-body">
+                                <form id="user-property" class="row">
+                                    <div class="col-sm-12 p-0">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <input select2-property id="property-index" type="text" name="prop"
+                                                    ng-model="propertyData.property_id" class="form-control"
+                                                    ng-change="loadValue(propertyData.property_id, 'property-value')" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3" ng-show="show_value">
+                                            <div class="form-group">
+                                                <input id="property-value" type="text" name="values"
+                                                    ng-model="propertyData.value_id" class="form-control" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3" ng-show="show_value">
+                                            <button type="button" class="btn btn-info"
+                                                ng-click="saveProperty('user-property');">OK</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default" style="margin-top:1%">
+                    <div class="panel-body">
+                        <div class="panel panel-default">
+                            <div class="panel-heading font-bold">
+                                <h4>Properties List</h4>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <th>#</th>
+                                        <th>Property Name</th>
+                                        <th>Values</th>
+                                        <th>Action</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="t in propList"
+                                            ng-class="(t.id == propId.id) ? 'rowactivate' : ''">
+                                            <td ng-bind="$index + 1"></td>
+                                            <td ng-bind="t.property_name"></td>
+                                            <td ng-bind="t.values_names"></td>
+                                            <td><a href="javascript:void(0)"
+                                                    ng-click="getProperty(t.id, 'property-value')" title="edit"><i
+                                                        class="glyph-icon fa-edit"></i></a> <a
+                                                    href="javascript:void(0)" ng-click="deleteProperty(t.id)"
+                                                    title="delete"><i class="iconDelete glyph-icon fa-times"></i></a></td>
+                                        </tr>
+                                        <tr ng-show="propLisEmpty">
+                                            <td colspan="4">No records found</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <a class="btn btn-info pull-right" ng-click="savePropretyExternal('user-property');">Save & Next
+                            <i class="fa fa-angle-right"></i></a>
+                    </div>
+                </div>
+                <!-- footer copy right -->
+                <div data-ng-include="'tpl/copyRight.html'"></div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+</div>

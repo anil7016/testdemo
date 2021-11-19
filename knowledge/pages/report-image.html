@@ -1,0 +1,22 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+  <form id="reportimage-form" name="reportimageForm">    
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">&times;</button>
+        <h4 class="modal-title">Report this image</h4>
+    </div>
+        
+        <div class="modal-body">
+            <md-input-container class="md-block">
+              <label>Reason for abuse</label>
+              <textarea ng-model="reason" name="reason" md-maxlength="50" rows="5" md-select-on-focus required></textarea>
+            </md-input-container>
+        </div>
+    
+    <div class="modal-footer">
+      <md-button class="md-default md-raised" ng-click="cancel()">Close</md-button>
+      <md-button class="md-primary md-raised" ng-disabled="reportimageForm.$invalid" ng-click="ReportImageSave(reason)">Save</md-button>
+    </div>
+  </form>
+  </div><!-- /.modal-content -->
+</div>

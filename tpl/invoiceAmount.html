@@ -1,0 +1,33 @@
+<form id="invoiceAmount_form">
+    <div class="modal-header">
+        <h3 class="modal-title">Invoice pay</h3>
+    </div>
+    <div class="panel-body">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label>Status</label>
+                <input type="text" select2-invoice-payment id="paidStatus" class="form-control" name="paidStatus" ng-model="paidStatus" ng-change="statusChange(paidStatus)" required>
+            </div>
+        </div>
+        <div class="col-lg-6" ng-show="closeAmount">
+            <div class="form-group">
+                <label ng-bind="am"></label> </br>
+                <h4>{{invoiceComplete | customNumber}}</h4>
+            </div>
+        </div>
+        <div class="col-lg-6" ng-hide="closeAmount">
+            <div class="form-group">
+                <label>Amount</label> <input type="number" ng-init="inv.paid_amount=dueAmount" class="form-control" name="paid_amount" ng-model="inv.paid_amount" min="0" allow-decimal-numbers required>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <h4>Total Amount is: {{currencySymbol.split(',')[1]}} {{totalAmount | customNumber}}</h4>
+        <h4>Paid Amount : {{currencySymbol.split(',')[1]}} {{amountToPaid | customNumber}}</h4>
+        <span style="color:green;" ng-if="totalAmount==amountToPaid">Invoice amount Completed</span>
+    </div>
+    <div class="panel-footer">
+        <button class="btn btn-info" ng-disabled="totalAmount==amountToPaid" type="button"  ng-click="ok('invoiceAmount_form')">Ok</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</form>

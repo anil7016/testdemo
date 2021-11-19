@@ -1,0 +1,216 @@
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+  data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+  <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+    data-ng-include=" 'tpl/material.aside.html' ">
+  </div>
+  <div flex layout="column">
+    <div ui-butterbar></div>
+    <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+    <div class="md-content page_content_wrapper">
+
+      <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+        <a href="javascript:history.back()" class="btn btn-sm btn-info pull-right" style="margin-right: 10px;"><span
+            class="fa fa-arrow-left"></span> Back</a>
+        <h1 class="m-n font-thin h3">Invoice</h1>
+      </div>
+      <div class="wrapper-md ng-scope">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <form id="invoice-form">
+              <!-- <div class="col-sm-12">
+                    <a href="" class="btn btn-sm btn-info pull-right" onclick="window.print();">Print</a>
+                </div> -->
+              <div class="wrapper-md ng-scope">
+                <div>
+                  <!-- <i class="fa fa-twitter fa fa-3x"></i> -->
+                  <img ng-src="uploads/profilePic/{{invoiceDetail.freelancePic}}" width="80" height="80"
+                    style="border-radius: 100px;">
+
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <h4 ng-bind="invoiceDetail.freelanceName"></h4>
+                      <p ng-bind="invoiceDetail.freelanceAddress"></p>
+                      <p>
+                        Telephone: <span ng-bind="invoiceDetail.freelancePhone"></span>
+                      </p>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                      <p class="h4" ng-bind="invoiceDetail.invoiceNumber"></p>
+                      <h5>
+                        <span>Invoice date : </span><span
+                          ng-bind="invoiceDetail.invoiceDate | globalDtFormat"></span></br></br>
+                        <!-- <span>Value date : </span><span ng-bind="invoiceDetail.invoiceDate | dateFormat"></span></br></br> -->
+                        <span>Payment due date : </span><span
+                          ng-bind="invoiceDetail.paymentDueDate | globalDtFormat"></span>
+                      </h5>
+                    </div>
+                  </div>
+
+                  <div class="well">
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <!-- <p class="m-t m-b">Order date: <strong>26th Mar 2013</strong><br>
+                              Order status: <span class="label bg-success">Shipped</span><br>
+                              Order ID: <strong>#9399034</strong>
+                          </p> -->
+                        <p class="m-t m-b">
+                          <span>Job
+                            <!-- Number  -->:
+                          </span><strong ng-bind="invoiceDetail.poNumber.split('_')[1]"></strong></br>
+                          <span>Project Number : </span><strong
+                            ng-bind="invoiceDetail.poNumber.split('_')[0]"></strong></br>
+                        </p>
+                      </div>
+
+                      <div class="col-xs-6">
+                        <strong>Company:</strong>
+                        <h4 ng-bind="invoiceDetail.companyName"></h4>
+                        <p>
+                          <span ng-bind="invoiceDetail.companyAddress"></span></br>
+                          Phone: <span ng-bind="invoiceDetail.companyPhone"></span><br>
+                          <!--  Email: <span ng-bind="invoiceDetail.companyEmail"></span><br> -->
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-12" style="padding:0;bottom:10px;top:3px">
+                    <p class="m-t m-b" style="font-weight:600;background: #edf1f2;
+    padding: 11px;">Payment Information:</p>
+                    <div class="col-sm-6" ng-if="currencyPaymentMethod == 'Bank Transfer'">
+                      <table class="table table-striped b-t b-b table-bordered">
+                        <tbody>
+                          <tr>
+                            <th><span class="TblSpan">Payment Method</span></th>
+                            <td><span ng-bind="vBankInfo.payment_method" class="ng-binding"></span></td>
+                          </tr>
+                          <tr>
+                            <th><span class="TblSpan">Bank Address</span></th>
+                            <td><span ng-bind="vBankInfo.address" class="ng-binding"></span></td>
+                          </tr>
+                          <tr>
+                            <th><span class="TblSpan">Account Holder</span></th>
+                            <td><span ng-bind="vBankInfo.holder_name" class="ng-binding"></span></td>
+                          </tr>
+                          <tr>
+                            <th><span class="TblSpan">Currency</span></th>
+                            <td><span ng-bind="vBankInfo.currency_code" class="ng-binding"></span></td>
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="col-sm-6" ng-if="currencyPaymentMethod == 'Bank Transfer'">
+                      <table class="table table-striped b-t b-b table-bordered">
+                        <tbody>
+                          <tr>
+                            <th><span class="TblSpan">IBAN</span></th>
+                            <td><span ng-bind="vBankInfo.iban" class="ng-binding"></span></td>
+                          </tr>
+                          <tr>
+                            <th><span class="TblSpan">SWIFT/BIC</span></th>
+                            <td><span ng-bind="vBankInfo.bic" class="ng-binding"></span></td>
+                          </tr>
+                          <tr>
+                            <th><span class="TblSpan">Routing Number</span></th>
+                            <td><span ng-bind="vBankInfo.bank_code" class="ng-binding"></span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="col-sm-6" ng-if="currencyPaymentMethod == 'Paypal'">
+                      <table class="table table-striped b-t b-b table-bordered">
+                        <tbody>
+                          <tr>
+                            <th><span class="TblSpan">Paysera Account</span></th>
+                            <td><span ng-bind="vBankInfo.paypal_address" class="ng-binding"></span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!-- <p class="m-t m-b">Payment Method:
+                                    <br>
+                                    <span ng-if="currencyPaymentMethod == 'Bank Transfer'">
+                                                          <input type="radio" id="Bank" name="paymentType" ng-init="currencyPaymentMethod == 'Bank Transfer'" ng-model="invoiceDetail.payment" ng-value='"Bank"' disabled> Bank
+                                                        </span>
+                                    <span ng-if="currencyPaymentMethod == 'Paypal'">
+                                                          <input type="radio" id="Paypal" name="paymentType" ng-model="invoiceDetail.payment" ng-value='"Paypal"' disabled> Paypal
+                                                        </span>
+                                </p> -->
+                  </div>
+                  <div class="line"></div>
+                  <table ng-init="invoiceLength = invoiceList.length - 1" ng-init="invL.item.subTotal = {}" s
+                    class="table table-striped bg-white b-a" ng-repeat="invL in invoiceList track by $index"
+                    id="InvoiceTbl">
+                    <thead>
+                      <tr ng-if="$index == 0">
+                        <th style="width: 60px">#</th>
+                        <th style="width: 230px">PRICE UNIT</th>
+                        <th>QUANTITY</th>
+                        <th style="width: 140px">UNIT PRICE</th>
+                        <th style="width: 90px">TOTAL</th>
+                      </tr>
+                      <tr>
+                        <th style="width: 60px">({{$index + 1}})</th>
+                        <th style="width: 230px">Job : {{invL.poNumber.split('_')[1]}}</th>
+                        <th>Job Number : {{invL.poNumber}}</th>
+                        <th style="width: 90px"></th>
+                        <th style="width: 90px"></th>
+                      </tr>
+
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="item in invL.item track by $index">
+                        <td ng-bind="$index+1"></td>
+                        <td ng-bind="item.pricelist"></td>
+                        <td ng-bind="item.quantity"></td>
+                        <td ng-bind="item.itemPrice | customNumber"></td>
+                        <td ng-bind="item.itemTotal | customNumber"></td>
+                        <td class="none" ng-init="invL.item.subTotal = invL.item.subTotal + item.itemTotal"></td>
+                      </tr>
+                      <tr ng-if="$index == invoiceLength">
+                        <td colspan="4" class="text-right"><strong>Subtotal</strong></td>
+                        <td style="width:9%;">
+                          {{currencyType}}
+                          {{grandTotal | customNumber}}
+                          <!-- <span ng-if="!invoiceLength">{{invL.item.subTotal | customNumber}}</span>
+                                <span ng-if="invoiceLength">{{invL.item.subTotal * (invoiceLength + 1) | customNumber}}</span> </td> -->
+                      </tr>
+                      <tr ng-if="$index == invoiceLength">
+                        <td colspan="4" class="text-right no-border"><strong>Tax</strong></td>
+                        <td>{{currencyType}}0.00</td>
+                      </tr>
+                      <tr ng-if="$index == invoiceLength">
+                        <td colspan="4" class="text-right no-border"><strong>VAT Included in Total</strong></td>
+                        <td>{{currencyType}}0.00</td>
+                      </tr>
+                      <tr ng-if="$index == invoiceLength">
+                        <td colspan="4" class="text-right no-border"><strong>Total</strong></td>
+                        <td><strong>{{currencyType}}
+                            {{grandTotal | customNumber}}
+                            <!-- <span ng-if="!invoiceLength" id="invoiceTotal"> {{invL.item.subTotal | customNumber}}</span> -->
+                            <!-- <span ng-if="invoiceLength" id="invoiceTotal"> {{invL.item.subTotal * (invoiceLength + 1) | customNumber}}</span> -->
+                          </strong></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <button class="btn btn-info btnSave" ng-click="save('invoice-form', 'save');"><i class="fa fa-floppy-o"
+                  aria-hidden="true"></i> Save</button>
+              <button class="btn btn-info" ng-click="save('invoice-form', 'draft');"> Draft</button>
+              <button class="btn btn-info" ng-click="cancel();"> Cancel</button>
+          </div>
+          </form>
+        </div>
+
+        <!-- footer copy right -->
+        <div data-ng-include="'tpl/copyRight.html'"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>

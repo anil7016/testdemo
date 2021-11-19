@@ -1,0 +1,382 @@
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+    data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+        data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+        <div ui-butterbar></div>
+        <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+        <div class="md-content page_content_wrapper" id="top">
+
+            <div class="content_head bg-light wrapper-md ng-scope">
+                <a href="javascript:history.back()" class="btn m-b-xs btn-info pull-right"><span
+                        class="fa fa-arrow-left"></span> Back</a>
+                <!-- <h1 class="m-n font-thin h3">Resource Type</h1> -->
+            </div>
+            <div class="wrapper-md ng-scope">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form id="job-status-report">
+                            <!--   TAB1 -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading font-bold">Select</div>
+                                        <div class="panel-body">
+
+                                            <div class=" form-group">
+                                                <!-- <div class="col-sm-4"> 
+                                                            <label>Select date option</label>
+                                                            <select class="form-control" ng-model="dateSelect">
+                                                              <option>Period(Due date jobs)</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-3"> 
+                                                            <label>Start date</label>
+                                                            <input type="text" ng-datetimepicker id="startDate" class="form-control" name="companyCode" ng-model="jobReport.startDate"/>
+                                                        </div>
+                                                        <div class="col-sm-1"> 
+                                                            <label style="margin: 30px 20px 10px 22px;"><strong>to</strong></label>
+                                                        </div>
+                                                        <div class="col-sm-3"> 
+                                                            <label>End date</label>
+                                                            <input type="text" ng-datetimepicker id="endDate" class="form-control" name="endDate" ng-model="jobReport.endDate"/>
+                                                        </div> -->
+                                            </div>
+                                            <div class="row">
+                                            <div class="col-sm-6 form-group">
+                                                <div class="row">
+                                                <div class="col-sm-11">
+                                                    <label>Company code (rights)</label>
+                                                    <input type="text" select2-center-client id="companyCode1"
+                                                        class="form-control" name="companyCode"
+                                                        ng-model="jobReport.companyCode" />
+                                                </div>
+                                                <div class="col-sm-1" style="margin:33px 0 0 -14px;">
+                                                    <a href="javascript:void(0)"
+                                                        ng-click="clearCode('job-status-report','companyCode')"
+                                                        ng-if="jobReport.companyCode"><i class="iconDelete glyph-icon fa-times"
+                                                            aria-hidden="true"></i></a>
+                                                </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 form-group">
+                                                <div class="row">
+                                                <div class="col-sm-11">
+                                                    <label>Contact persons(Jobs)</label>
+                                                    <input type="text" select2-contactsummery id="contactPerson1"
+                                                        class="form-control" name="contactPerson"
+                                                        ng-model="jobReport.contactPerson" />
+                                                </div>
+                                                <div class="col-sm-1" style="margin:33px 0 0 -14px;">
+                                                    <a href="javascript:void(0)"
+                                                        ng-click="clearCode('job-status-report','contactPerson')"
+                                                        ng-if="jobReport.contactPerson"><i class="iconDelete glyph-icon fa-times"
+                                                            aria-hidden="true"></i></a>
+                                                </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 form-group">
+                                                <div class="row">
+                                                <div class="col-sm-11">
+                                                    <label>Resources</label>
+                                                    <input type="text" select2-job-detail-resource id="resource1"
+                                                        class="form-control" name="resource"
+                                                        ng-model="jobReport.resource" />
+                                                </div>
+                                                <div class="col-sm-1" style="margin:33px 0 0 -14px;">
+                                                    <a href="javascript:void(0)"
+                                                        ng-click="clearCode('job-status-report','resource')"
+                                                        ng-if="jobReport.resource"><i class="iconDelete glyph-icon fa-times"
+                                                            aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                            </div>
+
+                                            <div class="col-sm-6 form-group">
+                                                <div class="row">
+                                                <div class="col-sm-11">
+                                                    <label>Client</label>
+                                                    <input type="text" select2-client id="customer1"
+                                                        class="form-control" name="customer"
+                                                        ng-model="jobReport.customer" />
+                                                </div>
+                                                <div class="col-sm-1" style="margin:33px 0 0 -14px;">
+                                                    <a href="javascript:void(0)"
+                                                        ng-click="clearCode('job-status-report','customer')"
+                                                        ng-if="jobReport.customer"><i class="iconDelete glyph-icon fa-times"
+                                                            aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                            </div>
+
+                                            <div class="col-sm-6 form-group">
+                                                <div class="row">
+                                                <div class="col-sm-11">
+                                                    <label>Service group</label>
+                                                    <input type="text" ng-select2-usertype data-typeid="2"
+                                                        id="serviceGroup1" class="form-control" name="serviceGroup"
+                                                        ng-model="jobReport.serviceGroup" />
+                                                </div>
+                                                <div class="col-sm-1" style="margin:33px 0 0 -14px;">
+                                                    <a href="javascript:void(0)"
+                                                        ng-click="clearCode('job-status-report','serviceGroup')"
+                                                        ng-if="jobReport.serviceGroup"><i class="iconDelete glyph-icon fa-times"
+                                                            aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                            </div>
+
+                                            <div class="col-sm-6 form-group">
+                                                <div class="row">
+                                                <div class="col-sm-11">
+                                                    <label>Project Types</label>
+                                                    <input type="text" select2-proj-type id="projectType1"
+                                                        class="form-control" name="projectType"
+                                                        ng-model="jobReport.projectType" />
+                                                </div>
+                                                <div class="col-sm-1" style="margin:33px 0 0 -14px;">
+                                                    <a href="javascript:void(0)"
+                                                        ng-click="clearCode('job-status-report','projectType')"
+                                                        ng-if="jobReport.projectType"><i class="iconDelete glyph-icon fa-times"
+                                                            aria-hidden="true"></i></a>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 form-group">
+                                                <div class="row">
+                                                <div class="col-sm-11">
+                                                    <label>Job Status</label>
+                                                    <input type="text" select2-job-detailitm-status id="jobStatus1"
+                                                        class="form-control" name="jobStatus"
+                                                        ng-model="jobReport.jobStatus" />
+                                                </div>
+                                                <div class="col-sm-1" style="margin:33px 0 0 -14px;">
+                                                    <a href="javascript:void(0)"
+                                                        ng-click="clearCode('job-status-report','jobStatus')"
+                                                        ng-if="jobReport.jobStatus"><i class="iconDelete glyph-icon fa-times"
+                                                            aria-hidden="true"></i></a>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 form-group">
+                                                <div class="row">
+                                                <div class="col-sm-11">
+                                                    <label>Scoop status</label>
+                                                    <input type="text" select2-job-detailitm-status id="itemStatus1"
+                                                        class="form-control" name="itemStatus"
+                                                        ng-model="jobReport.itemStatus" />
+                                                </div>
+                                                <div class="col-sm-1" style="margin:33px 0 0 -14px;">
+                                                    <a href="javascript:void(0)"
+                                                        ng-click="clearCode('job-status-report','itemStatus')"
+                                                        ng-if="jobReport.itemStatus"><i class="iconDelete glyph-icon fa-times"
+                                                            aria-hidden="true"></i></a>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 form-group">
+                                                <div class="row">
+                                                <div class="col-sm-11">
+                                                    <label>User Types</label>
+                                                    <select id="userTypes1" class="form-control" name="usertypes"
+                                                        ng-model="jobReport.orderTypes">
+                                                        <option value="1">Internal</option>
+                                                        <option value="2">External</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-1" style="margin:33px 0 0 -14px;">
+                                                    <a href="javascript:void(0)"
+                                                        ng-click="clearCode('job-status-report','userTypes')"
+                                                        ng-if="jobReport.orderTypes"><i class="iconDelete glyph-icon fa-times"
+                                                            aria-hidden="true"></i></a>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="col-sm-6 form-group"> 
+                                                        <div class="col-sm-11">
+                                                            <label>Source Language</label>
+                                                            <input type="text" select2-order-languages-data id="sourceLanguage1" class="form-control" name="sourceLanguage" ng-model="jobReport.sourceLanguage"/>
+                                                        </div>
+                                                        <div class="col-sm-1" style="margin:33px 0 0 -14px;">
+                                                            <a href="javascript:void(0)" ng-click="clearCode('job-status-report','sourceLanguage')" ng-if="jobReport.sourceLanguage"><i class="iconDelete glyph-icon fa-times" aria-hidden="true"></i></a>
+                                                        </div>    
+                                                    </div>
+                                                    <div class="col-sm-6 form-group"> 
+                                                        <div class="col-sm-11">
+                                                            <label>Target Language</label>
+                                                            <input type="text" select2-order-languages-data id="targetLanguage1" class="form-control" name="targetLanguage" ng-model="jobReport.targetLanguage"/>
+                                                        </div>
+                                                        <div class="col-sm-1" style="margin:33px 0 0 -14px;">
+                                                            <a href="javascript:void(0)" ng-click="clearCode('job-status-report','targetLanguage')" ng-if="jobReport.targetLanguage"><i class="iconDelete glyph-icon fa-times" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div> -->
+                                            <!-- <div class="col-sm-6 form-group">
+                                                            <label>Responsible sales person</label>
+                                                            <input type="text" select2-contactsummery data-typeid="2" id="salesPerson" class="form-control" name="salesPerson" ng-model="jobReport.salesPerson"/>
+                                                    </div>
+                                                    <div class="col-sm-6 form-group">
+                                                            <label>Display Result in</label>
+                                                            <select id="resultDiaplay" class="form-control" name="resultDisplay" ng-model="jobReport.resultDisplay">
+                                                              <option>EUR</option>
+                                                              <option>USD</option>
+                                                              <option>GBP</option>
+                                                              <option>NOK</option>
+                                                              <option>BGN</option>
+                                                              <option>CAD</option>
+                                                            </select>
+                                                    </div> -->
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--   TAB1 -->
+                            <div class="panel-footer pl-0 pr-0">
+                                <a class="btn btn-info btn-leftside"
+                                    ng-click="jobstatusReportsearch('job-status-report','middle')">Update search</a>
+                                <button class="btn btn-info btn-leftside"
+                                    ng-click="reseteSearch('job-status-report')">Delete Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="" id="middle">
+                            <div class="panel panel-default">
+                                <div class="panel-heading font-bold">Result</div>
+                                <div class="">
+                                    <div class="">
+                                        <div class="row wrapper" ng-show="statusRes.length">
+                                            <div class="col-sm-6 m-b-xs">
+                                                <div class="col-sm-4">
+                                                    <select class="input-sm form-control w-sm inline v-middle"
+                                                        ng-model="action" ng-change="statucOrderAction(action)">
+                                                        <option>Change status to</option>
+                                                        <option>Export to excel</option>
+                                                        <option>Remove selection</option>
+                                                        <option>Select all</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-5" ng-show="jobStatus">
+                                                    <input type="text" select2-job-detailitm-status data-typeid="2"
+                                                        id="jobStatusdata" class="input-sm form-control w-sm  v-middle"
+                                                        ng-model="jobStatus" />
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <button class="btn btn-sm btn-info"
+                                                        ng-click="statusAction(action,projectStatus)"><i
+                                                            class="glyphicon glyphicon-ok"></i></button>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <button ng-show="statusRes.length" class="btn btn-info pull-right"
+                                                    ng-click="exportData()">Excel</button>
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table m-b-none default footable-loaded footable">
+                                                <thead>
+                                                    <th>Sr.no</th>
+                                                    <th>#</th>
+                                                    <th>Job Number</th>
+                                                    <th>Status</th>
+                                                    <th>Contact persons</th>
+                                                    <th>Resource</th>
+                                                    <th>
+                                                        <!-- Customers -->Client
+                                                    </th>
+                                                    <th>Target language</th>
+                                                    <th>Prices</th>
+                                                    <th>Time</th>
+                                                    <th>Scoop Status</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr
+                                                        ng-repeat="result in statusRes=(statusResult | filter : jobReport)">
+                                                        <td ng-bind="$index + 1"></td>
+                                                        <td>
+                                                            <input type="checkbox" id="orderCheck{{$index}}"
+                                                                name="orderCheck{{$index}}" ng-model="checkor"
+                                                                ng-checked="checkdata=='ordercheck'">
+                                                            <input type="text" id="orderCheckData{{$index}}"
+                                                                name="orderCheckData{{$index}}" style="display: none;"
+                                                                ng-model="result.jobId">
+                                                        </td>
+                                                        <td>{{result.orderNum}}_{{result.jobCode}}{{result.jobNo |
+                                                            numberFixedLen:3}}</td>
+                                                        <td ng-bind="result.jobStatus"></td>
+                                                        <td><a href="#/viewinternal/{{result.contactPerson}}"
+                                                                class="summeryColor">{{result.contactPersonName}}</a>
+                                                        </td>
+                                                        <td><a href="javascript:void(0)"
+                                                                ng-click="jobsumResource(result.resource,result.jobId)"><i
+                                                                    class="fa fa-envelope summeryColor"></i></a>&nbsp;<a
+                                                                href="javascript:void(0)" class="summeryColor"
+                                                                ng-click="resourceRedirect(result.resourceName)">{{result.resourceName}}</a>
+                                                        </td>
+                                                        <td><span ng-if="result.customerName"><a
+                                                                    href="#/viewdirect/{{result.customer}}"
+                                                                    class="summeryColor">{{result.customerName}}</a></span><span
+                                                                ng-if="!result.customerName">--</span></td>
+                                                        <td ng-if="result.ItemLanguage">{{result.ItemLanguage}}</td>
+                                                        <td ng-if="!result.ItemLanguage">--</td>
+                                                        <td>--</td>
+                                                        <td>--</td>
+                                                        <td>{{result.itemStatus}}</td>
+                                                    </tr>
+                                                    <tr ng-show="!statusRes.length">
+                                                        <td colspan="8" ng-bind="dataNotFound"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- use for export to excel -->
+                                        <div class="table-responsive" id="exportable" style="display:none">
+                                            <table class="table m-b-none default footable-loaded footable">
+                                                <thead>
+                                                    <th>#</th>
+                                                    <th>Job Number</th>
+                                                    <th>Status</th>
+                                                    <th>Contact persons</th>
+                                                    <th>Resource</th>
+                                                    <th>Customers</th>
+                                                    <th>Target language</th>
+                                                    <th>Prices</th>
+                                                    <th>Time</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr id="Export_{{$index}}"
+                                                        ng-repeat="result in statusResult | filter : jobReport">
+                                                        <td ng-bind="$index + 1"></td>
+                                                        <td>{{result.orderNum}}</br>{{result.jobCode}}{{result.jobNo |
+                                                            numberFixedLen:3}}</td>
+                                                        <td ng-bind="result.jobStatus"></td>
+                                                        <td ng-bind="result.contactPersonName"></td>
+                                                        <td ng-bind="result.resourceName"></td>
+                                                        <td ng-bind="result.customerName"></td>
+                                                        <td>--</td>
+                                                        <td>--</td>
+                                                        <td>--</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- footer copy right -->
+                <div data-ng-include="'tpl/copyRight.html'"></div>
+
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,100 @@
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+  data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+  <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+    data-ng-include=" 'tpl/material.aside.html' ">
+  </div>
+  <div flex layout="column">
+    <div ui-butterbar></div>
+    <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+    <div class="md-content page_content_wrapper" id="top">
+      <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+        <h1 class="m-n font-thin h3">Job Chain</h1>
+      </div>
+      <div class="wrapper-md ng-scope">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <form id="Child-price-form">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <h4>New :</h4>
+                    </div>
+                  </div>
+                  <div class="col-sm-5">
+                    <div class="form-group">
+                      <!-- <i class="fa fa-file-o 4x" ng-click="newFile()" style="margin-top:15px;"></i>
+                                                 -->
+                      <button style="margin-top:3px;" class="btn btn-info " ng-click="newFile()">Create</button>
+                    </div>
+                  </div>
+                  <!-- <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <h4>Edit :</h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <div class="form-group">
+                                              <input type="text" select2-jobchain-name data-typeid="1" id="mamaster_edit_id" class="form-control" name="master_edit_id"   ng-model="edit.id" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-1">
+                                            <div class="form-group">
+                                              <span><a href="javascript:void(0);" ng-click="chainEditId(edit.id);"><i class="fa fa-pencil fontawe"></i></a></span>
+                                            </div>
+                                        </div> -->
+                  <!-- <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <h4>Duplicate :</h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <div class="form-group">
+                                              <input type="text" select2-jobchain-name data-typeid="1" id="mamaster_duplicate_id" class="form-control" name="master_duplicate_id"   ng-model="duplicate.id" required />
+                                            </div>
+                                        </div> -->
+                  <!-- <div class="col-sm-1">
+                                            <div class="form-group">
+                                              <a href="javascript:void(0);" ng-click="chainDuplicate(duplicate.id)"><i class="fa fa-pencil fontawe"></i></a>
+                                            </div>
+                                        </div>  -->
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <table class="table table-striped b-t b-b table-bordered" datatable="ng">
+            <thead>
+              <th>#</th>
+              <th>Job chain name</th>
+              <th>Job chain status</th>
+              <th>Creator</th>
+              <!-- <th>Description</th> -->
+              <th>Action</th>
+            </thead>
+            <tbody>
+              <tr ng-repeat="jobL in jobChainList1">
+                <td ng-bind="$index + 1"></td>
+                <td ng-bind="jobL.job_name"></td>
+                <td ng-bind="jobL.job_status"></td>
+                <td ng-bind="jobL.creator"></td>
+                <!-- <td ng-bind="jobL.description"></td> -->
+                <td>
+                  <a href="javascript:void(0);" ng-click="chainEditId(jobL.job_chain_id);"><i
+                      class="glyph-icon fa-edit"></i></a>
+                  <a href="javascript:void(0);" ng-click="chainDeleteId(jobL.job_chain_id)"><i
+                      class="iconDelete glyph-icon fa-times"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- footer copy right -->
+        <div data-ng-include="'tpl/copyRight.html'"></div>
+
+      </div>
+    </div>
+  </div>

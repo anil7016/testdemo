@@ -1,0 +1,225 @@
+<style type="text/css">
+.modal-dialog {
+    width: 90%;
+    top: -30px;
+    left: 132px;
+}
+
+.panel-body {
+
+    /*  padding: 15px;
+        height: 545px; 
+    } */
+    .app-content-body {
+        width: 96%;
+    }
+
+    .tagsinput {
+        border-radius: 3px;
+        border: 1px solid #D5D5D5;
+        background: #FFF;
+        width: 100%;
+        min-height: 30px;
+        overflow-y: auto;
+        padding: 0px 15px;
+    }
+
+    /*.bolck {
+    float: left;
+    width: 100%;
+    padding: 15px;
+    background: #fff;
+}*/
+
+    .bolck .control-label {
+        text-align: right;
+        font-size: 12px;
+        color: #656d78;
+        font-weight: 600;
+        padding-top: 10px;
+    }
+
+    .custm-table table {
+        border: 1px solid #c1c1c1;
+    }
+
+    .custm-table thead tr {
+        background: #2cb1da;
+        color: #fff;
+        border: 1px solid #c1c1c1;
+    }
+
+    .custm-table tbody tr td {
+        border: 1px solid #c1c1c1;
+    }
+
+    .custm-table thead tr th {
+        border: 1px solid #c1c1c1;
+    }
+
+    .custm-table tbody tr:nth-child(even) {
+        background: #CCC;
+        border: 1px solid #c1c1c1;
+    }
+
+    .custm-table tbody tr:nth-child(even):hover {
+        opacity: 0.8;
+    }
+
+    .custm-table tbody tr:nth-child(odd) {
+        background: #e2e2e2;
+        border: 1px solid #c1c1c1;
+    }
+
+    .custm-table tbody tr:nth-child(odd):hover {
+        opacity: 0.8;
+    }
+
+    .fa-remove:before,
+    .fa-close:before,
+    .fa-times:before {
+        content: "\f00d";
+        color: white !important;
+    }
+
+    .modal-content {
+        position: relative;
+        background-color: #fff;
+        /* -webkit-background-clip: padding-box; */
+        /* background-clip: padding-box; */
+        /* border: 1px solid #999; */
+        /* border: 1px solid rgba(0, 0, 0, .2); */
+        /* border-radius: 6px; */
+        outline: 0;
+        /* -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5); */
+        /* box-shadow: 0 3px 9px rgba(0, 0, 0, .5); */
+    }
+</style>
+<div class="bolck">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="margin-right:50px;display:none;" ng-click="cancel()">×</button>
+        <h3 class="modal-title" style="float:left;">
+            Feedback for {{DisplayUserName}}
+        </h3>
+        <button class="btn btn-info" style="margin-left:60%;" ng-click="cancel()"><span class="glyph-icon fa-times"></span> Cancel</button>
+    </div>
+    <div class="app-content-body ">
+        <div class="bg-light lter b-b wrapper-md" id="userprofile-ctrl">
+            <div ng-if="reviewJobs.length=='0'"><h4>No record available</h4>
+            </div>
+            <div ng-repeat="job in reviewJobs track by $index">
+                <div class="panel panel-default" style="width: 94%;">
+                    <div class="panel-heading" style="font-size:18px"><strong>({{$index + 1}})</strong> {{job.jobName}} -> {{job.period}}</div>
+                    <div class="panel-body">
+                        <table style="width:65%" class="table m-b-none default footable-loaded footable">
+                            <tr>
+                                <td style="width:36% !important;">Language</td>
+                                <td>
+                                    <ng-rate-it ng-model="job.language" min="0" max="5" resetable="false" read-only="model.readonly_enables"></ng-rate-it>
+                                </td>
+                                <td>
+                                    <div><span ng-if="job.language">{{job.language * 20}} %</span><span ng-if="!job.language">Not rated</span></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:36% !important;">Specialist</td>
+                                <td>
+                                    <ng-rate-it ng-model="job.specialist" min="0" max="5" resetable="false" read-only="model.readonly_enables"></ng-rate-it>
+                                </td>
+                                <td>
+                                    <div><span ng-if="job.specialist">{{job.specialist * 20}} %</span><span ng-if="!job.specialist">Not rated</span></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:36% !important;">Technical</td>
+                                <td>
+                                    <ng-rate-it ng-model="job.technical" min="0" max="5" resetable="false" read-only="model.readonly_enables"></ng-rate-it>
+                                </td>
+                                <td>
+                                    <div><span ng-if="job.technical">{{job.technical * 20}} %</span><span ng-if="!job.technical">Not rated</span></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:36% !important;">Deadlines</td>
+                                <td>
+                                    <ng-rate-it ng-model="job.deadlines" min="0" max="5" resetable="false" read-only="model.readonly_enables"></ng-rate-it>
+                                </td>
+                                <td>
+                                    <div><span ng-if="job.deadlines">{{job.deadlines * 20}} %</span><span ng-if="!job.deadlines">Not rated</span></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:36% !important;">Flexibility</td>
+                                <td>
+                                    <ng-rate-it ng-model="job.flexibility" min="0" max="5" resetable="false" read-only="model.readonly_enables"></ng-rate-it>
+                                </td>
+                                <td>
+                                    <div><span ng-if="job.flexibility">{{job.flexibility * 20}} %</span><span ng-if="!job.flexibility">Not rated</span></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">
+                                    Overall rating in percent (weighted)
+                                    <!--  <button type="button" class="btn btn-info btn-xs" ng-click="calculateRate()">Calculate</button> -->
+                                </th>
+                                <td>
+                                    <div id="totalCalculate"><span ng-if="job.totalRate">{{job.totalRate}} %</span></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <br>
+                        <strong>Memo Comment on this assessment :</strong>
+                        <p>{{job.review_memo}}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- <table style="width:65%" class="table m-b-none default footable-loaded footable">
+                                <tr>
+                                    <td style="width:36% !important;">Language</td>
+                                    <td>
+                                        <ng-rate-it ng-model="overAllRate.language" min="0" max="5" resetable="false" read-only="model.readonly_enables"></ng-rate-it>
+                                    </td>
+                                    <td>
+                                        <div id="overAllRate_language"><span ng-if="overAllRate.language">{{overAllRate.language * 20}} %</span><span ng-if="!overAllRate.language">Not rated</span></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:36% !important;">Specialist</td>
+                                    <td>
+                                        <ng-rate-it ng-model="overAllRate.specialist" min="0" max="5" resetable="false" read-only="model.readonly_enables"></ng-rate-it>
+                                    </td>
+                                    <td>
+                                        <div id="rate_specialist"><span ng-if="overAllRate.specialist">{{overAllRate.specialist * 20}} %</span><span ng-if="!overAllRate.specialist">Not rated</span></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:36% !important;">Technical</td>
+                                    <td>
+                                        <ng-rate-it ng-model="overAllRate.technical" min="0" max="5" resetable="false" read-only="model.readonly_enables"></ng-rate-it>
+                                    </td>
+                                    <td>
+                                        <div id="rate_technical"><span ng-if="overAllRate.technical">{{overAllRate.technical * 20}} %</span><span ng-if="!overAllRate.technical">Not rated</span></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:36% !important;">Deadlines</td>
+                                    <td>
+                                        <ng-rate-it ng-model="overAllRate.deadlines" min="0" max="5" resetable="false" read-only="model.readonly_enables"></ng-rate-it>
+                                    </td>
+                                    <td>
+                                        <div id="rate_deadlines"><span ng-if="overAllRate.deadlines">{{overAllRate.deadlines * 20}} %</span><span ng-if="!overAllRate.deadlines">Not rated</span></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="width:36% !important;">Flexibility</td>
+                                    <td>
+                                        <ng-rate-it ng-model="overAllRate.flexibility" min="0" max="5" resetable="false" read-only="model.readonly_enables"></ng-rate-it>
+                                    </td>
+                                    <td>
+                                        <div id="rate_flexibility"><span ng-if="overAllRate.flexibility">{{overAllRate.flexibility * 20}} %</span><span ng-if="!overAllRate.flexibility">Not rated</span></div>
+                                    </td>
+                                </tr>
+                            </table> -->
+        </div>
+    </div>
+</div>

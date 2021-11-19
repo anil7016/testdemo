@@ -1,0 +1,59 @@
+<form id="message_form">
+    <div class="modal-header">
+        <h3 class="modal-title">Mail</h3>
+    </div>
+    <div class="panel-body">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label>User Name1</label> 
+                <input type="text" class="form-control" name="User Name" ng-model="cPersonMsg.vUserName" required>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label>Email Id</label> <input type="email" class="form-control" name="Email Id" ng-model="cPersonMsg.vEmailAddress" required>
+            </div>
+        </div>
+        
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label>CC</label> <input select2-user-email class="form-control" type="text" ng-model="message.cc" name="values" />
+            </div>
+        </div>
+        <div class="col-lg-12" ng-hide="bccshow">
+            <div class="form-group">
+                <button ng-click="bccShow()" class="btn btn-info">Add
+                    Bcc</button>
+            </div>
+        </div>
+        <div class="col-lg-12" ng-show="bccshow">
+            <div class="form-group">
+                <label>BCC</label> <input select2-user-email class="form-control" type="text" ng-model="message.bcc" name="values" />
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="form-group">
+                <!--<input type="text" class="form-control" name="cc"   ng-model="message.editor">-->
+                <div text-angular="text-angular" name="htmlcontent" ng-model="cPersonMsg.messageData" ta-disabled='disabled' required></div>
+            </div>
+        </div>
+        <!-- <div class="form-group">
+                      <label class="col-sm-2 control-label">Tags input</label>
+                      <div class="col-sm-10">
+                        <input ui-jq="tagsinput" ui-options="" class="form-control w-md" />
+                      </div>
+                    </div> -->
+        <div class="form-group">
+            <div class="col-sm-8">
+                <label>Attatch</label> <input type="file" ng-model="cPersonMsg.attachment" id="" ng-file-select="onFileSelect($files)"/>
+            </div>
+        </div>
+
+    </div>
+    <div class="panel-footer">
+        <button class="btn btn-info" type="button"
+                style="background-color: purple;"
+                ng-click="ok('message_form', cPersonMsg)">Send</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</form>

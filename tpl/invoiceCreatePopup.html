@@ -1,0 +1,69 @@
+<style type="text/css">
+    .bolck {
+    float: left;
+    width: 100%;
+    padding: 15px;
+    background: #fff;
+}
+</style>
+<form id="invoice-Detail">
+     <div class="modal-header">
+        <h3 class="modal-title">Add Invoice</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="margin-top:-25px" ng-click="cancel()">×</button>
+    </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <p>NOTE: Only Approved jobs allowed to create invoice.</p>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Job Number</th>
+                                    <th>Due date</th>
+                                    <th>Job Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="invoice in InvoiceVal=(InvoiceResult | filterByTags:searchPonumber)">
+                                    <td>
+                                        <span ng-if="invoice.item_status=='Approved'">
+                                            <input type="checkbox" ng-model="invoice.SELECTED"  ng-true-value="1" ng-false-value="0"/>
+                                        </span>
+                                        <span ng-if="invoice.item_status!='Approved'">
+                                            <input type="checkbox"  name="invoceCheck" disabled>
+                                        </span>
+                                    </td>
+                                    <td ng-bind="invoice.poNumber"></td>
+                                    <td ng-bind="invoice.due_date | globalDtFormat"></td>
+                                    <td>
+                                        <button class="btn completedColor" ng-if="invoice.item_status == 'Completed'"></button>
+                                        <button class="btn inpreprartionColor" ng-if="invoice.item_status == 'In preparation'"></button>
+                                        <button class="btn requestedColor" ng-if="invoice.item_status == 'Requested'"></button>
+                                        <button class="btn newJob" ng-if="invoice.item_status == 'New'"></button>
+                                        <button class="btn assignedwaitongColor" ng-if="invoice.item_status == 'Assigned-waiting'"></button>
+                                        <button class="btn inprogressColor" ng-if="invoice.item_status == 'In-progress'"></button>
+                                        <button class="btn overdueColor" ng-if="invoice.item_status == 'Overdue'"></button>
+                                        <button class="btn deliveredColor" ng-if="invoice.item_status == 'Delivered'"></button>
+                                        <button class="btn approvedColor" ng-if="invoice.item_status == 'Approved'"></button>
+                                        <button class="btn invoicecreatedColor" ng-if="invoice.item_status == 'Invoice created'"></button>
+                                        <button class="btn invoiceckedColor" ng-if="invoice.item_status == 'Invoice checked'"></button>
+                                        <button class="btn invoiceacceptedColor" ng-if="invoice.item_status == 'Invoice Accepted'"></button>
+                                        <button class="btn paidColor" ng-if="invoice.item_status == 'Paid'"></button>
+                                        <button class="btn canceledColor" ng-if="invoice.item_status == 'Canceled'"></button>
+                                        <button class="btn withoutInvoiceColor" ng-if="invoice.item_status == 'Without invoice'"></button>
+                                        &nbsp;{{invoice.item_status}}
+                                    </td>
+                                </tr>
+                                <tr ng-show="!InvoiceVal.length">
+                                    <td></td>
+                                    <td colspan="6" ng-bind="dataNotFound"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <button ng-show="InvoiceVal.length" class="btn btn-info" style="margin: 9px 233px;" ng-click="addInvoice(InvoiceVal)">Create invoice</button>
+                <button ng-show="!InvoiceVal.length" class="btn btn-info" style="margin: 9px 260px;" ng-click="cancel()">Close</button>
+            </form>

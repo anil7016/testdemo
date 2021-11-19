@@ -1,0 +1,53 @@
+  <div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' " >
+  </div>
+  <div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs" data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+      <div ui-butterbar></div>
+      <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside" ></a>
+      <div class="md-content page_content_wrapper" id="top">
+      
+        <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+          <h1 class="m-n font-thin h3">Reported Images List</h1>
+        </div>
+        <div class="wrapper-md ng-scope">
+          
+          <div class="panel panel-default">
+            <table class="table table-striped b-t b-b table-bordered" datatable="ng">
+            <thead>
+                                        <th>#</th>
+                                        <th>Picture</th>
+                                        <th>Uploaded By</th>
+                                        <th>Reported By</th>
+                                        <th>Reason for abuse</th>
+                                        <th>Reported Date</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                         </thead>
+                                        <tbody>
+                                            <tr ng-repeat="i in reportedImages">
+                                                <td ng-bind="$index + 1"></td>
+                                                <td>
+                                                    <img ng-src="knowledge/uploads//{{i.reported_image}}" width="100px"/>
+                                                </td>
+                                                <td><span ng-bind="i.uploadedUserName"></span></td>
+                                                <td><span ng-bind="i.reportedUserName"></span></td>
+                                                <td><span ng-bind="i.reason"></span></td>
+                                                <td><span ng-bind="i.created_date | globalDtFormat"></span></td>
+                                                <td>
+                                                    <span ng-if="i.status==1" class="label bg-success" title="active">Active</span>
+                                                    <span ng-if="i.status==0" class="label bg-danger" title="Inactive">Deactive</span>
+                                                </td>
+                                                <td>
+                                                    <a href="javascript:void(0)" ng-if="i.status==1"  ng-click="UpdateImageStatus(i.reported_image,0)" class="label bg-danger">Deactivate</a>
+                                                    <a href="javascript:void(0)" ng-if="i.status==0"  ng-click="UpdateImageStatus(i.reported_image,1)" class="label bg-success">Activate</a>
+                                                </td>
+                                            </tr>
+                                          </tbody>
+            </table>
+          </div>
+
+        </div>
+    </div>
+  </div>

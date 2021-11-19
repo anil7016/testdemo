@@ -1,0 +1,58 @@
+<div>
+    <div class="ht-sitecontainer ht-sitecontainer--wide">
+        <div class="site-header">
+            <div ng-include="'pages/header.html'">
+            </div>
+        </div>
+        <div class="ht-pageheader">
+            <div class="ht-container">
+                <div class="hkb-breadcrumbs_wrap">
+                    <ol class="hkb-breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList" >
+                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                            <a itemprop="item" href="#/home" title="Home">
+                                <span itemprop="name">Home</span>
+                                <svg class="hkb-breadcrumbs__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 34.1">
+                                    <g>
+                                        <path d="M19,17c0,0.5-0.2,1-0.6,1.4L3.4,33.5c-0.8,0.8-2,0.8-2.8,0c-0.8-0.8-0.8-2,0-2.8L14.2,17L0.6,3.4c-0.8-0.8-0.8-2,0-2.8  c0.8-0.8,2-0.8,2.8,0l15.1,15.1C18.8,16,19,16.5,19,17z"/>
+                                    </g>
+                                </svg> 
+                            </a>
+                            <meta itemprop="position" content="1"/>
+                        </li>
+                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
+                            <span itemprop="item" href="index.html" title="{{resultList.title}}"> 
+                                <span itemprop="name" ng-bind="resultList.title"></span> 
+                            </span>
+                            <meta itemprop="position" content="2" />
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="ht-page ht-page--sidebarright">
+            <div class="ht-container">
+                <div>
+                    <div class="ht-categoryheader">
+                        <h2 ng-bind="resultList.title"></h2>
+                        <!-- <h1 class="ht-categoryheader__title" ng-bind="resultName"></h1> -->
+                    </div>
+                    <ul class="ht-articlelist">
+                        <li ng-show="resultList.section">
+                            <article id="post-74" class="hkb-articlemini">
+                                <div class="hkb-article__excerpt" ng-bind-html="trustedHtml(resultList.section)"></div>
+                            </article>
+                        </li>
+                        <li ng-show="!resultList.section">
+                            <article id="post-74" class="hkb-articlemini">
+                                <div class="hkb-article__excerpt">
+                                    <h3>No Data found</h3>
+                                </div>
+                            </article>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div ng-include="'pages/footer.html'"></div>
+    </div>
+</div>

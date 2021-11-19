@@ -1,0 +1,155 @@
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+  data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+  <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+    data-ng-include=" 'tpl/material.aside.html' ">
+  </div>
+  <div flex layout="column">
+    <div ui-butterbar></div>
+    <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+    <div class="md-content page_content_wrapper" id="top">
+
+      <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+        <h1 class="m-n font-thin h3">Statement</h1>
+      </div>
+      <div class="wrapper-md ng-scope">
+        <div class="panel panel-default" ng-if="userRight==1">
+          <div class="panel-body">
+            <div class="col-sm-12">
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label style="font-weight:bold;">Total Amount :</label>
+                </div>
+                <h4 ng-if="!totalAmountAdmin == 0">&euro; {{totalAmountAdmin|customNumber}}</h4>
+                <h4 ng-if="totalAmountAdmin == 0">&euro; {{0|customNumber}}</h4>
+              </div>
+              <div class="col-sm-3">
+                <div class="form-group">
+                  <label style="font-weight:bold;">Total Pending Amount :</label>
+                </div>
+                <h4 ng-if="!totalPendingAmountAdmin == 0">
+                  &euro; {{totalPendingAmountAdmin|customNumber}}</h4>
+                <h4 ng-if="totalPendingAmountAdmin == 0">&euro; {{0|customNumber}}</h4>
+              </div>
+              <a class="btn btn-info pull-right" ng-click="openFilter();"><i class="fa fa-filter"
+                  aria-hidden="true"></i> Filter</a>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default" id="filterRows" style="display:none;" ng-if="userRight==1">
+          <div class="panel-body">
+            <form id="filterForm">
+              <div class="col-sm-12">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label style="font-weight:bold;">Select due date from :</label>
+                    <input type="text" class="form-control" id="dueDateFrom" ng-datepicker name="dueDateFrom"
+                      ng-model="search.dueDateFrom" required onkeydown="return false">
+                  </div>
+                  <div class="form-group">
+                    <label style="font-weight:bold;">Select company code:</label>
+                    <input type="text" select2-company-code id="comapanyCode" class="form-control" name="comapanyCode"
+                      ng-model="search.comapanyCode" required />
+                  </div>
+                  <div class="form-group">
+                    <label style="font-weight:bold;">Select resource :</label>
+                    <input select2-freelance-user="" data-typeid="2" id="resource"
+                      class="form-control ng-pristine ng-untouched ng-valid ng-valid-required select2-offscreen"
+                      name="resource" required="" tabindex="-1" type="text" ng-model="search.resource">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+
+                  <div class="form-group">
+                    <label style="font-weight:bold;">Select due date to :</label>
+                    <input type="text" class="form-control" id="dueDateTo" ng-datepicker name="dueDateTo"
+                      ng-model="search.dueDateTo" required onkeydown="return false">
+                  </div>
+
+                  <div class="form-group">
+                    <label style="font-weight:bold;">Select invoice status:</label>
+                    <input type="text" class="form-control" id="invoiceStatus" select2-invoice-status
+                      name="invoiceStatus" ng-model="search.invoiceStatus" required onkeydown="return false">
+                  </div>
+                  <div class="form-group">
+                    <label style="font-weight:bold;">Select invoice number:</label>
+                    <input type="text" class="form-control" id="invoiceNumber" select2-invoice-number
+                      name="invoiceNumber" ng-model="search.invoiceNumber" required onkeydown="return false">
+                  </div>
+                </div>
+              </div>
+              <a class="btn btn-info" ng-click="filterStatement('filterForm');" style="margin-left:3%">Filter</a>
+            </form>
+          </div>
+        </div>
+
+        <!-- Statment data for admin statement page -->
+        <div class="panel panel-default" ng-if="userRight==1">
+          <table st-table="rowCollectionBasic" class="table table-bordered table-striped">
+            <thead>
+              <th>#</th>
+              <th>Resource Name</th>
+              <th>Invoice date</th>
+              <th>Due date</th>
+              <th>Project No</th>
+              <th>Invoice No</th>
+              <th>Total amount</th>
+              <th>Pending amount</th>
+            </thead>
+            <tbody>
+              <tr ng-repeat="s in stamementList track by $index">
+                <td ng-bind="$index + 1"></td>
+                <td>{{s.vUserName}}</td>
+                <td ng-if="s.created_date == '0000-00-00 00:00:00'">-</td>
+                <td ng-if="s.created_date != '0000-00-00 00:00:00'">{{s.created_date | globalDtFormat}}</td>
+                <td>{{s.paymentDueDate | globalDtFormat}}</td>
+                <td>{{s.InvoiceNo.split('_')[0]}}</td>
+                <td>{{s.InvoiceNo}}</td>
+                <td>{{s.Amount | customNumber}}</td>
+                <td>{{s.Amount - s.paid_amount |customNumber}}</td>
+              </tr>
+              <tr ng-show="!stamementList.length">
+                <td colspan="8" ng-bind="dataNotFound"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Statment data for freelancer page -->
+        <div class="panel panel-default" ng-if="userRight==2">
+          <table st-table="rowCollectionBasic" class="table table-bordered table-striped">
+            <thead>
+              <th>#</th>
+              <th>Resource Name</th>
+              <th>Invoice date</th>
+              <th>Due date</th>
+              <th>Project No</th>
+              <th>Invoice No</th>
+              <th>Total amount</th>
+              <th>Pending amount</th>
+            </thead>
+            <tbody>
+              <tr ng-repeat="s in stamementList track by $index">
+                <td ng-bind="$index + 1"></td>
+                <td>{{s.vUserName}}</td>
+                <td ng-if="s.created_date == '0000-00-00 00:00:00'">-</td>
+                <td ng-if="s.created_date != '0000-00-00 00:00:00'">{{s.created_date | globalDtFormat}}</td>
+                <td>{{s.paymentDueDate | globalDtFormat}}</td>
+                <td>{{s.InvoiceNo.split('_')[0]}}</td>
+                <td>{{s.InvoiceNo}}</td>
+                <td>{{s.Amount | customNumber}}</td>
+                <td>{{s.Amount - s.paid_amount |customNumber}}</td>
+              </tr>
+              <tr ng-show="!stamementList.length">
+                <td colspan="8" ng-bind="dataNotFound"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- footer copy right -->
+        <div data-ng-include="'tpl/copyRight.html'"></div>
+
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,62 @@
+<div class="ht-sitecontainer ht-sitecontainer--wide">
+    <div class="site-header">
+        <div ng-include="'pages/header.html'"></div>
+    </div>
+    <div class="ht-pageheader" id="top">
+        <div class="ht-container">
+            <div class="hkb-breadcrumbs_wrap">
+                <ol class="hkb-breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList" >
+                    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
+                        <a itemprop="item" href="#/home" title="Home"> 
+                            <span itemprop="name">Home</span>
+                            <svg class="hkb-breadcrumbs__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 34.1"><g><path d="M19,17c0,0.5-0.2,1-0.6,1.4L3.4,33.5c-0.8,0.8-2,0.8-2.8,0c-0.8-0.8-0.8-2,0-2.8L14.2,17L0.6,3.4c-0.8-0.8-0.8-2,0-2.8  c0.8-0.8,2-0.8,2.8,0l15.1,15.1C18.8,16,19,16.5,19,17z"/></g></svg> 
+                        </a>
+                        <meta itemprop="position" content="1"/>
+                    </li>
+                    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem" ng-if="catgoryId!=20">
+                        <a itemprop="item" href="#/getStarted/{{catId}}" title="{{headerTitle.info[0].category_name}}">
+                            <span itemprop="name" ng-bind="headerTitle.info[0].category_name"></span>
+                            <svg class="hkb-breadcrumbs__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 34.1"><g><path d="M19,17c0,0.5-0.2,1-0.6,1.4L3.4,33.5c-0.8,0.8-2,0.8-2.8,0c-0.8-0.8-0.8-2,0-2.8L14.2,17L0.6,3.4c-0.8-0.8-0.8-2,0-2.8  c0.8-0.8,2-0.8,2.8,0l15.1,15.1C18.8,16,19,16.5,19,17z"/></g></svg>
+                        </a>
+                        <meta itemprop="position" content="2"/>
+                    </li>
+                    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">							
+                        <span itemprop="item" title="{{articleDetail[0].title}}"> 
+                            <span itemprop="name" ng-bind="articleDetail[0].title"></span>
+                        </span>
+                        <meta itemprop="position" content="3"/>
+                    </li>
+                </ol>						
+            </div>
+        </div>
+    </div>
+    <div class="ht-page ht-page--sidebarleft" style="padding: 60px 0;">
+        <div class="ht-container"> 
+            <aside class="sidebar sidebar--sticky natural" id="sticky" role="complementary" itemtype="http://schema.org/WPSideBar" itemscope="itemscope" style="top:50px;" ng-show="articleTitle.length">
+                <div class="sidebar__innercontainer" data-spy="affix" data-offset-top="248" data-offset-bottom="160"> 
+                    <section id="ht-kb-toc-widget-2" class="widget hkb_widget_toc">
+                        <h1 class="widget__title">Contents</h1> 
+                        <nav id="navtoc" role="navigation">
+                            <ol class="nav">
+                             <!-- ng-class="(art.id) ? 'active' : ''" -->
+                                <li ng-repeat="art in articleTitle" ng-class="($index==0) ? 'active' : ''" id="nav_{{$index+1}}"><a href class="target" ng-click="articleGet(art.id)" ng-bind="art.id"></a></li>
+                            </ol> 
+                        </nav>
+                    </section>
+                </div> 
+            </aside>
+            <div class="contentSticky" ng-class="articleTitle.length ? 'ht-page__content' : ''">
+                <article class="hkb-article">
+                    <div ng-repeat="article in articleDetail">
+                        <div md-scroll-shrink style="box-shadow: 1px 3px 1px #cacaca; color: #000000; background-color:  rgb(244, 245, 245)">
+                            <div class="md-toolbar-tools" ng-bind="article.title"></div>
+                        </div>
+                        <div style="padding: 10px;" ng-bind-html="trustedHtml(article.section)"></div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <div ng-include="'pages/footer.html'">
+    </div>

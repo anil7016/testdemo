@@ -1,0 +1,227 @@
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+    data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+        data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+        <div ui-butterbar></div>
+        <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+        <div class="md-content page_content_wrapper" id="top">
+            <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+                <h1 class="m-n font-thin h3">Email signature</h1>
+            </div>
+            <div class="wrapper-md ng-scope">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form id="email-sign-form">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group emailSignEditor">
+                                        <label>Sign Detail</label>
+                                        <!--<input type="text" class="form-control" name="cc"   ng-model="message.editor">-->
+                                        <textarea id="txtAngular" name="content"
+                                            ng-model="emails.sign_detail"></textarea>
+                                        <!-- <div text-angular="text-angular" id="txtAngular" name="htmlcontent" ng-model="emails.sign_detail" ta-disabled='disabled' required></div> -->
+                                    </div>
+                                </div>
+                                <!--<div class="col-sm-4">
+                                            <label>Sign name</label>    
+                                            <input type="text" class="form-control" name="signName" placeholder="Enter Sign Name"  ng-model="emails.sign_name">
+                                        </div>-->
+                                <!-- <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <div class="col-sm-8">
+                                            <label>Sign Picture</label>
+                                            <input type="file" ng-model="emails.sign_picture" ng-file-select="onFileSelect($files)" />
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="thumb-info mb-md">
+                                                <img id="new_profile_pic" ng-if="emails.sign_picture != undefined && !imgshow" ng-src="uploads/attatchment/{{emails.sign_picture}}" class="img-thumbnail" alt="Add a Picture">
+                                                <img id="new_profile_pic" ng-show="imgshow" ng-if="emails.sign_picture == undefined" ng-src="assets/img/blank.png" class="img-thumbnail" alt="Add a Picture">
+                                                <img id="new_profile_pic" ng-show="!imgshow && emails.sign_picture == undefined" ng-src="assets/img/blank.png" class="img-thumbnail" alt="Add a Picture">
+                                                <img id="new_profile_pic" ng-show="imgshow" ng-src="{{imageSrc}}" class="img-thumbnail" alt="Add a Picture">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="col-sm-4">
+                                    <div class="checkbox" style="padding-bottom: 18px;">
+                                        <label class="i-checks i-checks-sm" style="padding-top: 20px;"
+                                            ng-if="emailSignActive==1 && emails.is_active!=1">
+                                            <input type="checkbox" name="is_active" ng-true-value="1" ng-false-value="0"
+                                                ng-model="emails.is_active" ng-checked="emailSignActive==1"
+                                                ng-disabled="emailSignActive==1">
+                                            <i></i> Active(check to active)
+                                        </label>
+                                        <label class="i-checks i-checks-sm" style="padding-top: 20px;"
+                                            ng-if="emailSignActive!=1 && emails.is_active!=1">
+                                            <input type="checkbox" name="is_active" ng-true-value="1" ng-false-value="0"
+                                                ng-model="emails.is_active" ng-checked="emailSignActive==1">
+                                            <i></i> Active(check to active)
+                                        </label>
+                                        <label class="i-checks i-checks-sm" style="padding-top: 20px;"
+                                            ng-if="emailSignActive==1 && emails.is_active==1">
+                                            <input type="checkbox" name="is_active" ng-true-value="1" ng-false-value="0"
+                                                ng-model="emails.is_active" ng-checked="emailSignActive==1">
+                                            <i></i> Active(check to active)
+                                        </label>
+                                        <label class="i-checks i-checks-sm" style="padding-top: 20px;"
+                                            ng-if="emailSignActive==0 && emails.is_active==1">
+                                            <input type="checkbox" name="is_active" ng-true-value="1" ng-false-value="0"
+                                                ng-model="emails.is_active">
+                                            <i></i> Active(check to active)
+                                        </label>
+                                        <label class="i-checks i-checks-sm" style="padding-top: 20px;"
+                                            ng-if="emailSignActive!=1 && emails.is_active==1">
+                                            <input type="checkbox" name="is_active" ng-true-value="1" ng-false-value="0"
+                                                ng-model="emails.is_active" ng-checked="emailSignActive==1">
+                                            <i></i> Active(check to active)
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-sm-4">
+                                    <span>Then image selected above will be displayed bellow the email signature text</span>
+                                </div> -->
+                            </div>
+                            <div class="panel-footer pl-0 pr-o">
+                                <button class="btn btn-info" ng-click="save('email-sign-form');"><i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                    Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <table class="table table-striped b-t b-b table-bordered" datatable="ng">
+                        <thead>
+                            <th>#</th>
+                            <!-- <th>Sign Picture</th> -->
+                            <th>Status</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="e in emailsignList"
+                                ng-class="(e.sign_id == emails.sign_id) ? 'rowactivate' : ''">
+                                <td ng-bind="$index + 1"></td>
+                                <!-- <td><img id="new_profile_pic" ng-src="uploads/attatchment/{{e.sign_picture}}" class="img-thumbnail" width="80px"></td> -->
+                                <td ng-if="e.is_active == '1'"><span class="label bg-success"
+                                        title="active">Active</span></td>
+                                <td ng-if="e.is_active == '0'"><span class="label bg-danger"
+                                        title="Inactive">Inactive</span></td>
+                                <td><a href="javascript:void(0)" ng-click="signEdit(e.sign_id, 'top');" title="edit"><i
+                                            class="glyph-icon fa-edit"></i></a> <a href="javascript:void(0)"
+                                        ng-click="deletesign(e.sign_id,e.sign_picture)" title="delete"><i
+                                            class="iconDelete glyph-icon fa-times"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel panel-default" id="tplForm">
+                    <div class="panel-heading">
+                        <span class="font-bold">Email Template</span>
+                    </div>
+                    <div class="panel-body">
+                        <form id="email-template-form">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>Template Name</label>
+                                        <input type="text" class="form-control" placeholder="Enter Template Name"
+                                            name="template_name" ng-model="emailTplData.template_name" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>Subject</label>
+                                        <input type="text" class="form-control" placeholder="Enter Subject"
+                                            name="emailTplSubject" ng-model="emailTplData.template_subject" required="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Category</label>
+                                        <input select2-email-tpl-cat type="text" class="form-control" name="emailTplCat"
+                                            ng-model="emailTplData.template_category" id="emailTplCat"
+                                            ng-change="emailTplCatChange()" required>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label class="control-label">Type</label>
+                                    <input select2-email-tpl-type type="text" class="form-control" name="emailTplType" ng-model="emailTplData.template_type" id="emailTplCat" ng-change="emailTplTypeChange()" required>
+                                </div>
+                            </div> -->
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="checkbox">
+                                        <label class="i-checks i-checks-sm" style="padding-top: 20px;">
+                                            <input type="checkbox" name="tpl_is_active" ng-true-value="1"
+                                                ng-false-value="0" id="" ng-model="emailTplData.is_active"
+                                                ng-checked="emailTplData.is_active == 1">
+                                            <i></i>
+                                            Active (Set as Active)
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group emailSignEditor">
+                                <label>Template Detail</label>
+                                <!--<input type="text" class="form-control" name="cc"   ng-model="message.editor">-->
+                                <div text-angular="text-angular" id="emailTpl" name="emailTpl"
+                                    ng-model="emailTplData.template_content" ta-disabled='disabled' required
+                                    ng-trim="false"></div>
+                            </div>
+                            <div class="panel-footer pl-0 pr-0">
+                                <button class="btn btn-info" ng-click="saveTemplate('email-template-form');"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save
+                                    Template</button>
+                            </div>
+                    </form>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <table class="table table-striped b-t b-b table-bordered" datatable="ng">
+                        <thead>
+                            <th>#</th>
+                            <th>Template name</th>
+                            <th>Template subject</th>
+                            <th>Template for</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="tpl in emailTemplateList"
+                                ng-class="(tpl.template_id == emailTplData.template_id) ? 'rowactivate' : ''">
+                                <td ng-bind="$index + 1"></td>
+                                <td>{{tpl.template_name}}</td>
+                                <td>{{tpl.template_subject}}</td>
+                                <td ng-if="tpl.template_category == '1'">Accepted job by resource</td>
+                                <td ng-if="tpl.template_category == '2'">Job rejected by resource</td>
+                                <td ng-if="tpl.template_category == '3'">Reset Password</td>
+                                <td ng-if="tpl.template_category == '4'">Registration email</td>
+                                <td ng-if="tpl.template_category == '5'">Overdue job</td>
+                                <td ng-if="tpl.template_category == '6'">Job Delivery</td>
+                                <td ng-if="tpl.is_active == '1'">
+                                    <span class="label bg-success" title="active">Active</span>
+                                </td>
+                                <td ng-if="tpl.is_active == '0'">
+                                    <span class="label bg-danger" title="Inactive">Inactive</span>
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0)" ng-click="tplEdit(tpl.template_id, 'tplForm');"
+                                        title="edit"><i class="glyph-icon fa-edit"></i></a>
+
+                                    <!-- <a href="javascript:void(0)" ng-click="tplDel(tpl.template_id)" title="delete"><i class="iconDelete glyph-icon fa-times"></i></a></td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            <!-- footer copy right -->
+            <div data-ng-include="'tpl/copyRight.html'"></div>
+            </div>
+            
+
+        </div>
+    </div>
+</div>

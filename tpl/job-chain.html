@@ -1,0 +1,198 @@
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' "></div>
+<style type="text/css">
+   .list {
+   list-style: none outside none;
+   margin: 10px 0 30px;
+}
+
+.item {
+   /*width: 150px;*/
+   padding: 5px 10px;
+   margin: 5px 0;
+   color:#ffffff;
+   /*border: 1px solid #444;*/
+   border-radius: 5px;
+   background-color: #4284f5;
+   text-align: center;
+   cursor: move;
+
+}
+
+.ui-sortable-helper {
+  cursor: move;
+}
+
+
+</style>
+<div layout="row">
+<div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs" data-ng-include=" 'tpl/material.aside.html' ">
+</div>
+<div flex layout="column">
+   <div ui-butterbar></div>
+   <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+   <div class="md-content page_content_wrapper" id="top">
+      <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+         <!-- <h1 class="m-n font-thin h3">Resource Type</h1> -->
+         <a href="javascript:history.back()" class="btn btn-info pull-right" style="margin-top: -16px;"><span class="fa fa-arrow-left"></span> Back</a>
+      </div>
+      <div class="wrapper-md ng-scope">
+         <div class="panel panel-default">
+            <form id="Child-price-form">
+               <div class="panel-heading font-bold">
+                  <h4>General</h4>
+               </div>
+               <div class="panel-body">
+                  <div class="col-sm-12">
+                     <div class="col-sm-4">
+                        <div class="form-group">
+                           <label>Name of the job chain</label>
+                           <input type="text" class="form-control" placeholder="Enter Name of the job  chain" name="job_chain_name" ng-model="jobchain.job_name" required/>
+                        </div>
+                     </div>
+                     <div class="col-sm-4">
+                        <div class="form-group">
+                           <label>Status</label>
+                           <input type="text" select2-job-chain-status data-typeid="1" id="unit" class="form-control" name="unit" ng-model="jobchain.job_status" required />
+                        </div>
+                     </div>
+                     <div class="col-sm-4">
+                        <div class="form-group">
+                           <label>Creator</label>
+                           <input type="text" class="form-control" name="job_chain_creator" ng-model="name" ng-disabled="name==name" required>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-sm-12">
+                     <div class="col-sm-4">
+                        <!-- <div class="form-group">
+                           <label>Discription</label>
+                           <input type="text" class="form-control" placeholder="Enter Description" name="job_chain_description" ng-model="jobchain.description" required>
+                           </div> -->
+                        <div class="form-group">
+                           <label class="control-label">Project Type:</label>
+                           <input select2-proj-type type="text" class="form-control" name="project_type" ng-model="jobchain.project_type" id="project_type" required>
+                           <label for="project_type" class="error" style="display:none;">This field is required.</label>
+                        </div>
+                     </div>
+                     <div class="col-sm-4">
+                        <div class="checkbox" style="padding-bottom: 18px;">
+                           <label class="i-checks i-checks-sm" style="padding-top: 20px;">
+                           <input type="checkbox" name="is_active" ng-model="jobchain.job_status" ng-checked="jobchain.job_status==2||jobchain.job_status==3" ng-if="jobchain.job_status==2||jobchain.job_status==3">
+                           <input type="checkbox" name="is_active" ng-model="jobchain.job_status" ng-if="jobchain.job_status==1||jobchain.job_status==4" ng-disabled="jobchain.job_status==1||jobchain.job_status==4" checked>
+                           <i></i> Work flow start automaticaly
+                           </label>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="panel-heading font-bold">Client</div>
+               <div class="panel-body">
+                  <div class="col-sm-12">
+                     <div class="col-sm-2">
+                        <div class="form-group">
+                           <label>Use job chain for</label>
+                           <select class="form-control m-b w-md" name="jobchainName" ng-model="jobchain.customer" ng-change="jobChainCustomerAdd(jobchain.customer)" required>
+                              <optgroup label="Client">
+                                 <option class="summertablebc " ng-repeat="jobdc in customerGroup" value="c,{{jobdc.iClientId}},{{jobdc.vUserName}}">{{jobdc.vUserName}}</option>
+                              </optgroup>
+                              <optgroup label="Group">
+                                 <option ng-repeat="jobd in customerLi" value="g,{{jobd.group_id}},{{jobd.group_name}}">{{jobd.group_name}}</option>
+                              </optgroup>
+                           </select>
+                           <!-- <input type="text" select2-job-chain-customer data-typeid="1"  class="form-control" name="user-job-chain-for"   ng-model="jobchain.customer" required /> -->
+                        </div>
+                     </div>
+                     <customer-group-clone>
+                        <button class="btn-info but" style="margin-top: 28px;margin-left:92px;">ok</button>
+                     </customer-group-clone>
+                  </div>
+                  <div class="col-sm-12">
+                     <div class="col-sm-4">
+                        <div class="form-group">
+                           <div ng-repeat="c in customerJob">
+                              <div class="cus{{$index}}"><a href="javascript:void(0)" ng-click="removeCustomer($index)">
+                                 <i class="iconDelete glyph-icon fa-times" aria-hidden="true"></i></a> &nbsp;&nbsp;
+                                 <span class="none" id="Cuscode{{$index}}">{{c.Cuscode}}</span>
+                                 <span class="none" id="Cusid{{$index}}">{{c.Cusid}}</span>
+                                 <span id="Cusname{{$index}}">{{c.Cusname}}</span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="form-group newChain">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </form>
+            <form id="form-job">
+               <div class="panel-heading font-bold">Create/Edit Job Chain</div>
+               <div class="panel-body">
+                  <div class="col-sm-12">
+                     <!--<div class="col-sm-4">
+                        <div class="form-group">
+                          <label>New Job</label>
+                            <div><input type="text" select2-job-chain-jobs data-typeid="1" id="jobs" class="form-control" name="jobs"   ng-model="jobchain.jobs" required />
+                            <button class="btn-info" ng-click="saveJob('job-form');">ok</button>
+                        </div>
+                        </div>-->
+                     <div class="form-group">
+                        <div class="col-sm-4">
+                           <label>New Job :</label>
+                           <input type="text" select2-job-chain-jobs data-typeid="1" id="jobs" class="form-control" name="jobs" ng-model="jobchain_data.jobs" required />
+                        </div>
+                     </div>
+                     <button class="btn-info but" ng-click="saveJob('form-job');" style="margin-top:15px;">ok</button>
+                     <a href="javascript:void(0)" ng-click="showSort()" style="margin-left:30px;font-size:16px;text-decoration: underline;
+                     font-weight: bold;">Sort this job chain</a>
+                  </div>
+                  <div class=" font-bold "></div>
+                  <div class="panel-body ">
+                     <div class="col-sm-12 ">
+                        <div class="wizard-progress wizard-progress-lg chainprog ">
+                           <div class="steps-progress ">
+                              <div class="progress-indicator "></div>
+                           </div>
+                           <ul class="wizard-steps ">
+                              <li class="active chain " ng-repeat="jobsjob in jobsList ">
+                                 <a data-toggle="tab ">
+                                    <span class="chainw ">{{jobsjob.job_code}}{{jobsjob.new_job_number | numberFixedLen:3}} 
+                                       <i class="fa fa-cog " title="Setting" ng-click="chainsetting(jobsjob.new_job_id) "></i>
+
+                                       <!-- <i class="fa fa-trash" title="Delete" ng-click="chainsetting(jobsjob.new_job_id) "></i> -->
+                                    </span>
+                                 </a>
+                              </li>
+                              <!-- <li>
+                                 <a href="#/user-contact-person " data-target="#w4-tab2 " data-toggle="tab "><span>2</span>Contact Person</a>
+                                 </li> -->
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+            </form>
+             <!-- <div class="floatleft">
+                <ul ui-sortable="sortableOptions" ng-model="sortedjobList" class="list">
+                  <li ng-repeat="item in sortedjobList" class="item">
+                    {{item.job_code}}
+                  </li>
+                </ul>
+              </div> -->
+            </div>
+            <button class="btn btn-info " ng-click="save( 'Child-price-form', 'job-form',name); "><i class="fa fa-floppy-o " aria-hidden="true "></i> Save</button>
+         </div>
+      </div>
+   </div>
+</div>
+<style>
+   .chain{
+   margin-left: 35px;     
+   }
+   .chainw{
+   width: 30px;
+   height: 30px;
+   margin-top: -15px;
+   margin-left: -15px;
+   border-radius: 30px;
+   border-width: 2px;
+   } .but{
+</style>

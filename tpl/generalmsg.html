@@ -1,0 +1,93 @@
+<style type="text/css">
+.modal-dialog {
+    width: 85%;
+    top: -30px;
+    left: 99px;
+}
+.tagsinput{border-radius:3px; border: 1px solid #D5D5D5;
+    background: #FFF;
+    width: 100%;
+    min-height: 30px;
+    overflow-y: auto;
+    padding:0px 15px;
+    }
+.bolck {
+    float: left;
+    width: 100%;
+    padding: 15px;
+    background: #f2f2f1;
+}
+.bolck .control-label{
+  text-align:right; 
+    font-size: 12px;
+    color: #656d78;
+    font-weight: 600;
+    padding-top:10px;
+}
+.classCcBcc{
+    margin-top: 5px;
+    float: right;
+    padding-right:36px;
+}
+.fa-remove:before, .fa-close:before, .fa-times:before {
+      content: "\f00d";
+      color: white !important;
+  }
+</style>
+<div class="bolck">
+  <form id="message_form">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button>
+        <h3 class="modal-title">Mail</h3>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+      <div class="col-md-12">
+        <div class="pull-right">
+          <button class="btn btn-info" ng-click="ok('message_form', cPersonMsg)"><span class="fa fa-envelope"></span> Send</button>
+          <button class="btn btn-info" ng-click="cancel()"><span class="fa fa-times"></span> Cancel</button>
+        </div>
+      </div>
+    </div><br><br>
+    <div class="form-group">
+      <label class="col-md-2 control-label">Email Id:</label>
+      <div class="col-md-9">
+        <input type="email" class="form-control" name="Email Id" ng-model="cPersonMsg.vEmailAddress" required>
+      </div>
+      <div class="classCcBcc">
+        <a href="javascript:void(0);" style="padding:5px;" ng-click="ccHideShow()">Cc</a>
+        <a href="javascript:void(0);" ng-click="bccHideShow()">Bcc</a>  
+      </div>
+    </div><br><br>
+    <div class="form-group none" id="ccHideShow">
+      <label class="col-md-2 control-label">Cc:</label>
+      <div class="col-md-10" style="margin-bottom: 15px;">
+        <input id="message-cc" select2-user-email class="form-control" type="text" ng-model="cPersonMsg.cc" name="values" />
+      </div>
+    </div>
+    <div class="form-group none" id="bccHideShow"">
+      <label class="col-md-2 control-label">Bcc:</label>
+      <div class="col-md-10" style="margin-bottom: 15px;">
+        <input id="message-bcc" select2-user-email class="form-control" type="text" ng-model="cPersonMsg.bcc" name="values" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-2 control-label">Attachments:</label>
+      <div class="col-md-10">
+        <input type="file" ng-model="message.attachment" id="" ng-file-select="onFileSelect($files)"/>
+        <span ng-bind="fileAttatchName" class="fileAttatchM"></span>
+      </div>
+    </div><br><br>
+    <div class="form-group"> 
+      <!--<input type="text" class="form-control" name="cc"   ng-model="message.editor">-->
+      <div style="padding-left:18%;" class="messText" text-angular="text-angular" name="htmlcontent" ng-model="cPersonMsg.messageData"  required> </div>
+    </div>
+     <div class="pull-right">
+          <button class="btn btn-info" ng-click="ok('message_form', cPersonMsg)"><span class="fa fa-envelope"></span> Send</button>
+          <button class="btn btn-info" ng-click="cancel()"><span class="fa fa-times"></span> Cancel</button>
+        </div>
+    </div>
+  </form>
+</div>
+
+

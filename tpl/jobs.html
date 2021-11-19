@@ -1,0 +1,189 @@
+  <div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' " >
+  </div>
+  <div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs" data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+      <div ui-butterbar></div>
+      <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside" ></a>
+      <div class="md-content page_content_wrapper" id="top">
+      
+        <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+          <h1 class="m-n font-thin h3">Jobs</h1>
+        </div>
+        <div class="wrapper-md ng-scope">
+          <div class="panel panel-default">
+            <div class="panel-body">
+             <section class="panel">
+                <div class="panel-body">
+                    <form id="job-status-form">
+                        <!--   TAB1 -->
+                        <div class="row">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Job Name</label>
+                                                <input type="text" class="form-control" placeholder="Enter Job Name" name="ServiceName" ng-model="type.service_name" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <label>Job Code</label>
+                                                <input type="text" class="form-control" placeholder="Enter Jobe Code" name="JobCode" ng-model="type.job_code" required>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Job Representation</label>
+                                                <select class="form-control m-b" name="JobRepresentation" ng-model="type.job_representation" required>
+                                                    <option>automatic</option>
+                                                    <option>default</option>
+                                                    <option>interpreting</option>
+                                                    <option>project management</option>
+                                                </select>                     
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                    <!-- <div class="col-sm-12">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Notes/Remarks</label>
+                                                <input type="text" class="form-control" placeholder="Enter Notes/Remarks" name="NoteRemarks" ng-model="type.notes" required>
+                                            </div>
+                                        </div>                                    
+                                    </div> -->
+                                </div>
+                                <div class="panel-footer pl-0 pr-0">
+                                    <button class="btn btn-info btnSave" ng-click="save('job-status-form');"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                                </div>
+                            </div>
+                            <div class="panel panel-default" ng-show="jobValue">
+                                <div class="panel-heading font-bold"><h4>Work instructions - Web Publishing</h4></div>
+                                <form id="values-form">
+                                    <table  class="table m-b-none default footable-loaded footable" >
+                                        <thead>
+                                        <th>English</th>
+                                        <th>English</th>
+                                        <th>Default</th>
+                                        <!-- <th>Sequence</th> -->
+                                        <th>Display</th>
+                                        <th></th>
+                                        </thead>
+                                        <tbody class="addWInstruct">
+                                            <tr id="item_0" class="put_row">
+                                                <td><input type="text" id="source0" name="source" class="form-control" ng-model="source"/></td>
+                                                <td><input type="text" id="target0" name="target" class="form-control" ng-model="source" /></td>
+                                                <td>    
+                                                    <div class="checkbox">
+                                                        <label class="i-checks i-checks-sm">
+                                                            <input type="checkbox" id="bdefault0" name="bdefault" ng-true-value="1" ng-false-value="0" ng-model="bdefault">
+                                                            <i></i>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <!-- <td>
+                                                <select name="sequence" class="form-control m-b sequence" ng-model="seque[0]">
+                                                        <option ng-repeat="op in options">{{op.id}}</option>
+                                                </select>
+                                                </td> -->
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <label class="i-checks i-checks-sm">
+                                                            <input type="checkbox" id="display0" name="display" ng-true-value="1" ng-false-value="0" ng-model="display">
+                                                            <i></i>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td><a href="javascript:void(0)" ng-click="deleteValue(0)" title="delete"><i class="iconDelete glyph-icon fa-times"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="panel-footer">
+                                        <button class="btn btn-info btn-sm" work-instruction>Add More <span class="glyphicon glyphicon-plus"></span></button>
+                                        <button class="btn btn-info btn-sm" ng-click="saveJobInstruction('values-form');"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="panel panel-default" ng-show="jobValue_edit">
+                                <div class="panel-heading font-bold"><h4>Work instructions - Web Publishing</h4></div>
+                                <form id="values-edit-form">
+                                    <table  class="table m-b-none default footable-loaded footable" >
+                                        <thead>
+                                        <th>English</th>
+                                        <th>English</th>
+                                        <th>Default</th>
+                                        <!-- <th>Sequence</th> -->
+                                        <th>Display</th>
+                                        <th></th>
+                                        </thead>
+                                        <tbody  class="editWInstruct">
+                                            <tr id="item1_{{$index}}" class="put_row1" ng-repeat="wor in workIns">
+                                                <td><input type="text" id="source_{{$index}}" name="source" class="form-control" ng-model="wor.w_source"/></td>
+                                                <td><input type="text" id="target_{{$index}}" name="target" class="form-control" ng-model="wor.w_source" /></td>
+                                                <td>    
+                                                    <div class="checkbox">
+                                                        <label class="i-checks i-checks-sm">
+                                                            <input type="checkbox" id="bdefault_{{$index}}" name="bdefault" ng-true-value="1" ng-false-value="0" ng-model="wor.w_default">
+                                                            <i></i>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <!-- <td>
+                                                <select name="sequence" class="form-control m-b sequence" ng-model="seque[0]">
+                                                        <option ng-repeat="op in options">{{op.id}}</option>
+                                                </select>
+                                                </td> -->
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <label class="i-checks i-checks-sm">
+                                                            <input type="checkbox" id="display_{{$index}}" name="display" ng-true-value="1" ng-false-value="0" ng-model="wor.w_display">
+                                                            <i></i>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                <span class="workI_id{{$index}} none">{{wor.w_id}}</span>
+                                                <a href="javascript:void(0)" ng-click="deleteValue($index,wor.w_id)" title="delete"><i class="iconDelete glyph-icon fa-times"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="panel-footer">
+                                        <button class="btn btn-info btn-sm" work-instruction1>Add More <span class="glyphicon glyphicon-plus"></span></button>
+                                        <button class="btn btn-info btn-sm" ng-click="saveJobInstruction('values-edit-form');"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <table  class="table table-striped b-t b-b table-bordered" datatable="ng">
+                                        <thead>
+                                        <th>#</th>
+                                        <th>Job Name</th>
+                                        <th>Job Code</th>
+                                        <!-- <th>Job Representation</th> -->
+                                        <th>Action</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="job in jobs" ng-class="(job.job_id == type.job_id) ? 'rowactivate' : ''">
+                                                <td ng-bind="$index + 1"></td>
+                                                <td ng-bind="job.service_name"></td>
+                                                <td ng-bind="job.job_code"></td>
+                                                <!-- <td ng-bind="job.job_representation"></td> --> 
+                                                <td><a href="javascript:void(0)" ng-click="getJob(job.job_id, 'top');" title="edit"><i class="glyph-icon fa-edit"></i></a>  <a href="javascript:void(0)" ng-click="deleteModel(job.job_id)" title="delete"><i class="iconDelete glyph-icon fa-times"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        <!-- footer copy right -->
+        <div data-ng-include="'tpl/copyRight.html'"></div>
+
+        </div>
+    </div>
+  </div>

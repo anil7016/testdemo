@@ -1,0 +1,61 @@
+<div ng-controller="headerController">
+    <div class="ht-sitecontainer ht-sitecontainer--wide">
+        <div class="site-header" style="background:#4285F4 !important;">
+            <header class="site-header__banner" role="banner" itemtype="http://schema.org/WPHeader" itemscope="itemscope">
+                <div class="ht-container">
+                    <!-- <div class="site-logo">
+                            <a title="KnowAll" href="#/home"> 
+                                    <img alt="KnowAll" src="assets/img/logo.png" /> 
+                            </a>
+                    </div> -->
+                    <div class="site-logo">
+                        <a title="KnowAll" href="#/" ng-if="adminRule!=2">
+                            <img src="assets/img/logo.png" alt="" width="200"/>
+                        </a>
+                        <a title="KnowAll" href="#/home" ng-if="adminRule==2">
+                            <img src="assets/img/logo.png" alt="" width="200"/>
+                        </a>
+                    </div>
+                    <nav class="nav-header" role="navigation" itemtype="http://schema.org/SiteNavigationElement" itemscope="itemscope">
+                        <button id="ht-navtoggle" class="nav-header__mtoggle"><span>Menu</span></button>
+                        <ul id="menu-header-menu" class="nav-header__menuwrapper">
+                                <li id="menu-item-285" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-285" >
+                                    <a ng-if="adminRule!=2" href="#/">Dashboard</a>
+                                    <a ng-if="adminRule==2" ng-click="pagePermission()" href="javascript:void(0)">Dashboard</a>
+                                </li>
+                                <li id="menu-item-285" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-285">
+                                    <a href="#/home">Knowledge Base</a>
+                                </li>
+                                <li id="menu-item-285" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-285">
+                                    <a ng-if="adminRule!=2" href="#/news">News</a>
+                                    <a ng-if="adminRule==2" ng-click="pagePermission()" href="javascript:void(0)">News</a>
+                                </li>
+                                <li id="menu-item-285" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-285">
+                                    <a href="#/member">Members</a>
+                                    <!-- <a ng-if="adminRule!=2" href="#/member">Members</a>
+                                    <a ng-if="adminRule==2" ng-click="pagePermission()" href="javascript:void(0)">Members</a> -->
+                                </li>
+                                <li id="menu-item-285" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-285">
+                                    <a ng-if="adminRule!=2" href="#/calendar">Calendar</a>
+                                    <a ng-if="adminRule==2" ng-click="pagePermission()" href="javascript:void(0)">Calendar</a>
+                                </li>
+                        </ul> 
+                    </nav>
+                </div> 
+            </header>
+            
+            <div class="site-header__search" ng-if="role=='knowledgeBase'">
+                <div class="ht-container">
+                    <h2 class="site-header__title">Knowledge Base</h2>
+                    <form class="hkb-site-search" method="get">
+                        <label class="hkb-screen-reader-text" for="s">Search For</label> 
+                        <input class="hkb-site-search__field" id="autoComplete" auto-complete ng-model="allSearch"  type="text" value="" placeholder="Search the knowledge base..." name="s">
+                         <input type="hidden" name="ht-kb-search" id="autoCompleteID" ng-model="autoId"/> 
+                        <button class="hkb-site-search__button" ng-click="searchResult()"><span>Search</span></button>
+                    </form>
+                </div>
+            </div>
+            <span us-spinner="{radius:15, width:2, length: 10}"></span>
+        </div>
+    </div>
+    

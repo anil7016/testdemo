@@ -1,0 +1,55 @@
+  <div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' " >
+  </div>
+  <div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs" data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+      <div ui-butterbar></div>
+      <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside" ></a>
+      <div class="md-content page_content_wrapper" id="top">
+      
+        <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+          <h1 class="m-n font-thin h3">Invoice Due Period</h1>
+        </div>
+        <div class="wrapper-md ng-scope">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <form id="invoice-due-form">
+              <div class="col-sm-12">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Number of days</label>
+                                                <input type="Number" class="form-control" placeholder="Enter Number of days" name="numberOfDays" min="0" ng-model="invoice.number_of_days" required>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-sm-4">
+                                            <div class="checkbox">
+                                                <label class="i-checks i-checks-sm" style="padding-top: 20px;">
+                                                    <input type="checkbox" name="invoiceDue" ng-true-value="1" ng-false-value="0" ng-model="invoice.due" ng-checked="invoice.due == 1">
+                                                    <i></i>
+                                                    Due
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="checkbox">
+                                                <label class="i-checks i-checks-sm" style="padding-top: 20px;">
+                                                    <input type="checkbox" name="is_active" ng-true-value="1" ng-false-value="0" ng-model="invoice.not_paid" ng-checked="invoice.not_paid == 1">
+                                                    <i></i>
+                                                    Not paid
+                                                </label>
+                                            </div>
+                                        </div> -->
+                                    </div>
+              
+                  <div class="panel-footer">
+                      <button  class="btn m-b-xs w-xs btn-info" style="margin-left:15px;" ng-click="save('invoice-due-form');"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                  </div>
+            </form>
+            </div>
+          </div>
+          
+
+        </div>
+    </div>
+  </div>

@@ -1,0 +1,83 @@
+
+<div class="ht-sitecontainer ht-sitecontainer--wide" >
+    <div class="site-header">
+        <div ng-include="'pages/header.html'" >
+        </div>
+    </div>
+    <div class="ht-pageheader" id="top">
+        <div class="ht-container">
+            <div class="hkb-breadcrumbs_wrap">
+                <ol class="hkb-breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList" >
+                    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                        <a itemprop="item" href="#/home" title="Home"> 
+                            <span itemprop="name">Home</span>
+                            <svg class="hkb-breadcrumbs__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 34.1"><g>
+                               <path d="M19,17c0,0.5-0.2,1-0.6,1.4L3.4,33.5c-0.8,0.8-2,0.8-2.8,0c-0.8-0.8-0.8-2,0-2.8L14.2,17L0.6,3.4c-0.8-0.8-0.8-2,0-2.8  c0.8-0.8,2-0.8,2.8,0l15.1,15.1C18.8,16,19,16.5,19,17z"/></g>
+                            </svg> 
+                        </a>
+                        <meta itemprop="position" content="1" />
+                    </li>
+                    <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
+                        <span itemprop="item" href="index.html" title="{{categoryTitle.category_name}}"> 
+                            <span itemprop="name" ng-bind="categoryTitle.category_name"></span> 
+                        </span>
+                        <meta itemprop="position" content="2" />
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="ht-page ht-page--sidebarright">
+        <div class="ht-container">
+                            <div class="ht-page__content">
+                                <div class="ht-categoryheader"> 
+                                    <img ng-src="{{categoryTitle.icon}}" alt="" width="40" style="padding: 5px;">
+                                    <h1 class="ht-categoryheader__title" ng-bind="categoryTitle.category_name"></h1>
+                                </div>
+                                <ul class="ht-articlelist">
+                                    <li ng-repeat = "categoryL in categoryDetailList"> 
+                                        <article id="post-74" class="hkb-articlemini">
+                                            <h3 class="hkb-article__title" itemprop="headline"> 
+                                                <a href="#/article/{{catId + '/' + categoryL.article_id}}"><strong>{{categoryL.title}}</strong></a>
+                                            </h3>
+                                            <div class="hkb-article__excerpt" ng-bind="categoryL.article_discription | limitTo: 200">
+                                            </div>
+                                        </article>
+                                    </li>
+                                    <li ng-show="Nodata">
+                                        <article id="post-74" class="hkb-articlemini">
+                                            <h3 class="hkb-article__title" itemprop="headline"> 
+                                                No Data found
+                                            </h3>
+                                        </article>
+                                    </li>
+                                </ul>
+                            </div> 
+                                    
+                                    
+            <!-- <aside class="sidebar sidebar--sticky" role="complementary" itemtype="http://schema.org/WPSideBar" itemscope="itemscope"> 
+                    <section id="ht-kb-articles-widget-2" class="widget hkb_widget_articles">
+                            <h1 class="widget__title">Category</h1>
+                            <ul>
+                                    <li class="hkb-widget-article__format-standard" ng-repeat="category in categoryList">
+                                            <a class="hkb-widget__entry-title active" href="#/getStarted/{{category.category_id}}" ng-bind="category.category_name"></a>
+                                    </li>
+                            </ul>
+                    </section> 	
+            </aside> -->
+            <aside class="sidebar " id="sticky" role="complementary" itemtype="http://schema.org/WPSideBar" itemscope="itemscope">
+                <div class="sidebar__innercontainer" data-spy="affix" data-offset-top="248" data-offset-bottom="160">   
+                    <section id="ht-kb-toc-widget-2" class="widget hkb_widget_toc">
+                        <h1 class="widget__title">Contents</h1> 
+                        <nav id="navtoc" role="navigation">
+                            <ol class="nav">
+                                <li ng-class="(category.category_id == catId) ? 'active' : ''" ng-repeat="category in categoryList" ng-if="category.category_name!='Getting started'"><a href ng-click="categoryGet(category.category_id);" ng-bind="category.category_name"></a>
+                                </li>
+                            </ol> 
+                        </nav>
+                    </section>
+                </div> 
+            </aside>
+        </div>
+    </div>
+    <div ng-include="'pages/footer.html'"></div>

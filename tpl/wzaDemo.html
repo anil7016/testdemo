@@ -1,0 +1,177 @@
+  <div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' " >
+  </div>
+  <div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs" data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+      <div ui-butterbar></div>
+      <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside" ></a>
+      <div class="md-content page_content_wrapper">
+        <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+        	<a href="#" class="btn btn-info pull-right btn-sm">Back</a>
+        	<h1 class="m-n font-thin h3">Stepper Form Demo</h1>
+        </div>
+        <div class="wrapper-md ng-scope">
+        	<progressbar value="steps.percent" class="progress-xs" type="success"></progressbar>
+ 			<tabset class="tab-container" ng-init="steps={percent:0, step1:true, step2:false, step3:false, step4:false, step5:false}">
+			    <!-- Basic information tab -->
+				<tab heading="Basic information" active="steps.step1" select="steps.percent=0">
+			      <!-- <progressbar value="steps.percent" class="progress-xs" type="success"></progressbar> -->
+			      <form name="step1" id="client-profile" class="form-validation">
+			        <div class="col-sm-12">
+			            <div class="col-sm-4">
+			            	<div class="form-group">
+			                    <label class="control-label">Client number</label><br> 
+			                    <strong name="iResourceNumber" ng-model="info.vClientNumber | numberFixedLen : 3">{{info.vClientNumber | numberFixedLen : 3}}</strong>
+			                </div>
+			            </div>
+			            <div class="col-sm-4">
+			                <div class="form-group">
+			                    <label class="control-label">Creation Date</label>
+			                    <br><strong name="dtCreationDate" ng-model="info.dtCreationDate">{{info.dtCreationDate}}</strong>
+			                </div>
+			            </div>
+			            <div class="col-sm-4">
+			                <div class="form-group">
+			                    <label class="control-label">Creator name</label>
+			                    <br>
+								<strong ng-if="!isNewClient" name="creator" ng-model="info.created_id">{{info.created_id}}</strong>
+			                    <strong ng-if="isNewClient" name="creator" ng-model="info.created_id">{{displayCreatorName}}</strong>
+			                </div>
+			            </div>
+			        </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Company Name</label> <input capitalize-first type="text"
+                                    class="form-control" name="vFirstName"
+                                    ng-model="info.vUserName" required
+                                    ng-blur="checkClientname()">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Business Unit</label> <input
+                                    type="text" select2-center-client id="comapanyBranch"
+                                    class="form-control" name="vResourceType"
+                                    ng-model="info.vCodeRights" ng-change="comapanyBranchError()" required />
+                                  
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Phone</label> <input type="tel"
+                                    class="form-control" id="userphone" name="phone" ng-model="info.vPhone" international-phone-number required/>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Website</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="website"  ng-model="info.vWebsite" required> 
+                                        <span class="input-group-addon">
+                                        <a target="_blank" href="http://{{info.vWebsite}}">
+                                        <i class="fa fa-external-link"></i></a>
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Status</label>
+                                <input class="form-control" name="eUserStatus"
+                                    select2-client-status ng-model="info.vStatus" required />
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                            	{{info.vLogo}}
+                                <div class="col-sm-4">
+                                    <div class="thumb-info mb-md">
+                                        <img id="new_profile_pic" ng-show="imgshow"
+                                            ng-if="info.vLogo != undefined"
+                                            ng-src="uploads/logo/{{info.vLogo}}"
+                                            class="img-thumbnail" alt="Add a logo"> 
+                                            <img id="new_profile_pic" ng-show="imgshow"
+                                            ng-if="info.vLogo == undefined" ng-src="assets/img/blank.png" class="img-thumbnail"
+                                            alt="Add a logo"> <img id="new_profile_pic" ng-show="!imgshow" ng-src="{{imageSrc}}"
+                                            class="img-thumbnail" alt="Add a logo">
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <label>Select Logo</label> <input type="file"
+                                        ng-model="info.vProfilePic"
+                                        ng-file-select="onFileSelect($files)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-t m-b">
+                    	<a class="btn btn-info btn-rightside"
+                                        ng-click="saveClientProfile('client-profile');">Save &
+                                        Next <i class="fa fa-angle-right"></i></a>
+			          <button type="submit" ng-disabled="step1.$invalid" class="btn btn-info" ng-click="steps.step2=true">Next</button>
+			        </div>
+			      </form>
+			    </tab>
+			    <!-- Basic information tab -->
+
+			    <tab heading="Contacts" disabled="step1.$invalid" active="steps.step2" select="steps.percent=25">
+			      <form name="step2" class="form-validation">
+			        <p class="m-b">Continue the next step</p>
+			        <!-- <progressbar value="steps.percent" class="progress-xs" type="success"></progressbar> -->
+			        <p>Your age:</p>
+			        <input type="number" name="age2" class="form-control" ng-model="age2" required>
+			        <div class="m-t m-b">
+			          <button type="button" class="btn btn-info" ng-click="steps.step1=true">Prev</button>
+			          <button type="submit" ng-disabled="step2.$invalid" class="btn btn-info" ng-click="steps.step3=true">Next</button>
+			        </div>
+			      </form>
+			    </tab>
+			    <tab heading="Prices" disabled="step2.$invalid" active="steps.step3" select="steps.percent=50">
+			      <form name="step3" class="form-validation">
+			        <p class="m-b">Continue the next step</p>
+			        <!-- <progressbar value="steps.percent" class="progress-xs" type="success"></progressbar> -->
+			        <p>Your age:</p>
+			        <input type="number" name="age3" class="form-control" ng-model="age3" required>
+			        <div class="m-t m-b">
+			          <button type="button" class="btn btn-info" ng-click="steps.step2=true">Prev</button>
+			          <button type="submit" ng-disabled="step3.$invalid" class="btn btn-info" ng-click="steps.step4=true">Next</button>
+			        </div>
+			      </form>
+			    </tab>
+			    <tab heading="payment" disabled="step3.$invalid" active="steps.step4" select="steps.percent=75">
+			      <form name="step4" class="form-validation">
+			        <p class="m-b">Continue the next step</p>
+			        <!-- <progressbar value="steps.percent" class="progress-xs" type="success"></progressbar> -->
+			        <p>Your age:</p>
+			        <input type="number" name="age4" class="form-control" ng-model="age4" required>
+			        <div class="m-t m-b">
+			          <button type="button" class="btn btn-info" ng-click="steps.step3=true">Prev</button>
+			          <button type="submit" ng-disabled="step4.$invalid" class="btn btn-info" ng-click="steps.step5=true">Next</button>
+			        </div>
+			      </form>
+			    </tab>
+			     
+			    <tab heading="Login detail" disabled="step4.$invalid" active="steps.step5" select="steps.percent=75">
+			      <form name="step5" class="form-validation">
+			        <p class="m-b">Continue the next step</p>
+			        <!-- <progressbar value="steps.percent" class="progress-xs" type="success"></progressbar> -->
+			        <p>Your age:</p>
+			        <input type="number" name="age5" class="form-control" ng-model="age5" required>
+			        <div class="m-t m-b">
+			          <button type="button" class="btn btn-info" ng-click="steps.step4=true">Prev</button>
+			          <button type="submit" ng-disabled="step1.$invalid || step2.$invalid || step3.$invalid || step4.$invalid || step5.$invalid" class="btn btn-info" ng-click="steps.percent=100">Finish</button>
+			        </div>
+			      </form>
+			    </tab>
+
+			     
+			  </tabset>
+        </div>
+      </div>
+    </div>
+  </div>

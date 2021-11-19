@@ -1,0 +1,168 @@
+<style type="text/css">
+    .modal-dialog {
+        width: 80%;
+        /* top: -30px;
+        left: 132px; */
+    }
+    
+    .panel-body {
+        /*padding: 15px;*/
+        /*height: 545px;*/
+    }
+    
+    .app-content-body {
+        width: 96%;
+    }
+    
+    .tagsinput {
+        border-radius: 3px;
+        border: 1px solid #D5D5D5;
+        background: #FFF;
+        width: 100%;
+        min-height: 30px;
+        overflow-y: auto;
+        padding: 0px 15px;
+    }
+    /*.bolck {
+        float: left;
+        width: 100%;
+        padding: 15px;
+        background: #fff;
+    }*/
+    
+    .bolck .control-label {
+        text-align: right;
+        font-size: 12px;
+        color: #656d78;
+        font-weight: 600;
+        padding-top: 10px;
+    }
+    
+    .custm-table table {
+        border: 1px solid #c1c1c1;
+    }
+    
+    .custm-table thead tr {
+        background: #2cb1da;
+        color: #fff;
+        border: 1px solid #c1c1c1;
+    }
+    
+    .custm-table tbody tr td {
+        border: 1px solid #c1c1c1;
+    }
+    
+    .custm-table thead tr th {
+        border: 1px solid #c1c1c1;
+    }
+    
+    .custm-table tbody tr:nth-child(even) {
+        background: #CCC;
+        border: 1px solid #c1c1c1;
+    }
+    
+    .custm-table tbody tr:nth-child(even):hover {
+        opacity: 0.8;
+    }
+    
+    .custm-table tbody tr:nth-child(odd) {
+        background: #e2e2e2;
+        border: 1px solid #c1c1c1;
+    }
+    
+    .custm-table tbody tr:nth-child(odd):hover {
+        opacity: 0.8;
+    }
+    
+    .fa-remove:before,
+    .fa-close:before,
+    .fa-times:before {
+        content: "\f00d";
+        color: white !important;
+    }
+    
+    .modal-content {
+        position: relative;
+        background-color: #fff;
+        /* -webkit-background-clip: padding-box; */
+        /* background-clip: padding-box; */
+        /* border: 1px solid #999; */
+        /* border: 1px solid rgba(0, 0, 0, .2); */
+        /* border-radius: 6px; */
+        outline: 0;
+        /* -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5); */
+        /* box-shadow: 0 3px 9px rgba(0, 0, 0, .5); */
+    }
+</style>
+<div class="bolck">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="margin-right:50px;display:none;" ng-click="cancel()">×</button>
+        <h3 class="modal-title">
+            Projects - {{dispalyTxt}}
+        </h3>
+        <button class="btn btn-info" ng-click="cancel()"><span class="fa fa-times"></span> Cancel</button>
+    </div>
+    <!-- <div class="app-content-body "> -->
+    <div class="modal-body">
+        <div class="content_head bg-light lter b-b wrapper-md" id="userprofile-ctrl">
+            <!-- <section class="panel form-wizard" id="w4" ng-stepform="dynamic"> -->
+            <div class="panel-body">
+                <!-- <div class="tab-content" style="height:550px;overflow-y: scroll;overflow-x: hidden;"> -->
+                <div class="tab-content">
+                    <div id="w4-tab1" class="tab-pane active" style="">
+                        <table class="table table-striped b-t b-b table-bordered" datatable="ng" id="example">
+                            <thead>
+                                <th>#</th>
+                                <th>Project No</th>
+                                <th>Languages</th>
+                                <th>Project Manager</th>
+                                <th>Deadline</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <!-- <th>Action</th> -->
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="order in proejctsToDisplay">
+                                    <td ng-bind="$index+1"></td>
+                                    <td>{{order.orderNumber}}</td>
+                                    <td>
+                                        <div class="langtd" ng-if="order.itemsSourceLang">
+                                            <span class="langflag"><img ng-src="{{ order.itemsSourceLang.dataNgSrc }}"
+                                            alt="..." /></span>
+                                            <span class="labeltitle">
+                                            {{ order.itemsSourceLang.sourceLang
+                                            }}
+                                          </span> &nbsp;&nbsp;
+                                            <span class="label bg-light">
+                                          <i class="fa fa-angle-right"></i> </span>&nbsp;&nbsp;
+                                            <span class="langflag"><img ng-src="{{ order.itemsTargetLang.dataNgSrc }}"
+                                            alt="..." /></span>
+                                            <span class="labeltitle">
+                                            {{ order.itemsTargetLang.sourceLang
+                                            }}
+                                          </span>
+                                        </div>
+                                    </td>
+                                    <td><span class="labeltitle">{{order.pm_name}}</span></td>
+                                    <td><span ng-if="order.itemDuedate" class="labeltitle mytooltip">
+                                        {{ order.itemDuedate | dateFormatDisplayFront }}</span></td>
+                                    <td><span class="labeltitle">{{order.totalAmount |
+                                        CurrencyNumbersCommaformat}}</span></td>
+                                    <td><span class="labeltitle">{{order.itemStatus}}</span></td>
+                                    <!-- <td>
+                                        <a href="javascript:void(0)" ng-click="viewProejct(order.orderId)" title="View" class="trActionIcon"><i class="fa fa-eye"></i></a>
+                                        
+                                        <a href="javascript:void(0)" ng-click="edit(order.orderId)" title="Edit" class="trActionIcon"><i class="glyph-icon fa-edit"></i></a>
+                                    </td> -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- </section> -->
+        </div>
+    </div>
+
+</div>

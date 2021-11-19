@@ -1,0 +1,74 @@
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs" data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+        <div ui-butterbar></div>
+        <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+        <div class="md-content page_content_wrapper" id="top">
+            <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+                <h1 class="m-n font-thin h3">Funny picture status</h1>
+            </div>
+            <div class="wrapper-md ng-scope">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form>
+                            <div class="col-sm-12">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Created User search</label>
+                                        <input type="text" select2-all-user class="form-control" placeholder="Select user name" name="username" ng-model="picture.user_id" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <button class="btn  btn-info" style="margin-left:15px;" ng-click="Search(picture.user_id);">Search history delete</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <table st-table="rowCollectionBasic" class="table table-bordered table-striped">
+                        <thead>
+                            <th>#</th>
+                            <th>Picture</th>
+                            <th>Created User</th>
+                            <th>Created Date</th>
+                            <th>Status</th>
+                        </thead>
+                        <tbody ng-if="picture.user_id">
+                            <!-- <tr ng-repeat="funpic in funpicList" ng-class="(cat.category_id == category.category_id) ? 'rowactivate' : ''"> -->
+                            <tr ng-repeat="funpic in funpicList" ng-if="funpic.user_id == picture.user_id">
+                                <td ng-bind="$index + 1"></td>
+                                <td><img ng-src="knowledge/uploads/{{funpic.funny_pic}}" width="100px" /></td>
+                                <td><span ng-bind="funpic.vUserName"></span></td>
+                                <td><span ng-bind="funpic.created_date | globalDtFormat"></span></td>
+                                <td><span>Like (<span ng-bind="funpic.flag_like"></span>)</span>
+                                </td>
+                            </tr>
+                            <tr ng-if="!funpicList">
+                                <td colspan="4" ng-bind="dataNotFound"></td>
+                            </tr>
+                            
+                        </tbody>
+                        <tbody ng-if="!picture.user_id">
+                            <!-- <tr ng-repeat="funpic in funpicList" ng-class="(cat.category_id == category.category_id) ? 'rowactivate' : ''"> -->
+                            <tr ng-repeat="funpic in funpicList">
+                                <td ng-bind="$index + 1"></td>
+                                <td><img ng-src="knowledge/uploads/{{funpic.funny_pic}}" width="100px" /></td>
+                                <td><span ng-bind="funpic.vUserName"></span></td>
+                                <td><span ng-bind="funpic.created_date | globalDtFormat"></span></td>
+                                <td><span>Like (<span ng-bind="funpic.flag_like"></span>)</span>
+                                </td>
+                            </tr>
+                            <tr ng-if="!funpicList">
+                                <td colspan="4" ng-bind="dataNotFound"></td>
+                            </tr>
+                             
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>

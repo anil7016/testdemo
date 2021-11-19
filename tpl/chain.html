@@ -1,0 +1,45 @@
+					
+                    <form id="chain_form">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Action QA-{{nameofCode | numberFixedLen:3}}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-lg-6">
+                                <div class="form-group">    
+                                    <label>Follows</label>
+						              <select multiple="true" class="form-control" name="follows" ng-modal="chain.follows" >
+						                <option ng-repeat="predes in newfollows" >{{predes.job_code}} - {{predes.new_job_number | numberFixedLen:3}}</option>
+						              </select>
+																              
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">    
+                                    <label>Predecessor</label>
+                                    <select multiple="true" class="form-control" name="predecessor" ng-modal="chain.predecessor" >
+						                <option ng-repeat="predes in newfollows" >{{predes.job_code}} - {{predes.new_job_number | numberFixedLen:3}}</option>
+						              </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">    
+                                    <label>Insert job</label>
+                                     <input select2-job-chain-jobs class="form-control" type="text" ng-model="chain.insert_job" name="insert_job"/>
+                                </div>
+                                
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">    
+                                    <label>Insert job chain</label>
+                                     <input select2-jobchain-name class="form-control" type="text" ng-model="chain.insert_job_chain" name="insert_job_chain"/>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                        <div class="panel-footer">
+                            <button class="btn btn-info" type="button" ng-click="ok('chain_form')">ok</button>
+                            <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+                        </div>
+
+                    </form>

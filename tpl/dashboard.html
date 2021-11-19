@@ -1,0 +1,2416 @@
+<div ng-init="app.settings.container = false;" class="md-navbar navbar md-whiteframe-z1"
+  data-ng-include=" 'tpl/material.header.html' "></div>
+<style type="text/css">
+  /* th { font-size: 12px; }
+td { font-size: 11px; } */
+  /* The side navigation menu */
+  .sidenav {
+    z-index: 1000;
+    height: 100%;
+    /* 100% Full-height */
+    width: 0;
+    /* 0 width - change this with JavaScript */
+    position: fixed;
+    /* Stay in place */
+
+    top: 0;
+    /* Stay at the top */
+    right: 0;
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    padding-top: 60px;
+    /* Place content 60px from the top */
+    transition: 0.5s;
+    /* 0.5 second transition effect to slide in the sidenav */
+  }
+
+  .list-group-item a {
+    text-decoration: underline;
+  }
+
+  /* The navigation menu links */
+
+  /* Position and style the close button (top right corner) */
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+
+  .projecttable .tab-content {
+    position: relative;
+    padding: 25px 0px;
+  }
+
+  .projecttable .tab-content thead {
+    background: #f7f8fd;
+  }
+
+  .projecttable .dataTables_filter {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+  }
+
+  .projecttable .tab-content .dataTables_info {
+    padding-left: 15px;
+  }
+
+  .projecttable .dataTables_paginate {
+    position: absolute;
+    right: 15px;
+  }
+
+  .projecttable .table-striped>tbody>tr>td {
+    padding: 25px ​20px 0px 20px !important;
+    /*border: none;*/
+    vertical-align: middle;
+    border-top: 7px solid #edf1f2;
+    border-bottom: 7px solid #edf1f2;
+    background-color: #ffff;
+  }
+
+  .projstatus {
+    border: 1px solid #c0c0c0;
+    padding: 5px 10px 5px 5px;
+    border-radius: 0px 15px 15px 15px;
+    white-space: nowrap;
+  }
+
+ 
+
+  .projecttable .media-body {
+    width: auto;
+  }
+
+  .mainprojectdv.hbox {
+    height: auto;
+  }
+
+  .mainprojectdv .tab-container {
+    margin-bottom: initial;
+  }
+
+  .projecttable .label {
+    font-size: 95%;
+    font-weight: normal;
+  }
+
+  .labeltitle {
+    white-space: nowrap;
+  }
+
+  .mytooltip {
+    position: relative;
+    display: inline-block;
+  }
+
+  .mytooltip .mytooltip_div {
+    visibility: hidden;
+    width: auto;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: auto;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .mytooltip .mytooltip_div::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    /*top: 100%;*/
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #000 transparent transparent transparent;
+    transform: rotate(180deg);
+  }
+
+  .mytooltip:hover .mytooltip_div {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .mytooltip_div .tl-wrap {
+    padding: 5px 0 5px 20px;
+  }
+
+  .customerthumb {
+    min-height: 30px;
+  }
+  .projecttable td .media,
+  .langtd {
+    display: inline-flex;
+  }
+
+  .langflag {
+    margin-right: 5px;
+  }
+
+  .projectpopup {
+    width: 80%;
+  }
+
+  .projecttable .dataTables_info,
+  .projecttable .dataTables_length,
+  .projecttable .dataTables_paginate {
+    padding: 10px 0;
+  }
+
+  #new-serach::-webkit-input-placeholder {
+    /* Edge */
+    font-family: FontAwesome;
+  }
+
+  #new-serach:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    font-family: FontAwesome;
+  }
+
+  #new-serach::placeholder {
+    font-family: FontAwesome;
+  }
+
+  .projecttable ul.nav.nav-tabs {
+    padding-top: 25px !important;
+    padding-left: 18px;
+  }
+
+  .projecttable th {
+    white-space: nowrap;
+  }
+
+  .projecttable input[type="search"] {
+    border-radius: 500px;
+    padding-left: 12px;
+    padding-right: 0px;
+    text-indent: 10px;
+  }
+
+  .projecttable input[type="search"]:focus::placeholder {
+    color: transparent;
+  }
+
+  .projecttable input[type="search"]:focus::-webkit-input-placeholder {
+    color: transparent;
+  }
+
+  .projecttable input[type="search"]:focus::-moz-placeholder {
+    color: transparent;
+  }
+
+  .projecttable input[type="search"]:focus:-ms-input-placeholder {
+    color: transparent;
+  }
+
+  .projecttable input[type="search"]:focus:-moz-placeholder {
+    color: transparent;
+  }
+
+  .projecttable .searchicn {
+    color: #ccc;
+    margin-right: -30px;
+    position: relative;
+    vertical-align: middle;
+  }
+
+  .projecttable #DataTables_Table_0_filter .sicon1,
+  .projecttable #DataTables_Table_0_filter:focus-within .searchicn {
+    color: transparent;
+  }
+
+  .projecttable #DataTables_Table_1_filter .sicon2,
+  .projecttable #DataTables_Table_1_filter:focus-within .searchicn {
+    color: transparent;
+  }
+
+  .projecttable #DataTables_Table_2_filter .sicon3,
+  .projecttable #DataTables_Table_2_filter:focus-within .searchicn {
+    color: transparent;
+  }
+
+  .projecttable #DataTables_Table_3_filter .sicon4,
+  .projecttable #DataTables_Table_3_filter:focus-within .searchicn {
+    color: transparent;
+  }
+
+  .projecttable #DataTables_Table_4_filter .sicon5,
+  .projecttable #DataTables_Table_4_filter:focus-within .searchicn {
+    color: transparent;
+  }
+
+  .projecttable #DataTables_Table_5_filter .sicon6,
+  .projecttable #DataTables_Table_5_filter:focus-within .searchicn {
+    color: transparent;
+  }
+
+  .projecttable #DataTables_Table_6_filter .sicon7,
+  .projecttable #DataTables_Table_6_filter:focus-within .searchicn {
+    color: transparent;
+  }
+
+  .cmtclrgrn {
+    color: green;
+  }
+
+  article.media.acmt5 a {
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .acmt5 {
+    margin-top: 5px;
+  }
+
+  .acmt5 a {
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .acmt5 .customerthumb {
+    padding-left: 7px;
+  }
+
+  .projecttable tr>td:nth-child(2) {
+    text-align: left;
+  }
+  
+
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidenav {
+      padding-top: 15px;
+    }
+  }
+
+  @media (min-width: 1199px) and (max-width: 1400px) {
+    .projecttable .nav-tabs>li {
+      margin-right: 20px;
+    }
+
+    .projecttable .nav-tabs>li>a {
+      font-size: 12px;
+    }
+  }
+</style>
+<script type="text/javascript">
+  /* Set the width of the side navigation to 250px */
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "270px";
+  }
+  /* Set the width of the side navigation to 0 */
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+  }
+</script>
+<div layout="row" class="page_dashboard">
+  <!-- menu -->
+  <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+    data-ng-include=" 'tpl/material.aside.html' "></div>
+  <!-- / menu -->
+  <!-- view -->
+  <div flex layout="column">
+    <!-- <div ui-butterbar></div> -->
+    <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+    <div class="md-content page_content_wrapper">
+      <!-- <div class="content_head bg-light lt b-b wrapper-md">
+        <div class="row">
+          <div class="col-sm-6 col-xs-12">
+            <h1 class="m-n font-thin h3 text-black">Dashboard</h1>
+            <small class="">Welcome <span ng-bind="welUser"></span></small>
+          </div>
+           <a href="javascript:void(0);" style="margin-left:5px" onclick="openNav()" ng-if="userRight == 1" class="btn btn-info pull-right btn-sm">Recent activity</a>
+
+
+        </div>
+      </div> -->
+      <div class="white_box_wrapper hbox hbox-auto-xs hbox-auto-sm mainprojectdv" ng-if="userRight == 1">
+        <!-- main -->
+        <div class="col">
+          <!-- / main header -->
+          <div class="wrapper-md" style="padding-bottom: 0;">
+            <!-- tasks -->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="white_box panel panel-default mynewtabs" style="margin-bottom: 0;">
+                  <a href="javascript:void(0);" ng-click="createProject()" ng-if="userRight == 1"
+                    class="btn_create-project btn btn-info pull-right btn-sm btn-rounded"><i
+                      class="fa fa-plus"></i>&nbsp; Create Project</a>
+                   
+                  <tabset id="dynamicAddAnchore" class="tab-container projecttable tab_dashboard" style="background-color: #f3f3fa;">
+                    <tab>
+                      <tab-heading>
+                        <i class="glyphicon glyphicon-triangle-bottom"></i> Due
+                        Today
+                        <span class="badge bg-info">{{projectsDueTodayCount}}</span>
+                      </tab-heading>
+                      <div class="table-responsive">
+                        <table class="table table-striped" datatable="ng" dt-options="dtOptions">
+                          <thead>
+                            <th>Project Number</th>
+                            <th>Customer</th>
+                            <!-- <th>Account</th> -->
+                            <th>Languages</th>
+                            <th style="white-space: nowrap">Project Manager</th>
+                            <th>Linguist</th>
+                            <th>Deadline</th>
+                            <th>Progress</th>
+                            <th>Status</th>
+                            <th>Price</th>
+                            <!-- <th>PO Number</th> -->
+                            <th>Comment</th>
+                            <!-- <th>Action</th> -->
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="order in projectsDueToday">
+                              <td>
+                                <a href="javascript:void(0)" ng-click="goToProjectViewdetail(order.orderId)">
+                                  {{order.orderNumber}}
+                                </a>
+                                <small class="block m-t-sm">
+                                  <span class="labeltitle">PO Number : </span><br /><span
+                                    class="label bg-light">{{order.itemPonumber}}</span>
+                                </small>
+                              </td>
+                              <td>
+                                <article class="media">
+                                  <span class="customerthumb pull-left thumb-sm"
+                                    ng-if="order.clientlogo != undefined && order.clientlogo !='' "><img
+                                      ng-src="uploads/logo/{{order.clientlogo}}" alt="..." class="img-circle" /></span>
+                                  <span class="
+                                      customerthumb
+                                      pull-left
+                                      thumb-sm
+                                      fa-stack fa-lg
+                                    " ng-if="order.clientlogo == '' ">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-user fa-stack-1x text-white"></i>
+                                  </span>
+                                  <div class="media-body">
+                                    <a href="" class="h5">{{order.contactName}}</a>
+                                  </div>
+                                </article>
+                                <br />
+                                <article class="media acmt5">
+                                  <span class="customerthumb pull-left thumb-sm">
+                                    <i class="fa fa-address-card"></i>
+                                  </span>
+                                  <div class="media-body">
+                                    <a href="" class="h5">{{order.accountname}}</a>
+                                  </div>
+                                </article>
+                              </td>
+                              <td>
+                                <div class="langtd" ng-if="order.itemsSourceLang">
+                                  <span class="langflag"><img ng-src="{{ order.itemsSourceLang.dataNgSrc }}"
+                                      alt="..." /></span>
+                                  <div class="media-body">
+                                    <span class="labeltitle">
+                                      {{ order.itemsSourceLang.sourceLang
+                                      }}
+                                    </span>
+                                  </div>
+                                  &nbsp;&nbsp;
+                                  <span class="label bg-light">
+                                    <i class="fa fa-angle-right"></i> </span>&nbsp;&nbsp;
+                                  <span class="langflag"><img ng-src="{{ order.itemsTargetLang.dataNgSrc }}"
+                                      alt="..." /></span>
+                                  <div class="media-body">
+                                    <span class="labeltitle">
+                                      {{ order.itemsTargetLang.sourceLang
+                                      }}
+                                    </span>
+                                  </div>
+                                </div>
+                                <!-- <div class="block m-t-sm">
+                                  <span class="badge bg-warning">Linguist</span>
+                                </div> -->
+                              </td>
+                              <td>{{order.pm_name}}</td>
+                              <td><div ng-repeat="liguist in order.jobLinguist" style="white-space:nowrap;">{{liguist.vUserName}} </div>
+                               <span ng-if="!order.jobLinguist.length"> - </span>
+                              </td>
+                              <td>
+                                <span style="display: none;">{{ order.itemDuedate_new }}</span>
+                                <span ng-if="order.itemDuedate" class="labeltitle mytooltip">
+                                  {{ order.itemDuedate | dateFormatDisplayFront }}
+                                  <div class="mytooltip_div">
+                                    <ul class="timeline">
+                                      <li class="tl-item">
+                                        <div class="tl-wrap b-info">
+                                          <span class="tl-date">Start Date</span>
+                                          <div class="tl-content" ng-if="order.itemStartdate">
+                                            {{ order.itemStartdate |
+                                            dateFormatDisplayFront }}
+                                          </div>
+                                        </div>
+                                      </li>
+                                      <li class="tl-item tl-left">
+                                        <div class="tl-wrap b-success">
+                                          <span class="tl-date">End Date</span>
+                                          <div class="tl-content" ng-if="order.itemDuedate">
+                                            {{ order.itemDuedate |
+                                            dateFormatDisplayFront }}
+                                          </div>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </span>
+                              </td>
+                              <td>
+                                <span ng-if="order.progrss_precentage < 0 ">-</span>
+                                <div class="inline" ng-if="order.progrss_precentage >= 0">
+                                  <div ui-jq="easyPieChart" ui-options="{
+                                  percent: '{{order.progrss_precentage}}',
+                                  lineWidth: 3,
+                                  trackColor: '#e8eff0',
+                                 barColor: '#67bb0a',
+                                  scaleColor: false,
+                                  color: '#fff',
+                                  size: 50,
+                                  lineCap: 'butt',
+                                  rotate: 90,
+                                  animate: 1000
+                                  }" class="easyPieChart" style="
+                                      width: 50px;
+                                      height: 50px;
+                                      line-height: 50px;
+                                    ">
+                                    <div>
+                                      <span class="step">{{order.progrss_precentage}}</span>%
+                                    </div>
+                                    <canvas width="50" height="50"></canvas>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>
+                                <span class="projstatus m-t-sm {{order.projectstatus_class}}"><i
+                                    class="fa fa-circle text-xs" style="color: {{order.projectstatus_color}}"></i>
+                                  {{order.itemStatus}}</span>
+                              </td>
+                              <td>
+                                <!-- <i class="fa fa-usd"></i> -->
+                                <span class="labeltitle">{{order.totalAmount |
+                                  CurrencyNumbersCommaformat}}</span>
+                              </td>
+                              <td>
+                                <a href="javascript:void(0)" ng-click="goTocommentChat(order.orderId)">
+                                  <i style="color:{{order.comment}}"
+                                    class="fa fa-commenting-o fa-2x cmtclr{{order.orderId}}"></i>
+                                </a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </tab>
+                    <tab>
+                      <tab-heading>
+                        <i class="glyphicon glyphicon-plus-sign"></i> To be
+                        Assigned
+                        <span class="badge bg-info">{{projectsAssignedCount}}</span>
+                      </tab-heading>
+                      <div class="table-responsive">
+                        <table class="table table-striped" datatable="ng" dt-options="dtOptions">
+                          <thead>
+                            <th>Project Number</th>
+                            <th>Customer</th>
+                            <!-- <th>Account</th> -->
+                            <th>Languages</th>
+                            <th style="white-space: nowrap">Project Manager</th>
+                            <th>Linguist</th>
+                            <th>Deadline</th>
+                            <th>Progress</th>
+                            <th>Status</th>
+                            <th>Price</th>
+                            <!-- <th>PO Number</th> -->
+                            <th>Comment</th>
+                            <!-- <th>Action</th> -->
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="order in projectsAssigned">
+                              <td>
+                                <a href="javascript:void(0)" ng-click="goToProjectViewdetail(order.orderId)">
+                                  {{order.orderNumber}}
+                                </a>
+                                <small class="block m-t-sm">
+                                  <span class="labeltitle">PO Number : </span><br /><span
+                                    class="label bg-light">{{order.itemPonumber}}</span>
+                                </small>
+                              </td>
+                              <td>
+                                <article class="media">
+                                  <span class="customerthumb pull-left thumb-sm"
+                                    ng-if="order.clientlogo != undefined && order.clientlogo !='' "><img
+                                      ng-src="uploads/logo/{{order.clientlogo}}" alt="..." class="img-circle" /></span>
+                                  <span class="
+                                      customerthumb
+                                      pull-left
+                                      thumb-sm
+                                      fa-stack fa-lg
+                                    " ng-if="order.clientlogo == '' ">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-user fa-stack-1x text-white"></i>
+                                  </span>
+                                  <div class="media-body">
+                                    <a href="" class="h5">{{order.contactName}}</a>
+                                  </div>
+                                </article>
+                                <br />
+                                <article class="media acmt5">
+                                  <span class="customerthumb pull-left thumb-sm">
+                                    <i class="fa fa-address-card"></i>
+                                  </span>
+                                  <div class="media-body">
+                                    <a href="" class="h5">{{order.accountname}}</a>
+                                  </div>
+                                </article>
+                              </td>
+                              <td>
+                                <div class="langtd" ng-if="order.itemsSourceLang">
+                                  <span class="langflag"><img ng-src="{{ order.itemsSourceLang.dataNgSrc }}"
+                                      alt="..." /></span>
+                                  <div class="media-body">
+                                    <span class="labeltitle">
+                                      {{ order.itemsSourceLang.sourceLang
+                                      }}
+                                    </span>
+                                  </div>
+                                  &nbsp;&nbsp;
+                                  <span class="label bg-light">
+                                    <i class="fa fa-angle-right"></i> </span>&nbsp;&nbsp;
+                                  <span class="langflag"><img ng-src="{{ order.itemsTargetLang.dataNgSrc }}"
+                                      alt="..." /></span>
+                                  <div class="media-body">
+                                    <span class="labeltitle">
+                                      {{ order.itemsTargetLang.sourceLang
+                                      }}
+                                    </span>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>{{order.pm_name}}</td>
+                              <td><div ng-repeat="liguist in order.jobLinguist" style="white-space:nowrap;">{{liguist.vUserName}} </div>
+                               <span ng-if="!order.jobLinguist.length"> - </span>
+                              </td>
+                              <td>
+                                <span style="display: none;">{{ order.itemDuedate_new }}</span>
+                                <span ng-if="order.itemDuedate" class="labeltitle mytooltip">
+                                  {{ order.itemDuedate | dateFormatDisplayFront }}
+                                  <div class="mytooltip_div">
+                                    <ul class="timeline">
+                                      <li class="tl-item">
+                                        <div class="tl-wrap b-info">
+                                          <span class="tl-date">Start Date</span>
+                                          <div class="tl-content" ng-if="order.itemStartdate">
+                                            {{ order.itemStartdate |
+                                            dateFormatDisplayFront }}
+                                          </div>
+                                        </div>
+                                      </li>
+                                      <li class="tl-item tl-left">
+                                        <div class="tl-wrap b-success">
+                                          <span class="tl-date">End Date</span>
+                                          <div class="tl-content" ng-if="order.itemDuedate">
+                                            {{ order.itemDuedate |
+                                            dateFormatDisplayFront }}
+                                          </div>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </span>
+                              </td>
+                              <td>
+                                <span ng-if="order.progrss_precentage < 0 ">-</span>
+                                <div class="inline" ng-if="order.progrss_precentage >= 0">
+                                  <div ui-jq="easyPieChart" ui-options="{
+                                    percent: '{{order.progrss_precentage}}',
+                                    lineWidth: 3,
+                                    trackColor: '#e8eff0',
+                                   barColor: '#67bb0a',
+                                    scaleColor: false,
+                                    color: '#fff',
+                                    size: 50,
+                                    lineCap: 'butt',
+                                    rotate: 90,
+                                    animate: 1000
+                                    }" class="easyPieChart" style="
+                                      width: 50px;
+                                      height: 50px;
+                                      line-height: 50px;
+                                    ">
+                                    <div>
+                                      <span class="step">{{order.progrss_precentage}}</span>%
+                                    </div>
+                                    <canvas width="50" height="50"></canvas>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>
+                                <span class="projstatus m-t-sm {{order.projectstatus_class}}"><i
+                                    class="fa fa-circle text-xs" style="color: {{order.projectstatus_color}}"></i>
+                                  {{order.itemStatus}}</span>
+                              </td>
+                              <td>
+                                <!-- <i class="fa fa-usd"></i> -->
+                                <span class="labeltitle">{{order.totalAmount |
+                                  CurrencyNumbersCommaformat}}</span>
+                              </td>
+                              <td>
+                                <a href="javascript:void(0)" ng-click="goTocommentChat(order.orderId)">
+                                  <i style="color:{{order.comment}}"
+                                    class="fa fa-commenting-o fa-2x  cmtclr{{order.orderId}}"></i>
+                                </a>
+                              </td>
+                              <!-- <td>
+                                <a href="javascript:void(0)" ng-click="editProject(order.orderId)" title="Edit" class=""><i class="fa fa-ellipsis-h fa-1x"></i></a>
+                              </td> -->
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </tab>
+                    <tab>
+                      <tab-heading>
+                        <i class="glyphicon glyphicon-tree-deciduous"></i> In
+                        Progress
+                        <span class="badge bg-info">{{projectsInprogressCount}}</span>
+                      </tab-heading>
+                      <div class="table-responsive">
+                        <table class="table table-striped" datatable="ng" dt-options="dtOptions">
+                          <thead>
+                            <th>Project Number</th>
+                            <th>Customer</th>
+                            <!-- <th>Account</th> -->
+                            <th>Languages</th>
+                            <th style="white-space: nowrap">Project Manager</th>
+                            <th>Linguist</th>
+                            <th>Deadline</th>
+                            <th>Progress</th>
+                            <th>Status</th>
+                            <th>Price</th>
+                            <!-- <th>PO Number</th> -->
+                            <th>Comment</th>
+                            <!-- <th>Action</th> -->
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="order in projectsInProgress">
+                              <td>
+                                <a href="javascript:void(0)" ng-click="goToProjectViewdetail(order.orderId)">
+                                  {{order.orderNumber}}
+                                </a>
+                                <small class="block m-t-sm">
+                                  <span class="labeltitle">PO Number : </span><br /><span
+                                    class="label bg-light">{{order.itemPonumber}}</span>
+                                </small>
+                              </td>
+                              <td>
+                                <article class="media">
+                                  <span class="customerthumb pull-left thumb-sm"
+                                    ng-if="order.clientlogo != undefined && order.clientlogo !='' "><img
+                                      ng-src="uploads/logo/{{order.clientlogo}}" alt="..." class="img-circle" /></span>
+                                  <span class="
+                                      customerthumb
+                                      pull-left
+                                      thumb-sm
+                                      fa-stack fa-lg
+                                    " ng-if="order.clientlogo == '' ">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-user fa-stack-1x text-white"></i>
+                                  </span>
+                                  <div class="media-body">
+                                    <a href="" class="h5">{{order.contactName}}</a>
+                                  </div>
+                                </article>
+                                <br />
+                                <article class="media acmt5">
+                                  <span class="customerthumb pull-left thumb-sm">
+                                    <i class="fa fa-address-card"></i>
+                                  </span>
+                                  <div class="media-body">
+                                    <a href="" class="h5">{{order.accountname}}</a>
+                                  </div>
+                                </article>
+                              </td>
+                              <td>
+                                <div class="langtd" ng-if="order.itemsSourceLang">
+                                  <span class="langflag"><img ng-src="{{ order.itemsSourceLang.dataNgSrc }}"
+                                      alt="..." /></span>
+                                  <div class="media-body">
+                                    <span class="labeltitle">
+                                      {{ order.itemsSourceLang.sourceLang
+                                      }}
+                                    </span>
+                                  </div>
+                                  &nbsp;&nbsp;
+                                  <span class="label bg-light">
+                                    <i class="fa fa-angle-right"></i> </span>&nbsp;&nbsp;
+                                  <span class="langflag"><img ng-src="{{ order.itemsTargetLang.dataNgSrc }}"
+                                      alt="..." /></span>
+                                  <div class="media-body">
+                                    <span class="labeltitle">
+                                      {{ order.itemsTargetLang.sourceLang
+                                      }}
+                                    </span>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>{{order.pm_name}}</td>
+                              <td><div ng-repeat="liguist in order.jobLinguist" style="white-space:nowrap;">{{liguist.vUserName}} </div>
+                               <span ng-if="!order.jobLinguist.length"> - </span>
+                              </td>
+                              <td>
+                                <span style="display: none;">{{ order.itemDuedate_new }}</span>
+                                <span ng-if="order.itemDuedate" class="labeltitle mytooltip">
+                                  {{ order.itemDuedate | dateFormatDisplayFront }}
+                                  <div class="mytooltip_div">
+                                    <ul class="timeline">
+                                      <li class="tl-item">
+                                        <div class="tl-wrap b-info">
+                                          <span class="tl-date">Start Date</span>
+                                          <div class="tl-content" ng-if="order.itemStartdate">
+                                            {{ order.itemStartdate |
+                                            dateFormatDisplayFront }}
+                                          </div>
+                                        </div>
+                                      </li>
+                                      <li class="tl-item tl-left">
+                                        <div class="tl-wrap b-success">
+                                          <span class="tl-date">End Date</span>
+                                          <div class="tl-content" ng-if="order.itemDuedate">
+                                            {{ order.itemDuedate |
+                                            dateFormatDisplayFront }}
+                                          </div>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </span>
+                              </td>
+                              <td>
+                                <span ng-if="order.progrss_precentage < 0 ">-</span>
+                                <div class="inline" ng-if="order.progrss_precentage >= 0">
+                                  <div ui-jq="easyPieChart" ui-options="{
+                                      percent: '{{order.progrss_precentage}}',
+                                      lineWidth: 3,
+                                      trackColor: '#e8eff0',
+                                     barColor: '#67bb0a',
+                                      scaleColor: false,
+                                      color: '#fff',
+                                      size: 50,
+                                      lineCap: 'butt',
+                                      rotate: 90,
+                                      animate: 1000
+                                      }" class="easyPieChart" style="
+                                      width: 50px;
+                                      height: 50px;
+                                      line-height: 50px;
+                                    ">
+                                    <div>
+                                      <span class="step">{{order.progrss_precentage}}</span>%
+                                    </div>
+                                    <canvas width="50" height="50"></canvas>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>
+                                <span class="projstatus m-t-sm {{order.projectstatus_class}}"><i
+                                    class="fa fa-circle text-xs" style="color: {{order.projectstatus_color}}"></i>
+                                  {{order.itemStatus}}</span>
+                              </td>
+                              <td>
+                                <!-- <i class="fa fa-usd"></i> -->
+                                <span class="labeltitle">{{order.totalAmount |
+                                  CurrencyNumbersCommaformat}}</span>
+                              </td>
+                              <td>
+                                <a href="javascript:void(0)" ng-click="goTocommentChat(order.orderId)">
+                                  <i style="color:{{order.comment}}"
+                                    class="fa fa-commenting-o fa-2x cmtclr{{order.orderId}}"></i>
+                                </a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </tab>
+                    <tab>
+                      <tab-heading>
+                        <i class="glyphicon glyphicon-ok-circle"></i> QA Ready
+                        <span class="badge bg-info">{{projectsQaReadyCount}}</span>
+                      </tab-heading>
+                      <div class="table-responsive">
+                        <table class="table table-striped" datatable="ng" dt-options="dtOptions">
+                          <thead>
+                            <th>Project Number</th>
+                            <th>Customer</th>
+                            <!-- <th>Account</th> -->
+                            <th>Languages</th>
+                            <th style="white-space: nowrap">Project Manager</th>
+                            <th>Linguist</th>
+                            <th>Deadline</th>
+                            <th>Progress</th>
+                            <th>Status</th>
+                            <th>Price</th>
+                            <!-- <th>PO Number</th> -->
+                            <th>Comment</th>
+                            <!-- <th>Action</th> -->
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="order in projectsQaready">
+                              <td>
+                                <a href="javascript:void(0)" ng-click="goToProjectViewdetail(order.orderId)">
+                                  {{order.orderNumber}}
+                                </a>
+                                <small class="block m-t-sm">
+                                  <span class="labeltitle">PO Number : </span><br /><span
+                                    class="label bg-light">{{order.itemPonumber}}</span>
+                                </small>
+                              </td>
+                              <td>
+                                <article class="media">
+                                  <span class="customerthumb pull-left thumb-sm"
+                                    ng-if="order.clientlogo != undefined && order.clientlogo !='' "><img
+                                      ng-src="uploads/logo/{{order.clientlogo}}" alt="..." class="img-circle" /></span>
+                                  <span class="
+                                      customerthumb
+                                      pull-left
+                                      thumb-sm
+                                      fa-stack fa-lg
+                                    " ng-if="order.clientlogo == '' ">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-user fa-stack-1x text-white"></i>
+                                  </span>
+                                  <div class="media-body">
+                                    <a href="" class="h5">{{order.contactName}}</a>
+                                  </div>
+                                </article>
+                                <br />
+                                <article class="media acmt5">
+                                  <span class="customerthumb pull-left thumb-sm">
+                                    <i class="fa fa-address-card"></i>
+                                  </span>
+                                  <div class="media-body">
+                                    <a href="" class="h5">{{order.accountname}}</a>
+                                  </div>
+                                </article>
+                              </td>
+                              <td>
+                                <div class="langtd" ng-if="order.itemsSourceLang">
+                                  <span class="langflag"><img ng-src="{{ order.itemsSourceLang.dataNgSrc }}"
+                                      alt="..." /></span>
+                                  <div class="media-body">
+                                    <span class="labeltitle">
+                                      {{ order.itemsSourceLang.sourceLang
+                                      }}
+                                    </span>
+                                  </div>
+                                  &nbsp;&nbsp;
+                                  <span class="label bg-light">
+                                    <i class="fa fa-angle-right"></i> </span>&nbsp;&nbsp;
+                                  <span class="langflag"><img ng-src="{{ order.itemsTargetLang.dataNgSrc }}"
+                                      alt="..." /></span>
+                                  <div class="media-body">
+                                    <span class="labeltitle">
+                                      {{ order.itemsTargetLang.sourceLang
+                                      }}
+                                    </span>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>{{order.pm_name}}</td>
+                              <td><div ng-repeat="liguist in order.jobLinguist" style="white-space:nowrap;">{{liguist.vUserName}} </div>
+                               <span ng-if="!order.jobLinguist.length"> - </span>
+                              </td>
+                              <td>
+                                <span style="display: none;">{{ order.itemDuedate_new }}</span>
+                                <span ng-if="order.itemDuedate" class="labeltitle mytooltip">
+                                  {{ order.itemDuedate | dateFormatDisplayFront }}
+                                  <div class="mytooltip_div">
+                                    <ul class="timeline">
+                                      <li class="tl-item">
+                                        <div class="tl-wrap b-info">
+                                          <span class="tl-date">Start Date</span>
+                                          <div class="tl-content" ng-if="order.itemStartdate">
+                                            {{ order.itemStartdate |
+                                            dateFormatDisplayFront }}
+                                          </div>
+                                        </div>
+                                      </li>
+                                      <li class="tl-item tl-left">
+                                        <div class="tl-wrap b-success">
+                                          <span class="tl-date">End Date</span>
+                                          <div class="tl-content" ng-if="order.itemDuedate">
+                                            {{ order.itemDuedate |
+                                            dateFormatDisplayFront }}
+                                          </div>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </span>
+                              </td>
+                              <td>
+                                <span ng-if="order.progrss_precentage < 0 ">-</span>
+                                <div class="inline" ng-if="order.progrss_precentage >= 0">
+                                  <div ui-jq="easyPieChart" ui-options="{
+                                        percent: '{{order.progrss_precentage}}',
+                                        lineWidth: 3,
+                                        trackColor: '#e8eff0',
+                                       barColor: '#67bb0a',
+                                        scaleColor: false,
+                                        color: '#fff',
+                                        size: 50,
+                                        lineCap: 'butt',
+                                        rotate: 90,
+                                        animate: 1000
+                                        }" class="easyPieChart" style="
+                                      width: 50px;
+                                      height: 50px;
+                                      line-height: 50px;
+                                    ">
+                                    <div>
+                                      <span class="step">{{order.progrss_precentage}}</span>%
+                                    </div>
+                                    <canvas width="50" height="50"></canvas>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>
+                                <span class="projstatus m-t-sm {{order.projectstatus_class}}"><i
+                                    class="fa fa-circle text-xs" style="color: {{order.projectstatus_color}}"></i>
+                                  {{order.itemStatus}}</span>
+                              </td>
+                              <td>
+                                <!-- <i class="fa fa-usd"></i> -->
+                                <span class="labeltitle">{{order.totalAmount |
+                                  CurrencyNumbersCommaformat}}</span>
+                              </td>
+                              <td>
+                                <a href="javascript:void(0)" ng-click="goTocommentChat(order.orderId)">
+                                  <i style="color:{{order.comment}}"
+                                    class="fa fa-commenting-o fa-2x cmtclr{{order.orderId}}"></i>
+                                </a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </tab>
+                    <tab>
+                      <tab-heading>
+                        <i class="glyphicon glyphicon-send"></i> To be Delivered
+                        <span class="badge bg-info">{{projectsToBeDeliveredCount}}</span>
+                      </tab-heading>
+                      <div class="table-responsive">
+                        <table class="table table-striped" datatable="ng" dt-options="dtOptions">
+                          <thead>
+                            <th>Project Number</th>
+                            <th>Customer</th>
+                            <!-- <th>Account</th> -->
+                            <th>Languages</th>
+                            <th style="white-space: nowrap">Project Manager</th>
+                            <th>Linguist</th>
+                            <th>Deadline</th>
+                            <th>Progress</th>
+                            <th>Status</th>
+                            <th>Price</th>
+                            <!-- <th>PO Number</th> -->
+                            <th>Comment</th>
+                            <!-- <th>Action</th> -->
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="order in projectsToBeDelivered">
+                              <td>
+                                <a href="javascript:void(0)" ng-click="goToProjectViewdetail(order.orderId)">
+                                  {{order.orderNumber}}
+                                </a>
+                                <small class="block m-t-sm">
+                                  <span class="labeltitle">PO Number : </span><br /><span
+                                    class="label bg-light">{{order.itemPonumber}}</span>
+                                </small>
+                              </td>
+                              <td>
+                                <article class="media">
+                                  <span class="customerthumb pull-left thumb-sm"
+                                    ng-if="order.clientlogo != undefined && order.clientlogo !='' "><img
+                                      ng-src="uploads/logo/{{order.clientlogo}}" alt="..." class="img-circle" /></span>
+                                  <span class="
+                                      customerthumb
+                                      pull-left
+                                      thumb-sm
+                                      fa-stack fa-lg
+                                    " ng-if="order.clientlogo == '' ">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-user fa-stack-1x text-white"></i>
+                                  </span>
+                                  <div class="media-body">
+                                    <a href="" class="h5">{{order.contactName}}</a>
+                                  </div>
+                                </article>
+                                <br />
+                                <article class="media acmt5">
+                                  <span class="customerthumb pull-left thumb-sm">
+                                    <i class="fa fa-address-card"></i>
+                                  </span>
+                                  <div class="media-body">
+                                    <a href="" class="h5">{{order.accountname}}</a>
+                                  </div>
+                                </article>
+                              </td>
+                              <td>
+                                <div class="langtd" ng-if="order.itemsSourceLang">
+                                  <span class="langflag"><img ng-src="{{ order.itemsSourceLang.dataNgSrc }}"
+                                      alt="..." /></span>
+                                  <div class="media-body">
+                                    <span class="labeltitle">
+                                      {{ order.itemsSourceLang.sourceLang
+                                      }}
+                                    </span>
+                                  </div>
+                                  &nbsp;&nbsp;
+                                  <span class="label bg-light">
+                                    <i class="fa fa-angle-right"></i> </span>&nbsp;&nbsp;
+                                  <span class="langflag"><img ng-src="{{ order.itemsTargetLang.dataNgSrc }}"
+                                      alt="..." /></span>
+                                  <div class="media-body">
+                                    <span class="labeltitle">
+                                      {{ order.itemsTargetLang.sourceLang
+                                      }}
+                                    </span>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>{{order.pm_name}}</td>
+                              <td><div ng-repeat="liguist in order.jobLinguist" style="white-space:nowrap;">{{liguist.vUserName}} </div>
+                               <span ng-if="!order.jobLinguist.length"> - </span>
+                              </td>
+                              <td>
+                                <span style="display: none;">{{ order.itemDuedate_new }}</span>
+                                <span ng-if="order.itemDuedate" class="labeltitle mytooltip">
+                                  {{ order.itemDuedate | dateFormatDisplayFront }}
+                                  <div class="mytooltip_div">
+                                    <ul class="timeline">
+                                      <li class="tl-item">
+                                        <div class="tl-wrap b-info">
+                                          <span class="tl-date">Start Date</span>
+                                          <div class="tl-content" ng-if="order.itemStartdate">
+                                            {{ order.itemStartdate |
+                                            dateFormatDisplayFront }}
+                                          </div>
+                                        </div>
+                                      </li>
+                                      <li class="tl-item tl-left">
+                                        <div class="tl-wrap b-success">
+                                          <span class="tl-date">End Date</span>
+                                          <div class="tl-content" ng-if="order.itemDuedate">
+                                            {{ order.itemDuedate |
+                                            dateFormatDisplayFront }}
+                                          </div>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </span>
+                              </td>
+                              <td>
+                                <span ng-if="order.progrss_precentage < 0 ">-</span>
+                                <div class="inline" ng-if="order.progrss_precentage >= 0">
+                                  <div ui-jq="easyPieChart" ui-options="{
+                                          percent: '{{order.progrss_precentage}}',
+                                          lineWidth: 3,
+                                          trackColor: '#e8eff0',
+                                         barColor: '#67bb0a',
+                                          scaleColor: false,
+                                          color: '#fff',
+                                          size: 50,
+                                          lineCap: 'butt',
+                                          rotate: 90,
+                                          animate: 1000
+                                          }" class="easyPieChart" style="
+                                      width: 50px;
+                                      height: 50px;
+                                      line-height: 50px;
+                                    ">
+                                    <div>
+                                      <span class="step">{{order.progrss_precentage}}</span>%
+                                    </div>
+                                    <canvas width="50" height="50"></canvas>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>
+                                <span class="projstatus m-t-sm {{order.projectstatus_class}}"><i
+                                    class="fa fa-circle text-xs" style="color: {{order.projectstatus_color}}"></i>
+                                  {{order.itemStatus}}</span>
+                              </td>
+                              <td>
+                                <!-- <i class="fa fa-usd"></i> -->
+                                <span class="labeltitle">{{order.totalAmount |
+                                  CurrencyNumbersCommaformat}}</span>
+                              </td>
+                              <td>
+                                <a href="javascript:void(0)" ng-click="goTocommentChat(order.orderId)">
+                                  <i style="color:{{order.comment}}"
+                                    class="fa fa-commenting-o fa-2x cmtclr{{order.orderId}}"></i>
+                                </a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </tab>
+                    <tab>
+                      <tab-heading>
+                        <i class="glyphicon glyphicon-ice-lolly"></i> Due
+                        Tomorrow
+                        <span class="badge bg-info">{{projectsDueTomorrowCount}}</span>
+                      </tab-heading>
+                      <div class="table-responsive">
+                        <table class="table table-striped projectlist" datatable="ng" dt-options="dtOptions">
+                          <thead>
+                            <th>Project Number</th>
+                            <th>Customer</th>
+                            <!-- <th>Account</th> -->
+                            <th>Languages</th>
+                            <th style="white-space: nowrap">Project Manager</th>
+                            <th>Linguist</th>
+                            <th>Deadline</th>
+                            <th>Progress</th>
+                            <th>Status</th>
+                            <th>Price</th>
+                            <!-- <th>PO Number</th> -->
+                            <th>Comment</th>
+                            <!-- <th>Action</th> -->
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="order in projectsDueTomorrow">
+                              <td>
+                                <a ng-click="goToProjectViewdetail(order.orderId)">
+                                  {{order.orderNumber}}
+                                </a>
+                                <small class="block m-t-sm">
+                                  <span class="labeltitle">PO Number : </span><br /><span
+                                    class="label bg-light">{{order.itemPonumber}}</span>
+                                </small>
+                              </td>
+                              <td>
+                                <article class="media">
+                                  <span class="customerthumb pull-left thumb-sm"
+                                    ng-if="order.clientlogo != undefined && order.clientlogo !='' "><img
+                                      ng-src="uploads/logo/{{order.clientlogo}}" alt="..." class="img-circle" /></span>
+                                  <span class="
+                                      customerthumb
+                                      pull-left
+                                      thumb-sm
+                                      fa-stack fa-lg
+                                    " ng-if="order.clientlogo == '' ">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-user fa-stack-1x text-white"></i>
+                                  </span>
+                                  <div class="media-body">
+                                    <a href="" class="h5">{{order.contactName}}</a>
+                                  </div>
+                                </article>
+                                <br />
+                                <article class="media acmt5">
+                                  <span class="customerthumb pull-left thumb-sm">
+                                    <i class="fa fa-address-card"></i>
+                                  </span>
+                                  <div class="media-body">
+                                    <a href="" class="h5">{{order.accountname}}</a>
+                                  </div>
+                                </article>
+                              </td>
+                              <td>
+                                <div class="langtd" ng-if="order.itemsSourceLang">
+                                  <span class="langflag"><img ng-src="{{ order.itemsSourceLang.dataNgSrc }}"
+                                      alt="..." /></span>
+                                  <div class="media-body">
+                                    <span class="labeltitle">
+                                      {{ order.itemsSourceLang.sourceLang
+                                      }}
+                                    </span>
+                                  </div>
+                                  &nbsp;&nbsp;
+                                  <span class="label bg-light">
+                                    <i class="fa fa-angle-right"></i> </span>&nbsp;&nbsp;
+                                  <span class="langflag"><img ng-src="{{ order.itemsTargetLang.dataNgSrc }}"
+                                      alt="..." /></span>
+                                  <div class="media-body">
+                                    <span class="labeltitle">
+                                      {{ order.itemsTargetLang.sourceLang
+                                      }}
+                                    </span>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>{{order.pm_name}}</td>
+                              <td><span ng-repeat="liguist in order.jobLinguist" style="white-space:nowrap;">{{liguist.vUserName}} </span>
+                               <span ng-if="!order.jobLinguist.length"> - </span>
+                              </td>
+                              <td>
+                                <span style="display: none;">{{ order.itemDuedate_new }}</span>
+                                <span ng-if="order.itemDuedate" class="labeltitle mytooltip">
+                                  {{ order.itemDuedate | dateFormatDisplayFront }}
+                                  <div class="mytooltip_div">
+                                    <ul class="timeline">
+                                      <li class="tl-item">
+                                        <div class="tl-wrap b-info">
+                                          <span class="tl-date">Start Date</span>
+                                          <div class="tl-content" ng-if="order.itemStartdate">
+                                            {{ order.itemStartdate |
+                                            dateFormatDisplayFront }}
+                                          </div>
+                                        </div>
+                                      </li>
+                                      <li class="tl-item tl-left">
+                                        <div class="tl-wrap b-success">
+                                          <span class="tl-date">End Date</span>
+                                          <div class="tl-content" ng-if="order.itemDuedate">
+                                            {{ order.itemDuedate |
+                                            dateFormatDisplayFront }}
+                                          </div>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </span>
+                              </td>
+                              <td>
+                                <span ng-if="order.progrss_precentage < 0 ">-</span>
+                                <div class="inline" ng-if="order.progrss_precentage >= 0">
+                                  <div ui-jq="easyPieChart" ui-options="{
+                                            percent: '{{order.progrss_precentage}}',
+                                            lineWidth: 3,
+                                            trackColor: '#e8eff0',
+                                           barColor: '#67bb0a',
+                                            scaleColor: false,
+                                            color: '#fff',
+                                            size: 50,
+                                            lineCap: 'butt',
+                                            rotate: 90,
+                                            animate: 1000
+                                            }" class="easyPieChart" style="
+                                      width: 50px;
+                                      height: 50px;
+                                      line-height: 50px;
+                                    ">
+                                    <div>
+                                      <span class="step">{{order.progrss_precentage}}</span>%
+                                    </div>
+                                    <canvas width="50" height="50"></canvas>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>
+                                <span class="projstatus m-t-sm {{order.projectstatus_class}}"><i
+                                    class="fa fa-circle text-xs" style="color: {{order.projectstatus_color}}"></i>
+                                  {{order.itemStatus}}</span>
+                              </td>
+                              <td>
+                                <!-- <i class="fa fa-usd"></i> -->
+                                <span class="labeltitle">{{order.totalAmount |
+                                  CurrencyNumbersCommaformat}}</span>
+                              </td>
+                              <td>
+                                <a href="javascript:void(0)" ng-click="goTocommentChat(order.orderId)">
+                                  <i style="color:{{order.comment}}"
+                                    class="fa fa-commenting-o fa-2x cmtclr{{order.orderId}}"></i>
+                                </a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </tab>
+                    <tab>
+                      <tab-heading>
+                        <i class="glyphicon glyphicon-list"></i> My Projects
+                        <span class="badge bg-info">{{projectsAllCount}}</span>
+                      </tab-heading>
+                      <div class="table-responsive">
+                        <table class="table table-striped" datatable="ng" dt-options="dtOptions">
+                          <thead>
+                            <th>Project Number</th>
+                            <th>Customer</th>
+                            <!-- <th>Account</th> -->
+                            <th>Languages</th>
+                            <th style="white-space: nowrap">Project Manager</th>
+                            <th>Linguist</th>
+                            <th>Deadline</th>
+                            <th>Progress</th>
+                            <th>Status</th>
+                            <th>Price</th>
+                            <!-- <th>PO Number</th> -->
+                            <th>Comment</th>
+                            <!-- <th>Action</th> -->
+                          </thead>
+                          <tbody>
+                            <tr ng-repeat="order in projectsAll">
+                              <td>
+                                <a href="javascript:void(0)" ng-click="goToProjectViewdetail(order.orderId)">
+                                  {{order.orderNumber}}
+                                </a>
+                                <small class="block m-t-sm">
+                                  <span class="labeltitle">PO Number : </span><br /><span class="label bg-light"
+                                    title="{{order.itemPonumber}}">{{order.itemPonumber | Textcharacter}}</span>
+                                </small>
+                              </td>
+                              <td>
+                                <article class="media">
+                                  <span class="customerthumb pull-left thumb-sm"
+                                    ng-if="order.clientlogo != undefined && order.clientlogo !='' "><img
+                                      ng-src="uploads/logo/{{order.clientlogo}}" alt="..." class="img-circle" /></span>
+                                  <span class="
+                                      customerthumb
+                                      pull-left
+                                      thumb-sm
+                                      fa-stack fa-lg
+                                    " ng-if="order.clientlogo == '' ">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-user fa-stack-1x text-white"></i>
+                                  </span>
+                                  <div class="media-body">
+                                    <a href="" class="h5">{{order.contactName}}</a>
+                                  </div>
+                                </article>
+                                <br />
+                                <article class="media acmt5">
+                                  <span class="customerthumb pull-left thumb-sm">
+                                    <i class="fa fa-address-card"></i>
+                                  </span>
+                                  <div class="media-body">
+                                    <a href="" class="h5">{{order.accountname}}</a>
+                                  </div>
+                                </article>
+                              </td>
+                              <td>
+                                <div class="langtd" ng-if="order.itemsSourceLang">
+                                  <span class="langflag"><img ng-src="{{ order.itemsSourceLang.dataNgSrc }}"
+                                      alt="..." /></span>
+                                  <div class="media-body">
+                                    <span class="labeltitle">
+                                      {{ order.itemsSourceLang.sourceLang
+                                      }}
+                                    </span>
+                                  </div>
+                                  &nbsp;&nbsp;
+                                  <span class="label bg-light">
+                                    <i class="fa fa-angle-right"></i> </span>&nbsp;&nbsp;
+                                  <span class="langflag"><img ng-src="{{ order.itemsTargetLang.dataNgSrc }}"
+                                      alt="..." /></span>
+                                  <div class="media-body">
+                                    <span class="labeltitle">
+                                      {{ order.itemsTargetLang.sourceLang
+                                      }}
+                                    </span>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>{{order.pm_name}}</td>
+                              <td><div ng-repeat="liguist in order.jobLinguist" style="white-space:nowrap;">{{liguist.vUserName}} </div>
+                               <span ng-if="!order.jobLinguist.length"> - </span>
+                              </td>
+                              <td>
+                                <span style="display: none;">{{ order.itemDuedate_new }}</span>
+                                <span ng-if="order.itemDuedate" class="labeltitle mytooltip" >
+                                  {{ order.itemDuedate | dateFormatDisplayFront }}
+                                  <div class="mytooltip_div">
+                                    <ul class="timeline">
+                                      <li class="tl-item">
+                                        <div class="tl-wrap b-info">
+                                          <span class="tl-date">Start Date</span>
+                                          <div class="tl-content" ng-if="order.itemStartdate">
+                                            {{ order.itemStartdate |
+                                            dateFormatDisplayFront }}
+                                          </div>
+                                        </div>
+                                      </li>
+                                      <li class="tl-item tl-left">
+                                        <div class="tl-wrap b-success">
+                                          <span class="tl-date">End Date</span>
+                                          <div class="tl-content" ng-if="order.itemDuedate">
+                                            {{ order.itemDuedate |
+                                            dateFormatDisplayFront }}
+                                          </div>
+                                        </div>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </span>
+                              </td>
+                              <td>
+                                <span ng-if="order.progrss_precentage < 0 ">-</span>
+                                <div class="inline" ng-if="order.progrss_precentage >= 0">
+                                  <div ui-jq="easyPieChart" ui-options="{
+                                              percent: '{{order.progrss_precentage}}',
+                                              lineWidth: 3,
+                                              trackColor: '#e8eff0',
+                                              barColor: '#67bb0a',
+                                              scaleColor: false,
+                                              color: '#fff',
+                                              size: 50,
+                                              lineCap: 'butt',
+                                              rotate: 90,
+                                              animate: 1000
+                                              }" class="easyPieChart" style="
+                                      width: 50px;
+                                      height: 50px;
+                                      line-height: 50px;
+                                    ">
+                                    <div>
+                                      <span class="step">{{order.progrss_precentage}}</span>%
+                                    </div>
+                                    <canvas width="50" height="50"></canvas>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>
+                                <span class="projstatus m-t-sm {{order.projectstatus_class}}"><i
+                                    class="fa fa-circle text-xs" style="color: {{order.projectstatus_color}}"></i>
+                                  {{order.itemStatus}}</span>
+                              </td>
+                              <td>
+                                <span class="labeltitle">{{order.totalAmount |
+                                  CurrencyNumbersCommaformat}}</span>
+                              </td>
+                              <td>
+                                <a href="javascript:void(0)" ng-click="goTocommentChat(order.orderId)">
+                                  <i style="color:{{order.comment}}"
+                                    class="fa fa-commenting-o fa-2x cmtclr{{order.orderId}}"></i>
+                                </a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </tab>
+                    
+                  </tabset>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="white_box_wrapper hbox hbox-auto-xs hbox-auto-sm" ng-if="userRight == 1">
+        <!-- main -->
+        <div class="col">
+          <!-- / main header -->
+          <div class="wrapper-md">
+            <!-- tasks -->
+            <div class="row">
+              <div class="col-md-12 rightBox-group">
+                  <div class="box-group-head white_box h3">
+                    Overview
+                  </div>
+              </div> 
+              <div class="col-md-9 chid-tables">
+                <div class="box ">
+                  <div class="white_box panel panel-default projectjobliprnt">
+                    <div class="panel-heading">
+                      <div class="clearfix">
+                        <div class="clear">
+                          <div class="h4">Projects</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="status-tags">
+                      <div class="btn m-b-xs btn-default" ng-class="{ 'active': scoopjobStatus=='all'}">
+                        <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','all')">
+                            All <span class="badge bg-info">{{scoopAlljobsCount}}</span></a>
+                      </div>
+                      <div class="btn m-b-xs btn-default" ng-class="{ 'active': scoopjobStatus=='scoopAssigned'}">
+                        <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopAssigned')">
+                            To be Assign <span class="badge bg-info">{{scoopAssignedCount}}</span></a>
+                      </div>
+                      <div class="btn m-b-xs btn-default" ng-class="{ 'active': scoopjobStatus=='scoopProgress'}">
+                        <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopProgress')">
+                            In progress <span class="badge bg-info">{{scoopProgressCount}}</span></a>
+                      </div>
+                      <div class="btn m-b-xs btn-default" ng-class="{ 'active': scoopjobStatus=='scoopLinguist'}">
+                        <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopLinguist')">
+                            Completed by linguist <span class="badge bg-info">{{scoopLinguistCount}}</span></a>
+                      </div>
+                      <div class="btn m-b-xs btn-default" ng-class="{ 'active': scoopjobStatus=='scoopQaReady'}">
+                        <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopQaReady')">
+                            QA Ready <span class="badge bg-info">{{scoopQaReadyCount}}</span></a>
+                      </div>
+                      <div class="btn m-b-xs btn-default" ng-class="{ 'active': scoopjobStatus=='scoopTobedelivered'}">
+                          <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopTobedelivered')">
+                            To be Delivered <span class="badge bg-info">{{scoopTobedeliveredCount}}</span></a>
+                      </div>
+                        <div class="btn m-b-xs btn-default" ng-class="{ 'active': scoopjobStatus=='scoopDelivered'}">
+                          <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopDelivered')">
+                            Delivered <span class="badge bg-info">{{scoopDeliveredCount}}</span></a>
+                        </div>
+                        <div class="btn m-b-xs btn-default" ng-class="{ 'active': scoopjobStatus=='scoopApproved'}">
+                          <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopApproved')">
+                            Approved <span class="badge bg-info">{{scoopApprovedCount}}</span></a>
+                        </div>
+                        <div class="btn m-b-xs btn-default" ng-class="{ 'active': scoopjobStatus=='scoopInvoiced'}">
+                          <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopInvoiced')">
+                            Invoiced <span class="badge bg-info">{{scoopInvoicedCount}}</span></a>
+                        </div>
+                        <div class="btn m-b-xs btn-default" ng-class="{ 'active': scoopjobStatus=='scoopPaid'}">
+                          <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopPaid')">
+                            Paid <span class="badge bg-info">{{scoopPaidCount}}</span></a>
+                        </div>
+                        <div class="btn m-b-xs btn-default" ng-class="{ 'active': scoopjobStatus=='scoopWithoutInvoice'}">
+                          <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopWithoutInvoice')">
+                            Without invoice <span class="badge bg-info">{{scoopWithoutInvoiceCount}}</span></a>
+                        </div>
+                        <div class="btn m-b-xs btn-default" ng-class="{ 'active': scoopjobStatus=='scoopCancelled'}">
+                          <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopCancelled')">
+                            Cancelled <span class="badge bg-info">{{scoopCancelledCount}}</span></a>
+                        </div>
+                      
+
+                    </div>
+                    <!-- <div class="twelve columns filter-wrapper d-flex ">
+                      <ul class="nav-bar-filter mb-0 overviewli" id="nav-bar-filter">
+                        <li class="list-group-item"  ng-class="{ 'active': scoopjobStatus=='all'}">
+                          <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','all')">
+                            All <span class="badge bg-info">{{scoopAlljobsCount}}</span></a>
+                        </li>
+                        <li class="list-group-item"  ng-class="{ 'active': scoopjobStatus=='scoopAssigned'}">
+                          <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopAssigned')">
+                            To be Assigned <span class="badge bg-info">{{scoopAssignedCount}}</span></a>
+                        </li>
+                        <li class="list-group-item" ng-class="{ 'active': scoopjobStatus=='scoopProgress'}">
+                          <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopProgress')">
+                            In progress <span class="badge bg-info">{{scoopProgressCount}}</span></a>
+                        </li>
+                        <li class="list-group-item" ng-class="{ 'active': scoopjobStatus=='scoopLinguist'}">
+                          <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopLinguist')">
+                            Completed by linguist <span class="badge bg-info">{{scoopLinguistCount}}</span></a>
+                        </li>
+                        <li class="list-group-item" ng-class="{ 'active': scoopjobStatus=='scoopQaReady'}">
+                          <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopQaReady')">
+                            QA Ready <span class="badge bg-info">{{scoopQaReadyCount}}</span></a>
+                        </li>
+                        <li class="list-group-item" ng-class="{ 'active': scoopjobStatus=='scoopTobedelivered'}">
+                          <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopTobedelivered')">
+                            To be Delivered <span class="badge bg-info">{{scoopTobedeliveredCount}}</span></a>
+                        </li>
+                        <li class="list-group-item" ng-class="{ 'active': scoopjobStatus=='scoopDelivered'}">
+                          <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopDelivered')">
+                            Delivered <span class="badge bg-info">{{scoopDeliveredCount}}</span></a>
+                        </li>
+                        <li class="list-group-item" ng-class="{ 'active': scoopjobStatus=='scoopApproved'}">
+                          <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopApproved')">
+                            Approved <span class="badge bg-info">{{scoopApprovedCount}}</span></a>
+                        </li>
+                        <li class="list-group-item" ng-class="{ 'active': scoopjobStatus=='scoopInvoiced'}">
+                          <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopInvoiced')">
+                            Invoiced <span class="badge bg-info">{{scoopInvoicedCount}}</span></a>
+                        </li>
+                        <li class="list-group-item" ng-class="{ 'active': scoopjobStatus=='scoopPaid'}">
+                          <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopPaid')">
+                            Paid <span class="badge bg-info">{{scoopPaidCount}}</span></a>
+                        </li>
+                        <li class="list-group-item" ng-class="{ 'active': scoopjobStatus=='scoopWithoutInvoice'}">
+                          <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopWithoutInvoice')">
+                            Without invoice <span class="badge bg-info">{{scoopWithoutInvoiceCount}}</span></a>
+                        </li>
+                        <li class="list-group-item" ng-class="{ 'active': scoopjobStatus=='scoopCancelled'}">
+                          <a href="javascript:void(0)"
+                            ng-click="scoopjobstatusRecord('scoop','scoopCancelled')">
+                            Cancelled <span class="badge bg-info">{{scoopCancelledCount}}</span></a>
+                        </li>				
+                      </ul>
+                      <ul id="more-nav" class="mb-0 more-tab">			  
+                        <li id="moreli" class="list-group-item more-tab-li"><a href="#" style="white-space: nowrap;">More > </a>
+                          <ul class="subfilter">									
+                          </ul>
+                        </li>    
+                      </ul>
+                    </div> -->
+                     <!-- Scoop Jobs List based on status -->
+                <div class="overview-list projecttable" ng-show="isoverviewProject">
+                  <div class="table-responsive">
+                    <!-- <h4 class="" style="float: left;position: relative;top: 25px;margin-left: 5px;">New Jobs</h4> -->
+                    <table class="table table-striped b-b" datatable="ng" id="scoopjobAllTbl" dt-options="dtOptionsJob">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Scoop Number</th>
+                          <!-- <th>Job Number</th> -->
+                          <th>Client</th>
+                          <th>Account</th>
+                          <!-- <th>Type</th> -->
+                          <th>Language Pair</th>
+                          <th>Project Manager</th>
+                          <th>Resource</th>
+                          <th>Progress (in %)</th>
+                          <th>Status</th>
+                          <!-- <th>Start Date</th> -->
+                          <!-- <th>Deadline</th> -->
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="jList in scoopjobsListAll">
+                          <td>{{$index + 1}}</td>
+                          <td>{{jList.item_id}}</td>
+                          <!-- <td>
+                            <span ng-if="!jList.po_number"> - </span>
+                            <span ng-if="jList.po_number"><a href="javascript:void(0);" ng-click="goToJob(jList.job_summmeryId,jList.order_id);">{{jList.po_number}}</a></span>
+                          </td> -->
+                          <td>{{jList.Client}}</td>
+                          <td>{{jList.indirectClient}}</td>
+                          <!-- <td>{{jList.type}}</td> -->
+                          <td>
+                            <span ng-if="!jList.ItemLanguage"> - </span>
+                            <span ng-if="jList.ItemLanguage">{{jList.ItemLanguage}}</span>
+                          </td>
+                          <td>
+                            <span ng-if="jList.contact_person != ''">{{jList.contact_person}}</span>
+                            <span ng-if="jList.contact_person == ''">-</span>
+                          </td>
+                          <td>
+                            <span ng-if="jList.resource != ''">{{jList.resource}}</span>
+                            <span ng-if="jList.resource == ''">-</span>
+                          </td>
+                          <td>-</td>
+                          <td>{{jList.item_status}}</td>
+                          <!-- <td>{{jList.created_date | dateFormat}}</td> -->
+                          <!-- <td>
+                            <span ng-if="jList.due_date == '0000-00-00 00:00:00'"> - </span>
+                            <span ng-if="jList.due_date != '0000-00-00 00:00:00'">{{jList.due_date | dateFormat}}</span>
+                          </td> -->
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <!-- Job List For Status New END -->
+                  </div>
+                </div>
+               
+
+                <div class="box ">
+                  <div class="white_box panel panel-default pb-15">
+                    <div class="panel-heading">
+                      <div class="clearfix">
+                        <div class="clear">
+                          <div class="h4">Jobs</div>
+                        </div>
+                      </div>
+                    </div>
+                    <ul class="alt projectjobdv2 overviewli">
+                      <li class="list-group-item"  ng-class="{ 'active': jobsactive=='Requested'}">
+                        <a href="javascript:void(0)"
+                          ng-click="jobstatusRecord('jobs','Requested')">
+                          Requested <span class="badge bg-info">{{jobRequestesCount}}</span></a>
+                      </li>
+                      <li class="list-group-item" ng-class="{ 'active': jobsactive=='inProgress'}">
+                        <a href="javascript:void(0)"
+                          ng-click="jobstatusRecord('jobs','inProgress')">
+                          In progress <span class="badge bg-info">{{jobInProgressCount}}</span></a>
+                      </li>
+                      <li class="list-group-item" ng-class="{ 'active': jobsactive=='DueToday'}">
+                        <a href="javascript:void(0)"
+                          ng-click="jobstatusRecord('jobs','DueToday')">
+                          Due Today <span class="badge bg-info">{{jobDueTodayCount}}</span></a>
+                      </li>
+                      <li class="list-group-item" ng-class="{ 'active': jobsactive=='DueTomorrow'}">
+                        <a href="javascript:void(0)"
+                          ng-click="jobstatusRecord('jobs','DueTomorrow')">
+                          Due Tomorrow <span class="badge bg-info">{{jobDueTomorrowCount}}</span></a>
+                      </li>
+                      <li class="list-group-item" ng-class="{ 'active': jobsactive=='Overdue'}">
+                        <a href="javascript:void(0)"
+                          ng-click="jobstatusRecord('jobs','Overdue')">
+                          Overdue <span class="badge bg-info">{{jobOverDueCount}}</span></a>
+                      </li>    
+                    </ul>
+                    <!-- Jobs List based on status -->
+                <div class="overview-list projecttable"  ng-show="isoverviewJobs">
+                  <div class="table-responsive">
+                    <!-- <h4 class="" style="float: left;position: relative;top: 25px;margin-left: 5px;">New Jobs</h4> -->
+                    <table class="table table-striped b-b" datatable="ng" id="jobAllTbl" dt-options="dtOptionsJob">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Scoop Number</th>
+                          <!-- <th>Job Number</th> -->
+                          <th>Client</th>
+                          <th>Account</th>
+                          <!-- <th>Type</th> -->
+                          <th>Language Pair</th>
+                          <th>Project Manager</th>
+                          <th>Resource</th>
+                          <th>Progress (in %)</th>
+                          <th>Status</th>
+                          <!-- <th>Start Date</th> -->
+                          <!-- <th>Deadline</th> -->
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="jList in jobsListAll">
+                          <td>{{$index + 1}}</td>
+                          <td>{{jList.item_id}}</td>
+                          <!-- <td>
+                            <span ng-if="!jList.po_number"> - </span>
+                            <span ng-if="jList.po_number"><a href="javascript:void(0);" ng-click="goToJob(jList.job_summmeryId,jList.order_id);">{{jList.po_number}}</a></span>
+                          </td> -->
+                          <td>{{jList.Client}}</td>
+                          <td>{{jList.indirectClient}}</td>
+                          <!-- <td>{{jList.type}}</td> -->
+                          <td>
+                            <span ng-if="!jList.ItemLanguage"> - </span>
+                            <span ng-if="jList.ItemLanguage">{{jList.ItemLanguage}}</span>
+                          </td>
+                          <td>
+                            <span ng-if="jList.contact_person != ''">{{jList.contact_person}}</span>
+                            <span ng-if="jList.contact_person == ''">-</span>
+                          </td>
+                          <td>
+                            <span ng-if="jList.resource != ''">{{jList.resource}}</span>
+                            <span ng-if="jList.resource == ''">-</span>
+                          </td>
+                          <td>-</td>
+                          <td>{{jList.item_status}}</td>
+                          <!-- <td>{{jList.created_date | dateFormat}}</td> -->
+                          <!-- <td>
+                            <span ng-if="jList.due_date == '0000-00-00 00:00:00'"> - </span>
+                            <span ng-if="jList.due_date != '0000-00-00 00:00:00'">{{jList.due_date | dateFormat}}</span>
+                          </td> -->
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <!-- Job List For Status New END -->
+                  </div>
+                </div>                
+              </div>
+              <div class="col-sm-3 rightBox-group">
+                <!-- <div class="box-group-head white_box h3" style="text-align: center">
+                  Overview
+                </div>
+                <div class="box">
+                  <div class="white_box panel panel-default">
+                    <div class="panel-heading">
+                      <div class="clearfix">
+                        <div class="clear">
+                          <div class="h4">Projects</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="list-group no-radius alt">
+                      <li class="list-group-item"  ng-class="{ 'active': scoopjobStatus=='all'}">
+                        <span class="badge bg-info">{{scoopAlljobsCount}}</span><a href="javascript:void(0)"
+                          ng-click="scoopjobstatusRecord('scoop','all')">
+                          All</a>
+                      </li>
+                      <li class="list-group-item"  ng-class="{ 'active': scoopjobStatus=='scoopAssigned'}">
+                        <span class="badge bg-info">{{scoopAssignedCount}}</span><a href="javascript:void(0)"
+                          ng-click="scoopjobstatusRecord('scoop','scoopAssigned')">
+                          To be Assigned</a>
+                      </li>
+                      <li class="list-group-item" ng-class="{ 'active': scoopjobStatus=='scoopProgress'}">
+                        <span class="badge bg-info">{{scoopProgressCount}}</span><a href="javascript:void(0)"
+                          ng-click="scoopjobstatusRecord('scoop','scoopProgress')">
+                          In progress</a>
+                      </li>
+                      <li class="list-group-item" ng-class="{ 'active': scoopjobStatus=='scoopLinguist'}">
+                        <span class="badge bg-info">{{scoopLinguistCount}}</span><a href="javascript:void(0)"
+                          ng-click="scoopjobstatusRecord('scoop','scoopLinguist')">
+                          Completed by linguist</a>
+                      </li>
+                      <li class="list-group-item" ng-class="{ 'active': scoopjobStatus=='scoopQaReady'}">
+                        <span class="badge bg-info">{{scoopQaReadyCount}}</span><a href="javascript:void(0)"
+                          ng-click="scoopjobstatusRecord('scoop','scoopQaReady')">
+                          QA Ready</a>
+                      </li>
+                      <li class="list-group-item" ng-class="{ 'active': scoopjobStatus=='scoopTobedelivered'}">
+                        <span class="badge bg-info">{{scoopTobedeliveredCount}}</span><a href="javascript:void(0)"
+                          ng-click="scoopjobstatusRecord('scoop','scoopTobedelivered')">
+                          To be Delivered</a>
+                      </li>
+                      <li class="list-group-item" ng-class="{ 'active': scoopjobStatus=='scoopDelivered'}">
+                        <span class="badge bg-info">{{scoopDeliveredCount}}</span><a href="javascript:void(0)"
+                          ng-click="scoopjobstatusRecord('scoop','scoopDelivered')">
+                          Delivered</a>
+                      </li>
+                      <li class="list-group-item" ng-class="{ 'active': scoopjobStatus=='scoopApproved'}">
+                        <span class="badge bg-info">{{scoopApprovedCount}}</span><a href="javascript:void(0)"
+                          ng-click="scoopjobstatusRecord('scoop','scoopApproved')">
+                          Approved</a>
+                      </li>
+                      <li class="list-group-item" ng-class="{ 'active': scoopjobStatus=='scoopInvoiced'}">
+                        <span class="badge bg-info">{{scoopInvoicedCount}}</span><a href="javascript:void(0)"
+                          ng-click="scoopjobstatusRecord('scoop','scoopInvoiced')">
+                          Invoiced</a>
+                      </li>
+                      <li class="list-group-item" ng-class="{ 'active': scoopjobStatus=='scoopPaid'}">
+                        <span class="badge bg-info">{{scoopPaidCount}}</span><a href="javascript:void(0)"
+                          ng-click="scoopjobstatusRecord('scoop','scoopPaid')">
+                          Paid</a>
+                      </li>
+                      <li class="list-group-item" ng-class="{ 'active': scoopjobStatus=='scoopWithoutInvoice'}">
+                        <span class="badge bg-info">{{scoopWithoutInvoiceCount}}</span><a href="javascript:void(0)"
+                          ng-click="scoopjobstatusRecord('scoop','scoopWithoutInvoice')">
+                          Without invoice</a>
+                      </li>
+                      <li class="list-group-item" ng-class="{ 'active': scoopjobStatus=='scoopCancelled'}">
+                        <span class="badge bg-info">{{scoopCancelledCount}}</span><a href="javascript:void(0)"
+                          ng-click="scoopjobstatusRecord('scoop','scoopCancelled')">
+                          Cancelled</a>
+                      </li>
+                      
+                      <!-- <li class="list-group-item" ng-class="{ 'active': jobsactive=='DueToday'}">
+                        <span class="badge bg-info">{{filteredTodos.length}}</span><a href="javascript:void(0)"
+                          ng-click="goToProjectScoopList('All')">
+                          All</a>
+                      </li> -->
+                      
+                      <!-- <li class="list-group-item">
+                        <span class="badge bg-info">{{filteredTodos.length}}</span><a href="javascript:void(0)"
+                          ng-click="goToProjectList('All')">
+                          All</a>
+                      </li> -->
+                    <!-- </div>
+                  </div>
+                </div>
+                <div class="box">
+                  <div class="white_box panel panel-default">
+                    <div class="panel-heading">
+                      <div class="clearfix">
+                        <div class="clear">
+                          <div class="h4">Jobs</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="list-group no-radius alt">
+                      <li class="list-group-item"  ng-class="{ 'active': jobsactive=='Requested'}">
+                        <span class="badge bg-info">{{jobRequestesCount}}</span><a href="javascript:void(0)"
+                          ng-click="jobstatusRecord('jobs','Requested')">
+                          Requested</a>
+                      </li>
+                      <li class="list-group-item" ng-class="{ 'active': jobsactive=='inProgress'}">
+                        <span class="badge bg-info">{{jobInProgressCount}}</span><a href="javascript:void(0)"
+                          ng-click="jobstatusRecord('jobs','inProgress')">
+                          In progress</a>
+                      </li>
+                      <li class="list-group-item" ng-class="{ 'active': jobsactive=='DueToday'}">
+                        <span class="badge bg-info">{{jobDueTodayCount}}</span><a href="javascript:void(0)"
+                          ng-click="jobstatusRecord('jobs','DueToday')">
+                          Due Today</a>
+                      </li>
+                      <li class="list-group-item" ng-class="{ 'active': jobsactive=='DueTomorrow'}">
+                        <span class="badge bg-info">{{jobDueTomorrowCount}}</span><a href="javascript:void(0)"
+                          ng-click="jobstatusRecord('jobs','DueTomorrow')">
+                          Due Tomorrow</a>
+                      </li>
+                      <li class="list-group-item" ng-class="{ 'active': jobsactive=='Overdue'}">
+                        <span class="badge bg-info">{{jobOverDueCount}}</span><a href="javascript:void(0)"
+                          ng-click="jobstatusRecord('jobs','Overdue')">
+                          Overdue</a>
+                      </li>
+                      
+                    </div>
+                  </div>
+                </div> --> 
+                <div class="box">
+                  <div class="white_box panel panel-default">
+                    <div class="panel-heading">
+                      <div class="clearfix">
+                        <div class="clear">
+                          <div class="h4">National Holidays</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="panel-heading wrapper b-b b-light">
+                      <a><span class="holidayTab1" ng-click="holidayStatus('Upcoming')"
+                          style="padding: 11px">Upcoming</span></a>
+                      <a><span class="holidayTab2" ng-click="holidayStatus('Ongoing')"
+                          style="padding: 11px">Ongoing</span></a>
+                    </div>
+                    <ul class="scrollbar list-group list-group-lg m-b-none" id="scrollStyle" style="height: 250px">
+                      <li class="list-group-item" ng-hide="holidayShow" ng-repeat="upcome in upcommingList">
+                        <span ng-bind="upcome.date">28 Nov 2016</span> |
+                        <span class="pull-right label bg-primary inline m-t-sm" ng-bind="upcome.holidayStatus">National
+                          holiday</span>
+                        <span ng-bind="upcome.holidayName">Damon Parker</span>
+                      </li>
+                      <li class="list-group-item" ng-show="holidayShow" ng-repeat="ongoing in ongoingList">
+                        <span ng-bind="ongoing.date">28 Nov 2016</span> |
+                        <span class="pull-right label bg-primary inline m-t-sm" ng-bind="ongoing.holidayStatus">National
+                          holiday</span>
+                        <span href ng-bind="ongoing.holidayName">Damon Parker</span>
+                      </li>
+                      <md-progress-linear id="holidaysLoading" style="width: 50%; margin-left: 24%; margin-top: 48%"
+                        md-mode="indeterminate" class="m-b"></md-progress-linear>
+                      <span style="padding: 45px" ng-if="!upcommingList.length">No upcomming holiday</span>
+                      <!-- <li class="list-group-item" ng-hide="holidayShow" ng-if="!upcommingList.length">
+                        <span ng-bind="dataNotFound"></span>
+                      </li>
+                      <li class="list-group-item" ng-show="holidayShow" ng-if="!ongoingList.length">
+                        <span ng-bind="dataNotFound"></span>
+                      </li> -->
+                    </ul>
+                    <div class="panel-footer" style="background: #e6e9ef">
+                      <span class="pull-right badge bg-info" ng-hide="holidayShow" ng-bind="upLength">32</span>
+                      <span class="pull-right badge bg-info" ng-show="holidayShow" ng-bind="onLength">32</span>
+                      <span>&nbsp;</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="white_box_wrapper hbox hbox-auto-xs hbox-auto-sm" ng-if="userRight == 2">
+        <!-- main -->
+        <div class="col">
+          <!-- / main header -->
+          <div class="wrapper-md">
+            <!-- tasks -->
+            <div class="row">
+              <div class="col-md-12">
+                <section class="panel" id="w4" ng-stepform="dynamic" ng-if="userRight == 2">
+                  <div class="panel-body">
+                    <div class="tab-content">
+                      <div id="w4-tab1" class="tab-pane active">
+                        <form id="userprofileform">
+                          <!--   TAB1 -->
+                          <div class="col-sm-6">
+                            <div class="white_box panel panel-default">
+                              <div class="panel-heading">
+                                <h4>Jobs</h4>
+                              </div>
+                              <table class="table table-striped m-b-none">
+                                <thead>
+                                  <tr ng-class="(highlightSearch == 'All') ? 'rowactivate' : ''">
+                                    <!-- ng-click="sortJob('All')" -->
+                                    <th>
+                                      <a href="javascript:void(0)" ng-click="sortJob('All', 'middle')">All
+                                        <span ng-if="allCount">({{allCount}})</span>
+                                        <span ng-if="!allCount">(0)</span>
+                                      </a>
+                                    </th>
+                                  </tr>
+                                  <tr ng-class="(highlightSearch == 'Requested') ? 'rowactivate' : ''">
+                                    <th>
+                                      <a href="javascript:void(0)" ng-click="sortJob('Requested', 'middle')"
+                                        style="color: red">Requested
+                                        <!-- – Accept or Reject -->
+                                        <span ng-if="RequestedCount">(<span ng-bind="RequestedCount"></span>)</span>
+                                        <span ng-if="!RequestedCount">(0)</span>
+                                      </a>
+                                    </th>
+                                  </tr>
+                                  <tr ng-class="(highlightSearch == 'Assigned-waiting') ? 'rowactivate' : ''">
+                                    <th>
+                                      <a href="javascript:void(0)"
+                                        ng-click="sortJob('Assigned-waiting', 'middle')">Assigned - waiting
+                                        <span ng-if="awCount">({{awCount}})</span>
+                                        <span ng-if="!awCount">(0)</span>
+                                      </a>
+                                    </th>
+                                  </tr>
+                                  <tr ng-class="(highlightSearch == 'In_progress') ? 'rowactivate' : ''">
+                                    <th>
+                                      <a href="javascript:void(0)" ng-click="sortJob('In_progress', 'middle')">In
+                                        progress
+                                        <span ng-if="ipCount">({{ipCount}})</span>
+                                        <span ng-if="!ipCount">(0)</span>
+                                      </a>
+                                    </th>
+                                  </tr>
+                                  <tr ng-class="(highlightSearch == 'Delivered') ? 'rowactivate' : ''">
+                                    <th>
+                                      <a href="javascript:void(0)" ng-click="sortJob('Delivered', 'middle')">Delivered
+                                        <span ng-if="Delivered">({{Delivered}})</span>
+                                        <span ng-if="!Delivered">(0)</span>
+                                      </a>
+                                    </th>
+                                  </tr>
+                                  <tr ng-class="(highlightSearch == 'Approved') ? 'rowactivate' : ''">
+                                    <th>
+                                      <a href="javascript:void(0)" ng-click="sortJob('Approved', 'middle')"
+                                        style="color: green">Approved
+                                        <span ng-if="Approved">({{Approved}})</span>
+                                        <span ng-if="!Approved">(0)</span>
+                                      </a>
+                                    </th>
+                                  </tr>
+                                  <tr ng-class="(highlightSearch == 'Calculated') ? 'rowactivate' : ''">
+                                    <th>
+                                      <a href="javascript:void(0)" ng-click="sortJob('Calculated', 'middle')">Calculated
+                                        (Status report - Jobs)</a>
+                                    </th>
+                                  </tr>
+                                </thead>
+                              </table>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel-body">
+                    <div class="tab-content">
+                      <div id="w4-tab1" class="tab-pane active">
+                        <!--   TAB1 -->
+                        <div class="col-sm-12">
+                          <div class="white_box panel panel-default">
+                            <div class="panel-heading">
+                              <h4>Job list</h4>
+                            </div>
+                            <div class="row wrapper">
+                              <div class="col-sm-6 m-b-xs">
+                                <div class="col-sm-4">
+                                  <select class="
+                                      input-sm
+                                      form-control
+                                      w-sm
+                                      inline
+                                      v-middle
+                                    " ng-model="action">
+                                    <option>Export to excel</option>
+                                    <!-- <option>Remove selection</option>
+                                    <option>Select all</option> -->
+                                  </select>
+                                </div>
+                                <div class="col-sm-1">
+                                  <button class="btn btn-sm btn-info" ng-click="statusAction(action,jobL1)">
+                                    <i class="glyphicon glyphicon-ok"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="table-responsive">
+                              <table class="
+                                  table
+                                  m-b-none
+                                  default
+                                  footable-loaded footable
+                                ">
+                                <thead>
+                                  <th>#</th>
+                                  <th>Job Number</th>
+                                  <th>Client</th>
+                                  <th>Account</th>
+                                  <th>Description</th>
+                                  <th>Due date</th>
+                                  <th>Status</th>
+                                </thead>
+                                <tbody id="middle">
+                                  <tr ng-repeat="job in JobL=(jobList| filter : jobRow)">
+                                    <td ng-bind="$index + 1">
+                                      <!-- <input type="checkbox" id="orderCheck{{$index}}" name="orderCheck{{$index}}" ng-model="checkor" ng-checked="checkdata=='ordercheck'">
+                                      <input type="text" class="none" id="orderCheckData{{$index}}" name="orderCheckData{{$index}}" ng-model="result.jobId"> -->
+                                    </td>
+                                    <td ng-if="job.poNumber">
+                                      <a href="#/project-job-detail/{{job.job_summmeryId}}" class="summeryColor"
+                                        ng-click="namePrezip(job.clientName)">{{job.poNumber}}</a>
+                                    </td>
+                                    <td ng-if="!job.poNumber">-</td>
+                                    <!-- <td><a href="#/project-job-detail/{{job.job_summmeryId}}" class="summeryColor">{{job.order_no}}_{{job.job_code}}{{job.job_no| numberFixedLen:3}}</a></td> -->
+                                    <td class="clientDnld">
+                                      {{job.clientName}}
+                                    </td>
+                                    <td>{{job.IndirectClientName}}</td>
+                                    <td>
+                                      <span ng-if="job.description">{{job.description}}</span>
+                                      <span ng-if="!job.description">--</span>
+                                    </td>
+                                    <td ng-bind="job.due_date | dateFormat2"></td>
+                                    <td>
+                                      <button class="btn requestedColor"
+                                        ng-if="job.item_status == 'Requested'"></button>
+                                      <button class="btn assignedwaitongColor"
+                                        ng-if="job.item_status == 'Assigned-waiting'"></button>
+                                      <button class="btn inprogressColor"
+                                        ng-if="job.item_status == 'In-progress'"></button>
+                                      <button class="btn deliveredColor"
+                                        ng-if="job.item_status == 'Delivered'"></button>
+                                      <button class="btn approvedColor"
+                                        ng-if="job.item_status == 'Invoice Accepted'"></button>
+                                      <button class="btn approvedColor" ng-if="job.item_status == 'Approved'"></button>
+                                      {{job.item_status}}
+                                    </td>
+                                  </tr>
+                                  <tr ng-show="!JobL.length">
+                                    <td colspan="4" ng-bind="dataNotFound"></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                            <div class="table-responsive none" id="exportableRecord">
+                              <table class="
+                                  table
+                                  m-b-none
+                                  default
+                                  footable-loaded footable
+                                ">
+                                <thead>
+                                  <th>#</th>
+                                  <th>Job Number</th>
+                                  <th>Client</th>
+                                  <th>Account</th>
+                                  <th>Description</th>
+                                  <th>Due date</th>
+                                  <th>Status</th>
+                                </thead>
+                                <tbody>
+                                  <tr ng-repeat="job in jobL1=(jobList| filter : jobRow)">
+                                    <td ng-bind="$index + 1"></td>
+                                    <td>
+                                      {{job.order_no}}-{{job.job_code}}{{job.job_no
+                                      | numberFixedLen:3}}
+                                    </td>
+                                    <td>{{job.clientName}}</td>
+                                    <td>{{job.IndirectClientName}}</td>
+                                    <td>
+                                      <span ng-if="job.description">{{job.description}}</span>
+                                      <span ng-if="!job.description">--</span>
+                                    </td>
+                                    <td ng-bind="job.due_date | dateFormat2"></td>
+                                    <td>
+                                      <button class="btn requestedColor"
+                                        ng-if="job.item_status == 'Requested'"></button>
+                                      <button class="btn assignedwaitongColor"
+                                        ng-if="job.item_status == 'Assigned-waiting'"></button>
+                                      <button class="btn inprogressColor"
+                                        ng-if="job.item_status == 'In-progress'"></button>
+                                      <button class="btn deliveredColor"
+                                        ng-if="job.item_status == 'Delivered'"></button>
+                                      <button class="btn approvedColor" ng-if="job.item_status == 'Approved'"></button>
+                                      {{job.item_status}}
+                                    </td>
+                                  </tr>
+                                  <!-- <tr ng-show="!jobL1.length">
+                                    <td colspan="5" ng-bind="dataNotFound"></td>
+                                  </tr> -->
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <!-- footer copy right -->
+      <div class="wrapper-md m-t-n-xl" data-ng-include="'tpl/copyRight.html'"></div>
+
+    </div>
+
+
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+
+    setTimeout(() => {
+    
+      var menu = $("#nav-bar-filter"),
+        subMenu = $(".subfilter"),
+        more = $("#more-nav"),
+        parent = $(".filter-wrapper"),
+        ww = $(window).width(),
+        smw = more.outerWidth();
+
+      menu.children("li").each(function () {
+          var w = $(this).outerWidth();
+          //console.log('li-w',w);
+          if (w > smw) smw = w + 120;
+          return smw
+      });
+      more.css('width', smw);
+
+      function contract() {
+          var w = 0,
+              outerWidth = parent.width() - smw - 90;
+          for (i = 0; i < menu.children("li").size(); i++) {
+              w += menu.children("li").eq(i).outerWidth();
+              if (w > outerWidth) {
+                  menu.children("li").eq(i - 1).nextAll()
+                      .detach()
+                      .css('opacity', 0)
+                      .prependTo(".subfilter")
+                      .stop().animate({
+                      'opacity': 1
+                  }, 300);
+                  break;
+              }
+          }
+      }
+
+      function expand() {
+          var w = 0,
+              outerWidth = parent.width() - smw - 20;
+          menu.children("li").each(function () {
+              w += $(this).outerWidth();
+              return w;
+          });
+          for (i = 0; i < subMenu.children("li").size(); i++) {
+              w += subMenu.children("li").eq(i).outerWidth();
+              if (w > outerWidth) {
+                  var a = 0;
+                  while (a < i) {
+                      subMenu.children("li").eq(a)
+                          .css('opacity', 0)
+                          .detach()
+                          .appendTo("#nav-bar-filter")
+                          .stop().animate({
+                          'opacity': 1
+                      }, 300);
+                      a++;
+                  }
+                  break;
+              }
+          }
+      }
+      contract();
+
+      $(window).on("resize", function (e) {
+          ($(window).width() > ww) ? expand() : contract();
+          ww = $(window).width();
+      });
+      $(window).on("load", function (e) {
+          ($(window).width() > ww) ? expand() : contract();
+          ww = $(window).width();
+      });
+
+
+    // if ($(".subfilter > li").length > 0) { //if we have elements in extended menu - show it
+    //     $("#more-nav").show();
+    //   }
+    //   else {
+    //     $("#more-nav").hide();
+    //   }
+    $("#moreli").click(function(e){
+      $(".subfilter").toggle('medium');
+    });
+
+    $(".subfilter").hide();
+
+    // arrow both side of tabs to scroll
+    $('.myscrolltabs').scrollingTabs();
+
+  }, 5500);
+
+});
+
+  $(document).on("click", function(event){
+      var $trigger = $("#moreli");
+      if($trigger !== event.target && !$trigger.has(event.target).length){
+          $(".subfilter").slideUp("fast");
+      }
+                  
+  });
+
+  setTimeout(() => {
+  //    $(window).trigger("resize");    
+  }, 1500);
+   
+</script>
+
+<style>
+  
+  #more-nav {
+    display: none;
+    vertical-align: top;
+    padding-left: 0;
+    width: 80px !important;
+  }
+  .overviewli  .list-group-item{
+    display: flex;
+    align-items: center;
+    white-space: nowrap !important;
+  }
+  .overviewli .list-group.projectjobdv li a{
+    white-space: nowrap;
+  }
+  .overviewli .list-group-item > span{order: 2; margin: 0 0 0 5px;}
+  #nav-bar-filter, #more-nav {
+    display: inline-flex;
+  }
+
+  /* #nav-bar-filter li span{
+    margin-left: 12px !important;
+  } */
+  #moreli:hover > .subfilter{
+    display: block !important;
+  } 
+  .subfilter {
+    position: absolute;
+    z-index: 99;
+    width: 200px;
+    border: 1px solid #e5eaf0;
+    padding-left: 0;
+  }
+  .subfilter > li > a {
+    display: block;
+ }
+  .panel-heading + .list-group .list-group-item{border-right-width: 1px;}
+
+  /* Overview Tabs  */
+
+
+/* more li tab */
+  
+  .subfilter .list-group-item .bg-info {
+    color: #737f8b !important;
+    background: #e5eaf0 !important;
+  }
+  .subfilter > li .bg-info {
+    z-index: 999 !important;
+  }
+  #more-nav > .list-group-item > a:hover {
+    text-decoration: none !important;
+  }
+</style>

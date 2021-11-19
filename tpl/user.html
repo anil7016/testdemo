@@ -1,0 +1,146 @@
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+    data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+        data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+        <div ui-butterbar></div>
+        <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+        <div class="md-content page_content_wrapper">
+
+            <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+                <a href="#/resource-advance-search" style="font-size:14px;" class="btn btn-info pull-right btn-sm"
+                    ng-show="btn_resource_add">Advance Resource Search </a>
+                <a href="javascript:void(0);" ng-click="addUser('2')" style="font-size:14px;margin-right:15px;"
+                    class="btn btn-info pull-right btn-sm" ng-show="btn_resource_add"> Add Resource </span></a>
+
+                <!-- #/internal -->
+                <a href="javascript:void(0)" ng-click="addUser('1')" style="font-size:14px;"
+                    class="btn btn-info pull-right btn-sm" ng-hide="btn_resource_add"> Add Resource</span></a>
+
+                <h1 class="m-n font-thin h3">Resource Management</h1>
+            </div>
+            <div class="wrapper-md ng-scope" ng-show="btn_resource_add">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table table-striped b-t b-b table-bordered" datatable="ng" id="externalUserList">
+                            <thead>
+                                <th>#</th>
+                                <th>Resources</th>
+                                <th>Status</th>
+                                <th>Email</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="user in userlist">
+                                    <td>{{$index + 1}}</td>
+                                    <td>
+                                        <a style="color:#4ba0c3" href="#/viewExternal/{{user.iUserId}}" title="View"
+                                            class="trActionIcon">{{user.vFirstName}} {{user.vLastName}}</a>
+                                    </td>
+                                    <td>
+                                        {{user.status_name}}
+                                    </td>
+
+                                    <td>
+                                        <div class="trActiontitle">
+                                            <a href="javascript:void(0)"
+                                                ng-click="workingHour(user.iUserId,'internal','2')" title="Message"
+                                                class="trActionIcon">{{user.vEmailAddress}}</a>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper-md ng-scope" ng-hide="btn_resource_add">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table table-striped b-t b-b table-bordered" datatable="ng" id="internalUserList">
+                            <thead>
+                                <th>#</th>
+                                <!-- <th>Picture</th> -->
+                                <th>
+                                    <!-- Resource Details -->Employee
+                                </th>
+                                <th>Position</th>
+                                <th>Email</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="user in userlist">
+                                    <td>{{$index + 1}}</td>
+                                    <!-- <td>
+                                    <span><img id="new_profile_pic" ng-src="uploads/profilePic/{{user.vProfilePic}}" width="50" height="50"></span>
+                                </td> -->
+                                    <td>
+                                        <a style="color:#4ba0c3" href="#/viewinternal/{{user.iUserId}}" title="View"
+                                            class="trActionIcon">{{user.vFirstName}} {{user.vLastName}}</a>
+                                        <!-- {{user.vEmailAddress}} -->
+                                    </td>
+                                    <td>
+                                        <!-- {{user.vResourceType}} -->{{user.position_name}}
+                                    </td>
+                                    <!-- <td  ng-hide="btn_resource_add" ng-if="user.iEditedBy!=0">
+                                    <div class="trActiontitle">
+                                        <a href="#/viewinternal/{{user.iUserId}}" title="View" class="trActionIcon"><i class="fa fa-eye"></i></a>
+                                        </br>
+                                        <strong>View</strong>
+                                    </div>
+                                    <div class="trActiontitle">
+                                        <a href="#/internal/{{user.iUserId}}" title="{{user.vFirstName}}" class="trActionIcon"><i class="glyph-icon fa-edit"></i></a>
+                                        </br>
+                                        <strong>Edit</strong>
+                                    </div>
+                                    <div class="trActiontitle">
+                                        <a href="javascript:void(0)" ng-click="deleteUser(user.iUserId,user.vProfilePic)" title="delete" class="trActionIcon"><i class="iconDelete glyph-icon fa-times"></i></a>
+                                        </br>
+                                        <strong>Delete</strong>
+                                    </div>
+                                    <div class="trActiontitle">
+                                        <a href="javascript:void(0)" ng-click="workingHour(user.iUserId,'External','1')" title="Message" class="trActionIcon"><i class="fa fa-envelope-o"></i></a>
+                                        </br>
+                                        <strong>Email</strong>
+                                    </div>
+                                </td>  -->
+                                    <!-- <td ng-hide="btn_resource_add" ng-if="user.iEditedBy==0"> -->
+                                    <td>
+                                        <!-- <div class="trActiontitle">
+                                        <a href="#/viewinternal/{{user.iUserId}}" title="View" class="trActionIcon"><i class="fa fa-eye"></i></a>
+                                        </br>
+                                        <strong>View</strong>
+                                    </div> -->
+                                        <!-- <div class="trActiontitle">
+                                        <a href="#/internal/{{user.iUserId}}" title="edit" class="trActionIcon"><i class="glyph-icon fa-edit"></i></a>
+                                        </br>
+                                        <strong>Edit</strong>
+                                    </div>
+                                    <div class="trActiontitle">
+                                        <a href="javascript:void(0)" ng-click="deleteUser(user.iUserId,user.vProfilePic,user.vUserName, user.iFkUserTypeId)" title="delete" class="trActionIcon"><i class="iconDelete glyph-icon fa-times"></i></a>
+                                        </br>
+                                        <strong>Delete</strong>
+                                    </div> -->
+                                        <div class="trActiontitle">
+                                            <a href="javascript:void(0)"
+                                                ng-click="workingHour(user.iUserId,'External','1')" title="Message"
+                                                class="trActionIcon">{{user.vEmailAddress}}</i></a>
+                                            <!-- </br>
+                                        <strong>Email</strong> -->
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- footer copy right -->
+            <div class="wrapper-md m-t-n-xl" data-ng-include="'tpl/copyRight.html'"></div>
+
+        </div>
+
+    </div>
+</div>

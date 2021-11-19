@@ -1,0 +1,22 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">&times;</button>
+        <h4 class="modal-title">Picture Upload</h4>
+    </div>
+    <div class="modal-body">
+        <img ng-show="imageSrc" ng-src="{{imageSrc}}" class="img-rounded" alt="No preview available." width="304" height="236">
+        <img ng-show="!imageSrc" ng-src="assets/img/blank.png" class="img-rounded" alt="No preview available" width="304" height="236">
+        <input type="file" class="btn btn-default"  ng-file-select="getFile($files)">
+        <span style="font-size: 13px;color: #797878;margin-left: 15px;color:red;" ng-if="AllowFileType">
+          Allow file types are jpg, png, gif and bmp.
+        </span>
+    </div>
+    
+    <div class="modal-footer">
+      <md-button class="md-default md-raised" ng-click="cancel()">Close</md-button>
+      <!-- <md-button class="md-primary md-raised" ng-click="funnyPicUpload(imageSrc)">Upload</md-button> -->
+      <md-button class="md-primary md-raised" ng-disabled="!imageSrc" ng-click="showAdvanced(imageSrc)">Upload</md-button>
+    </div>
+  </div><!-- /.modal-content -->
+</div>

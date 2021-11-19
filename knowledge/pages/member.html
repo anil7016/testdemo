@@ -1,0 +1,92 @@
+<div>
+    <div class="ht-sitecontainer ht-sitecontainer--wide">
+        <div class="site-header">
+            <div ng-include="'pages/header.html'">
+            </div>
+        </div>
+        <div class="ht-pageheader">
+            <div class="ht-container">
+                <div class="hkb-breadcrumbs_wrap" ng-hide="">
+                    <ol class="hkb-breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList" >
+                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                            <a itemprop="item" href="#/home" title="Home">
+                                <span itemprop="name">Home</span>
+                                <svg class="hkb-breadcrumbs__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 34.1">
+                                    <g>
+                                        <path d="M19,17c0,0.5-0.2,1-0.6,1.4L3.4,33.5c-0.8,0.8-2,0.8-2.8,0c-0.8-0.8-0.8-2,0-2.8L14.2,17L0.6,3.4c-0.8-0.8-0.8-2,0-2.8  c0.8-0.8,2-0.8,2.8,0l15.1,15.1C18.8,16,19,16.5,19,17z"/>
+                                    </g>
+                                </svg> 
+                            </a>
+                            <meta itemprop="position" content="1"/>
+                        </li>
+                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
+                            <span itemprop="item" href="index.html" title="{{resultList.title}}"> 
+                                <span itemprop="name">Member</span> 
+                            </span>
+                            <meta itemprop="position" content="2" />
+                        </li>
+                    </ol>
+                </div>
+                <form class="hkb-site-search"> 
+                    <label class="hkb-screen-reader-text" for="s">Search For</label> 
+                    <input class="hkb-site-search__field" type="text" ng-model="search.vUserName" placeholder="Search Member" name="s" autocomplete="off"> 
+                    <img class="hkb-site-search__loader" src="http://d3ijh37r9qzozj.cloudfront.net/knowall/wp-content/themes/knowall/img/loading.svg" alt="" /> 
+                    <input type="hidden" name="ht-kb-search" value="1" /> 
+                </form>
+            </div>
+        </div>
+        <div class="ht-page ht-page--sidebarright">
+            <div class="ht-container">
+                <div>
+                    <div class="contentHeadTitle" md-scroll-shrink>
+                        <div class="md-toolbar-tools">Member</div>
+                    </div>
+                </div>
+                <!--<img src="../../uploads/profilePic/1450002150.jpg" alt=""/>-->
+                <div layout="row" layout-margin layout-wrap layout-align="left" class="memberTab">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <span ng-hide="adminRule==2" class="memberLink memberActive" ng-click="changeMember(1)">Internal User</span>
+                            <span id="external_list" class="memberLink" ng-click="changeMember(2)">External User</span>
+                        </div>
+                    </div>
+                </div>
+                <div layout="row" layout-margin layout-wrap layout-align="left" ng-cloak>
+                    <div class="col-md-12">
+                            <div class="col-md-6" ng-repeat="member in memberList | filter:search">
+                                <div class="people-item">
+                                  <div class="media">
+                                    <a href="" class="pull-left">
+                                      <img alt="{{member.vProfilePic}}" ng-src="../uploads/profilePic/{{member.vProfilePic}}" class="thumbnail media-object" width="100" height="100" title="{{member.vProfilePic}}">
+                                    </a>
+                                    <div class="media-body">
+                                      <h4 class="person-name">{{member.vUserName}}</h4>
+                                      <div class="text-muted"><i class="fa fa-map-marker"></i> {{member.vType}}</div>
+                                      <!-- <div class="text-muted"><i class="fa fa-briefcase"></i> Software Engineer at <a href="">SomeCompany, Inc.</a></div> -->
+                                      <ul class="social-list">
+                                        <!-- <li><a href="mailto:{{member.vEmailAddress}}" class="tooltips" data-toggle="tooltip" data-placement="top"  data-original-title="Email"><i class="fa fa-envelope-o"></i></a></li> -->
+                                        <li><a target="_blank" href="" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a target="_blank" href="" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a target="_blank" href="" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Google PLus"><i class="fa fa-google-plus-square"></i></a></li>
+                                        <li><a href="skype:{{member.vSkypeName}}" class="tooltips" data-toggle="tooltip" data-placement="top" title="" data-original-title="Skype"><i class="fa fa-skype"></i></a></li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                    </div>
+                    <md-card flex="100" ng-show="!memberList.length | filter:search">
+                        <h3 style="padding: 19px;">Not Found</h3>
+                    </md-card>
+                    <md-card flex="100" ng-if="memberList.length">
+                        <div ng-switch="(memberList | filter:search).length">
+                            <h3 class="ng-empty" ng-switch-when="0" style="padding: 19px;">Not Found</h3>
+                        </div>
+                    </md-card>
+                </div>
+            </div>
+        </div>
+        <div ng-include="'pages/footer.html'"></div>
+    </div>
+</div>

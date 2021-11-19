@@ -1,0 +1,160 @@
+<style type="text/css">
+    .nav-pills.nav-wizard>>ul>li {
+        border-right: 78px solid #eef5fa !important;
+    }
+
+    .hrght {
+        float: right;
+        color: red;
+        margin-top: -1.5%;
+    }
+</style>
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+    data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+        data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+        <div ui-butterbar></div>
+        <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+        <div class="md-content page_content_wrapper">
+
+            <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+                <h1 class="m-n font-thin h3 hleft">{{currentUserName}}</h1>
+                <!-- <a href="javascript:history.back()" class="btn btn-info pull-right btn-sm"><span class="fa fa-arrow-left"></span> Back</a> -->
+                <div class="hrght1">
+                    <h5 ng-if="user_name!=' '">This record is currently edited by {{user_name}}<h5>
+                </div>
+            </div>
+            <div class="wrapper-md ng-scope">
+                <ul class="nav nav-pills nav-wizard" style="width: 69%;margin: auto;">
+                    <li>
+                        <a href="#/client-profile">Basic Information</a>
+                        <div class="nav-arrow"></div>
+                    </li>
+                    <li>
+                        <div class="nav-wedge"></div>
+                        <a href="#/contact-person">Contacts</a>
+                        <div class="nav-arrow"></div>
+                    </li>
+                    <li>
+                        <div class="nav-wedge"></div>
+                        <a href="#/price-list">Prices</a>
+                        <div class="nav-arrow"></div>
+                    </li>
+                    <li>
+                        <div class="nav-wedge"></div>
+                        <a href="#/payment_client">Payment Information</a>
+                        <div class="nav-arrow"></div>
+                    </li>
+                    <li class="active">
+                        <div class="nav-wedge"></div>
+                        <a href="#/login-detail">Login Details</a>
+                    </li>
+
+                </ul>
+                <div class="panel panel-default" style="margin-top:1%">
+
+                    <div class="panel-body">
+                        <form id="login-details">
+                            <!--   TAB1 -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading font-bold">
+                                            <h4>Login Details</h4>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="col-sm-12">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label>Username</label>
+                                                        <!-- <div class="input-group"> -->
+                                                        <input type="text" class="form-control" name="vEmail"
+                                                            ng-model="clientlist.vEmail"
+                                                            ng-blur="checkemailaddress(clientlist.vEmail)" required>
+                                                        <!-- <span class="input-group-addon"><a ng-href="mailto:{{clientlist.vEmail}}"><i class="fa fa-inbox"></i></a></span> -->
+                                                        <!-- </div> -->
+                                                        <span for="vEmail" class="help-block">This field is
+                                                            required.</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label>Password</label>
+                                                        <input type="password" class="form-control" name="password"
+                                                            ng-model="clientlist.vPassword" autocomplete="new-password"
+                                                            required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label><strong>Website :</strong></label>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" name="website"
+                                                                ng-model="clientlist.vWebsite" required> <span
+                                                                class="input-group-addon"><a target="_blank"
+                                                                    ng-href="http://{{clientlist.vWebsite}}/"><i
+                                                                        class="fa fa-external-link"></i></a></span>
+                                                        </div>
+                                                        <label for="website" class="error"></label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="panel-footer">
+                                                    <div>
+                                                        <a class="btn btn-info pull-right"
+                                                            href="#/viewdirect/{{redirectToClientViewId}}">Finish</a>
+                                                        <a class="btn btn-info pull-right"
+                                                            ng-click="saveLogin('login-details');"
+                                                            style="margin-right:5px;"><i class="fa fa-floppy-o"
+                                                                aria-hidden="true"></i> Save</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <th>#</th>
+                            <th>User Name</th>
+                            <th>Password</th>
+                            <th>Website</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="client in clientlist1"
+                                ng-class="(client.iClientId == clientlist.iClientId) ? 'rowactivate' : ''">
+                                <td ng-bind="$index + 1"></td>
+                                <td ng-bind="client.vEmail"></td>
+                                <td id="passwordLength{{$index}}"></td>
+                                <!-- <td><a target="_blank" class="summeryColor" ng-href="http://{{client.vWebsite}}/" ng-bind="client.vWebsite"></a></td>  -->
+                                <td ng-bind="client.vWebsite"></td>
+                                <td><a href="javascript:void(0)" ng-click="getclientEdit(client.iClientId);"
+                                        title="edit"><i class="glyph-icon fa-edit"></i></a> <a
+                                        href="javascript:void(0)" ng-click="deletelogindetail(client.iClientId)"
+                                        title="delete"><i class="iconDelete glyph-icon fa-times"></i></a></td>
+                            </tr>
+                            <tr ng-show="contactLoginEmpty">
+                                <td colspan="4" ng-bind="dataNotFound"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- footer copy right -->
+                <div data-ng-include="'tpl/copyRight.html'"></div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<style type="text/css">
+    .bolck {
+    float: left;
+    width: 100%;
+    padding: 15px;
+    background: #fff;
+}
+</style>
+<form id="filter-Detail">
+     <div class="modal-header">
+        <h3 class="modal-title">Filter Data</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="margin-top:-25px" ng-click="cancel()">×</button>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            
+        </div>
+        
+    </div>
+    <button ng-show="InvoiceVal.length" class="btn btn-info" style="margin: 9px 233px;" ng-click="addInvoice(InvoiceVal)">Create invoice</button>
+    <button ng-show="!InvoiceVal.length" class="btn btn-info" style="margin: 9px 260px;" ng-click="cancel()">Close</button>
+</form>

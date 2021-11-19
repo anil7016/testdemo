@@ -1,0 +1,92 @@
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+  data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+  <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+    data-ng-include=" 'tpl/material.aside.html' ">
+  </div>
+  <div flex layout="column">
+    <div ui-butterbar></div>
+    <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+    <div class="md-content page_content_wrapper" id="top">
+
+      <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+        <h1 class="m-n font-thin h3">National Holidays</h1>
+      </div>
+      <div class="wrapper-md ng-scope">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <form id="user-type-form">
+              <div class="col-md-12">
+                <label>Select Holliday country</label>
+                <input type="text" select2-holiday-country data-typeid="2" id="Holidaycountry" class="form-control"
+                  name="country" ng-model="country" ng-change="countryHolidayGet(country,'onChange')" />
+
+            </form>
+            <div>
+              <div class="col-sm-6" style="margin-top: 19px;margin-left: -13px;">
+                <div class="list-group">
+                  <a href="javascript:void(0);" class="list-group-item">
+                    <h4>Selected Country</h4>
+                  </a>
+                  <a href="javascript:void(0);" class="list-group-item"
+                    ng-repeat="hl in countryListHoliday track by $index">
+
+                    <i class="glyph-icon fa-times pull-right" title="Remove" ng-click="removeCountry(hl.Cname);"
+                      style="z-index:100000;"></i>
+                    <i class="fa fa-arrow-right fa-fw m-r-xs"></i>
+                    {{hl.Cname}}
+                  </a>
+                  <a href="javascript:void(0);" class="list-group-item" ng-if="!countryListHoliday.length">
+                    No data found.
+                  </a>
+                </div>
+              </div>
+              <!-- <span ng-repeat="hl in countryListHoliday">
+                  <p>{{hl.Cname}}</p>
+                </span> -->
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading" style="background:#fff;border:none;">
+            <a><span class="holidayTab1" ng-click="holidayStatus('Upcoming')" style="padding: 11px;">Upcoming</span></a>
+            <a><span class="holidayTab2" ng-click="holidayStatus('Ongoing')" style="padding: 11px;">Ongoing</span></a>
+          </div>
+          <ul class="scrollbar list-group list-group-lg m-b-none" id="scrollStyle" style="height: 250px;">
+            <li class="list-group-item" ng-hide="holidayShow" ng-repeat="upcome in upcommingList">
+              <span ng-bind="upcome.date">28 Nov 2016</span> | <span class="pull-right label bg-primary inline m-t-sm"
+                ng-bind="upcome.holidayStatus">National holiday</span>
+              <span ng-bind="upcome.holidayName">Damon Parker</span>
+            </li>
+            <li class="list-group-item" ng-show="holidayShow" ng-repeat="ongoing in ongoingList">
+              <span ng-bind="ongoing.date">28 Nov 2016</span> | <span class="pull-right label bg-primary inline m-t-sm"
+                ng-bind="ongoing.holidayStatus">National holiday</span>
+              <span href ng-bind="ongoing.holidayName">Damon Parker</span>
+            </li>
+            <md-progress-linear id="holidaysLoading" ng-if="!upcommingList.length"
+              style="display: block;width: 50%;margin-left: 24%;margin-top: 10%;" md-mode="indeterminate" class="m-b">
+            </md-progress-linear>
+            <!-- <li class="list-group-item" ng-hide="holidayShow" ng-if="!upcommingList.length">
+                                            <span ng-bind="dataNotFound"></span>
+                                        </li>
+                                        <li class="list-group-item" ng-show="holidayShow" ng-if="!ongoingList.length">
+                                            <span ng-bind="dataNotFound"></span>
+                                        </li> -->
+          </ul>
+          <div class="panel-footer">
+            <span class="pull-right badge bg-info m-t-xs" ng-hide="holidayShow" ng-bind="upLength">32</span>
+            <span class="pull-right badge bg-info m-t-xs" ng-show="holidayShow" ng-bind="onLength">32</span>
+            <span>&nbsp;</span>
+          </div>
+        </div>
+        <button class="btn m-b-xs w-xs btn-info" ng-click="saveHolidayList();">Save</button>
+        <!-- footer copy right -->
+        <div data-ng-include="'tpl/copyRight.html'"></div>
+        
+      </div>
+      
+
+    </div>
+  </div>
+</div>

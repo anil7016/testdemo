@@ -1,0 +1,46 @@
+<form id="event_form">
+    <div class="modal-header">
+        <h3 class="modal-title" ng-show="event.event_id"> Update Leave </h3>
+        <h3 class="modal-title" ng-show="!event.event_id"> Add Leave </h3>
+    </div>
+    <div class="panel-body">
+        <div class="col-lg-12">
+            <div class="form-group">    
+                <label>Leave Description</label>
+                <input type="text" class="form-control" name="title"   ng-model="event.title" required>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group" >
+                <label>Start Date</label>
+                <input ng-event-first id="start_date" type="text" class="form-control start-date" name="start_date" ng-model="event.start"/>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label>End Date</label>
+                <input ng-date-time id="end_date" type="text" class="form-control end-date"   name="end_date" ng-model="event.end" >
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <button class="btn btn-info" type="button" ng-click="ok('event_form')">OK</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</form>
+<!--<script>    
+    $('#start_date').datetimepicker({
+        
+    });
+    $('#end_date').datetimepicker({
+        useCurrent: false //Important! See issue #1075
+    });
+    $("#start_date").on("dp.change", function(e) {
+        
+        $('#end_date').data("DateTimePicker").minDate(e.date);
+    });
+    $("#end_date").on("dp.change", function(e) {
+
+        $('#start_date').data("DateTimePicker").minDate(e.date);
+    });
+</script>-->

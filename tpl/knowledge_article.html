@@ -1,0 +1,91 @@
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+  data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+  <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+    data-ng-include=" 'tpl/material.aside.html' ">
+  </div>
+  <div flex layout="column">
+    <div ui-butterbar></div>
+    <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+    <div class="md-content page_content_wrapper" id="top">
+
+      <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+        <h1 class="m-n font-thin h3">Articles</h1>
+      </div>
+      <div class="wrapper-md ng-scope">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <form id="knowledge-article-form">
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Article Title</label>
+                    <input type="text" class="form-control" placeholder="Enter Article Title" name="article_title"
+                      ng-model="article.title" required>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Category</label>
+                    <input type="text" select2-knowledge-category id="article_category" class="form-control"
+                      name="article_category" ng-model="article.category" required />
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <label>Description</label>
+                  <input type="text" class="form-control" placeholder="Enter Description" name="article_description"
+                    ng-model="article.article_discription">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label>Section </label>
+                    <!-- <div id='edit' style="margin-top: 30px;">
+
+                                                </div> -->
+                    <textarea id="edit" name="content"></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel-footer pl-0 pr-0">
+                <button class="btn m-b-xs w-xs btn-info"
+                  ng-click="save('knowledge-article-form');"><i class="fa fa-floppy-o" aria-hidden="true"></i>
+                  Save</button>
+
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <table class="table table-striped b-t b-b table-bordered" datatable="ng">
+            <thead>
+              <th>#</th>
+              <th>Article Title</th>
+              <th>Category</th>
+              <th>Description</th>
+              <th>Action</th>
+            </thead>
+            <tbody>
+              <tr ng-repeat="art in artileList" ng-class="(art.article_id == article.article_id) ? 'rowactivate' : ''">
+                <td ng-bind="$index + 1"></td>
+                <td ng-bind="art.title"></td>
+                <td ng-bind="art.category_name"></td>
+                <td ng-bind="art.article_discription"></td>
+                <td ng-if="t.is_active == '1'"><span class="label bg-success" title="active">Active</span></td>
+                <td ng-if="t.is_active == '0'"><span class="label bg-danger" title="Inactive">Inactive</span></td>
+                <td><a href="javascript:void(0)" ng-click="getArticle(art.article_id, 'top');" title="edit"><i
+                      class="glyph-icon fa-edit"></i></a>  <a href="javascript:void(0)"
+                    ng-click="deleteModel(art.article_id)" title="delete"><i class="iconDelete glyph-icon fa-times"></i></a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- footer copy right -->
+        <div data-ng-include="'tpl/copyRight.html'"></div>
+
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,267 @@
+<style type="text/css">
+.fa-times:before {
+    color: #ffffff;
+}
+.modal-dialog {
+    width: 90%;
+    top: -30px;
+    left: 133px;
+}
+
+.tagsinput {
+    border-radius: 3px;
+    border: 1px solid #D5D5D5;
+    background: #FFF;
+    width: 100%;
+    min-height: 30px;
+    overflow-y: auto;
+    padding: 0px 15px;
+}
+
+.bolck {
+    float: left;
+    width: 97%;
+    /*padding: 15px;*/
+    background: #fff;
+}
+
+.bolck .control-label {
+    text-align: right;
+    font-size: 12px;
+    color: #656d78;
+    font-weight: 600;
+    padding-top: 10px;
+}
+</style>
+<div class="bolck">
+    <form id="disp">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="margin-right:50px" ng-click="cancel()">×</button>
+            <h3 class="modal-title">{{info.vUserName}}'s Profile</h3>
+        </div>
+        <div class="panel-body" style="height:530px !important">
+            <div class="col-sm-12">
+                <div class="wrapper-md ng-scope">
+                    <div class="panel panel-default">
+                        <div class="panel-body" style="background:#e4e7ea;">
+                            <div class="col-sm-12">
+                                <div class="col-sm-2" style="margin-right: 10px;">
+                                    <img ng-src="uploads/logo/{{info.vLogo}}" style="width:175px;border: 7px solid #fff;padding: 8px;height:150px">
+                                </div>
+                                <div class="col-sm-3">
+                                    <span class="profileTitleh" ng-bind="info.vUserName"></span>
+                                    <span class="profileTitle">I am a client</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="panel panel-default panel-labeled">
+                                <div class="panel-body">
+                                    <h4 style="text-align: center;color: #636e7a;">Basic Information</h4>
+                                    <table class="table table-striped b-t b-b table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td><span class="TblSpan">Business Unit</span></td>
+                                                <td><span ng-bind="info.vCodeRights"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="TblSpan">Phone</span></td>
+                                                <td><span ng-bind="info.vPhone"></span></td>
+                                            </tr>
+                                            <!-- <tr>
+                    <td><span class="TblSpan">Email</span></td>
+                    <td><span ng-bind="info.vEmailAddress"></span></td>
+                </tr> -->
+                                            <tr>
+                                                <td><span class="TblSpan">Website</span></td>
+                                                <td>
+                                                    <a href="http://{{info.vWebsite}}" target="_blank">{{info.vWebsite}}</a>
+                                                </td>
+                                            </tr>
+                                            <!-- <tr>
+                    <td><span class="TblSpan">Skype</span></td>
+                    <td><span ng-bind="info.vSkype"></span></td>
+                </tr> -->
+                                            <tr>
+                                                <td><span class="TblSpan">Client number</span></td>
+                                                <td><span ng-bind="info.vClientNumber | numberFixedLen:3"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="TblSpan">Creation Date</span></td>
+                                                <td><span ng-bind="info.dtCreationDate"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="TblSpan">Status</span></td>
+                                                <td><span ng-bind="info.vStatus"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="TblSpan">Responsible Sales Person</span></td>
+                                                <td><span id="iBussinessDeveloper"></span></td>
+                                            </tr>
+                                            <!-- <tr>
+                    <td><span class="TblSpan">Taxation Type</span></td>
+                    <td><span ng-bind="info.vTextType"></span></td>
+                </tr> -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="panel panel-default panel-labeled" style="height:350px;">
+                                <div class="panel-body">
+                                    <h4 style="text-align: center;color: #636e7a;">Address</h4>
+                                    <table class="table table-striped b-t b-b table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td><span class="TblSpan">Address</span></td>
+                                                <td><span ng-bind="info.vAddress1"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="TblSpan">City</span></td>
+                                                <td><span id="address1_locality" ng-bind="vCity1"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="TblSpan">State</span></td>
+                                                <td><span id="address1_administrative_area_level_1" ng-bind="add1.state"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="TblSpan">Country</span></td>
+                                                <td><span id="address1_country" ng-bind="add1.zipcode"></span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="TblSpan">Zip Code </span></td>
+                                                <td><span id="address1_postal_code" ng-bind="add1.country"></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="panel panel-default panel-labeled" style="height: 165px;">
+                                <div class="panel-body">
+                                    <h4 style="text-align: center;color: #636e7a;">Other Information</h4>
+                                    <table class="table table-striped b-t b-b table-bordered">
+                                        <tbody>
+                                            <!-- <tr>
+                    <td><span class="TblSpan">Project Coordinator</span></td>
+                    <td><span ng-bind="info.vProjectCoordinator"></span></td>
+                </tr>
+                <tr>
+                    <td><span class="TblSpan">Project Manager</span></td>
+                    <td><span ng-bind="info.vProjectManager"></span></td>
+                </tr>
+                <tr>
+                    <td><span class="TblSpan">QA Specialist</span></td>
+                    <td><span ng-bind="info.vQASpecialist"></span></td>
+                </tr> -->
+                                            <tr>
+                                                <td><span class="TblSpan">PO Format</span></td>
+                                                <td><span ng-bind="info.tPoInfo"></span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="panel panel-default panel-labeled">
+                                <div class="panel-body">
+                                    <h4 style="text-align: center;color: #636e7a;">Account Information</h4>
+                                    <table class="table table-striped b-t b-b table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td><span class="TblSpan">Sales TAX ID (VAT number)</span></td>
+                                                <td><span ng-bind="payment.tax_id"></span></td>
+                                            </tr>
+                                            <!-- <tr>
+                    <td><span class="TblSpan">Taxation Type</span></td>
+                    <td><span ng-bind="info.vTextType"></span></td>
+                </tr> -->
+                                            <tr>
+                                                <td><span class="TblSpan">Accounting notes</span></td>
+                                                <td>
+                                                    <span ng-if="payment.memos">{{payment.memos}}</span>
+                                                    <span ng-if="!payment.memos">No data found</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="panel panel-default panel-labeled">
+                                <div class="panel-body">
+                                    <h4 style="text-align: center;color: #636e7a;">Contact Person</h4>
+                                    <table class="table table-striped b-t b-b table-bordered">
+                                        <thead>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <!-- <th>Department</th> -->
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="c in contactlist">
+                                                <td ng-bind="{{$index + 1}}"></td>
+                                                <td>{{c.vFirstName}}&nbsp;{{c.vLastName}}</td>
+                                                <td style="word-break: break-word; display: inline-flex;">{{c.vEmail}} <a href="javascript:void(0)" style="margin-left: 5px;" ng-click="generalEmail(c.vEmail)"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></td>
+                                                <!-- <td ng-bind="c.vDepartment"></td> -->
+                                            </tr>
+                                            <tr ng-show="!contactlist.length">
+                                                <td colspan="4" ng-bind="dataNotFound"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="panel panel-default panel-labeled">
+                                <div class="panel-body">
+                                    <h4 style="text-align: center;color: #636e7a;">Login Detail</h4>
+                                    <table class="table table-striped b-t b-b table-bordered">
+                                        <thead>
+                                            <th>#</th>
+                                            <th>User Name</th>
+                                            <th>Website</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="client in clientlist1">
+                                                <td ng-bind="{{$index + 1}}"></td>
+                                                <td>{{client.vEmail}}
+                                                    <!-- <a href="javascript:void(0)" ng-click="generalEmail(client.vEmail)"><i class="fa fa-envelope-o" aria-hidden="true"></i></a> --></td>
+                                                <td>
+                                                    <a href="http://{{client.vWebsite}}" style="color:#4ba0c3" target="_blank">{{client.vWebsite}}</a>
+                                                </td>
+                                            </tr>
+                                            <tr ng-show="!clientlist1.length">
+                                                <td colspan="3" ng-bind="dataNotFound"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="pull-right">
+        <button class="btn btn-info" style="margin-right:50px" ng-click="cancel()"><span class="glyph-icon fa-times"></span> Cancel</button>
+    </div>
+</div>

@@ -1,0 +1,203 @@
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+    data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+        data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+        <div ui-butterbar></div>
+        <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+        <div class="md-content page_content_wrapper">
+            <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+                <h1 class="m-n font-thin h3">Jobs Status Report</h1>
+            </div>
+            <div class="wrapper-md ng-scope">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form id="job-status-report">
+                            <!--   TAB1 -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading font-bold">Select</div>
+                                        <div class="panel-body">
+                                            <div class="col-sm-6 form-group">
+                                                <div class="col-sm-11">
+                                                    <label>Job Status</label>
+                                                    <input type="text" select2-job-detailitm-status id="jobStatus1"
+                                                        class="form-control" name="jobStatus"
+                                                        ng-model="jobReport.jobStatus" />
+                                                </div>
+                                                <div class="col-sm-1" style="margin:33px 0 0 -14px;">
+                                                    <a href="javascript:void(0)"
+                                                        ng-click="clearCode('job-status-report','jobStatus')"
+                                                        ng-if="jobReport.jobStatus"><i class="iconDelete glyph-icon fa-times"
+                                                            aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--   TAB1 -->
+                            <div class="panel-footer">
+                                <a class="btn btn-info btn-leftside"
+                                    ng-click="jobstatusReportsearch('job-status-report','middle')">Update search</a>
+                                <button class="btn btn-info btn-leftside"
+                                    ng-click="reseteSearch('job-status-report')">Delete Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading font-bold">Result</div>
+                    <div class="panel-body">
+                        <div class="col-sm-12">
+                            <div class="row wrapper" ng-show="resultStatus.length">
+                                <div class="col-sm-6 m-b-xs">
+                                    <div class="col-sm-4">
+                                        <select class="input-sm form-control w-sm inline v-middle" ng-model="action"
+                                            ng-change="statucOrderAction(action)">
+                                            <option>Export to excel</option>
+                                            <option>Remove selection</option>
+                                            <option>Select all</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <button class="btn btn-sm btn-info"
+                                            ng-click="statusAction(action,projectStatus)"
+                                            ng-disabled="!resultStatus.length"><i
+                                                class="glyphicon glyphicon-ok"></i></button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button class="btn btn-info pull-right" ng-disabled="!resultStatus.length"
+                                        ng-click="exportData()">Excel</button>
+                                </div>
+                            </div>
+                            <div class="table-responsive" id="middle">
+                                <table class="table m-b-none default footable-loaded footable">
+                                    <thead>
+                                        <th>#</th>
+                                        <th>Job Number</th>
+                                        <th>Status</th>
+                                        <th>Contact persons</th>
+                                        <th>Resource</th>
+                                        <th>Target language</th>
+                                        <th>Prices</th>
+                                        <!-- <th>Time</th> -->
+                                    </thead>
+                                    <tbody>
+                                        <tr id="{{}}"
+                                            ng-repeat="result in resultStatus=(statusResult | filter : jobReport)"
+                                            ng-if="result.resource == uId">
+                                            <td>
+                                                <input type="checkbox" id="orderCheck{{$index}}"
+                                                    name="orderCheck{{$index}}" ng-model="checkor"
+                                                    ng-checked="checkdata=='ordercheck'">
+                                                <input type="text" id="orderCheckData{{$index}}"
+                                                    name="orderCheckData{{$index}}" style="display: none;"
+                                                    ng-model="result.jobId">
+                                            </td>
+                                            <td ng-if="result.poNumber"><a href="#/project-job-detail/{{result.jobId}}"
+                                                    class="summeryColor">{{result.poNumber}}</a></td>
+                                            <td>
+                                                <button class="btn completedColor"
+                                                    ng-if="result.jobStatus == 'Completed'"></button>
+                                                <button class="btn inpreprartionColor"
+                                                    ng-if="result.jobStatus == 'In preparation'"></button>
+                                                <button class="btn requestedColor"
+                                                    ng-if="result.jobStatus == 'Requested'"></button>
+                                                <button class="btn newJob" ng-if="result.jobStatus == 'New'"></button>
+                                                <button class="btn assignedwaitongColor"
+                                                    ng-if="result.jobStatus == 'Assigned-waiting'"></button>
+                                                <button class="btn inprogressColor"
+                                                    ng-if="result.jobStatus == 'In-progress'"></button>
+                                                <button class="btn overdueColor"
+                                                    ng-if="result.jobStatus == 'Overdue'"></button>
+                                                <button class="btn deliveredColor"
+                                                    ng-if="result.jobStatus == 'Delivered'"></button>
+                                                <button class="btn approvedColor"
+                                                    ng-if="result.jobStatus == 'Approved'"></button>
+                                                <button class="btn invoicecreatedColor"
+                                                    ng-if="result.jobStatus == 'Invoice created'"></button>
+                                                <button class="btn invoiceckedColor"
+                                                    ng-if="result.jobStatus == 'Invoice checked'"></button>
+                                                <button class="btn invoiceacceptedColor"
+                                                    ng-if="result.jobStatus == 'Invoice Accepted'"></button>
+                                                <button class="btn paidColor"
+                                                    ng-if="result.jobStatus == 'Paid'"></button>
+                                                <button class="btn canceledColor"
+                                                    ng-if="result.jobStatus == 'Canceled'"></button>
+                                                <button class="btn withoutInvoiceColor"
+                                                    ng-if="result.jobStatus == 'Without invoice'"></button>
+                                                &nbsp;{{result.jobStatus}}
+                                            </td>
+                                            <!-- <td><a href="#/project-job-detail/{{result.jobId}}" class="summeryColor">{{result.orderNum}}-{{result.jobCode}}{{result.jobNo | numberFixedLen:3}}</a></td>
+                                                            <td> -->
+                                            <!-- <button class="btn inpreprartionColor" ng-if="result.jobStatus == 'In preparation'"></button>
+                                                                <button class="btn requestedColor" ng-if="result.jobStatus == 'Requested'"></button>
+                                                                <button class="btn assignedwaitongColor" ng-if="result.jobStatus == 'Assigned-waiting'"></button>
+                                                                <button class="btn inprogressColor" ng-if="result.jobStatus == 'In-progress'"></button>
+                                                                <button class="btn overdueColor" ng-if="result.jobStatus == 'Overdue'"></button>
+                                                                <button class="btn deliveredColor" ng-if="result.jobStatus == 'Delivered'"></button>
+                                                                <button class="btn approvedColor" ng-if="result.jobStatus == 'Approved'"></button>
+                                                                <button class="btn invoicecreatedColor" ng-if="result.jobStatus == 'Invoice created'"></button>
+                                                                <button class="btn invoiceckedColor" ng-if="result.jobStatus == 'Invoice checked'"></button>
+                                                                <button class="btn invoiceacceptedColor" ng-if="result.jobStatus == 'Invoice Accepted'"></button>
+                                                                <button class="btn paidColor" ng-if="result.jobStatus == 'Paid'"></button>
+                                                                <button class="btn canceledColor" ng-if="result.jobStatus == 'Canceled'"></button>
+                                                                <button class="btn withoutInvoiceColor" ng-if="result.jobStatus == 'Without invoice'"></button>
+                                                                {{result.jobStatus}} -->
+                                            </td>
+                                            <td>{{result.contactPersonName }}</td>
+                                            <td>{{result.resourceName}}</td>
+                                            <td>{{result.ItemLanguage}}</td>
+                                            <td>--</td>
+                                            <!-- <td>--</td> -->
+                                        </tr>
+                                        <tr ng-show="!resultStatus.length">
+                                            <td colspan="8" ng-bind="dataNotFound"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- use for export to excel -->
+                            <div class="table-responsive" id="exportable">
+                                <table class="table m-b-none default footable-loaded footable" style="display: none;">
+                                    <thead>
+                                        <th>Job no.</th>
+                                        <th>Contact persons</th>
+                                        <th>Resource</th>
+                                        <th>Status</th>
+                                        <th>Target language</th>
+                                        <th>Prices</th>
+                                        <!-- <th>Time</th> -->
+                                    </thead>
+                                    <tbody>
+                                        <tr id="Export_{{$index}}"
+                                            ng-repeat="result in statusResult | filter : jobReport"
+                                            ng-if="result.resource == uId">
+                                            <td>{{result.orderNum}}-{{result.jobCode}}{{result.jobNo |
+                                                numberFixedLen:3}}</td>
+                                            <td>{{result.contactPersonName}}</td>
+                                            <td>{{result.resourceName}}</td>
+                                            <td ng-bind="result.jobStatus"></td>
+                                            <td>--</td>
+                                            <td>--</td>
+                                            <!-- <td>--</td> -->
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- footer copy right -->
+                <div data-ng-include="'tpl/copyRight.html'"></div>
+
+            </div>
+        </div>
+    </div>
+</div>

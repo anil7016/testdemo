@@ -1,0 +1,14 @@
+/* Pullquotes CSS */
+.ht-shortcodes-pullquote {
+	float: left;
+	width: 8em;
+	background: #ddf;
+	font-weight: bold;
+	padding: 1em;
+	margin: 0 0.5em 0.5em 0;
+}
+
+.ht-shortcodes-pullquote p:first-letter {
+	font-size: 1.5em;
+	font-weight: bold;
+}

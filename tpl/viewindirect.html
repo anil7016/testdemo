@@ -1,0 +1,94 @@
+<style type="text/css">
+  .tab-content>.active {
+    margin-left: -15px;
+  }
+
+  .fa-times:before {
+    color: #ffffff !important;
+  }
+
+  .fa-edit:before {
+    color: #fff !important;
+  }
+</style>
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+  data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+  <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+    data-ng-include=" 'tpl/material.aside.html' ">
+  </div>
+  <div flex layout="column">
+    <div ui-butterbar></div>
+    <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+    <div class="md-content page_content_wrapper">
+
+      <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+        <a href="javascript:history.back()" style="margin-top:-15px" class="btn btn-info pull-right btn-sm"><span
+            class="fa fa-arrow-left"></span> Back</a>
+      </div>
+      <div class="wrapper-md ng-scope">
+        <div class="panel panel-default">
+          <div class="panel-body" style="background:#e4e7ea;">
+            <div class="col-sm-12">
+              <!-- <div class="col-sm-2">
+                       <img id="new_profile_pic" ng-src="uploads/profilePic/{{viewExternalCommunicational.vProfilePic}}" style="width:175px;border: 7px solid #fff;padding: 8px;height:150px">
+                    </div> -->
+              <div class="col-sm-3">
+                <span class="profileTitleh" style="margin-left:0px;">{{info.vUserName}}</span>
+                <span class="profileTitle" style="margin-left:0px;">I am a customer</span>
+              </div><br><br><br>
+              <div class="col-sm-7">
+                <a class="btn btn-info" href="#/edit-indirect/{{info.iClientId}}" title="edit"
+                  style="margin-left:0px;margin-top:5px;"><i class="glyph-icon fa-edit-white"
+                    style="margin-right:5px"></i>Edit</a>
+
+                <a href="javascript:void(0)" class="btn btn-info" ng-click="viewFileManager(info.iClientId)"
+                  title="File Manager" style="margin-left:0px;margin-top:5px;"><i class="fa fa-folder-open"
+                    style="margin-right:5px"></i>File Manager</a>
+
+                <button class="btn btn-info" ng-click="deleteIndirect(info.iClientId, info.vUserName)" title="Delete"
+                  style="margin-left:0px;margin-top:5px;"><i class="glyph-icon fa-times-white"></i> Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-sm-12">
+        <tabset active="active">
+          <tab index="3">
+            <tab-heading>
+              <i class="fa fa-info-circle"></i>
+              <span>Basic Information</span>
+            </tab-heading>
+            <div class="col-sm-5">
+              <table class="table table-striped b-t b-b table-bordered">
+                <tbody>
+                  <tr>
+                    <td><b> <span class="TblSpan">Account name</span></b></td>
+                    <td><span ng-bind="info.vUserName"></span></td>
+                  </tr>
+                  <tr>
+                    <td><b> <span class="TblSpan">Website</span></b></td>
+                    <td>
+                      <a style="color:#4ba0c3" target="_blank" href="https://{{info.vWebsite}}"
+                        title="{{info.vWebsite}}">{{info.vWebsite}}</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><b> <span class="TblSpan">Notes</span></b></td>
+                    <td><span ng-bind="info.notes"></span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </tab>
+        </tabset>
+      </div>
+      <!-- footer copy right -->
+      <div data-ng-include="'tpl/copyRight.html'"></div>
+
+
+    </div>
+  </div>

@@ -1,0 +1,119 @@
+  <div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' " >
+  </div>
+  <div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs" data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+      <div ui-butterbar></div>
+      <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside" ></a>
+      <div class="md-content page_content_wrapper" id="top">
+      <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+          <h1 class="m-n font-thin h3">Child Price Unit</h1>
+        </div>
+        <div class="wrapper-md ng-scope">
+        <a href="#/master-price" class="btn btn-info">Master Price</a>
+        <a href="#/child-price" class="btn btn-info active">Child Price</a>
+        <a href="#/rounding-price" class="btn btn-info">Rounding Price</a>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <form id="Child-price-form">
+                  <div class="col-sm-12">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Name</label>
+                                                <input type="text" class="form-control" placeholder="Enter Name" name="childprice_name" ng-model="childprice.name" required>
+                                            </div>
+                                        </div>
+                                         <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Code</label>
+                                                <input type="text" name="code" class="form-control" placeholder="Enter code"  ng-model="childprice.code" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Rate</label>
+                                                <!-- <input type="number" name="code" class="form-control" placeholder="Enter rate" min="0" ng-model="childprice.rate" allow-decimal-numbers required>
+                                                 -->
+                                                 <input type="text" name="code" class="form-control" placeholder="Enter rate" ng-model="childprice.rate" only-digits2 required>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                              <label>Master Price</label>
+                                              <input type="text" select2-master-unit data-typeid="1" id="mamaster_price_id" class="form-control" name="master_price_id"   ng-model="childprice.master_price_id" required />
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                              <label>Project Type</label>
+                                              <input type="text" select2-proj-type data-typeid="1" id="service" class="form-control" name="service"   ng-model="childprice.service" required />
+                                          </div>
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                              <label>Unit</label>
+                                              <input type="text" select2-child-unit data-typeid="1" id="unit" class="form-control" name="unit"   ng-model="childprice.unit" required />
+                                          </div>
+                                        </div>                                        
+                                        
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Hours</label>
+                                                <input type="number" min="0" name="code" class="form-control" placeholder="Enter Hour"  ng-model="childprice.hours" allow-decimal-numbers required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="checkbox" style="padding-bottom: 18px;">
+                                                <label class="i-checks i-checks-sm" style="padding-top: 20px;">
+                                                    <input type="checkbox" name="is_active" ng-true-value="1" ng-false-value="0" ng-model="childprice.is_active" ng-checked="childprice.is_active == 1">
+                                                    <i></i>
+                                                    Active(check to active)
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer">
+                                    <button class="btn btn-info btnSave" ng-click="save('Child-price-form');"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                                </div>
+              </form>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <table class="table table-striped b-t b-b table-bordered" datatable="ng" id="masterPriceList">
+              <thead>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Master price name</th>
+                                    <th>code</th>
+                                    <th>Unit</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="childu in childunitlist" ng-class="(childu.child_price_id == childprice.child_price_id) ? 'rowactivate' : ''">
+                                            <td ng-bind="$index + 1"></td>
+                                            <td ng-bind="childu.name"></td>
+                                            <td ng-bind="childu.masterPriceName"></td>
+                                            <td ng-bind="childu.code"></td>
+                                            <td ng-bind="childu.unit"></td>
+                                            <td ng-if="childu.is_active == '1'"><span class="label bg-success" title="active">Active</span></td>
+                                            <td ng-if="childu.is_active == '0'"><span class="label bg-danger" title="Inactive">Inactive</span></td>
+                                            <td><a href="javascript:void(0)" ng-click="ChildunitEdit(childu.child_price_id, 'top');" title="edit"><i class="glyph-icon fa-edit"></i></a>   <a href="javascript:void(0)" ng-click="deleteChildprice(childu.child_price_id)" title="delete"><i class="iconDelete glyph-icon fa-times"></i></a></td>
+                                        </tr>
+                                        
+                                    </tbody>
+            </table>
+          </div>
+        <!-- footer copy right -->
+        <div data-ng-include="'tpl/copyRight.html'"></div>
+        </div>
+
+    </div>
+  </div>

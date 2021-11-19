@@ -1,0 +1,82 @@
+<style type="text/css">
+    .fc-more-popover{
+        z-index:9999 !important;
+    }
+</style>
+<div>
+    <div class="ht-sitecontainer ht-sitecontainer--wide">
+        <div class="site-header">
+            <div ng-include="'pages/header.html'">
+            </div>
+        </div>
+        <div class="ht-pageheader">
+            <div class="ht-container">
+                <div class="hkb-breadcrumbs_wrap">
+                    <ol class="hkb-breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList" >
+                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                            <a itemprop="item" href="#/" title="Home">
+                                <span itemprop="name">Home</span>
+                                <svg class="hkb-breadcrumbs__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 34.1">
+                                    <g>
+                                        <path d="M19,17c0,0.5-0.2,1-0.6,1.4L3.4,33.5c-0.8,0.8-2,0.8-2.8,0c-0.8-0.8-0.8-2,0-2.8L14.2,17L0.6,3.4c-0.8-0.8-0.8-2,0-2.8  c0.8-0.8,2-0.8,2.8,0l15.1,15.1C18.8,16,19,16.5,19,17z"/>
+                                    </g>
+                                </svg> 
+                            </a>
+                            <meta itemprop="position" content="1"/>
+                        </li>
+                        
+                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"> 
+                            <span itemprop="item" href="index.html" title="{{resultList.title}}"> 
+                                <span itemprop="name">Calendar</span> 
+                            </span>
+                            <meta itemprop="position" content="2" />
+                        </li>
+                        <div id="eventcalendar">
+            <div id='fullcalendar' style="width:65%"></div>
+            <div id="popover-head" class="hide">some title</div>
+            <div id="popover-content" class="hide">
+                <form>
+                    <input type="text" name="test" value="test" />
+                </form>
+            </div>
+        </div>
+                    </ol>
+                </div>
+<!--                <form class="hkb-site-search"> 
+                    <label class="hkb-screen-reader-text" for="s">Search For</label> 
+                    <input class="hkb-site-search__field" type="text" ng-model="search.vUserName" placeholder="Search Member" name="s" autocomplete="off"> 
+                    <img class="hkb-site-search__loader" src="http://d3ijh37r9qzozj.cloudfront.net/knowall/wp-content/themes/knowall/img/loading.svg" alt="" /> 
+                    <input type="hidden" name="ht-kb-search" value="1" /> 
+                </form>-->
+            </div>
+        </div>
+        <div class="ht-page ht-page--sidebarright">
+            <div class="ht-container">
+<!--            <div>
+                    <div class="hrC" align="center">
+                        <h2>Member</h2>
+                    </div>
+                </div>-->
+                <!--<img src="../../uploads/profilePic/1450002150.jpg" alt=""/>-->
+                <div class="contentHeadTitle" md-scroll-shrink>
+                    <div class="md-toolbar-tools">Calendar</div>
+                </div>
+                <div layout="row" layout-margin layout-wrap layout-align="center center">
+                    <md-card flex="100" ng-show="!memberList.length">
+                        <section ng-init="loadEvents()">
+                            <div class="alert alert-success" ng-show="event">Event selected:{{event.startTime|date:
+                                'MMM/dd,yyyy,HH:mm'}} - {{event.endTime|date:'MMM/dd,yyyy,HH:mm'}}, {{event.title}}
+                            </div>
+                            <div class="btn-toolbar">
+                            </div>
+                            <div class="well well-sm">
+                                <div id='calendar'></div>
+                            </div>
+                        </section>
+                    </md-card>
+                </div>
+            </div>
+        </div>
+        <div ng-include="'pages/footer.html'"></div>
+    </div>
+</div>

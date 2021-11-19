@@ -1,0 +1,240 @@
+  <div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' " >
+  </div>
+  <div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs" data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+      <div ui-butterbar></div>
+      <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside" ></a>
+      <div class="md-content page_content_wrapper">
+        
+        <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+            <a href="javascript:history.back()" class="btn btn-info pull-right" style="margin-top:-16px">Back</a>
+            <!-- <a href="#/discussion/{{jobDiscussionRedirect}}" ng-click="jobDiscussion();" class="btn btn-info pull-right" style="margin-right: 10px;margin-top:-16px">Job Discussion</a> -->
+          <!-- <h1 class="m-n font-thin h3">Resource Type</h1> -->
+        </div>
+        <div class="wrapper-md ng-scope">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <form id="jobDetails-form">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="panel panel-default">
+                                          <div class="panel-heading font-bold"><h4>Job details</h4></div>
+                                            <div class="panel-body">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label><strong>Job Number :</strong></label>
+                                                        <label>{{jobdetail.job_code}}{{jobdetail.job_no | numberFixedLen:3}}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label><strong>Creation Date:</strong></label>
+                                                        <label>{{jobdetail.created_date | globalDtFormat}}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label><strong>Resource:</strong></label>
+                                                        <span>{{jobdetail.userName}}</span>
+                                                        <span class="none"><input select2-job-detail-resource type="text" class="form-control" name="resources" ng-model="jobdetail.resource" readonly/></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label><strong>Project No:</strong></label>
+                                                        <label id="companyCode">{{jobdetail.company_code}}</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label><strong>Status:</strong> </label>
+                                                        <span>{{jobdetail.item_status}}</span>
+                                                        <span class="none"><input type="text" select2-job-detailitm-status class="form-control" name="itemStatus" id="itemStatus"  ng-model="jobdetail.item_status" readonly/></span>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label><strong>Project Name:</strong> </label>
+                                                        <span>{{jobdetail.projectName}}</span>
+                                                       <textarea class="form-control none" name="description" ng-model="jobdetail.description" readonly></textarea>
+                                                    </div>
+                                                </div> -->
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label><strong>Language: </strong> </label>
+                                                        <span>{{jobdetail.ItemLanguage}}</span>
+                                                        <input type="text" id="sourceLang" class="form-control none" name="sourcelang" ng-model="jobdetail.ItemLanguage" readonly/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label><strong>Due Date:</strong></label>
+                                                        <span>{{jobdetail.due_date | globalDtFormat}}</span>
+                                                        <input  ng-upcomming-date type="text" class="form-control none" id="duedate" name="due_date" ng-model="jobdetail.due_date" readonly/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label><strong>Po Number:</strong> </label>
+                                                        <span>{{jobdetail.po_number}}</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label><strong>Project Manager:</strong> </label>
+                                                        <span>{{jobdetail.projectManager}}</span>
+                                                        <span class="none"><input select2-contactsummery  type="text" class="form-control" name="contactPerson" ng-model="jobdetail.contactPerson" readonly/></span>
+                                                        <a href="#/discussion/{{jobDiscussionRedirect}}" ng-click="jobDiscussion();" title="Job Discussion"><span class="summeryColor"><i class="fa fa-envelope fa-lg"></i></span></a>
+                                                        <!-- <a href="javascript:void(0)"  ng-click="jobsumemailResource(jobdetail.contact_person)"><span class="summeryColor"><i class="fa fa-envelope fa-lg"></i></span></a> -->
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="col-sm-6">
+                                                        <a style="padding:2px" href="javascript:void(0);" ng-click="popupOpenFilemanager('#/filemanager/source')"><span class="orderin"></span>Source &nbsp;(<span class="sourceC" id="proDetailSourceCount"></span>)</a>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <a style="padding:2px" href="javascript:void(0)" ng-click="popupOpenFilemanager('#/filemanager/target')"><span class="orderout"></span>Target &nbsp;(<span class="targteC" id="proDetailTargetCount"></span>)</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-sm-6">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading font-bold"><h4>Project Instructions</h4></div>
+                                            <div class="panel-body">
+                                                <table  class="table m-b-none default footable-loaded footable" >
+                                                    <thead>
+                                                    <th>Project Instructions</th>
+                                                    <th>Check list</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr id="work1_{{$index}}" class="put_row" ng-repeat="war in wrInstruct">
+                                                            <td class="none"><span id="work_id{{$index}}" ng-bind="war.work_id"><span></td>
+                                                            <td><span id="work_name{{$index}}" ng-bind="war.work_name"><span></td>
+                                                            <td><span class="checkList"></span></td>
+                                                        </tr>
+                                                        <tr ng-show="wrInstructEmpty">
+                                                            <td colspan="4" ng-bind="dataNotFound"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            </div>
+                                    </div> -->
+                                    
+                                    <!-- <div class="col-sm-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading font-bold"><h4>Prices</h4></div>
+                                            <div class="panel-body">
+                                                <table  class="table m-b-none default footable-loaded footable">
+                                                    <thead>
+                                                    <th>Quantity</th>
+                                                    <th>Price unit</th>
+                                                    <th>Unit price</th>
+                                                    <th>Amount in {{currencyCodeDisplay}}</th>
+                                                    <th>Tax</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="item in itemList">
+                                                            <td  ng-bind="item.quantity"></td>
+                                                            <td  ng-bind="item.pricelist"></td>
+                                                            <td  ng-bind="item.itemPrice |customNumber"></td>
+                                                            <td ng-bind="item.itemTotal |customNumber"></td>
+                                                            <td>Without tax</td>
+                                                        </tr>
+                                                        <tr ng-show="itemPriceEmpty">
+                                                            <td colspan="4" ng-bind="dataNotFound"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="3">Total Net price</th>
+                                                            <th ng-bind="totalPrice |customNumber"></th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="col-sm-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading font-bold"><h4>Work Instructions</h4></div>
+                                            <div class="panel-body">
+                                                <table  class="table m-b-none default footable-loaded footable">
+                                                    <thead style="background-color:#3615a0;">
+                                                    <th style="color:white;">Work Instructions</th>
+                                                    <!-- <th>Check list</th> -->
+                                                    <th></th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr id="work1_{{$index}}" class="put_row" ng-repeat="war in wrInstruct">
+                                                            <td class="none"><span id="work_id{{$index}}" ng-bind="war.work_id"><span></td>
+                                                            <td><span style="color:green;"><i class="fa fa-check" aria-hidden="true"></i> </span> &nbsp;&nbsp;<span id="work_name{{$index}}" ng-bind="war.work_name"><span></td>
+                                                            <td><span class="checkList"></span></td>
+                                                        </tr>
+                                                        <tr ng-show="wrInstructEmpty">
+                                                            <td colspan="4" ng-bind="dataNotFound"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading font-bold"><h4>Payment</h4></div>
+                                            <div class="panel-body">
+                                                <table  class="table m-b-none default footable-loaded footable">
+                                                    <thead>
+                                                    <th>Quantity</th>
+                                                    <th>Price unit</th>
+                                                    <th>Unit price</th>
+                                                    <th>Amount in {{currencyCodeDisplay}}</th>
+                                                    <!-- <th>Tax</th> -->
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="linguist in jobdetail.price">
+                                                            <td  ng-bind="linguist.quantity"></td>
+                                                            <td  ng-bind="linguist.pricelist"></td>
+                                                            <td  ng-bind="linguist.itemPrice | NumbersCommaformatzero"></td>
+                                                            <td ng-bind="linguist.itemTotal | NumbersCommaformatzero"></td>
+                                                            <!-- <td>Without tax</td> -->
+                                                        </tr>
+                                                        <tr ng-show="itemPriceEmpty">
+                                                            <td colspan="4" ng-bind="dataNotFound"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="3">Total Net price</th>
+                                                            <th ng-bind="jobdetail.total_price |NumbersCommaformat"><!-- customNumber --></th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="panel-footer" ng-if="jobdetail.item_status == 'Requested'">
+                                            <a class="btn btn-info" ng-click="acceptjobstatus(jobdetail.item_status,'accept');">Accept</a>
+                                            <a class="btn btn-info" ng-click="acceptjobstatus(jobdetail.item_status,'reject');">Reject</a>
+                                        </div>
+                                        <div class="panel-footer" ng-if="jobdetail.item_status == 'Assigned-waiting'">
+                                            <a class="btn btn-info" ng-click="acceptjobstatus(jobdetail.item_status,'start');">Start</a>
+                                        </div>
+                                        <div class="panel-footer" ng-if="jobdetail.item_status == 'In-progress'">
+                                            <!-- <a class="btn btn-info" ng-click="acceptjobstatus(jobdetail.item_status,'save');">Save</a> -->
+                                            <a class="btn btn-info" ng-click="acceptjobstatus(jobdetail.item_status,'save');">Delivered</a>
+                                        </div>
+                                    </div>
+                            </form>
+            </div>
+          </div>
+        </div>
+      <!-- footer copy right -->
+      <div data-ng-include="'tpl/copyRight.html'"></div>
+
+      </div>
+    </div>
+  </div>

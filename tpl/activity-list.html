@@ -1,0 +1,86 @@
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+    data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+        data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+        <div ui-butterbar></div>
+        <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+        <div class="md-content activityPage page_content_wrapper" id="top">
+
+            <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+                <h1 class="m-n font-thin h3">Activity <span>{{activityList.length}}</span></h1>
+            </div>
+            <div class="wrapper-md ng-scope">
+                <div class="col-md-12 p-0">
+                    <div class="panel panel-default">
+                        <div class="panel-body" ui-jq="slimScroll" ui-options="{height:'100%', size:'8px'}">
+                        <div class="col-md-6 p-0">
+                            <div ng-repeat="activity in activityList  | limitTo:activityLimit">
+                                <div class="media">
+                                    <span class="pull-left m-r-xs"> <span class=""><i class="glyphicon glyphicon-stats icon text-primary-dker"></i></span> </span>
+                                    <div class="media-body">
+                                    <div class="pull-right text-center text-muted">
+                                        <strong class="h4">{{dateDate[$index]}}</strong><br>
+                                    </div>
+                                    
+                                <!-- For Direct Client -->
+                                <a href class="h4" ng-if="activity.log_status == 'direct_cli' && activity.log_type != 'delete'" href="#/viewdirect/{{activity.log_type_id}}" class="text-info" ng-bind="activity.log_title"></a>
+   
+                                <a href class="h4" ng-if="activity.log_status == 'direct_cli' && activity.log_type == 'delete'" href="javascript:void(0);" class="text-info" ng-bind="activity.log_title"></a>
+                                    
+                                   <!-- For Project -->
+                                <a href class="h4" ng-if="activity.log_status == 'project' && activity.log_type == 'delete'" href="javascript:void(0);" ng-click="edit(activity.log_type_id)" class="text-info" ng-bind="activity.log_title"></a>
+
+                                <a href class="h4" ng-if="activity.log_status == 'project' && activity.log_type != 'delete'" href="javascript:void(0);" ng-click="edit(activity.log_type_id)" class="text-info" ng-bind="activity.log_title"></a>
+                                    
+                                   <!-- For External Resource --> 
+                                <a href class="h4" ng-if="activity.log_status == 'external_res' && activity.log_type == 'delete'" href="javascript:void(0);" class="text-info" ng-bind="activity.log_title"></a>
+   
+                                <a href class="h4" ng-if="activity.log_status == 'external_res' && activity.log_type != 'delete'" href="#/viewExternal/{{activity.log_type_id}}" class="text-info" ng-bind="activity.log_title"></a>
+                                    
+                                <!-- For Task #/job-summery-details/{{activity.task_id}}-->
+                                <a href class="h4" ng-if="activity.log_status == 'task' && activity.log_type != 'delete'" href="javascript:void(0);" ng-click="goToJob(activity.task_id,activity.log_type_id)" class="text-info" ng-bind="activity.log_title"></a>
+                                
+                                <a href class="h4" ng-if="activity.log_status == 'task' && activity.log_type == 'delete'" href="javascript:void(0);" class="text-info" ng-bind="activity.log_title"></a></span>
+                                    
+                                <!-- For Indirect Client -->
+                                <a href class="h4"  ng-if="activity.log_status == 'indirect_cli' && activity.log_type == 'delete'" href="javascript:void(0);" class="text-info" ng-bind="activity.log_title"></a></span>
+   
+                                <a href class="h4" ng-if="activity.log_status == 'indirect_cli' && activity.log_type != 'delete'" href="#/viewindirect/{{activity.log_type_id}}" class="text-info" ng-bind="activity.log_title"></a></span>
+                                    
+                                    <!-- For Internal Resource -->
+                                <a href class="h4"  ng-if="activity.log_status == 'internal_res' && activity.log_type == 'delete'" href="javascript:void(0);" class="text-info" ng-bind="activity.log_title"></a></span>
+   
+                                <a href class="h4" ng-if="activity.log_status == 'internal_res' && activity.log_type != 'delete'" href="#/viewinternal/{{activity.log_type_id}}" class="text-info" ng-bind="activity.log_title"></a></span>
+
+                                <small class="block"> <span ng-if="activity.log_type != 'add'"><span ng-bind="activity.log_type | capitalize"></span>d</span><span ng-if="activity.log_type == 'add'"><span ng-bind="activity.log_type | capitalize"></span>ed</span>
+                                    <span  class="text-muted">in {{activity.log_status.split('_')[0] | capitalize}}
+                                        <span  class="text-muted" ng-if="activity.log_status.split('_')[0] == 'indirect' || activity.log_status.split('_')[0] == 'direct'">Clients</span>
+                                        <span  class="text-muted" ng-if="activity.log_status.split('_')[0] == 'internal' || activity.log_status.split('_')[0] == 'external'">Resources</span>
+                                    </span> 
+                                </small>
+                                </div>
+
+                                </div>
+                                <div class="line pull-in"></div>
+                            </div>
+                            <div class="col-md-8" ng-show="!activityList.length">
+                                <div class="m-l" ng-bind="dataNotFound">
+                                </div>
+                             </div>
+                            <h4 ng-if="activityList.length > 25" style="text-align:center;"><a href="javascript:void(0);" ng-click="loadMoreActivity()" class="loadMore">Load More</a></h4>
+                    
+                        
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- footer copy right -->
+                <div data-ng-include="'tpl/copyRight.html'"></div>
+            </div>
+        </div>
+    </div>

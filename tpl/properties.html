@@ -1,0 +1,226 @@
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+    data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+        data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+        <div ui-butterbar></div>
+        <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+        <div class="md-content page_content_wrapper" id="top">
+            <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+                <h1 class="m-n font-thin h3">Properties</h1>
+            </div>
+            <div class="wrapper-md ng-scope">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form id="property-form">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Property Name</label>
+                                                <input type="text" class="form-control"
+                                                    placeholder="Enter Property Name" name="property_name"
+                                                    ng-model="propertyData.property_name" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Languages</label>
+                                                <input type="text" select2-momoq-language data-typeid="1"
+                                                    id="language" class="form-control" name="language"
+                                                    ng-model="propertyData.language" required />
+                                                <!-- <input type="text" select2-language data-typeid="1" id="language" class="form-control" name="language"   ng-model="propertyData.language" required /> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Description</label>
+                                                <input type="text" name="description" class="form-control"
+                                                    placeholder="Enter Description"
+                                                    ng-model="propertyData.description" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="checkbox" style="padding-bottom: 18px;">
+                                                <label class="i-checks i-checks-sm"
+                                                    style="padding-top: 20px;">
+                                                    <input type="checkbox" name="is_active"
+                                                        ng-true-value="1" ng-false-value="0"
+                                                        ng-model="propertyData.is_active"
+                                                        ng-checked="propertyData.is_active == 1">
+                                                    <i></i> Active (Set as Active)
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="checkbox">
+                                                <label class="i-checks i-checks-sm"
+                                                    style="padding-top: 20px;">
+                                                    <input type="checkbox" name="is_active"
+                                                        ng-true-value="1" ng-false-value="0"
+                                                        ng-model="propertyData.resource"
+                                                        ng-checked="propertyData.resource == 1">
+                                                    <i></i> Resources
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <!--                                        <div class="col-sm-4">
+                                <div class="checkbox">
+                                    <label class="i-checks i-checks-sm" style="padding-top: 20px;">
+                                        <input type="checkbox" name="is_active" ng-true-value="1" ng-false-value="0" ng-model="propertyData.customer" ng-checked="propertyData.customer == 1">
+                                        <i></i>
+                                        Customers
+                                    </label>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="checkbox">
+                                    <label class="i-checks i-checks-sm" style="padding-top: 20px;">
+                                        <input type="checkbox" name="is_active" ng-true-value="1" ng-false-value="0" ng-model="propertyData.mi_contact" ng-checked="propertyData.mi_contact == 1">
+                                        <i></i>
+                                        Miscellaneous contacts
+                                    </label>
+                                </div>
+
+                            </div>-->
+                                        <div class="col-sm-2">
+                                            <div class="checkbox">
+                                                <label class="i-checks i-checks-sm"
+                                                    style="padding-top: 20px;">
+                                                    <input type="checkbox" name="is_active"
+                                                        ng-true-value="1" ng-false-value="0"
+                                                        ng-model="propertyData.request"
+                                                        ng-checked="propertyData.request == 1">
+                                                    <i></i> Requests
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="checkbox">
+                                                <label class="i-checks i-checks-sm"
+                                                    style="padding-top: 20px;">
+                                                    <input type="checkbox" name="is_active"
+                                                        ng-true-value="1" ng-false-value="0"
+                                                        ng-model="propertyData.project"
+                                                        ng-checked="propertyData.project == 1">
+                                                    <i></i> Project
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="checkbox">
+                                                <label class="i-checks i-checks-sm"
+                                                    style="padding-top: 20px;">
+                                                    <input type="checkbox" name="is_active"
+                                                        ng-true-value="1" ng-false-value="0"
+                                                        ng-model="propertyData.item"
+                                                        ng-checked="propertyData.item == 1">
+                                                    <i></i> Item
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="panel-footer pl-0 pr-0">
+                                    <button class="btn btn-info btnSave"
+                                        ng-click="save('property-form');"><i class="fa fa-floppy-o"
+                                            aria-hidden="true"></i> Save</button>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="panel panel-default" ng-show="edit_value">
+                    <div class="panel-heading font-bold">Add Values </div>
+                    <form id="edit-value-form">
+                        <table class="table m-b-none default footable-loaded footable">
+                            <tbody id="additional_row">
+                                <tr class="put_row2" ng-repeat="p in values" id="{{$index}}">
+                                    <td contentEditable="true" ng-model="value_name[$index]"
+                                        ng-bind="p.value_name" />
+                                    </td>
+                                    <td contentEditable="true" ng-model="description[$index]"
+                                        ng-bind="p.description" />
+                                    <input type="hidden" ng-init="value_id[$index] = p.value_id" />
+                                    </td>
+                                    <td><a href="javascript:void(0)"
+                                            ng-click="rowDelete($index, p.value_id)"
+                                            title="delete"><i class="iconDelete glyph-icon fa-times"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="panel-footer">
+                            <button class="btn btn-info btn-sm" ng-row2>Add More <span
+                                    class="glyphicon glyphicon-plus"></span></button>
+                            <button class="btn btn-info btn-sm"
+                                ng-click="UpdateValue('edit-value-form');">Save</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel panel-default" ng-show="value_form">
+                    <div class="panel-heading font-bold">Add Values </div>
+                    <form id="values-form">
+                        <table class="table m-b-none default footable-loaded footable">
+                            <tbody>
+                                <tr id="item_0" class="put_row">
+                                    <td>
+                                        <input type="text" name="value_name" id="value_name_0"
+                                            class="form-control" ng-model="value_name[0]"
+                                            placeholder="Value name" />
+                                    </td>
+                                    <td>
+                                        <input type="text" name="description" id="description_0"
+                                            class="form-control" ng-model="description[0]"
+                                            placeholder="Description" />
+                                    </td>
+                                    <td><a href="javascript:void(0)" ng-click="deleteValue(0)"
+                                            title="delete"><i class="iconDelete glyph-icon fa-times"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="panel-footer">
+                            <button class="btn btn-info" id="add_value_name" ng-row>Add
+                                More</button>
+                            <button class="btn btn-info"
+                                ng-click="saveValue('values-form');">Save</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table table-striped b-t b-b table-bordered" datatable="ng"
+                            id="externalUserList111">
+                            <thead>
+                                <th>#</th>
+                                <th>Property Name</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="t in propertiesList"
+                                    ng-class="(t.property_id == propertyData.property_id) ? 'rowactivate' : ''">
+                                    <td ng-bind="$index + 1"></td>
+                                    <td ng-bind="t.property_name"></td>
+                                    <td ng-if="t.is_active == '1'"><span class="label bg-success"
+                                            title="active">Active</span></td>
+                                    <td ng-if="t.is_active == '0'"><span class="label bg-danger"
+                                            title="Inactive">Inactive</span></td>
+                                    <td><a href="javascript:void(0)"
+                                            ng-click="getType(t.property_id, 'top');"
+                                            title="edit"><i class="glyph-icon fa-edit"></i></a>  <a
+                                            href="javascript:void(0)"
+                                            ng-click="deleteModel(t.property_id)" title="delete"><i
+                                                class="iconDelete glyph-icon fa-times"></i></a></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- footer copy right -->
+                <div data-ng-include="'tpl/copyRight.html'"></div>
+
+            </div>

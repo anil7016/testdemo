@@ -1,0 +1,12 @@
+[13-Dec-2018 16:40:13 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Class 'Funnypic' not found in /home/beconmxb/tms.beconnected.no/knowledge/api/v1/index.php:109
+Stack trace:
+#0 [internal function]: {closure}('1', '2')
+#1 /home/beconmxb/tms.beconnected.no/knowledge/api/libs/Slim/Route.php(436): call_user_func_array(Object(Closure), Array)
+#2 /home/beconmxb/tms.beconnected.no/knowledge/api/libs/Slim/Slim.php(1306): Slim\Route->dispatch()
+#3 /home/beconmxb/tms.beconnected.no/knowledge/api/libs/Slim/Middleware/Flash.php(85): Slim\Slim->call()
+#4 /home/beconmxb/tms.beconnected.no/knowledge/api/libs/Slim/Middleware/MethodOverride.php(92): Slim\Middleware\Flash->call()
+#5 /home/beconmxb/tms.beconnected.no/knowledge/api/libs/Slim/Middleware/PrettyExceptions.php(67): Slim\Middleware\MethodOverride->call()
+#6 /home/beconmxb/tms.beconnected.no/knowledge/api/libs/Slim/Slim.php(1253): Slim\Middleware\PrettyExceptions->call()
+#7 /home/beconmxb/tms.beconnected.no/knowledge/api/v1/index.php(151): Slim\Slim->run()
+#8 {main}
+  thrown in /home/beconmxb/tms.beconnected.no/knowledge/api/v1/index.php on line 109

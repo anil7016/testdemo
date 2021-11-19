@@ -1,0 +1,541 @@
+<style>
+   table {
+   table-layout:fixed;
+   }
+   td{
+   overflow:hidden;
+   text-overflow: ellipsis;
+   }
+   .app-header-fixed {
+   padding-top:0px;
+   }
+   folder2{
+   height: 74px;
+   overflow:hidden;
+   background-repeat: no-repeat;
+   background-position: center 5px;
+   background-size: 24px 24px;
+   font-size: 11px;
+   text-align: center;
+   font-weight: bold;
+   display: inline-block;
+   cursor: default;
+   width: 75px;
+   padding-top: 35px;
+   margin: 5px;
+   vertical-align: top;
+   border: 1px solid transparent;
+   word-wrap: break-word;
+   position: relative;
+   box-sizing: border-box;
+   }
+  folder, file{
+    height: 40px;
+    /* overflow: hidden; */
+    background-repeat: no-repeat;
+    /* background-position: center 5px; */
+    background-size: 24px 24px;
+    font-size: 11px;
+    /* text-align: center; */
+    font-weight: bold;
+    display: inline-block;
+    cursor: default;
+    width: 100%;
+    padding: 7px 10px; 
+    margin: 5px 15px;
+    /* vertical-align: top; */
+    border: 1px solid transparent;
+    /* word-wrap: break-word; */
+    position: relative;
+    box-sizing: border-box;
+    background-origin: content-box;
+  }
+   .video{background-image: url(assets/img/file_icon/video.png);}
+   .png{background-image: url(assets/img/file_icon/png.png);}
+   folder { background-image: url(assets/img/file_icon/folder1.png);}
+   .doc{ background-image: url(assets/img/file_icon/doc.png);}
+   .pdf{ background-image: url(assets/img/file_icon/pdf.png);}
+   .zip{ background-image: url(assets/img/file_icon/zip.png);}
+   .xls{ background-image: url(assets/img/file_icon/xls.png);}
+   .ppt{ background-image: url(assets/img/file_icon/ppt.png);}
+   .txt{ background-image: url(assets/img/file_icon/txt.png);}
+   .exe{ background-image: url(assets/img/file_icon/exe.png);}
+   .mp3{ background-image: url(assets/img/file_icon/mp3.png);}
+   .breadcrumb {
+   padding: 8px 15px;
+   list-style: none;
+   background-color: #f5f5f5;
+   border-radius: 4px;
+   }
+   .breadcrumb > .active {
+   color: #777;
+   }
+   .breadcrumb > li {
+   display: inline-block;
+   }
+   .breadcrumb > li + li::before {
+   padding: 0 5px;
+   color: #ccc;
+   content: "/\00a0";
+   }
+   .navbar-brand img {
+   width: 22px;
+   height: auto;
+   }
+   .navbar-default{margin:0px;}
+   folder:hover,file:hover{    border: 1px solid #CEE8FC;
+   /*background-color: rgba(0, 139, 255, 0.06);*/
+   /*background-color: rgba(0, 139, 255);*/
+   }
+   .activeselect{
+      border: 1px solid #CEE8FC;
+      background-color: rgba(0, 139, 255, 0.06);
+   }
+   div#filesContainer {
+      height: 100%;
+      min-height: 768px;
+   }
+   .selectCount{
+      float: left;
+      padding: 9px;
+      font-size: 16px;
+   }
+   #propertyModal .modal-backdrop.in {
+      opacity: 0;
+   }
+   .modalClass{
+      margin-top: 208px;
+      width:50%;
+      margin-left:20%;
+   }
+   #propertyModal .modal-body {
+      position: relative;
+      padding: 0px; 
+   }
+   #propertyModal .modal-footer {
+       padding: 5px;
+       text-align: right;
+       border-top: 1px solid #e5e5e5;
+   }
+   .opcacityDown{
+      opacity: 0.6;
+   }
+
+   #loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #CACACA;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+.fa-times:before {
+    content: "\f00d";
+    color:#0086be !important;
+}
+.ajax-upload-dragdrop{
+  padding-top: 30px;
+  min-height: 100px;
+}
+.ajax-file-upload-container{
+  margin-bottom: 30px;
+  float:none; 
+}
+.ajax-file-upload-statusbar{
+  padding: 10px;
+  text-align: initial;
+  min-height: auto;
+  max-height: initial;
+  box-shadow: none;
+  width: 100% !important;
+  float: none;
+  display: inline-flex;
+}
+.ajax-file-upload-preview{
+  margin-left: initial !important; 
+}
+.ajax-file-upload-filename {
+    width: auto;
+    text-align: left;
+    padding-top: initial;
+    margin: auto 15px;
+    bottom: initial;
+    height: initial;
+    float: right;
+    position: relative;
+}
+.ajax-file-upload-cancel, .ajax-file-upload-red {
+    padding: 0px 5px;
+    margin: auto 10px;
+    position: relative;
+    bottom: initial;
+    left: initial;
+    float: right;
+    width: auto;
+}
+.fileshow p{
+  margin:5px 40px;
+}
+#uploadContainer .panel.panel-default {
+  float: initial; 
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}
+.ajax-upload-dragdrop{
+  margin: 0 auto;
+  text-align: center;
+}
+.ajax-file-upload{
+  margin-top: 42px;
+}
+.spandragdrop{
+    float: left;
+    position: absolute;
+    text-align: center;
+    margin: -10px 2px 0px -82px;
+}
+#multipleupload{
+  float: initial !important;
+}
+#multipleupload input[type="file"] {
+    cursor: pointer;
+}
+.brdrfile{
+  border: 2px dashed #c2cdda !important;
+  border-radius: 14px;
+}
+.uploadbtn1{
+  margin: -80px 0 0px 0;
+}
+.ajax-file-upload-container:nth-child(3){
+  border:none;
+}
+#multipleupload .ajax-upload-dragdropnth-child(2),#multipleupload .ajax-upload-dragdropnth-child(3) {
+  display: none;
+}
+.folderul file,.folderul folder{
+    margin-left: -10px;
+}
+.folderul.f2{
+    margin-left: 25px;
+}
+.fangle{
+    margin-left: 5px;
+}
+.folderbadge{
+    margin-left: 8px;
+}
+.ajax-file-upload-error{
+  float: left;
+  padding: 7px ​15px; 
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+vendor-prefixes.less:76
+*
+</style>
+<div id="content" role="main">
+   <div class="app-content-body ">
+      <div class="bg-light lter b-b wrapper-md">
+         <a href="javascript:void(0)" class="summeryColor pull-right" ng-click="popupCloseFile()">Close <i class="fa fa-times" aria-hidden="true"></i></a>
+         <h1 class="m-n font-thin h3">File Manager [&nbsp;{{rootFolderName}}&nbsp;]</h1>
+      </div>
+      <form id="customer-form">
+         <nav class="navbar navbar-default" style="background:#e6e6e6;">
+            <div class="container-fluid">
+               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav pull-left">
+                     <!-- <li><span class="glyphicon glyphicon-home" style="margin-top: 19px"></span><b>{{rootFolderName}}</b></li> -->
+                     <li title="Level up" class="toolbar"><a href="javascript:void(0);" class="glyphicon glyphicon-level-up" ng-click="higherlevelFolder(folid)"></a></li>
+                     <li title="Upload" class="toolbar"><a href="javascript:void(0);" ng-click="uploadbtn()" class="glyphicon glyphicon-upload"></a></li>
+                     <li title="New folder" class="toolbar toolbar-new-folder"><a href="javascript:void(0);" ng-click="mkdir()" class="glyphicon glyphicon-folder-open"></a></li>
+                     <li title="Delete Selected" class="toolbar toolbar-listview"><a href="javascript:void(0);" class="glyphicon glyphicon-trash" ng-click="deleteSelected()"></a></li>
+                  </ul>
+
+                  <div class="form-group pull-right" style="padding-top:6px;margin-bottom:0px;">
+                     <div class="selectCount">
+                        Selected Files : <span id="files_count">{{copyfile.length}}</span>
+                        <a href="javascript:void(0)" style="font-size:12px;color:#0086be" ng-click="clearCopy()">Clear</a>
+                     </div>
+                     <input class="form-control nav-inp fileSearchBox" id="fileSearchBox" ng-focus="searchBox()" name="fileSearchBox" placeholder="Search" type="text" ng-model="filters.search">
+                  </div>
+               </div>
+            </div>
+         </nav>
+         <!-- hideShowClass -->
+         <div id="filesContainer" context-menu="menuOptionsPaste">
+            <div id="uploadContainer" class="">
+               <div id="w4-tab1" class="tab-pane active" style="display: block;">
+                  <div class="panel panel-default" style="width:70%;border:none;margin:10px auto;">
+                     <div class="panel-heading filehead brdrfile">
+                        <div id="multipleupload" style="float:left;height: 125px;"><!-- Upload --></div>
+                        <a href="javascript:void(0)" style="margin-left:0px;padding:4px 10px;" ng-click="uploadClick();"
+                           class="btn btn-info">Upload</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- if folder contains no data -->
+            <div ng-if="displayfolder.length == 0 || (displayfolder|filter:filters.search).length==0">
+              <!-- <h1 style="margin-left:40%;">No Data Found</h1> -->
+              <div id="no-downloads">
+                <div>
+                  <!-- <img src="assets/img/file_icon/nothing.png"/> -->
+                  <!-- <a href="javascript:void(0);" ng-click="uploadbtn()" class="glyphicon glyphicon-upload uploadicon" style="font-size:80px;" title="Click to Add or Drag & Drop files"> </a> -->
+                  <br>
+                  <span>Nothing to see here…</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- loader image -->
+            <div ng-if="showLoder" id="loader"></div>
+
+            
+            <div ng-repeat="display in displayfolder | orderBy:'f_id' | filter:filters.search" style="" class="fileshow">
+               <!-- Folder display -->
+               <!-- icon condion ng-if="rootfolder==display.parent_id" -->
+              <folder ng-if="display.f_id=='0' && display.item_id =='0'" context-menu="menuOptionsFolder" ng-dblclick="findfile(display.fmanager_id,display.name)" ng-click="foldertree(display.fmanager_id,display.parent_id)" menuoptionIdName="0"><p>{{display.name.substr(0,22)}} <span class="badge bg-info folderbadge">{{display.countchild}}</span><span class="fangle"> <i class="fa fa-caret-right"></i></span></p></folder>
+              
+              <!-- Folder display if it is item folder-->
+              <folder ng-if="display.f_id=='0' && display.item_id !='0'" context-menu="menuOptionsFolder" ng-dblclick="findfile(display.fmanager_id,display.name)" menuoptionIdName="0">
+                <p>{{display.name.substr(0,22)}} </p></folder>
+                <!-- ng-if="rootfolder==display.parent_id" -->
+                <div class="ftree">
+                    <script type="text/ng-template" id="categoryTree">
+                        <folder ng-if="category.f_id=='0' && category.item_id =='0'" context-menu="menuOptionsFolder" ng-dblclick="findfile(category.fmanager_id,category.name)" ng-click="foldertreeChild(category.fmanager_id,category.parent_id)" menuoptionIdName="{{category.fmanager_id}},[{{category.ext}},{{category.created_date}},{{category.size}}],{{category.name}}"><p>{{category.name.substr(0,22)}} <span class="fangle"><span class="badge bg-info folderbadge">{{category.countchild}}</span> <i class="fa fa-caret-right"></i></span></p></folder>
+
+                        <!-- Folder display if it is item folder-->
+                        <folder ng-if="category.f_id=='0' && category.item_id !='0'" context-menu="menuOptionsFolder" ng-dblclick="findfile(category.fmanager_id,category.name)" menuoptionIdName="{{category.fmanager_id}},[{{category.ext}},{{category.created_date}},{{category.size}}],{{category.name}}">
+                        <p>{{category.name.substr(0,22)}}</p></folder>
+
+                        <!-- Pdf  -->
+                       <file extension="pdf" id="{{category.fmanager_id}}" ng-click="addToCopy(category.fmanager_id)"  ng-dblclick="addToDownload(category.name)" ng-if="category.ext == 'pdf'"  context-menu="menuOptionsFiles" class="pdf" menuoptionIdName="{{category.fmanager_id}},[{{category.ext}},{{category.created_date}},{{category.size}}],{{category.name}}"><p>{{category.name.substr(0,22)}}</p></file>
+                       
+                       <!-- Png -->
+                       <file extension="png" id="{{category.fmanager_id}}" ng-click="addToCopy(category.fmanager_id)"  ng-dblclick="addToDownload(category.name)" 
+                                ng-if="category.ext == 'jpg' ||
+                                       display.ext == 'JPEG' || 
+                                       category.ext == 'png' || 
+                                       category.ext == 'jpeg'||  
+                                       category.ext == 'gif' ||  
+                                       category.ext == 'bmp' ||  
+                                       category.ext == 'jfif' ||  
+                                       category.ext == 'webp'  
+                                       ||  
+                                       category.ext == 'svg'  
+                                      "  
+                       style="background-image:url('uploads/fileupload/{{category.name}}') !important;" context-menu="menuOptionsFiles" menuoptionIdName="{{category.fmanager_id}},[{{category.ext}},{{category.created_date}},{{category.size}}],{{category.name}}"><p>{{category.name.substr(0,22)}}</p></file>
+                       <!-- Zip -->
+                       <file extension="zip" id="{{category.fmanager_id}}" ng-click="addToCopy(category.fmanager_id)" ng-dblclick="addToDownload(category.name)"  
+                          ng-if="category.ext == 'zip' ||
+                                 category.ext == 'gz' ||
+                                 category.ext == 'rar'
+                                " class="zip" context-menu="menuOptionsFiles" menuoptionIdName="{{category.fmanager_id}},[{{category.ext}},{{category.created_date}},{{category.size}}],{{category.name}}"><p>
+                       {{category.name.substr(0,22)}}</p></file>
+
+                       <!-- doc&docx -->
+                       <file extension="doc" id="{{category.fmanager_id}}" ng-click="addToCopy(category.fmanager_id)"  ng-dblclick="addToDownload(category.name)" ng-if="category.ext == 'doc' || category.ext =='docx'" class="doc" context-menu="menuOptionsFiles" menuoptionIdName="{{category.fmanager_id}},[{{category.ext}},{{category.created_date}},{{category.size}}],{{category.name}}"><p>{{category.name}}</p></file>
+
+                       <!-- Xls -->
+                       <file extension="xls" id="{{category.fmanager_id}}" ng-click="addToCopy(category.fmanager_id)"  ng-dblclick="addToDownload(category.name)" 
+                          ng-if="category.ext == 'xlsx' ||
+                                 category.ext == 'xlsm' ||
+                                 category.ext == 'xls' ||
+                                 category.ext == 'csv'
+                                " class="xls" context-menu="menuOptionsFiles" menuoptionIdName="{{category.fmanager_id}},[{{category.ext}},{{category.created_date}},{{category.size}}],{{category.name}}"><p>
+                          {{category.name.substr(0,22)}}</p>
+                       </file>
+
+                       <!-- PPT -->
+                       <file extension="ppt" id="{{category.fmanager_id}}" ng-click="addToCopy(category.fmanager_id)"  ng-dblclick="addToDownload(category.name)" ng-if="category.ext == 'ppt' || category.ext =='pptx'" class="ppt" context-menu="menuOptionsFiles" menuoptionIdName="{{category.fmanager_id}},[{{category.ext}},{{category.created_date}},{{category.size}}],{{category.name}}"><p>{{category.name.substr(0,22)}}</p></file>
+
+                       <!-- MP3 -->
+                       <file extension="mp3" id="{{category.fmanager_id}}" ng-click="addToCopy(category.fmanager_id)" context-menu="menuOptionsFiles" ng-dblclick="addToDownload(category.name)" ng-if="category.ext == 'mp3' ||
+                                    category.ext =='wav' ||
+                                    category.ext =='wma'
+                                   " class="mp3" menuoptionIdName="{{category.fmanager_id}},[{{category.ext}},{{category.created_date}},{{category.size}}],{{category.name}}"><p>
+                       {{category.name.substr(0,22)}}</p></file>
+
+                       <!-- VIDEO -->
+                       <file extension="mp4" id="{{category.fmanager_id}}" ng-click="addToCopy(category.fmanager_id)"   ng-dblclick="addToDownload(category.name)"  
+                             ng-if="category.ext == 'mp4' ||
+                                    category.ext =='wmv' ||
+                                    category.ext =='avi' ||
+                                    category.ext =='3gp' ||
+                                    category.ext =='mov' ||
+                                    category.ext =='vob'
+                                   " class="video" context-menu="menuOptionsFiles" menuoptionIdName="{{category.fmanager_id}},[{{category.ext}},{{category.created_date}},{{category.size}}],{{category.name}}"><p>
+                       {{category.name.substr(0,22)}}</p></file>
+
+                       <!-- TEXT -->
+                       <file extension="txt" id="{{category.fmanager_id}}" ng-click="addToCopy(display.fmanager_id)"   ng-dblclick="addToDownload(display.name)" 
+                             ng-if="category.ext == 'txt' ||
+                                    category.ext =='html' ||
+                                    category.ext =='htm'  ||
+                                    category.ext =='js'   ||
+                                    category.ext =='css'  ||
+                                    category.ext =='sql'  ||
+                                    category.ext =='tiff' ||
+                                    category.ext =='ttf'  
+                                   " class="txt" context-menu="menuOptionsFiles" menuoptionIdName="{{category.fmanager_id}},[{{category.ext}},{{category.created_date}},{{category.size}}],{{category.name}}"><p>
+                       {{category.name.substr(0,22)}}</p></file>
+
+                       <!-- EXE -->
+                       <file extension="exe" id="{{category.fmanager_id}}" ng-click="addToCopy(category.fmanager_id)"  ng-dblclick="addToDownload(category.name)"  
+                             ng-if="category.ext == 'exe'
+                                   " class="exe" context-menu="menuOptionsFiles" menuoptionIdName="{{category.fmanager_id}},[{{category.ext}},{{category.created_date}},{{category.size}}],{{category.name}}"><p>
+                       {{category.name.substr(0,22)}}</p></file>
+
+                        <ul class="folderul f1 ftr{{display.fmanager_id}} nch{{category.parent_id}}{{category.fmanager_id}}" style="display:none;">
+                            <li ng-repeat="category in category.categories" ng-include="'categoryTree'" >           
+                            </li>
+                        </ul>
+                    </script>
+                    <ul class="folderul f2 ftr{{display.fmanager_id}} nch{{display.fmanager_id}}{{display.parent_id}}">
+                        <li ng-repeat="category in display.categories" ng-include="'categoryTree'" class="ft{{display.parent_id}}{{display.fmanager_id}} ftchld{{category.parent_id}}{{category.fmanager_id}}" style="display:none;"></li>
+                    </ul>
+                </div>
+               <!-- Pdf  -->
+               <file extension="pdf" id="{{display.fmanager_id}}" ng-click="addToCopy(display.fmanager_id)"  ng-dblclick="addToDownload(display.name)" ng-if="display.ext == 'pdf'"  context-menu="menuOptionsFiles" class="pdf" menuoptionIdName="0"><p>{{display.name.substr(0,22)}}</p></file>
+               
+               <!-- Png -->
+               <file extension="png" id="{{display.fmanager_id}}" ng-click="addToCopy(display.fmanager_id)"  ng-dblclick="addToDownload(display.name)" 
+                        ng-if="display.ext == 'jpg' ||
+                               display.ext == 'JPEG' ||
+                               display.ext == 'png' || 
+                               display.ext == 'jpeg'||  
+                               display.ext == 'gif'||  
+                               display.ext == 'bmp' || 
+                               display.ext == 'jfif' || 
+                               display.ext == 'svg' || 
+                               display.ext == 'webp' "  
+               style="background-image:url('uploads/fileupload/{{display.name}}') !important;" context-menu="menuOptionsFiles" menuoptionIdName="0"><p>{{display.name.substr(0,22)}}</p></file>
+
+               <!-- Zip -->
+               <file extension="zip" id="{{display.fmanager_id}}" ng-click="addToCopy(display.fmanager_id)" ng-dblclick="addToDownload(display.name)"  
+                  ng-if="display.ext == 'zip' ||
+                         display.ext == 'gz' ||
+                         display.ext == 'rar'
+                        " class="zip" context-menu="menuOptionsFiles" menuoptionIdName="0"><p>
+               {{display.name.substr(0,22)}}</p></file>
+
+               <!-- doc&docx -->
+               <file extension="doc" id="{{display.fmanager_id}}" ng-click="addToCopy(display.fmanager_id)"  ng-dblclick="addToDownload(display.name)" ng-if="display.ext == 'doc' || display.ext =='docx'" class="doc" context-menu="menuOptionsFiles" menuoptionIdName="0"><p>{{display.name}}</p></file>
+
+               <!-- Xls -->
+               <file extension="xls" id="{{display.fmanager_id}}" ng-click="addToCopy(display.fmanager_id)"  ng-dblclick="addToDownload(display.name)" 
+                  ng-if="display.ext == 'xlsx' ||
+                         display.ext == 'xlsm' ||
+                         display.ext == 'xls' ||
+                         display.ext == 'csv'
+                        " class="xls" context-menu="menuOptionsFiles" menuoptionIdName="0"><p>
+                  {{display.name.substr(0,22)}}</p>
+               </file>
+
+               <!-- PPT -->
+               <file extension="ppt" id="{{display.fmanager_id}}" ng-click="addToCopy(display.fmanager_id)"  ng-dblclick="addToDownload(display.name)" ng-if="display.ext == 'ppt' || display.ext =='pptx'" class="ppt" context-menu="menuOptionsFiles" menuoptionIdName="0"><p>{{display.name.substr(0,22)}}</p></file>
+
+               <!-- MP3 -->
+               <file extension="mp3" id="{{display.fmanager_id}}" ng-click="addToCopy(display.fmanager_id)" context-menu="menuOptionsFiles" ng-dblclick="addToDownload(display.name)" ng-if="display.ext == 'mp3' ||
+                            display.ext =='wav' ||
+                            display.ext =='wma'
+                           " class="mp3"  menuoptionIdName="0"><p>
+               {{display.name.substr(0,22)}}</p></file>
+
+               <!-- VIDEO -->
+               <file extension="mp4" id="{{display.fmanager_id}}" ng-click="addToCopy(display.fmanager_id)"   ng-dblclick="addToDownload(display.name)"  
+                     ng-if="display.ext == 'mp4' ||
+                            display.ext =='wmv' ||
+                            display.ext =='avi' ||
+                            display.ext =='3gp' ||
+                            display.ext =='mov' ||
+                            display.ext =='vob'
+                           " class="video" context-menu="menuOptionsFiles" menuoptionIdName="0"><p>
+               {{display.name.substr(0,22)}}</p></file>
+
+               <!-- TEXT -->
+               <file extension="txt" id="{{display.fmanager_id}}" ng-click="addToCopy(display.fmanager_id)"   ng-dblclick="addToDownload(display.name)" 
+                     ng-if="display.ext == 'txt' ||
+                            display.ext =='html' ||
+                            display.ext =='htm'  ||
+                            display.ext =='js'   ||
+                            display.ext =='css'  ||
+                            display.ext =='sql'  ||
+                            display.ext =='tiff' ||
+                            display.ext =='ttf'  
+                           " class="txt" context-menu="menuOptionsFiles" menuoptionIdName="0"><p>
+               {{display.name.substr(0,22)}}</p></file>
+
+               <!-- EXE -->
+               <file extension="exe" id="{{display.fmanager_id}}" ng-click="addToCopy(display.fmanager_id)"  ng-dblclick="addToDownload(display.name)"  
+                     ng-if="display.ext == 'exe'
+                           " class="exe" context-menu="menuOptionsFiles" menuoptionIdName="0"><p>
+               {{display.name.substr(0,22)}}</p></file>
+               
+               <a id="download{{display.fmanager_id}}" style="display:none;" href="uploads/fileupload/{{display.name}}">Download</a>
+
+            </div>
+
+         </div>
+
+      </form>
+      <!-- Modal -->
+      <div id="propertyModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content modalClass">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Properties</h4>
+            </div>
+            <div class="modal-body">
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+   </div>
+
+</div>

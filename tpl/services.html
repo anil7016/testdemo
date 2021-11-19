@@ -1,0 +1,147 @@
+  <div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' " >
+  </div>
+  <div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs" data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+      <div ui-butterbar></div>
+      <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside" ></a>
+      <div class="md-content page_content_wrapper" id="top">
+      
+        <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+          <h1 class="m-n font-thin h3">Services</h1>
+        </div>
+        <div class="wrapper-md ng-scope">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <form id="service-type-form">
+                        <!--   TAB1 -->
+                        <div class="row">
+                            <div class="">
+                                <div class="panel-body">
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Service Name</label>
+                                                <input type="text" class="form-control" placeholder="Enter Service Name" name="serviceName" ng-model="service.service_name" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Abbrevation</label>
+                                                <input type="text" name="code" class="form-control" placeholder="Enter abbrevation"  ng-model="service.abbrevation" required>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                              <label>Job Representation</label>
+                                              <input type="text" select2-job-presentation data-typeid="1" id="job_repereesantation_id" class="form-control" name="job_reperesantation"   ng-model="service.job_representation" required />
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                          <div class="form-group">
+                                              <label>Select Properties</label>
+                                              <input type="text" select2-properties data-typeid="1" id="properties_id" class="form-control" name="properties" ng-model="service.properties" required/>
+                                          </div>
+                                        </div>
+                                  <div class="col-sm-4">
+                                            <div class="checkbox">
+                                                <label class="i-checks i-checks-sm" style="padding-top: 20px;">
+                                                    <input type="checkbox" name="due_date_mandatory" ng-true-value="1" ng-false-value="0" ng-model="service.due_date_mandatory" ng-checked="service.due_date_mandatory == 1">
+                                                    <i></i>
+                                                    Due Date mandatory
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="checkbox">
+                                                <label class="i-checks i-checks-sm" style="padding-top: 20px;">
+                                                    <input type="checkbox" name="is_active" ng-true-value="1" ng-false-value="0" ng-model="service.quantity_mandatory" ng-checked="service.quantity_mandatory == 1">
+                                                    <i></i>
+                                                    Quantity mandatory
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Sort code</label>
+                                                <input type="text" name="servieCode" placeholder="Enter sort Code" class="form-control"  ng-model="service.short_code" required>
+
+                                            </div>
+                                        </div> -->
+                                        <!-- <div class="col-sm-4">
+                                            <div class="checkbox">
+                                                <label class="i-checks i-checks-sm" style="padding-top: 20px;">
+                                                    <input type="checkbox" name="is_active" ng-true-value="1" ng-false-value="0" ng-model="service.is_active" ng-checked="status.is_active == 1">
+                                                    <i></i>
+                                                    Active(check to active)
+                                                </label>
+                                            </div>
+
+                                        </div> -->
+                                        <!-- <div class="col-sm-4">
+                                            <div class="checkbox">
+                                                <label class="i-checks i-checks-sm" style="padding-top: 20px;">
+                                                    <input type="checkbox" name="isdefault" ng-true-value="1" ng-false-value="0" ng-model="service.isdefault" ng-checked="service.isdefault == 1">
+                                                    <i></i>
+                                                    Is Default(check to Default)
+                                                </label>
+                                            </div>
+
+                                        </div> -->
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="col-sm-4">
+                                            <div class="checkbox">
+                                                <label class="i-checks i-checks-sm" style="padding-top: 20px;">
+                                                    <input type="checkbox" name="is_active" ng-true-value="1" ng-false-value="0" ng-model="service.is_active" ng-checked="status.is_active == 1">
+                                                    <i></i>
+                                                    Active(check to active)
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <button style="margin-left: 27px" class="btn btn-info btnSave" ng-click="save('service-type-form');"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                                </div>
+                            </div>
+                            <div class="">
+                                <div class="panel-body">
+                                    <table  class="table table-striped b-t b-b table-bordered">
+                                        <thead>
+                                        <th>#</th>
+                                        <th>Service Name</th>
+                                        <th>Abbrevation</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="ser in servicelist" ng-class="(ser.sId == service.sId) ? 'rowactivate' : ''">
+                                                <td ng-bind="$index + 1"></td>
+                                                <td ng-bind="ser.service_name"></td>
+                                                <td ng-bind="ser.abbrevation"></td>
+                                                <td ng-if="ser.is_active == '0'" class="ng-scope"><span class="label bg-danger" title="Inactive">Inactive</span></td> 
+                                                <td ng-if="ser.is_active == '1'" class="ng-scope"><span class="label bg-success" title="Inactive">Active</span></td> 
+                                                <td>
+                                                    <a href="javascript:void(0)" ng-click="getService(ser.sId, 'top');" title="edit"><i class="glyph-icon fa-edit"></i></a>   <a href="javascript:void(0)" ng-click="deleteService(ser.sId)" title="delete"><i class="iconDelete glyph-icon fa-times"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr ng-show="serviceEmpty">
+                                                <td colspan="4" ng-bind="dataNotFound"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+          </div>
+        <!-- footer copy right -->
+        <div data-ng-include="'tpl/copyRight.html'"></div>
+
+        </div>
+    </div>
+  </div>

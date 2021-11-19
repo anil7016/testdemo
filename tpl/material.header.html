@@ -1,0 +1,352 @@
+<style type="text/css">
+.pagination {
+    margin: 0px 0 !important;
+}
+.sidenav {
+    z-index:1000;
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    
+    top: 0; /* Stay at the top */
+    right: 0;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+.list-group-item a{
+  text-decoration:underline;
+}
+/* The navigation menu links */
+
+    
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    
+}
+
+.loadMore:hover{
+  color:#19a9d5;
+}
+.loadMore:focus{
+  color:#19a9d5;
+}
+.loadMore:activate{
+  color:#19a9d5;
+}
+
+.loader{position:fixed;left:0px;right:0px;top:0px;bottom:0px;background-color:#fff;text-align:center;z-index:1000;}
+.uil-ring-css {
+  display:inline-block;
+  position: relative;
+  height:100%;
+}
+.uil-ring-css > div {
+  position: absolute;
+  display: block;
+  width: 80px;
+  height: 80px;
+  top: 50%;
+  left:50%;
+  margin-top:-40px;
+  margin-left:-40px;
+  border-radius:50%;
+  box-shadow: 0 3px 0 0 #502dc4;
+  /* box-shadow: 0 3px 0 0 #2196f3d6; */
+  -ms-animation: uil-ring-anim 1s linear infinite;
+  -moz-animation: uil-ring-anim 1s linear infinite;
+  -webkit-animation: uil-ring-anim 1s linear infinite;
+  -o-animation: uil-ring-anim 1s linear infinite;
+  animation: uil-ring-anim 1s linear infinite;
+}
+@-webkit-keyframes uil-ring-anim {
+  0% {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes uil-ring-anim {
+  0% {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes uil-ring-anim {
+  0% {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-moz-keyframes uil-ring-anim {
+  0% {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes uil-ring-anim {
+  0% {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes uil-ring-anim {
+  0% {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes uil-ring-anim {
+  0% {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+</style>
+
+<script type="text/javascript">
+  /* Set the width of the side navigation to 250px */
+  function openNav() {
+      document.getElementById("mySidenav").style.width = "270px";
+  }
+
+  /* Set the width of the side navigation to 0 */
+  function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+  }
+</script>
+
+
+<!-- Ajax Loader Start -->
+<div class="loader" data-loading=""> <div class="uil-ring-css"><div></div></div></div>
+<!-- Ajax Loader End -->
+
+<!-- navbar header -->
+<div class="navbar-header sub_header_custom">
+    <button class="pull-right visible-xs dk" ui-toggle-class="show" data-target=".navbar-collapse">
+        <i class="glyphicon glyphicon-cog"></i>
+    </button>
+    <button class="pull-right visible-xs" ui-toggle-class="off-screen" data-target=".md-aside" ui-scroll-to="app">
+        <i class="glyphicon glyphicon-align-justify"></i>
+    </button>
+    <!-- brand -->
+    <a href="#/" class="navbar-brand text-lt">
+          <!-- <i class="fa fa-btc" style="color:#ffffff !important;"></i> -->
+          <img src="assets/img/BeConnected_Mini_Logo.gif" alt="Translation Management System" style="max-height:30px !important;">
+          <span class="hidden-folded m-l-xs">TMS</span>
+        </a>
+    <!-- / brand -->
+</div>
+<!-- / navbar header -->
+<!-- navbar collapse -->
+<div class="collapse navbar-collapse box-shadow header-bg-color" ng-controller="headerController">
+    <!-- Recent Activity Sidebar start -->
+  <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn loadMore" onclick="closeNav()">&times;</a>
+      <div class="col w-lg lter b-l bg-auto" id="rightMenu"  ng-if="userRight==1" >
+             <div><!--class="wrapper" -->
+              <div class="col w-md bg-white-only b-l bg-auto no-border-xs" style="margin-top: -45px;width:252px">
+                  <div class="padder-md">
+                     <!-- streamline -->
+                     <div class="m-b text-md" style="color:black;">Recent Activity</div>
+                     <div class="streamline b-l m-b" style="font-size: 12px;">
+                        <div class="sl-item b-{{activity.color}} b-l" ng-repeat="activity in activityList | limitTo:activityLimit">
+                           <div class="m-l">
+                              <div id="activityDate{{$index}}" style="color:#828282;">{{dateDate[$index]}}</div>
+                              <div class="text-muted">
+                                <!-- For Direct Client -->
+                                 <span class="text-muted">
+                                 <a ng-if="activity.log_status == 'direct_cli' && activity.log_type != 'delete'" href="#/viewdirect/{{activity.log_type_id}}" class="text-info" ng-bind="activity.log_title"></a></span>
+
+                                 <span class="text-muted">
+                                 <a ng-if="activity.log_status == 'direct_cli' && activity.log_type == 'delete'" href="javascript:void(0);" class="text-info" ng-bind="activity.log_title"></a></span>
+                                 
+                                <!-- For Project -->
+                                <span class="text-muted"> 
+                                 <a ng-if="activity.log_status == 'project' && activity.log_type == 'delete'" href="javascript:void(0);" ng-click="edit(activity.log_type_id)" class="text-info" ng-bind="activity.log_title"></a>
+                                </span>
+                                <span class="text-muted"> 
+                                 <a ng-if="activity.log_status == 'project' && activity.log_type != 'delete'" href="javascript:void(0);" ng-click="edit(activity.log_type_id)" class="text-info" ng-bind="activity.log_title"></a>
+                                </span>
+                                 
+                                <!-- For External Resource --> 
+                                <span class="text-muted"> 
+                                 <a ng-if="activity.log_status == 'external_res' && activity.log_type == 'delete'" href="javascript:void(0);" class="text-info" ng-bind="activity.log_title"></a></span>
+
+                                 <span class="text-muted"> 
+                                 <a ng-if="activity.log_status == 'external_res' && activity.log_type != 'delete'" href="#/viewExternal/{{activity.log_type_id}}" class="text-info" ng-bind="activity.log_title"></a></span>
+                                 
+                                 <!-- For Task #/job-summery-details/{{activity.task_id}}-->
+                                 <span class="text-muted">
+                                 <a ng-if="activity.log_status == 'task' && activity.log_type != 'delete'" href="javascript:void(0);" ng-click="goToJob(activity.task_id,activity.log_type_id)" class="text-info" ng-bind="activity.log_title"></a></span>
+
+                                 <span class="text-muted">
+                                 <a ng-if="activity.log_status == 'task' && activity.log_type == 'delete'" href="javascript:void(0);" class="text-info" ng-bind="activity.log_title"></a></span>
+                                 
+                                 <!-- For Indirect Client -->
+                                 <span class="text-muted">
+                                 <a ng-if="activity.log_status == 'indirect_cli' && activity.log_type == 'delete'" href="javascript:void(0);" class="text-info" ng-bind="activity.log_title"></a></span>
+
+                                 <span class="text-muted">
+                                 <a ng-if="activity.log_status == 'indirect_cli' && activity.log_type != 'delete'" href="#/viewindirect/{{activity.log_type_id}}" class="text-info" ng-bind="activity.log_title"></a></span>
+                                 
+                                 <!-- For Internal Resource -->
+                                 <span class="text-muted">
+                                 <a ng-if="activity.log_status == 'internal_res' && activity.log_type == 'delete'" href="javascript:void(0);" class="text-info" ng-bind="activity.log_title"></a></span>
+
+                                 <span class="text-muted">
+                                 <a ng-if="activity.log_status == 'internal_res' && activity.log_type != 'delete'" href="#/viewinternal/{{activity.log_type_id}}" class="text-info" ng-bind="activity.log_title"></a></span>
+
+
+                                 <!-- <span class="text-muted" ng-bind="activity.log_title"></span> -->
+                                 <span ng-if="activity.log_type != 'add'"><span ng-bind="activity.log_type | capitalize"></span>d</span><span ng-if="activity.log_type == 'add'"><span ng-bind="activity.log_type | capitalize"></span>ed</span>
+                                 <span  class="text-muted">in {{activity.log_status.split('_')[0] | capitalize}}
+                                 <span  class="text-muted" ng-if="activity.log_status.split('_')[0] == 'indirect' || activity.log_status.split('_')[0] == 'direct'">Clients</span>
+                                 <span  class="text-muted" ng-if="activity.log_status.split('_')[0] == 'internal' || activity.log_status.split('_')[0] == 'external'">Resources</span>
+                                 </span>
+                              </div>
+                           </div>
+
+                        </div>
+                        <div class="sl-item" ng-show="!activityList.length">
+                           <div class="m-l" ng-bind="dataNotFound">
+                           </div>
+                        </div>
+                     </div>
+                      <h4 ng-if="activityList.length > 17" style="text-align:center;"><a href="javascript:void(0);" ng-click="loadMoreActivity()" class="loadMore">Load More</a></h4>
+                     <!-- / streamline -->
+                  </div>
+               </div>
+            </div>
+         </div>
+    </div>
+<!-- Recent Activity Sidebar end -->
+
+    <!-- nabar right -->
+    <ul class="nav navbar-nav navbar-right userProfile_box">
+        <li class="dropdown" dropdown>
+            <a href class="dropdown-toggle clear" dropdown-toggle>
+              <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+                <img id="profileImgLogin" src="uploads/profilePic/{{session_vProfilePic}}" alt="profilePic">
+                <i class="on md b-white bottom"></i>
+              </span>
+              <span class="hidden-sm hidden-md">{{session_vUserFullName}}</span> <b class="caret"></b>
+            </a>
+            <!-- dropdown -->
+            <ul class="dropdown-menu animated fadeInRight w">
+                <span class="arrow top hidden-folded arrow-info"></span>
+                <li ng-if="userRight == 1">
+                    <a href="#/viewinternal/{{uId}}">Profile</a>
+                    <!-- <a ui-sref="app.page.profile">Profile</a> -->
+                </li>
+                <li ng-if="userRight == 1">
+                    <a href="javascript:void(0);" onclick="openNav()">Recent Activity</a>
+                    <!-- <a ui-sref="app.page.profile">Profile</a> -->
+                </li>
+                <li>
+                    <a href="javascript:void(0);" ng-click="logout()">Logout</a>
+                </li>
+            </ul>
+            <!-- / dropdown -->
+        </li>
+    </ul>
+    <!-- / navbar right -->
+    <!-- search form -->
+    <form class="search_box navbar-form navbar-form-sm navbar-left shift pull-right" ui-shift="prependTo" target=".navbar-collapse" role="search" ng-if="userRight==1" ng-submit="searchProject()" name="searcForm">
+        <div class="form-group">
+            <div class="input-group">
+                <input type="text" ng-model="selectedOrder" typeahead="orderName for orderName in orderNames | filter:$viewValue | limitTo:8" class="form-control input-sm bg-light no-border rounded padder" placeholder="Search for project or job.." id="selectedOrder" typeahead-on-select="searchProject($item)" ng-disabled="disableSearch">
+                <span class="input-group-btn">
+                <!-- <a href="javascript:void(0);" ng-click="searchProject()" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></a> -->
+                <a id="clearBtn" ng-if="selectedOrder" href="javascript:void(0)" class="clearBtnHide btn btn-sm bg-light rounded" ng-click="clearSearchBox()"><i class="fa fa-close" style="color:#333 !important;"></i></a>
+
+                <button type="submit" class="btn btn-sm bg-light rounded">
+                    <i class="fa fa-search" id="searchIcon" style="color:#333 !important;"></i>
+                </button>
+              </span>
+            </div>
+        </div>
+    </form>
+    <!-- / search form -->
+</div>
+<!-- / navbar collapse -->

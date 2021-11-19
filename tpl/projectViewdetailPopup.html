@@ -1,0 +1,149 @@
+<style type="text/css">
+    .modal-dialog {
+        width: 80%;
+    }
+</style>
+<div class="modal-header" style="min-height:60px;">
+    <div class="modal-title">
+        <h4>Project Detail</h4>
+        <a href="javascript:void(0);" ng-click="editProjectDetail(general.order_id)" class="btn btn-info btn-sm btn-rounded ng-scope"><i class="fa fa-pencil"></i>&nbsp; Edit Project</a>
+    </div>
+</div>
+<div class="modal-body ng-scope">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label"><strong>Project Number :</strong></label> <label>{{general.order_no}}</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label><strong>Company Code : </strong></label>
+                            <label ng-bind="general.company_code"></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label"><strong>Project Date :</strong></label> <label>{{general.order_date}}</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label><strong>Client : </strong></label>
+                            <label ng-bind="customer.client"></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label><strong>Contact Persons : </strong></label>
+                            <label ng-bind="customer.contact"></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label><strong>Account : </strong></label>
+                            <label ng-bind="customer.indirect_customer"></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">
+                              <strong>Project Coordinator : </strong></label>
+                            <label id="coordinator"></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">
+                              <strong>Project Manager : </strong></label>
+                            <label id="manager"></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label">
+                              <strong>Quality Assurance Specialist : </strong></label>
+                            <label id="QASpecialist"></label>
+                        </div>
+                    </div>
+                    <!-- <div class="col-sm-4">
+                            <div class="form-group">
+                              <label class="control-label">
+                              <strong>Project Name :</strong></label>
+                              <label>{{general.project_name}}</label>
+                            </div>
+                          </div> -->
+                    <!-- <div class="col-sm-4">
+                            <div class="form-group">
+                              <label class="control-label"><strong>Email
+                              Subject :</strong></label> <label>{{general.email_subj}}</label>
+                            </div>
+                          </div> -->
+                    <!-- <div class="col-sm-4">
+                            <div class="form-group">
+                              <label class="control-label"><strong>Specialization :</strong></label> <label>{{general.specialization}}</label>
+                            </div>
+                          </div> -->
+                    <!-- <div class="col-sm-4">
+                            <div class="form-group">
+                              <label class="control-label"><strong>Project Type : </strong></label>
+                              <label ng-bind="general.project_type"></label>
+                            </div>
+                          </div> -->
+                    <!-- <div class="col-sm-4">
+                            <div class="form-group">
+                              <label class="control-label"><strong>Due Date :</strong></label> 
+                              <label>{{general.due_date}}</label>
+                            </div>
+                          </div> -->
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label class="control-label"><strong>Project status : </strong></label>
+                            <label ng-bind="general.project_status"></label>
+                        </div>
+                    </div>
+                    <!-- <div class="col-sm-6">
+                            <div class="form-group">
+                              <label><strong>PO number : </strong></label> 
+                              <label ng-bind="customer.po_number"></label>
+                            </div>
+                          </div> -->
+                    <div class="col-sm-12" ng-show="warn">
+                        <div class="form-group">
+                            <h4><span style="color:#DC7F1A;"><strong>Warning :</strong> {{customer.memo}}</span></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table m-b-none default footable-loaded footable">
+                        <thead>
+                            <th>#</th>
+                            <th>Scoop Number</th>
+                            <th>Scoop Name</th>
+                            <th>Due Date</th>
+                            <th>Scoop Status</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="it in itemList">
+                                <td>{{$index+1}}</td>
+                                <td>{{it.item_number | numberFixedLen:3}}</td>
+                                <td ng-bind="it.item_name"></td>
+                                <td ng-if="it.due_date">{{it.due_date | globalDtFormat}}</td>
+                                <td ng-if="!it.due_date">Not set yet</td>
+                                <td ng-bind="it.item_status"></td>
+                            </tr>
+                            <tr ng-show="!itemList.length">
+                                <td colspan="5" ng-bind="dataNotFound"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-info" ng-click="cancel()">Cancel</button>
+    <!-- <button class="btn btn-primary" ng-click="ok()">OK</button> -->
+</div>

@@ -1,0 +1,279 @@
+.AntiqueWhite {
+    color: #a6a8b1;
+    background-color: #8B8378;
+}
+.AntiqueWhite.lt,
+.AntiqueWhite .lt {
+    background-color: #474c5e;
+}
+.AntiqueWhite.lter,
+.AntiqueWhite .lter {
+    background-color: #f3ba29;
+}
+.AntiqueWhite.dk,
+.AntiqueWhite .dk {
+    background-color: #84745f;
+}
+.AntiqueWhite.dker,
+.AntiqueWhite .dker {
+    background-color: #232735;
+}
+.AntiqueWhite.bg,
+.AntiqueWhite .bg {
+    background-color: #3a3f51;
+}
+.AntiqueWhite a {
+    color: #c1c3c9;
+}
+.AntiqueWhite a:hover {
+    color: #ffffff;
+}
+.AntiqueWhite a.list-group-item:hover,
+.AntiqueWhite a.list-group-item:focus {
+    background-color: inherit;
+}
+.AntiqueWhite .nav > li:hover > a,
+.AntiqueWhite .nav > li:focus > a,
+.AntiqueWhite .nav > li.active > a {
+    color: #ffffff;
+    background-color: #9e8869;
+}
+.AntiqueWhite .nav > li > a {
+    color: #b4b6bd;
+}
+.AntiqueWhite .nav > li > a:hover,
+.AntiqueWhite .nav > li > a:focus {
+    background-color: #9e8869;
+}
+.AntiqueWhite .nav .open > a {
+    background-color: #2e3344;
+}
+.AntiqueWhite .caret {
+    border-top-color: #a6a8b1;
+    border-bottom-color: #a6a8b1;
+}
+.AntiqueWhite.navbar .nav > li.active > a {
+    color: #ffffff;
+    background-color: #2e3344;
+}
+.AntiqueWhite .open > a,
+.AntiqueWhite .open > a:hover,
+.AntiqueWhite .open > a:focus {
+    color: #ffffff;
+}
+.AntiqueWhite .text-muted {
+    color: #8b8e99 !important;
+}
+.AntiqueWhite .text-lt {
+    color: #eaebed !important;
+}
+.AntiqueWhite.auto .list-group-item,
+.AntiqueWhite .auto .list-group-item {
+    background-color: transparent;
+    border-color: #2f3342 !important;
+}
+.AntiqueWhite.auto .list-group-item:hover,
+.AntiqueWhite .auto .list-group-item:hover,
+.AntiqueWhite.auto .list-group-item:focus,
+.AntiqueWhite .auto .list-group-item:focus,
+.AntiqueWhite.auto .list-group-item:active,
+.AntiqueWhite .auto .list-group-item:active,
+.AntiqueWhite.auto .list-group-item.active,
+.AntiqueWhite .auto .list-group-item.active {
+    background-color: #2e3344 !important;
+}
+.CadetBlue {
+    color: #fff;
+    background-color: #5f9ea0;
+}
+.CadetBlue.lt,
+.CadetBlue .lt {
+    background-color: #474c5e;
+}
+.CadetBlue.lter,
+.CadetBlue .lter {
+    background-color: #54596a;
+}
+.CadetBlue.dk,
+.CadetBlue .dk {
+    background-color: #5a9092;
+}
+.CadetBlue.dker,
+.CadetBlue .dker {
+    background-color: #232735;
+}
+.CadetBlue.bg,
+.CadetBlue .bg {
+    background-color: #3a3f51;
+}
+.CadetBlue a {
+    color: #ffff;
+}
+.CadetBlue a:hover {
+    color: #ffffff;
+}
+.CadetBlue a.list-group-item:hover,
+.CadetBlue a.list-group-item:focus {
+    background-color: inherit;
+}
+.CadetBlue .nav > li:hover > a,
+.CadetBlue .nav > li:focus > a,
+.CadetBlue .nav > li.active > a {
+    color: #ffffff;
+    background-color: #3c898c;
+}
+.CadetBlue .nav > li > a {
+    color: #dadada;
+}
+.CadetBlue .nav > li > a:hover,
+.CadetBlue .nav > li > a:focus {
+    background-color: #8dc8ca;
+}
+.CadetBlue .nav .open > a {
+    background-color: #2e3344;
+}
+.CadetBlue .caret {
+    border-top-color: #a6a8b1;
+    border-bottom-color: #a6a8b1;
+}
+.CadetBlue.navbar .nav > li.active > a {
+    color: #ffffff;
+    background-color: #2e3344;
+}
+.CadetBlue .open > a,
+.CadetBlue .open > a:hover,
+.CadetBlue .open > a:focus {
+    color: #ffffff;
+}
+.CadetBlue .text-muted {
+    color: #8b8e99 !important;
+}
+.CadetBlue .text-lt {
+    color: #eaebed !important;
+}
+.CadetBlue.auto .list-group-item,
+.CadetBlue .auto .list-group-item {
+    background-color: transparent;
+    border-color: #2f3342 !important;
+}
+.CadetBlue.auto .list-group-item:hover,
+.CadetBlue .auto .list-group-item:hover,
+.CadetBlue.auto .list-group-item:focus,
+.CadetBlue .auto .list-group-item:focus,
+.CadetBlue.auto .list-group-item:active,
+.CadetBlue .auto .list-group-item:active,
+.CadetBlue.auto .list-group-item.active,
+.CadetBlue .auto .list-group-item.active {
+    background-color: #2e3344 !important;
+}
+.chartreuse {
+    color: #a6a8b1;
+    background-color: #458B00;
+}
+.chartreuse.lt,
+.chartreuse .lt {
+    background-color: #474c5e;
+}
+.chartreuse.lter,
+.chartreuse .lter {
+    background-color: #54596a;
+}
+.chartreuse.dk,
+.chartreuse .dk {
+    background-color: #3d611b;
+}
+.chartreuse.dker,
+.chartreuse .dker {
+    background-color: #232735;
+}
+.chartreuse.bg,
+.chartreuse .bg {
+    background-color: #3a3f51;
+}
+.chartreuse a {
+    color: #c1c3c9;
+}
+.chartreuse a:hover {
+    color: #ffffff;
+}
+.chartreuse a.list-group-item:hover,
+.chartreuse a.list-group-item:focus {
+    background-color: inherit;
+}
+.chartreuse .nav > li:hover > a,
+.chartreuse .nav > li:focus > a,
+.chartreuse .nav > li.active > a {
+    color: #ffffff;
+    background-color: #40750b;
+}
+.chartreuse .nav > li > a {
+    color: #b4b6bd;
+}
+.chartreuse .nav > li > a:hover,
+.chartreuse .nav > li > a:focus {
+    background-color: #74a743;
+}
+.chartreuse .nav .open > a {
+    background-color: #2e3344;
+}
+.chartreuse .caret {
+    border-top-color: #a6a8b1;
+    border-bottom-color: #a6a8b1;
+}
+.chartreuse.navbar .nav > li.active > a {
+    color: #ffffff;
+    background-color: #2e3344;
+}
+.chartreuse .open > a,
+.chartreuse .open > a:hover,
+.chartreuse .open > a:focus {
+    color: #ffffff;
+}
+.chartreuse .text-muted {
+    color: #8b8e99 !important;
+}
+.chartreuse .text-lt {
+    color: #eaebed !important;
+}
+.chartreuse.auto .list-group-item,
+.chartreuse .auto .list-group-item {
+    background-color: transparent;
+    border-color: #2f3342 !important;
+}
+.chartreuse.auto .list-group-item:hover,
+.chartreuse .auto .list-group-item:hover,
+.chartreuse.auto .list-group-item:focus,
+.chartreuse .auto .list-group-item:focus,
+.chartreuse.auto .list-group-item:active,
+.chartreuse .auto .list-group-item:active,
+.chartreuse.auto .list-group-item.active,
+.chartreuse .auto .list-group-item.active {
+    background-color: #2e3344 !important;
+}
+/*
+.bg-dark .nav > li > a:hover,
+.bg-dark .nav > li > a:focus {
+    background-color: #9e8869;
+}
+
+.bg-dark .nav > li:hover > a,
+.bg-dark .nav > li:focus > a,
+.bg-dark .nav > li.active > a {
+    color: #ffffff;
+    background-color: #2e3344;
+}
+
+.bg-dark.dk,
+.bg-dark .dk {
+    background-color: #2e3344;
+}
+
+.bg-dark.lter,
+.bg-dark .lter {
+    background-color: #54596a;
+}
+
+.bg-dark {
+    color: #a6a8b1;
+    background-color: #3a3f51;
+}*/

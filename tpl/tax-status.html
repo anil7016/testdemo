@@ -1,0 +1,83 @@
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+  data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+  <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+    data-ng-include=" 'tpl/material.aside.html' ">
+  </div>
+  <div flex layout="column">
+    <div ui-butterbar></div>
+    <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+    <div class="md-content page_content_wrapper" id="top">
+
+      <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+        <h1 class="m-n font-thin h3">Taxation</h1>
+      </div>
+      <div class="wrapper-md ng-scope">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <form id="tax-status-form">
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Tax Name</label>
+                    <input type="text" class="form-control" placeholder="Enter Tax Name" name="tax_name"
+                      ng-model="status.tax_name" required>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Tax Percentage</label>
+                    <input type="number" min="0" max="100" name="tax_percentage" placeholder="Enter Tax Percentage"
+                      class="form-control" ng-model="status.tax_percentage" allow-decimal-numbers required>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="checkbox">
+                    <label class="i-checks i-checks-sm" style="padding-top: 20px;">
+                      <input type="checkbox" name="is_active" ng-true-value="1" ng-false-value="0"
+                        ng-model="status.is_active" ng-checked="status.is_active == 1">
+                      <i></i>
+                      Active (Set as Active)
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel-footer pl-0 pr-0">
+                <button class="btn m-b-xs w-xs btn-info"
+                  ng-click="save('tax-status-form');"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <table class="table table-striped b-t b-b table-bordered" datatable="ng">
+            <thead>
+              <th>#</th>
+              <th>Tax Name</th>
+              <th>Tax Percentage</th>
+              <th>Status</th>
+              <th>Action</th>
+            </thead>
+            <tbody>
+              <tr ng-repeat="tax in taxstatus" ng-class="(tax.tax_id == status.tax_id) ? 'rowactivate' : ''">
+                <td ng-bind="$index + 1"></td>
+                <td ng-bind="tax.tax_name"></td>
+                <td><span>{{tax.tax_percentage}}</span> &nbsp;<span>%</span></td>
+                <td ng-if="tax.is_active == '1'"><span class="label bg-success" title="active">Active</span></td>
+                <td ng-if="tax.is_active == '0'"><span class="label bg-danger" title="Inactive">Inactive</span></td>
+                <td><a href="javascript:void(0)" ng-click="getTax(tax.tax_id, 'top');" title="edit"><i
+                      class="glyph-icon fa-edit"></i></a>  <a href="javascript:void(0)"
+                    ng-click="deleteModel(tax.tax_id)" title="delete"><i class="iconDelete glyph-icon fa-times"></i></a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- footer copy right -->
+        <div data-ng-include="'tpl/copyRight.html'"></div>
+      </div>
+
+    </div>
+  </div>

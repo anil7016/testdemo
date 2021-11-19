@@ -1,0 +1,577 @@
+<style type="text/css">
+.modal-dialog {
+    width: 90%;
+    /* top: -30px;
+    left: 132px; */
+}
+.panel-body {
+    /*padding: 15px;*/
+    /*height: 350px;*/
+}
+.app-content-body {
+    float:none;
+}
+.tagsinput {
+    border-radius: 3px;
+    border: 1px solid #D5D5D5;
+    background: #FFF;
+    width: 100%;
+    min-height: 30px;
+    overflow-y: auto;
+    padding: 0px 15px;
+}
+
+/*.bolck {
+    float: left;
+    width: 100%;
+    padding: 15px;
+    background: #fff;
+}*/
+
+.bolck .control-label {
+    text-align: right;
+    font-size: 12px;
+    color: #656d78;
+    font-weight: 600;
+    padding-top: 10px;
+}
+.custm-table table{
+        border:1px solid #c1c1c1;
+    }
+    .custm-table thead tr{
+        background: #2cb1da;
+        color: #fff;border:1px solid #c1c1c1;
+    }
+    .custm-table tbody tr td{border:1px solid #c1c1c1;}
+    .custm-table thead tr th{border:1px solid #c1c1c1;}
+    .custm-table tbody tr:nth-child(even) {background: #CCC;border:1px solid #c1c1c1;}
+    .custm-table tbody tr:nth-child(even):hover{opacity: 0.8;}
+    .custm-table tbody tr:nth-child(odd) {background: #e2e2e2;border:1px solid #c1c1c1;}
+    .custm-table tbody tr:nth-child(odd):hover{opacity: 0.8;}
+    .fa-remove:before, .fa-close:before, .fa-times:before {
+	    content: "\f00d";
+	    color: white !important;
+	}
+    .modal-content {
+    position: relative;
+    background-color: #fff;
+    /* -webkit-background-clip: padding-box; */
+    /* background-clip: padding-box; */
+    /* border: 1px solid #999; */
+    /* border: 1px solid rgba(0, 0, 0, .2); */
+    /* border-radius: 6px; */
+    outline: 0;
+    /* -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5); */
+    /* box-shadow: 0 3px 9px rgba(0, 0, 0, .5); */
+}
+.itemsheader{
+  border-bottom: 1px solid #eaeff0;
+  margin-bottom: 12px;
+  padding-bottom: 7px;
+  font-weight: bold;
+}
+.itemfield .form-group{
+  /*  margin-bottom: 5px !important;*/
+}
+.itemfield .fa-times:before, .deletebtn .fa-times:before {
+    color: red !important;
+}
+.filetarget{
+    padding-left: 50px;
+}
+.worktable tr{
+    background-color: #2196f3 !important;
+}
+.paymentsection .itemstotal, .paymentsection .itemsheader, .paymentsection .itemfield, .paymentsection .put_row{
+    padding-left: 0px;
+}
+</style>
+<div class="bolck">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="margin-right:50px;display:none;" ng-click="cancel()">×</button>
+        <h3 class="modal-title" style="float:left;">Edit job:</h3>
+
+        <a class="btn btn-info" ng-click="savejobDetail('jobDetails-form');"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</a>
+       	<button class="btn btn-info" style="margin-left: 10px; padding: 8px 15px;" ng-click="cancel()"><span class="fa fa-times"></span></button>
+    </div>
+	<div class="app-content-body ">
+        <div class="bg-light lter b-b wrapper-md" id="userprofile-ctrl" >
+            <!-- <section class="panel form-wizard" id="w4" ng-stepform="dynamic"> -->
+                    <div class="tab-content">
+                        <div id="w4-tab1" class="tab-pane active">
+                            <form id="jobDetails-form">
+                                <!-- TAB1 -->
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading font-bold"><h4>Job details</h4></div>
+                                            <div class="panel-body">
+                                                <div class="col-sm-12 p-0 projectDetailsbox">
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group" style="margin-top: 26px;">
+                                                            <label>Job Number :</label>
+                                                            <label><strong>{{jobdetail.po_number}}</strong></label>
+                                                            <!-- <label><strong>{{jobdetail.job_code}}{{jobdetail.job_no | numberFixedLen:3}}</strong></label> -->
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group" style="margin-top: 26px;">
+                                                            <label>Company Code :</label>
+                                                            <label id="companyCode"><strong>{{jobdetail.company_code}}</strong></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group" style="margin-top: 26px;">
+                                                            <label>Creation Date :</label>
+                                                            <label><strong>{{jobdetail.created_date | globalDtFormat}}</strong></label>
+                                                        </div>
+                                                    </div>
+                                                   <!--  <div class="col-sm-4">
+                                                        <div class="form-group" style="margin-top: 26px;">
+                                                            <label>PO Number :</label>
+                                                            <label>
+                                                                <strong ng-if="jobdetail.po_number" id="po_number">{{jobdetail.po_number}}</strong>
+                                                                
+                                                                <a ng-if="!jobdetail.po_number" href="javascript:void(0)" ng-click="assignPoToJob(jobdetail.job_summmeryId,jobdetail.tmp_po_number)" style="color:#0086be;" id="tmp_po_number">Assign PO Number</a>
+                                                            </label>
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <div class="left">
+                                                                <label>Status</label>
+                                                                <input type="text" select2-job-detailitm-status class="form-control" id="itemStatus" name="itemStatus"  ng-model="jobdetail.item_status" required />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <div class="left">
+                                                                <label>Project Manager</label>
+                                                                <input select2-contactsummery  type="text" class="form-control" id="contactPerson" name="contactPerson" ng-model="jobdetail.contact_person" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <div class="left">
+                                                                <label>Scoop</label>
+                                                                <select id="scoopId" class="form-control m-b" name="item_id" ng-model="jobdetail.item_id" required disabled>
+                                                                    <option value="All">All</option>
+                                                                    <option ng-repeat="jit in jobitList" value="{{jit.item_number}}">{{jit.item_number | numberFixedLen:3}}</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="right">
+                                                                <a href="javascript:void(0)" class="summeryColor" ng-click="jumptoItem()"><i class="fa fa-reply"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <div class="left">
+                                                                <label>Language</label>
+                                                                <input type="text" id="sourceLang"  class="form-control" name="sourcelang" ng-model="jobdetail.ItemLanguage" disabled="" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Specialization</label>
+                                                            <input select2-jobdetail-item type="text" class="form-control" name="specialization" ng-model="jobdetail.specialization" />
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <div class="left">
+                                                                <label>Resources *</label>
+                                                                <input select2-job-detail-resource type="text" class="form-control" id="resources" name="resources" ng-model="jobdetail.resource" ng-change="resourceChange(jobdetail.resource)" />
+                                                            </div>
+                                                            <div class="right">
+                                                                <a href="javascript:void(0)"  ng-click="jobsumemailResource(jobdetail.resource,jobdetail.job_summmeryId)"><span class="summeryColor"><i class="fa fa-envelope fa-lg"></i></span></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--<div class="col-sm-4">
+                                                        <div class="form-group" style="margin-top: 26px;">
+                                                            <label>Delivered on:</label>
+                                                            <label><strong>{{jobdetail.job_code}}{{jobdetail.job_no| numberFixedLen:3}}</strong></label>
+                                                        </div>
+                                                    </div>-->
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <div class="left">
+                                                                <label>Due Date</label>
+                                                                <!-- <input ng-if="dueDate!='0000-00-00 00:00:00'" ng-datetimepicker1 type="text" class="form-control" id="duedate" name="due_date" ng-model="jobdetail.due_date" required onkeydown="return false"/>
+                                                                <input ng-if="dueDate=='0000-00-00 00:00:00'" ng-datetimepicker1 type="text" class="form-control" id="duedate" name="due_date" ng-model="jobdetail.due_date" required onkeydown="return false"/> -->
+                                                                <input ng-if="dueDate!='0000-00-00'" ng-Datepicker2 type="text" class="form-control" id="duedate" name="due_date" ng-model="jobdetail.due_date" required onkeydown="return false"/>
+                                                                <input ng-if="dueDate=='0000-00-00'" ng-Datepicker2 type="text" class="form-control" id="duedate" name="due_date" ng-model="jobdetail.due_date" required onkeydown="return false"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <div class="left">
+                                                                <label>Due Time</label>
+                                                                <input timepicker1 id="due_time{{$index}}" type="text" class="form-control" name="due_time" ng-model="due_time" required onkeydown="return true" allowtimefrmt />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Negative Feedback (Freelancer)</label>
+                                                            <select class="form-control m-b" ng-init="jobdetail = {negative_feedback : '0'}" name="nagativeFeedback" ng-model="jobdetail.negative_feedback" required>
+                                                                <option value="0">--Please select--</option> 
+                                                                <option value="1">Yes</option>
+                                                            </select>                     
+                                                        </div>
+                                                    </div> -->
+                                                    <!-- <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Late Delivery</label>
+                                                            <select class="form-control m-b" name="lateDelivery" ng-model="jobdetail.late_delivery" required>
+                                                                <option  value="0">--Please select--</option> 
+                                                                <option value="1">Yes</option>
+                                                            </select>                     
+                                                        </div>
+                                                    </div> -->
+                                                    <!-- <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <label>Payment to linguist</label>
+                                                            <input type="number" id="payment"  class="form-control" name="payment" ng-model="jobdetail.payment" min="0" />
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <div class="left">
+                                                                <label>Comment</label>
+                                                                <textarea class="form-control" name="description" ng-model="jobdetail.jobDesc" style="resize: none;" required></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 pl-0">
+                                                    <div class="col-sm-2">
+                                                        <a style="padding:2px" href="javascript:void(0)" ng-click="filemanagerSource('source')"><span class="orderin"></span>Source &nbsp;(<span class="sourceC" id="popSourceCount"></span>)</a>
+                                                    </div>
+                                                    <div class="col-sm-2 filetarget">
+                                                        <a style="padding:2px" href="javascript:void(0)" ng-click="filemanagerSource('target')"><span class="orderout"></span>Target &nbsp;(<span class="targteC" id="popTargetCount"></span>)</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 pl-0" ng-if="jobdetail.rejection" style="margin-top:20px;">
+                                                    <div class="col-sm-12" style="color:red">
+                                                        <label>Rejected : {{jobdetail.rejection}}</label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default custm-table">
+                                            <div class="panel-heading font-bold"><h4>Work instructions</h4></div>
+                                            <div class="panel-body">
+                                                <div class="col-sm-12 p-0">
+                                                    <div class="col-sm-12" style="display: none;">
+                                                        <div class="col-sm-10" style="left:-20px;">
+                                                            <input type="text" class="form-control" id="work_instructs" name="work_instructs" ng-model="work_instructs" placeholder="Enter work instructions" />
+                                                        </div>
+                                                        <div class="col-sm-2" style="top:8px;left:-28px;">
+                                                            <a href="javascript:void(0)" job-work-instruction3 style="color: white; background: #3615a0; padding: 6px; border-radius: 5px;"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <table  class="p-0 table m-b-none default footable-loaded footable" style="width:98%;">
+                                                        <thead class="worktable" style="background-color:#3616a0;">    
+                                                        <th style="width:80%;">Work instructions</th>
+                                                        <th style="width:20%;">Action</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr style="background-color:#FFF;">
+                                                                <td> 
+                                                                    <input type="text" class="form-control" id="work_instructs" name="work_instructs" ng-model="work_instructs" placeholder="Enter work instructions" />
+                                                                </td>
+                                                                <td style="vertical-align: middle;">
+                                                                    <a href="javascript:void(0)" job-work-instruction3 style="color: white; background: #3615a0; font-size: 12px; padding: 5px 9px; border-radius: 5px;"><i class="fa fa-plus" aria-hidden="true"></i></a>        
+                                                                </td>
+                                                            </tr>
+                                                            <tr id="work1_{{$index}}" class="put_row putinstruct" ng-repeat="war in wrInstruct" style="background-color:#FFF;">
+                                                                <td class="none"><span id="work_id{{$index}}" ng-bind="war.work_id"><span></td>
+                                                                <td style="width:80%;"><span style="color:green;"><i class="fa fa-check" aria-hidden="true"></i> </span> <span id="work_name{{$index}}" ng-bind="war.work_name"><span></td>
+                                                                <td style="width:20%;"><a href="javascript:void(0)" ng-click="removeWorkIns($index)" title="delete" class="deletebtn"><i class="iconDelete glyph-icon fa-times"></i></a></td>
+                                                            </tr>
+                                                            <tr class="workIn" style="display:none;">
+                                                                <td >
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" id="work_instructs" name="work_instructs" ng-model="work_instructs"/>
+                                                                    </div>
+                                                                    <div class="col-sm-2" style="margin-top:8px;">
+                                                                        <a href="javascript:void(0)" job-work-instruction3 style="color: white; background: #3615a0; padding: 5px; border-radius: 5px;"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                                                    </div>
+                                                                </td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <!-- <tr>
+                                                                <td>
+                                                                    <input type="text" class="form-control" id="work_instructs" name="work_instructs" ng-model="work_instructs" placeholder="Enter work instructions" />
+                                                                </td>
+                                                                <td style="padding: 15px 0 0 15px;">
+                                                                    <a href="javascript:void(0)" job-work-instruction3 style="color: white; background: #3615a0; padding: 6px; border-radius: 5px;"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                                                </td>
+                                                            </tr> -->
+                                                        </tbody>
+                                                    </table><br>
+                                                    <div class="col-sm-12" style="display:none;">
+                                                        <div class="col-sm-10" style="left:-20px;">
+                                                            <input type="text" class="form-control" id="work_instructs" name="work_instructs" ng-model="work_instructs" placeholder="Enter work instructions" />
+                                                        </div>
+                                                        <div class="col-sm-2" style="top:8px;left:-28px;">
+                                                            <a href="javascript:void(0)" job-work-instruction3 style="color: white; background: #3615a0; padding: 6px; border-radius: 5px;"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <table  class="table m-b-none default footable-loaded footable" >
+                                                        <thead>    
+                                                        <th>Work instructions</th>
+                                                        <th>Action</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr id="work1_{{$index}}" class="put_row" ng-repeat="war in wrInstruct">
+                                                                <td class="none"><span id="work_id{{$index}}" ng-bind="war.work_id"><span></td>
+                                                                <td><span style="color:green;"><i class="fa fa-check" aria-hidden="true"></i> </span> <span id="work_name{{$index}}" ng-bind="war.work_name"><span></td>
+                                                                <td><a href="javascript:void(0)" ng-click="removeWorkIns($index)" title="delete" class="deletebtn"><i class="iconDelete glyph-icon fa-times"></i></a></td>
+                                                            </tr>
+                                                            <tr class="workIn">
+                                                                <td>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" id="work_instructs" name="work_instructs" ng-model="work_instructs"/>
+                                                                    </div>
+                                                                    <div class="col-sm-2" style="margin-top:8px;">
+                                                                        <a href="javascript:void(0)" job-work-instruction2 style="color: white; background: #3615a0; padding: 5px; border-radius: 5px;"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                                                    </div>
+                                                                </td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table><br> -->
+                                                    <!-- <div class="col-sm-12" style="left: -23px;">
+                                                        <div class="col-sm-4">
+                                                            <input type="text" class="form-control" id="work_instructs" name="work_instruction" ng-model="work_instruction" placeholder="Select work instructions" />
+                                                        </div>
+                                                        <div class="col-sm-2" style="top: 8px;left: -20px;">
+                                                            <a href="javascript:void(0)" job-work-instruction2 ><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                                        </div>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                          <div class="panel-heading font-bold"><h4>Payment to linguist</h4></div>
+                                                <div class="panel-body">
+                                                    <div class="col-sm-3">
+                                                        <div class="filecsv-upload">
+                                                            <div class="m-b">Import CSV</div>
+                                                            <label for="file-input" class="fa fa-upload newUpload" style="cursor: pointer;">
+                                                                <span >{{csvFilename}}</span>
+                                                            </label>
+                                                            <input type="file" ng-file-select="onFileSelect($files)" isabled="isClean() || formUpload.$invalid" accept=".csv" id="file-input" style="visibility:hidden;">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="csvprogress progress" style="width:50%; margin-top:30px;" ng-show="csvProgress">
+                                                            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="col-sm-12">    
+                                                        <table class="table m-b-none default footable-loaded footable" style="width: 50%;">
+                                                            <th>#</th>
+                                                            <th>Quantity</th>
+                                                            <th>Price Unit</th>
+                                                            <tr ng-repeat="cs in csvData">
+                                                                <td>{{cs.id}}</td>
+                                                                <td>{{cs.quantity}}</td>
+                                                                <td>{{cs.pricelist}}</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>  -->
+                                                    <div class="col-sm-12">
+                                                        <table class="table m-b-none default footable-loaded footable">
+                                                          <thead>
+                                                            <!-- <th width="" >Amount in <span id="currency"></span></th> -->
+                                                          </thead>
+                                                          <tbody>
+                                                             <tr class="paymentsection">
+                                                                <td style="border-right: 1px solid #eaeff0;border:none;padding-left: 0px;">
+                                                                    <div class="col-sm-12 itemstotal" >
+                                                                      <div class="col-sm-8">
+                                                                         
+                                                                      </div>
+                                                                      <div class="col-sm-3" style="margin-bottom:15px;">
+                                                                        <span style="font-weight:bold">Grand Total: &nbsp;&nbsp;&nbsp;</span>
+                                                                        <span>{{ClientCurrency}}</span> <span id="totalItemPrice">{{jobdetail.total_price | NumbersCommaformat}}</span> 
+                                                                      </div>
+                                                                    </div>
+                                                                   <div class="col-sm-12 itemsheader">
+                                                                     <div class="col-sm-2">Quantity</div>
+                                                                     <div class="col-sm-4">Price Unit</div>
+                                                                     <div class="col-sm-2">Unit Price</div>
+                                                                     <div class="col-sm-3">Prices</div>
+                                                                   </div>
+                                                                   <div ng-repeat="it1 in itemPriceUni[jobdetail.job_summmeryId] track by $index" class="col-sm-12 itemfield" id="totalItem_{{jobdetail.job_summmeryId}}">
+                                                                      <div class="col-sm-2">
+                                                                         <div class="form-group">
+                                                                            <input type="text" class="form-control" name="itemQuantity" id="itemQuantity{{jobdetail.job_summmeryId}}" ng-change="changeItemField(jobdetail.job_summmeryId,$index,$parent.$index)" ng-model="it1.quantity" numbers-only/>
+                                                                         </div>
+                                                                      </div>
+                                                                      <div class="col-sm-4" style="margin-top:1%;"> 
+                                                                         <label class="summeryColor" id="priceList{{jobdetail.job_summmeryId}}">{{it1.pricelist}}</label>
+                                                                      </div>
+                                                                      <div class="col-sm-2" style="padding-left:5px;padding-right:5px;">
+                                                                         <div class="form-group">
+                                                                            <input type="text" class="form-control price" name="itemPrice" id="itemPrice{{jobdetail.job_summmeryId}}" ng-change="changeItemField(jobdetail.job_summmeryId,$index,$parent.$index)" ng-model="it1.itemPrice" allow-decimal-comma-number/>
+                                                                         </div>
+                                                                      </div>
+                                                                      <div class="col-sm-3" >
+                                                                         <div class="form-group">
+                                                                            <input type="text" class="form-control price" name="itemTotal" id="itemTotal{{jobdetail.job_summmeryId}}" ng-change="changeItemField(jobdetail.job_summmeryId,$index,$parent.$index,1)" ng-model="it1.itemTotal" allow-decimal-comma-number/>
+                                                                          <span name="amtSum" id="amtSum{{jobdetail.job_summmeryId}}" ng-model="it1.amtSum"  style="visibility: hidden;position:absolute;">{{it1.itemTotal |customNumber}}</span>  
+                                                                         </div>
+                                                                      </div>
+                                                                      
+                                                                      <!-- <div class="col-sm-2" style="margin-top:1%;">
+                                                                         <span id="itemTotal{{it.itemId}}">{{it1.itemTotal |customNumber}}</span>
+                                                                      </div> -->
+                                                                      <!-- <div class="col-sm-2">
+                                                                         <input type="text" select2-item-tax class="form-control" id="itemTaxP{{index+1}}" name="itemTaxP" ng-model="it.itemTaxP"/>
+                                                                      </div> -->
+                                                                        <div class="col-sm-1 m-t-sm p-0">
+                                                                            <a href="javascript:void(0);" ng-click="itemQuentityDelete(jobdetail.job_summmeryId,$index,$parent.$index)"><i class="iconDelete glyph-icon fa-times" aria-hidden="true" style="color:red !important"></i></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-12 put_row">
+                                                                      <div class="col-sm-2">
+                                                                         <div class="form-group">
+                                                                            <!-- <label class="control-label">Total amount</label>  -->
+                                                                            <input type="text" numbers-only class="form-control" name="Quantity" id="Quantity{{jobdetail.job_summmeryId}}" ng-model="quantity" min="0"  placeholder="Quantity" />
+                                                                         </div>
+                                                                      </div>
+                                                                      <div class="col-sm-4">
+                                                                         <div class="form-group">
+                                                                            <jobitems-add2>
+                                                                            <select class="form-control m-b" ng-init="priceUnit = '0'" id="priceUnit{{jobdetail.job_summmeryId}}" name="priceUnit" ng-model="priceUnit" required>
+                                                                               <option value="0">--Please Select--</option>
+                                                                               <optgroup ng-repeat="master in masterPrice" label="{{master.name}}">
+                                                                                  <option ng-repeat="child in childPrice" ng-if="child.master_price_id == master.master_price_id" value="{{child.name}},{{child.rate}}">{{child.name}}</option>
+                                                                               </optgroup>
+                                                                            </select>
+                                                                          </jobitems-add2>
+                                                                         </div>
+                                                                      </div>
+                                                                      <!--
+                                                                      <div class="col-sm-1" style="margin-top:4px">
+                                                                         <items-add><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></items-add>
+                                                                      </div> -->
+                                                                      <div class="col-sm-1">
+                                                                      </div>
+                                                                      <!-- <div class="col-sm-3">
+                                                                         <input type="text" ng-init="itemTax='2'" select2-item-tax class="form-control" id="itemTax" name="itemTax" ng-model="itemTax" required/>
+                                                                      </div> -->
+                                                                   </div>
+                                                                </td>
+                                                                
+                                                             </tr>
+                                                             
+                                                          </tbody>
+                                                       </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="panel panel-default custm-table">
+                                            <div class="panel-heading font-bold"><h4>Work instructions</h4></div>
+                                            <div class="panel-body">
+                                                <table  class="table m-b-none default footable-loaded footable" >
+                                                    <thead>
+                                                    <th>Work instructions</th>
+                                                    <th>Check list</th>
+                                                    <th>Action</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr id="work1_{{$index}}" class="put_row" ng-repeat="war in wrInstruct">
+                                                            <td class="none"><span id="work_id{{$index}}" ng-bind="war.work_id"><span></td>
+                                                            <td><span id="work_name{{$index}}" ng-bind="war.work_name"><span></td>
+                                                            <td><span class="checkList"></span></td>
+                                                            <td><a href="javascript:void(0)" ng-click="removeWorkIns($index)" title="delete"><i class="iconDelete glyph-icon fa-times"></i></a></td>
+                                                        </tr>
+                                                        <tr class="workIn">
+                                                            <td>
+                                                                <div class="col-sm-10">
+                                                                    <input type="text" class="form-control" id="work_instruction" name="work_instruction" ng-model="work_instruction"/>
+                                                                </div>
+                                                                <div class="col-sm-2">
+                                                                    <a href="javascript:void(0)" job-work-instruction><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                                                </div>
+                                                            </td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table><br>
+                                                <div class="col-sm-12" style="left: -23px;">
+                                                    <div class="col-sm-4">
+                                                        <input type="text" class="form-control" id="work_instruction" name="work_instruction" ng-model="work_instruction" placeholder="Select work instructions" />
+                                                    </div>
+                                                    <div class="col-sm-2" style="top: 8px;left: -20px;">
+                                                        <a href="javascript:void(0)" job-work-instruction><i class="fa fa-plus" aria-hidden="true"></i></a>
+                                                    </div>
+                                                </div>
+                                               
+                                            </div>
+                                        </div> -->
+                                        
+                                        
+                                        <!-- <div class="panel panel-default">
+                                            <div class="panel-heading font-bold"><h4>Prices</h4></div>
+                                            <div class="panel-body">
+                                                <table  class="table m-b-none default footable-loaded footable" >
+                                                    <thead>
+                                                    <th>Price Unit </th>
+                                                    <th>Quantity</th>
+                                                    <th>Unit Price</th>
+                                                    <th>Currency ({{clientCurrency}})</th>
+                                                    <th>Tax</th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="item in itemList">
+                                                            <td ng-bind="item.pricelist"></td>
+                                                            <td ng-bind="item.quantity"></td>
+                                                            <td ng-bind="item.itemPrice | customNumber"></td>
+                                                            <td ng-bind="item.itemTotal | customNumber"></td>
+                                                            <td>Without tax</td>
+                                                        </tr>
+                                                        <tr ng-show="!itemList">
+                                                            <td colspan="4" ng-bind="dataNotFound"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="2">TotalNet price <th>
+                                                            <th>{{clientCurrencySymbole}} {{totalPrice | customNumber}}</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div> -->
+
+                                    </div>
+                                </div>
+                                
+                                <!--   TAB1 -->
+                                <!-- <div class="panel-footer">
+                                    <a class="btn btn-info" ng-click="savejobDetail('jobDetails-form');"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</a>
+                                    <button class="btn btn-info" style="margin-right:50px" ng-click="cancel()"><span class="fa fa-times"></span> Cancel</button>
+                                </div> -->
+                            </form>
+                        </div>
+                </div>
+
+            <!-- </section> -->
+        </div>
+    </div>
+	
+</div>

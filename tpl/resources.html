@@ -1,0 +1,261 @@
+  <div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' " >
+  </div>
+  <div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs" data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+      <div ui-butterbar></div>
+      <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside" ></a>
+      <div class="md-content page_content_wrapper">
+      
+        <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+          <h1 class="m-n font-thin h3">Resources</h1>
+        </div>
+        <!-- <div class="wrapper-md ng-scope">
+          <div class="panel panel-default" id="userType">
+            <div class="panel-heading">
+              <span class="font-bold"> Resource Type</span>
+            </div>
+            <div class="panel-body">
+              <form id="user-type-form">
+              <div class="col-sm-12">
+                <div class="col-sm-3">
+                      <div class="form-group">
+                          <label>Resource Type</label>
+                          <select class="form-control m-b" ng-init="type.iResourceType='select'" name="iResourceType" id="iResourceType" ng-model="type.iResourceType" required>
+                              <option value="select">-Select resource type-</option>
+                              <option value="1">External</option>
+                              <option value="2">Internal</option>
+        
+                          </select>                     
+                      </div>
+                  </div>
+              
+                  <div class="col-sm-3">
+                      <div class="form-group">
+                          <label>Name</label>
+                          <input type="text" class="form-control" placeholder="Enter Name" name="Name" ng-model="type.vType" required>
+                      </div>
+                  </div>
+                  
+                  <div class="col-sm-3">
+                      <div class="checkbox">
+                          <label class="i-checks i-checks-sm" style="padding-top: 20px;">
+                              <input type="checkbox" name="iResourceType" ng-true-value="1" ng-false-value="0" ng-model="type.iDefault" ng-checked="type.iDefault == 1">
+                              <i></i>
+                              Default (Set as Default type)
+                          </label>
+                      </div>
+                  </div>
+        
+                  <div class="col-sm-3">
+                      <div class="form-group">
+                          <label>Status</label>
+                          <select name="eTypeStatus" class="form-control m-b" ng-init="type.eTypeStatus='select'" ng-model="type.eTypeStatus" required>
+                              <option value="select">-Select status-</option>
+                              <option>Active</option>
+                              <option>Inactive</option>
+        
+                          </select>      
+                      </div>
+                  </div>
+              </div>
+              
+                  <div class="panel-footer">
+                      <button ng-if="type.iTypeId == '' || type.iTypeId == undefined" class="btn m-b-xs w-xs btn-info" style="margin-left:15px;" ng-click="saveType('user-type-form');"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                      <button ng-if="type.iTypeId != '' && type.iTypeId != undefined" class="btn m-b-xs w-xs btn-info" style="margin-left:15px;" ng-click=" updateType('user-type-form', type.iTypeId);"><i class="fa fa-floppy-o" aria-hidden="true"></i> Update</button>
+                  </div>
+            </form>
+            <table st-table="rowCollectionBasic" class="table table-bordered table-striped">
+              <thead>
+              <th>#</th>
+              <th>Resource Type</th>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Action</th>
+              </thead>
+              <tbody>
+                  <tr ng-repeat="t in usertype" ng-class="(t.iTypeId == type.iTypeId) ? 'rowactivate' : ''">
+                      <td ng-bind="$index + 1"></td>
+                      <td ng-if="t.iResourceType == '1'">External</td>
+                      <td ng-if="t.iResourceType == '2'">Internal</td>
+                      <td ng-bind="t.vType"></td>
+                      <td ng-bind="t.eTypeStatus"></td>
+                      <td><span ng-if="t.iTypeId=='1' || t.iTypeId=='2' || t.iTypeId=='3' || t.iTypeId=='4'"><i class="fa fa-edit disableColor"></i> <span class="disableColor">/ </span><i class="fa fa-times disableColor"></i></span>
+                      <span ng-if="t.iTypeId!='1' && t.iTypeId!='2' && t.iTypeId!='3' && t.iTypeId!='4'"><a href="javascript:void(0)" ng-click="getType(t.iTypeId,'userType')"><i class="glyph-icon fa-edit"></i></a> <a href="javascript:void(0)" ng-click="deleteType(t.iTypeId)"><i class="iconDelete glyph-icon fa-times"></i></a></span></td>
+                  </tr>
+                  <tr ng-show="usertype.length==0">
+                      <td colspan="4" ng-bind="dataNotFound"></td>
+                  </tr>
+              </tbody>
+            </table>
+            </div>
+          </div> -->
+
+          
+        <div class="wrapper-md">
+
+            <div class="panel panel-default" id="statuses">
+                <div class="panel-heading">
+                <span class="font-bold"> Resource Status</span>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                    <form id="user-status-form">
+                    <div class="row">
+                                                <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label>Name of Resource Status</label>
+                                                        <input type="text" class="form-control" placeholder="Enter name of Resource Status" name="task_type" ng-model="status.status_name" required>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="col-sm-4">
+                                                    <div class="form-group">
+                                                        <label>Description</label>
+                                                        <input type="text" name="description" placeholder="Enter Description" class="form-control"  ng-model="status.description" required>
+                                                    </div>
+                                                </div> -->
+                                                <div class="col-sm-4">
+                                                    <div class="checkbox">
+                                                        <label class="i-checks i-checks-sm" style="padding-top: 20px;">
+                                                            <input type="checkbox" name="is_active" ng-true-value="1" ng-false-value="0" ng-model="status.is_active" ng-checked="status.is_active == 1">
+                                                            <i></i>
+                                                            Active (Set as Active)
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                    
+                        <div class="panel-footer pl-0 pr-0">
+                            <button class="btn btn-info " ng-click="saveStatus('user-status-form');"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                        </div>
+                    </form>
+                    <hr>
+                    <table st-table="rowCollectionBasic" class="table table-bordered table-striped">
+                    <thead>
+                                                <th>#</th>
+                                                <th>Name of Resource Status</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="t in userStatus" ng-class="(t.status_id == status.status_id) ? 'rowactivate' : ''">
+                                                        <td ng-bind="$index + 1"></td>
+                                                        <td ng-bind="t.status_name"></td>
+                                                        <td ng-if="t.is_active == '1'"><span class="label bg-success" title="active">Active</span></td>
+                                                        <td ng-if="t.is_active == '0'"><span class="label bg-danger" title="Inactive">Inactive</span></td> 
+                                                        <td><a href="javascript:void(0)" ng-click="getStatus(t.status_id,'statuses');" title="edit"><i class="glyph-icon fa-edit"></i></a>   <a href="javascript:void(0)" ng-click="deleteStatusModel(t.status_id)" title="delete"><i class="iconDelete glyph-icon fa-times"></i></a></td>
+                                                    </tr>
+                                                    <tr ng-show="userstatusEmpty">
+                                                        <td colspan="4" ng-bind="dataNotFound"></td>
+                                                    </tr>
+                                                </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" id="position">
+                <div class="panel-heading">
+                <span class="font-bold"> Resource Position</span>
+                </div>
+                <div class="panel-body">
+                <form id="user-position-form">
+                <div class="row" >
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Name of Resource Position</label>
+                                                    <input type="text" class="form-control" placeholder="Enter name of Resource Position" name="task_type" ng-model="position.position_name" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="checkbox">
+                                                    <label class="i-checks i-checks-sm" style="padding-top: 20px;">
+                                                        <input type="checkbox" name="status" ng-true-value="1" ng-false-value="0" ng-model="position.status" ng-checked="position.status == 1">
+                                                        <i></i>
+                                                        Active (Set as Active)
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                
+                    <div class="panel-footer row">
+                        <button class="btn btn-info " ng-click="savePosition('user-position-form');"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                    </div>
+                </form>
+                <table st-table="rowCollectionBasic" class="table table-bordered table-striped">
+                <thead>
+                                            <th>#</th>
+                                            <th>Name of Resource Position</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="up in userPosition" ng-class="(up.position_id == position.position_id) ? 'rowactivate' : ''">
+                                                    <td ng-bind="$index + 1"></td>
+                                                    <td ng-bind="up.position_name"></td>
+                                                    <td ng-if="up.status == '1'"><span class="label bg-success" title="active">Active</span></td>
+                                                    <td ng-if="up.status == '0'"><span class="label bg-danger" title="Inactive">Inactive</span></td> 
+                                                    <td>
+                                                    <a href="javascript:void(0)" 
+                                                    ng-class="{disabledAnchor:up.position_id == 1 ||up.position_id == 2 ||up.position_id == 3||up.position_id == 4||up.position_id == 5}"
+                                                    ng-click="getPosition(up.position_id,'position');" title="edit"><i class="glyph-icon fa-edit"></i></a>  
+                                                    
+                                                    <a href="javascript:void(0)" 
+                                                    ng-class="{disabledAnchor:up.position_id == 1 ||up.position_id == 2 ||up.position_id == 3||up.position_id == 4||up.position_id == 5}"
+                                                    ng-click="deletePositionModel(up.position_id)" title="delete"><i class="iconDelete glyph-icon fa-times"></i></a></td>
+                                                </tr>
+                                                <tr ng-show="!userPosition.length">
+                                                    <td colspan="4" ng-bind="dataNotFound"></td>
+                                                </tr>
+                                            </tbody>
+                </table>
+                </div>
+            </div>
+
+            <!-- footer copy right -->
+            <div data-ng-include="'tpl/copyRight.html'"></div>
+        </div>
+         
+        </div>
+
+        
+      </div>
+  </div>
+<!-- <div class="panel panel-default">
+            <div class="panel-body">
+              <form id="user-type-form">
+              <div class="col-md-12">
+                <div class="col-md-12 b-r b-light no-border-xs">
+                         
+                        <div class="panel-heading wrapper b-b b-light">
+                           <a><span class="holidayTab1" ng-click="holidayStatus('Upcoming')" style="padding: 11px;">Upcoming</span></a> <a><span class="holidayTab2" ng-click="holidayStatus('Ongoing')" style="padding: 11px;">Ongoing</span></a>
+                        </div>
+                        <ul class="scrollbar list-group list-group-lg m-b-none" id="scrollStyle" style="height: 250px;">
+                           <li class="list-group-item" ng-hide="holidayShow" ng-repeat="upcome in upcommingList">
+                              <span ng-bind="upcome.date">28 Nov 2016</span> | <span class="pull-right label bg-primary inline m-t-sm" ng-bind="upcome.holidayStatus">National holiday</span>
+                              <span ng-bind="upcome.holidayName">Damon Parker</span>
+                           </li>
+                           <li class="list-group-item" ng-show="holidayShow" ng-repeat="ongoing in ongoingList">
+                              <span ng-bind="ongoing.date">28 Nov 2016</span> | <span class="pull-right label bg-primary inline m-t-sm" ng-bind="ongoing.holidayStatus">National holiday</span>
+                              <span href ng-bind="ongoing.holidayName">Damon Parker</span>
+                           </li>
+                           <li class="list-group-item" ng-hide="holidayShow" ng-if="!upcommingList.length">
+                              <span ng-bind="dataNotFound"></span>
+                           </li>
+                           <li class="list-group-item" ng-show="holidayShow" ng-if="!ongoingList.length">
+                              <span ng-bind="dataNotFound"></span>
+                           </li>
+                        </ul>
+                        <div class="panel-footer">
+                           <span class="pull-right badge badge-bg m-t-xs" ng-hide="holidayShow" ng-bind="upLength">32</span>
+                           <span class="pull-right badge badge-bg m-t-xs" ng-show="holidayShow" ng-bind="onLength">32</span>
+                           <span>&nbsp;</span>
+                        </div>
+                     </div>
+              </div>
+            </form>
+            </div>
+          </div> -->

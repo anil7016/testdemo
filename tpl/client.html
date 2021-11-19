@@ -1,0 +1,90 @@
+  <div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' " >
+  </div>
+  <div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs" data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+      <div ui-butterbar></div>
+      <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside" ></a>
+      <div class="md-content page_content_wrapper">
+      
+      <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+            <a href="javascript:void(0);" ng-click="adddClient('1')" style="font-size:14px;" class="btn btn-info pull-right btn-sm" ng-show="btn_client"> Add Client</a>
+            
+           <a href="javascript:void(0)" ng-click="adddClient('2')" style="font-size:14px;" class="btn btn-info pull-right btn-sm" ng-hide="btn_client"> Add Account</a>
+
+            <h1 class="m-n font-thin h3">Client Management</h1>
+        </div>
+        <div class="wrapper-md ng-scope" ng-show="btn_client">
+          <div class="panel panel-default">
+            <div class="panel-body">
+                <table  class="table table-striped b-t b-b table-bordered" datatable="ng" id="externalUserList">
+                    <thead>
+                        <th>#</th>
+                        <!-- <th>Logo</th> -->
+                        <th>Client</th>
+                        <!-- <th>Project Co-ordinator</th>
+                        <th>Project Manager</th> -->
+                        <th>Country</th>
+                        <!-- <th>Action</th> -->
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="client in clientlist">
+                                <td>{{$index + 1}}</td>
+                                <!-- <td>
+                                    <span><img id="clientLogo" ng-src="uploads/logo/{{client.vLogo}}" width="50" height="50"></span>
+                                </td> -->
+                                <td>
+                                    <a style="color:#4ba0c3" href="#/viewdirect/{{client.iClientId}}" title="View" class="trActionIcon">{{client.vUserName}}</a>
+                                </td>
+                                <!-- <td>{{client.projectCoordinator}}</td>
+                                <td>{{client.projectManager}}</td> -->
+                                <td>{{client.clientCountry}}</td>
+                                <!-- <td>
+                                    <div class="trActiontitle">
+                                        <a href="#/edit-client/{{client.iClientId}}" class="trActionIcon"><i class="fa fa-edit" title="{{client.name}}"></i></a>
+                                        </br>
+                                        <strong>Edit</strong>
+                                    </div>
+                                    <div class="trActiontitle">
+                                        <a href="javascript:void(0)" class="trActionIcon" ng-click="deleteDirect(client.iClientId,client.vLogo)"><i class="iconDelete glyph-icon fa-times"></i></a>
+                                        </br>
+                                        <strong>Delete</strong>
+                                    </div>
+                                    <div class="trActiontitle">
+                                        <a href="javascript:void(0)" class="trActionIcon" ng-click="workingHour(client.iClientId,'direct')" style="margin-left:25px;" title="Message"><i class="fa fa-envelope-o" style="font-size:18px"></i></a>
+                                    </div>
+                                </td> -->
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
+        <div class="wrapper-md ng-scope" ng-hide="btn_client">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <table  class="table table-striped b-t b-b table-bordered" datatable="ng" id="internalUserList">
+                        <thead>
+                            <th>#</th>
+                            <th>Account Name</th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="client in clientlistindirect">
+                                <td>{{$index + 1}}</td>
+                                <td>
+                                    <a style="color:#4ba0c3" href="#/viewindirect/{{client.iClientId}}" title="View" class="trActionIcon">{{client.vUserName}}</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- footer copy right -->
+      <div class="wrapper-md m-t-n-xl" data-ng-include="'tpl/copyRight.html'"></div>
+
+    </div>
+  </div>

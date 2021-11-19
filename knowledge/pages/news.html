@@ -1,0 +1,98 @@
+<div>
+    <div class="ht-sitecontainer ht-sitecontainer--wide">
+        <div class="site-header">
+            <div ng-include="'pages/header.html'">
+            </div>
+        </div>
+        <div class="ht-pageheader">
+            <div class="ht-container">
+                <div class="hkb-breadcrumbs_wrap">
+                    <ol class="hkb-breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList" >
+                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                            <a itemprop="item" href="#/" title="Home">
+                                <span itemprop="name">Home</span>
+                                <svg class="hkb-breadcrumbs__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 34.1">
+                                    <g>
+                                        <path d="M19,17c0,0.5-0.2,1-0.6,1.4L3.4,33.5c-0.8,0.8-2,0.8-2.8,0c-0.8-0.8-0.8-2,0-2.8L14.2,17L0.6,3.4c-0.8-0.8-0.8-2,0-2.8  c0.8-0.8,2-0.8,2.8,0l15.1,15.1C18.8,16,19,16.5,19,17z"/>
+                                    </g>
+                                </svg>
+                            </a>
+                            <meta itemprop="position" content="1"/>
+                        </li>
+                        <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                            <span itemprop="item" href="index.html" title="{{resultList.title}}">
+                                <span itemprop="name">News</span>
+                            </span>
+                            <meta itemprop="position" content="2"/>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="ht-page ht-page--sidebarright">
+            <div class="ht-container">
+                <div>
+<!--                <div class="hrC" align="center">
+                        <h2>Welcome</h2>
+                    </div>
+                    <div class="hrC" style="background-color: #f4f5f5; padding: 1%;">
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-clock-o" aria-hidden="true"></i> &nbsp; <span ng-bind="newsList.created_date"></span>
+                        &nbsp;&nbsp;&nbsp;<i class="fa fa-user" aria-hidden="true"></i> &nbsp; <span ng-bind="newsList.created_user"></span>
+                    </div>-->
+<!--                    <div class="ht-categoryheader">
+                        
+                    </div>-->
+                <!--<ul class="ht-articlelist">
+                        <li ng-show="newsList.k_news_description">
+                            <article id="post-74" class="hkb-articlemini">
+                                <div class="hkb-article__excerpt" ng-bind-html="trustedHtml(newsList.k_news_description)"></div>
+                            </article>
+                        </li>
+                        <li ng-show="!newsList.k_news_description">
+                            <article id="post-74" class="hkb-articlemini">
+                                <div class="hkb-article__excerpt">
+                                    <h3>No Data found</h3>
+                                </div>
+                            </article>
+                        </li>
+                    </ul>-->
+                    <div layout="column" flex layout-fill ng-cloak>
+                        <div md-scroll-shrink style="box-shadow: -1px 55px 15px #cacaca; color: #000000; background-color:  rgb(244, 245, 245)">
+                            <div class="md-toolbar-tools">News</div>
+                        </div>
+                        <md-content>
+                            <md-list>
+                                <md-list-item class="md-3-line"  ng-repeat="news in newsList">
+                                    <img ng-src="assets/img/news.png" class="md-avatar" alt="{{item.who}}">
+                                    <div class="md-list-item-text">
+                                        <a href ng-click="newsDetail(news.k_news_id)"><h3 ng-bind="news.k_news_title">{{item.what}}</h3></a>
+                                        <h4 ng-bind="news.created_user"></h4>
+                                        <p><span ng-bind="news.news_sort_des | limitTo: 60"></span>...</p>
+                                    </div>
+                                    <div class="md-secondary newsDate{{$index}}" style="color: #000000;">{{news.created_date | globalDtFormat}}</div>
+                                    <md-divider md-inset ng-if="!$last" style="left: 72px; width: calc(100% - 78px);"></md-divider>
+                                </md-list-item>
+                            </md-list>
+                        </md-content>
+<!--                    <md-content style="height: 400px;" md-theme="altTheme">
+                            <section>
+                                <md-subheader class="md-primary">Unread Messages</md-subheader>
+                                <md-list layout-padding>
+                                    <md-list-item class="md-3-line" ng-repeat="news in newsList">
+                                        <img ng-src="assets/img/news.png" class="md-avatar" alt="News">
+                                        <div class="md-list-item-text">
+                                            <h3>{{news.k_news_title}}</h3>
+                                            <h4 ng-bind="news.created_date |"></h4>
+                                            <p ng-bind-html="news.k_news_description "></p>
+                                        </div>
+                                    </md-list-item>
+                                </md-list>
+                            </section>
+                        </md-content>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-include="'pages/footer.html'"></div>
+    </div>
+</div>

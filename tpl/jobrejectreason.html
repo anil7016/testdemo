@@ -1,0 +1,22 @@
+<div class="bolck">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="cancel()">×</button>
+        <h3 class="modal-title">Reject job reason:</h3>
+
+    </div>
+    <md-progress-linear id="rejectLoder" style="display:none;" md-mode="indeterminate" class="m-b"></md-progress-linear>
+    <div>
+         <form id="message_form" ng-if="rejectId">
+    <div class="panel-body">
+        <div class="col-lg-12" style="padding: 0;">
+            <div class="form-group">
+                <textarea class="form-control"  name="rejection" ng-model="jobReject.rejection" required></textarea>
+            </div>
+        </div>
+        <button class="btn btn-info" type="button" ng-click="ok('message_form',jobReject)">Ok</button>
+        <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</form>
+    </div>
+    
+</div>

@@ -1,0 +1,295 @@
+.w-100 {
+    width: 100% !important;
+}
+.w-50 {
+    width: 50% !important;
+}
+.w-20px {
+    width: 20px !important;
+}
+.br-b {
+    border-bottom: 1px solid #ddd;
+}
+.br-orng {
+    border: 1px solid #F7941D;
+}
+.no-background{
+    background: none;
+}
+::-webkit-scrollbar-thumb
+{
+    background: rgba(129, 128, 127, 0.5);
+}
+.text-left {
+    text-align: left !important;
+}
+.text-right {
+    text-align: right !important;
+}
+.text-center {
+    text-align: center !important;
+}
+.text-justify {
+    text-align: justify !important;
+}
+.inline-block {
+    display: inline-block !important;
+}
+.p-0{
+    padding: 0px !important;
+}
+.p-5{
+    padding: 5px !important;
+}
+.p-10{
+    padding: 10px !important;
+}
+.p-15{
+    padding: 15px !important;
+}
+
+.m-0{
+    margin: 0px !important;
+}
+.m-5{
+    margin: 5px !important;
+}
+.m-10{
+    margin: 10px !important;
+}
+.m-15{
+    margin: 15px !important;
+}
+.pl-0 {
+    padding-left: 0px !important;
+}
+.pl-5 {
+    padding-left: 5px !important;
+}
+.pl-10 {
+    padding-left: 10px !important;
+}
+.pl-15 {
+    padding-left: 15px !important;
+}
+
+.pb-0 {
+    padding-bottom: 0px !important;
+}
+.pb-5 {
+    padding-bottom: 5px !important;
+}
+.pb-10 {
+    padding-bottom: 10px !important;
+}
+.pb-15 {
+    padding-bottom: 15px !important;
+}
+.pr-0 {
+    padding-right: 0px !important;
+}
+.pr-5 {
+    padding-right: 5px !important;
+}
+.pr-10 {
+    padding-right: 10px !important;
+}
+.pr-15 {
+    padding-right: 15px !important;
+}
+.pt-0 {
+    padding-top: 0px !important;
+}
+.pt-5 {
+    padding-top: 5px !important;
+}
+.pt-10 {
+    padding-top: 10px !important;
+}
+.pt-15 {
+    padding-top: 15px !important;
+}
+.pt-25 {
+    padding-top: 25px !important;
+}
+.pt-40 {
+    padding-top: 40px !important;
+}
+.pl-50{
+    padding-left: 50px !important;
+}
+.mt-0 {
+    margin-top: 0px !important;
+}
+.mt-5 {
+    margin-top: 5px !important;
+}
+.mt-10 {
+    margin-top: 10px !important;
+}
+.mt-15 {
+    margin-top: 15px !important;
+}
+.mt-50{
+    margin-top: 50px !important;
+}
+.mt-25{
+    margin-top:25px !important;
+}
+.mb-0 {
+    margin-bottom: 0px !important;
+}
+.mb-5 {
+    margin-bottom: 5px !important;
+}
+.mb-10 {
+    margin-bottom: 10px !important;
+}
+.mb-15 {
+    margin-bottom: 15px !important;
+}
+
+.ml-0 {
+    margin-left: 0px !important;
+}
+.ml-5 {
+    margin-left: 5px !important;
+}
+.ml-10 {
+    margin-left: 10px !important;
+}
+.ml-15 {
+    margin-left: 15px !important;
+}
+
+.mr-0 {
+    margin-right: 0px !important;
+}
+.mr-5 {
+    margin-right: 5px !important;
+}
+.mr-10 {
+    margin-right: 10px !important;
+}
+.mr-15 {
+    margin-right: 15px !important;
+}
+
+/*default text color bg-color*/
+.text-tagline {
+    color:#aeaeae !important;
+}
+.text-normal {
+    color:#545454 !important;
+}
+.text-won {
+    color:#82bd2c !important;
+}
+.text-lost {
+    color:#ff0000 !important;
+}
+.text-add {
+    color:#b9d3e0 !important;
+}
+.text-update {
+    color:#82bd2c !important;
+}
+.text-delete {
+    color:#ff0000 !important;
+}
+
+.bg-won {
+    background:#82bd2c !important;
+}
+.bg-lost {
+    background:#ff0000 !important;
+}
+.text-sm {
+    font-size:.8em!important
+}
+.text-lg {
+    font-size:1.2em!important
+}
+.text-xg {
+    font-size:1.6em!important
+}
+.text-10 {
+    font-size:10px!important
+}
+.text-11 {
+    font-size:11px!important
+}
+.text-12 {
+    font-size:12px!important
+}
+.text-13 {
+    font-size:13px!important
+}
+.text-14 {
+    font-size:14px!important
+}
+.text-15 {
+    font-size:15px!important
+}
+.text-16 {
+    font-size:16px!important
+}
+.text-18 {
+    font-size:18px!important
+}
+.text-20 {
+    font-size:20px!important
+}
+.text-24 {
+    font-size:24px!important
+}
+.text-32 {
+    font-size:32px!important
+}
+.text-48 {
+    font-size:48px!important
+}
+.text-64 {
+    font-size:64px!important
+}
+.text-uppercase {
+    text-transform:uppercase!important
+}
+.text-capital {
+    text-transform:capitalize!important
+}
+.text-normal {
+    font-weight:400!important
+}
+.text-bold {
+    font-weight:700!important
+}
+.text-lead {
+    font-weight:300!important
+}
+.text-italic {
+    font-style:italic!important
+}
+.text-underline {
+    text-decoration:underline!important
+}
+.text-linethrough {
+    text-decoration:line-through!important
+}
+.text-ellipsis {
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
+}
+.text-middle {
+    vertical-align:middle
+}
+.fa-6x {
+    font-size: 6em;
+}
+.fa-8x {
+    font-size: 8em;
+}
+.fa-10x {
+    font-size: 10em;
+}

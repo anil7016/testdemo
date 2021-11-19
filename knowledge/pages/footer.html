@@ -1,0 +1,55 @@
+<style type="text/css">
+.scrollToTop {
+
+    position: fixed;
+    top: 90%;
+    right: 40px;
+    display: none;
+    /*background: url('arrow_up.png') no-repeat 0px 20px;*/
+}
+
+.scrollToTop:hover {
+    text-decoration: none;
+}
+</style>
+<script type="text/javascript">
+$(document).ready(function() {
+
+    //Check to see if the window is top if not then display button
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 100) {
+            $('.scrollToTop').fadeIn();
+        } else {
+            $('.scrollToTop').fadeOut();
+        }
+    });
+
+    //Click event to scroll to top
+    $('.scrollToTop').click(function() {
+        $('html, body').animate({ scrollTop: 0 }, 800);
+        return false;
+    });
+
+});
+</script>
+<footer id="footer" class="site-footer" itemtype="http://schema.org/WPFooter" itemscope="itemscope">
+	<a href="#" class="scrollToTop">
+		<i class="fa fa-chevron-circle-up fa-3x" style="color:#4285F4;" aria-hidden="true"></i>
+	</a>
+    <div class="ht-container">
+        <div class="site-footer__copyright" role="contentinfo" style="color:#000000 !important">&copy; <a href>BeConnected</a>.</div>
+        <nav class="nav-footer" role="navigation">
+            <div class="menu-header-menu-container">
+                <ul id="menu-header-menu-1" class="">
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-285">
+                        <a href="http://tms.beconnected.no" style="color:#000000 !important">Go back to TMS</a></li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-135">
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</footer>
+<div class="ht-global-overlay"></div>
+<span id="bruteprotect_uptime_check_string" style="display:none;"></span>
+</div>

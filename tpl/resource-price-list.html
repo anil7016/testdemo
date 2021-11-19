@@ -1,0 +1,324 @@
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+    data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+        data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+        <div ui-butterbar></div>
+        <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+        <div class="md-content page_content_wrapper" id="top">
+            <div class="content_head bg-light lter b-b wrapper-md ng-scope">
+                <h1 class="m-n font-thin h3">Resource Price List</h1>
+            </div>
+            <div class="wrapper-md ng-scope">
+                <a href="#/customer-price-list" class="btn btn-info">Client Price List</a>
+                <a href="#/resource-price-list" class="btn btn-info active">Resource Price List</a>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form id="price-List-form">
+                            <div class="col-sm-12">
+                                <div class="col-sm-6"
+                                    style="padding: 20px;border: 1px solid #ccc;background:#eee;border-radius:15px;">
+
+                                    <div class="col-sm-5">
+                                        <div class="form-group">
+                                            <label>Select price list</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" select2-price-list data-typeid="1" id="customerPriceId"
+                                                class="form-control" name="currency" ng-model="customerPriceId"
+                                                ng-change="customerChange(customerPriceId)" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-1" ng-show="customerPriceId">
+                                        <a><i class="iconDelete glyph-icon fa-times" ng-click="removecustomerPriceId()"></i></a>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <div class="form-group">
+                                            <label>Change name of price list</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Change Name"
+                                                name="customerPriceName" ng-model="customerPrice.price_name" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12" style="margin-top:5%;">
+                                        <div class="form-group">
+                                            <label>New price list</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Create new price list</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button type="button" ng-click="newCustomer()" class="btn btn-info"
+                                            style="padding: 4px;margin-left: -40px;">
+                                            Create
+                                        </button>
+                                        <!-- <a href="javascript:void(0)" ng-click="newCustomer()"><i class="fa fa-file-o 4x newCustomer"></i></a> -->
+                                    </div>
+                                    <div class="col-sm-12"></div>
+                                    <div class="col-sm-5">
+                                        <div class="form-group">
+                                            <label>Copy Resource price list</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="text" select2-price-list data-typeid="1" id="customerPricecopyId"
+                                            class="form-control" name="currency" ng-model="customerPricecopyId" />
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <button type="button" ng-click="copyCustomer(customerPricecopyId)"
+                                            class="btn btn-info" style="padding:5px;margin-left: -20px;">
+                                            Copy
+                                        </button>
+                                        <!--  <a href="javascript:void(0)" ng-click="copyCustomer(customerPricecopyId)"><i class="fa fa-file-o 4x newCustomer"></i></a> -->
+                                    </div>
+                                </div>
+                                <!-- ng-show="customerPriceList" -->
+                                <div class="col-sm-6 customerPriceList" ng-show="customerPriceList">
+                                    <!-- <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Memo</label>
+                                                    <textarea ng-model="customerPrice.memo" class="form-control"></textarea>
+                                                </div>    
+                                            </div> -->
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Name</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="Enter Resource Price List Name" name="customerPriceName"
+                                                ng-model="customerPrice.price_name" id="customerPriceName" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Currency</label>
+                                            <input type="text" select2-currency-convert data-typeid="1"
+                                                id="price_currency" class="form-control" name="currency"
+                                                ng-model="customerPrice.price_currency" required />
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>CAT calculation basis</label>
+                                                    <input type="text" select2-calculation-basis data-typeid="1" id="calculation_basis" class="form-control" name="calculationBasis"  ng-model="customerPrice.calculation_basis" required/>
+                                                </div>    
+                                            </div> -->
+                                    <!-- <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label>Rounding procedure</label>
+                                                    <input type="text" select2-rounding data-typeid="1" id="rounding_proc" class="form-control" name="rounding_procesor"  ng-model="customerPrice.rounding_proc" required/>
+                                                </div>    
+                                            </div> -->
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Minimum Charge</label>
+                                            <input type="number" class="form-control" placeholder="Enter Minimum Price"
+                                                min="0" name="min_price_per_item"
+                                                ng-model="customerPrice.min_price_item" is-number required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label>Specialization</label>
+                                            <!-- <input type="checkbox" id="chkAll" >Select All -->
+                                            <input type="text" select2-specialization data-typeid="1"
+                                                id="specialization" class="form-control" name="specialization"
+                                                ng-model="customerPrice.specialization" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!--  -->
+                        <div class="col-sm-12" ng-show="customerPriceList">
+                            <table class="table m-b-none default footable-loaded footable">
+                                <thead class="priceTable">
+                                    <th style="width: 7%;" class="topMenu topMenu-Active">
+                                        Prices
+                                    </th>
+                                    <th style="width: 12%;" class="topMenu">
+                                        Planned time
+                                    </th>
+                                    <td colspan="6">
+                                        &nbsp;
+                                    </td>
+                                </thead>
+                            </table>
+                            <table class="table m-b-none default footable-loaded footable customerPriceTable"
+                                ng-hide="plannedTime">
+                                <thead style="background-color: #e0e0e0;">
+                                    <th>Languages</th>
+                                    <th style="border-right: 1px solid #ccc;">Price factor</th>
+                                    <th>Quantity</th>
+                                    <th>Price unit</th>
+                                    <th>Prices</th>
+                                    <th>Weighting</th>
+                                </thead>
+                            </table>
+                            <table class="table m-b-none default footable-loaded footable customerPriceTable"
+                                style="width:37.7%; float:left;  border-right:1px solid #ccc;" ng-hide="plannedTime">
+                                <tbody>
+                                    <tr class="rowactivate priceLPrice">
+                                        <td colspan="3"><strong>Change prices</strong></td>
+                                    </tr>
+                                    <tr class="priceLPrice" ng-repeat="langPrice in priceLanguageList"
+                                        id="priceLanguageID{{$index}}">
+                                        <td class="priceLanguage{{$index}}" ng-bind="langPrice.languagePrice">
+
+                                        </td>
+                                        <td>
+                                            <a><i class="iconDelete glyph-icon fa-times" ng-click="removePriceLanguage($index)"></i></a>
+                                        </td>
+                                        <td>
+                                            <a><i title="Set This Language" class="fa fa-caret-right" aria-hidden="true"
+                                                    ng-click="sendPriceLanguage($index)"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr class="itemList">
+                                        <td colspan="3">
+                                            <div class="col-sm-12">
+                                                <div class="col-sm-5">
+                                                    <input select2-multiple-languages-data id="source_lang" type="text"
+                                                        name="sourcelang" ng-model="item.source_lang"
+                                                        class="form-control sourcelanguages" required />
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <input select2-multiple-languages-data id="targetLanguage"
+                                                        type="text" name="sourcelang" ng-model="item.target_lang"
+                                                        class="form-control sourcelanguages" required />
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <button id="okBtn" class="btn-info but"
+                                                        language-price-list>ok</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table m-b-none default footable-loaded footable customerPriceTable"
+                                style="width:62%; border-left:1px solid #ccc;" ng-hide="plannedTime">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="5"><strong class="setPriceLanguage">Change prices</strong></td>
+                                    </tr>
+                                    <tr ng-repeat="priceBase in  priceBasiList" class="basePriceMain{{$index}}">
+                                        <td>
+                                            <div class="col-sm-12">
+                                                <div class="col-sm-2">
+                                                    <input type="text" id="basepriceQuantity{{$index}}" only-digits
+                                                        class="form-control" name="basepriceQuantity"
+                                                        ng-change="basePriceQuantityChnage($index, baseQuentity[$index])"
+                                                        ng-model="baseQuentity[$index]" required>
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <a ng-click="basePriceCheck($index)"><i
+                                                            ng-class="(priceBase.basePricecheck == 1) ? 'fa fa-check' : 'iconDelete glyph-icon fa-times'"
+                                                            id="basePriceCheck{{$index}}" aria-hidden="true"></i></a>
+                                                </div>
+                                                <div class="col-sm-3" id="basePriceUnit{{$index}}">
+                                                    {{priceBase.basePriceUnit}}
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <input type="text" class="form-control" id="basePrice{{$index}}"
+                                                        only-digits name="basePrice" ng-model="basePrice[$index]"
+                                                        required ng-change="basePriceChnage($index, basePrice[$index])">
+                                                </div>
+                                                <div ng-if="!basePrice[$index] || !baseQuentity[$index]"
+                                                    class="col-sm-2" id="baseWaiting{{$index}}">
+                                                    0
+                                                </div>
+                                                <div ng-if="basePrice[$index] && baseQuentity[$index]" class="col-sm-2"
+                                                    id="baseWaiting{{$index}}">
+                                                    {{basePrice[$index] * baseQuentity[$index]}}
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <a><i class="iconDelete glyph-icon fa-times"
+                                                            ng-click="removeBasePrice($index)"></i></a>
+                                                </div>
+                                                <div class="col-sm-2 none standardTime{{$index}}">
+                                                    {{priceBase.standardTime}}
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="basePriceAdd">
+                                        <td colspan="5">
+                                            <div class="col-sm-12">
+                                                <div class="col-sm-4">
+                                                    <label>Base price/other price</label>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <select class="form-control m-b w-md" ng-init="priceUnit = '0'"
+                                                        id="priceUnit" name="priceUnit" ng-model="priceUnit" required>
+                                                        <option value="0">--Please Select--</option>
+                                                        <optgroup ng-repeat="master in masterPrice"
+                                                            label="{{master.name}}">
+                                                            <option ng-repeat="child in childPrice"
+                                                                ng-if="child.master_price_id == master.master_price_id"
+                                                                value="{{child.name}},{{child.hours}}">{{child.name}}
+                                                            </option>
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <button class="btn-info but" base-price-add>ok</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table m-b-none default footable-loaded footable customerPriceTable"
+                                ng-show="plannedTime">
+                                <thead style="background-color: #e0e0e0;">
+                                    <th>#</th>
+                                    <th>Quantity</th>
+                                    <th>Price Unit</th>
+                                    <th>Quantity Per Hour</th>
+                                </thead>
+                                <tbody class="plannedTimerow">
+                                    <tr ng-repeat="priceBase in  priceBasiList" class="plannedData{{$index}}">
+                                        <td ng-bind="$index + 1"></td>
+                                        <td class="plannedQuentity{{$index}}" ng-bind="priceBase.baseQuentity"></td>
+                                        <td ng-bind="priceBase.basePriceUnit"></td>
+                                        <td class="plannedStandardTime{{$index}}" ng-bind="priceBase.standardTime"></td>
+                                    </tr>
+                                    <tr class="plannTime">
+                                        <td></td>
+                                        <td class="totalPlannQuentity"><strong ng-bind="planedQuaTotal"></strong></td>
+                                        <td></td>
+                                        <td class="totalPlannHour"><strong ng-bind="planedHourTotal"></strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer" ng-show="customerPriceList">
+                    <button class="btn btn-info" ng-click="save('price-List-form');"><i class="fa fa-floppy-o"
+                            aria-hidden="true"></i> Save</button>
+                </div>
+                </form>
+                <!-- footer copy right -->
+                <div data-ng-include="'tpl/copyRight.html'"></div>
+            </div>
+            
+        </div>
+
+    </div>
+</div>
+</div>

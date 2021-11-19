@@ -1,0 +1,535 @@
+<style type="text/css">
+   .nav-pills.nav-wizard>>ul>li {
+      border-right: 78px solid #eef5fa !important;
+   }
+
+   .hrght {
+      float: right;
+      color: red;
+      margin-top: -1.5%;
+   }
+
+   .itemsheader {
+      border-bottom: 1px solid #eaeff0;
+      margin-bottom: 12px;
+      padding-bottom: 7px;
+      font-weight: bold;
+   }
+
+   .itemsheader div:nth-child(3) {
+      padding-left: 8px;
+      padding-right: 8px;
+   }
+
+   .pls-language-container a.favlang {
+      font-weight: bold !important;
+      color: #333 !important;
+      /*background-color: yellow !important;*/
+   }
+</style>
+<script type="text/javascript">
+   function myFunction() {
+      $('#numOfItems').keyup(function () {
+         if (!this.value.match(/[0-9]/)) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+         }
+      });
+   }
+</script>
+<div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1"
+   data-ng-include=" 'tpl/material.header.html' ">
+</div>
+<div layout="row">
+   <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs"
+      data-ng-include=" 'tpl/material.aside.html' ">
+   </div>
+   <div flex layout="column">
+      <div ui-butterbar></div>
+      <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside"></a>
+      <div class="md-content items_page page_content_wrapper">
+
+         <div class="content_head d-flex justify-space-between bg-light lter b-b wrapper-md ng-scope">
+            <div class="left">
+               <h1 class="font-thin h3">
+                  Scoops -
+                  <span id="itemCode" ng-bind="projectOrderName"></span>
+                  <span>{{indirectCustomerName}}</span>
+               </h1>
+            </div>
+            <div class="right scoopText">
+               <!-- <a href="javascript:history.back()" class="btn btn-info">back<span
+                     class="fa fa-times1"></span></a> -->
+               <!-- <a href="javascript:void(0);" ng-click="createItems()" style="margin-right: 5px;"
+                  class="btn btn-info">Create Scoop<span class="fa fa-times1"></span></a> -->
+                  <!-- <input select2-proj-type type="text" class="form-control"
+                  name="project_type" ng-model="it.project_type"
+                  id="project_type{{it.itemId}}" required> -->
+               <div class="d-flex align-center">
+               <input select2-create-scoop type="text" class="form-control scooopid" ng-change="createItems(numOfScoopItems)" name="scoopItem" ng-model="numOfScoopItems" id="numOfScoopItems" ng-init="numOfScoopItems = '0'" placeholder="Create Scoop">      
+               <!-- <div class="scoop_selectbox btn btn-info" style="display: none;">
+                  <select id="numOfScoopItems" ng-change="createItems()"  name="scoopItem" ng-model="numOfScoopItems" ng-init="numOfScoopItems = '0'" > 
+                     <option value="0"> Create Scoop </option>
+                     <option value="1"> 1 </option>
+                     <option value="2"> 2 </option>
+                     <option value="3"> 3 </option>
+                     <option value="4"> 4 </option>
+                     <option value="5"> 5 </option>
+                  </select>
+               </div> -->
+               <a href="javascript:void(0);" ng-click="goTojobDetail()" style="margin-right: 5px;"
+               ng-if="itemList.length >0" class="btn btn-info">Go to jobs<span
+                  class="fa fa-times1"></span></a>
+               </div>      
+            </div>
+            <div class="hrght1" ng-if="showEditedByName">
+               <h5>This record is currently edited by {{UpdateClientName}}<h5>
+            </div>
+         </div>
+         <div class="wrapper-md ng-scope">
+
+            <ul class="nav nav-pills nav-wizard" style="display: flex;justify-content: center;">
+               <li>
+                  <a href="#/general">General</a>
+                  <div class="nav-arrow"></div>
+               </li>
+               <li class="active">
+                  <div class="nav-wedge"></div>
+                  <a href="#/items">Scoop</a>
+                  <div class="nav-arrow"></div>
+               </li>
+               <li>
+                  <div class="nav-wedge"></div>
+                  <a href="javascript:void(0)" ng-click="goTojobDetail()">Jobs</a>
+                  <div class="nav-arrow"></div>
+               </li>
+               <li>
+                  <div class="nav-wedge"></div>
+                  <a href="javascript:void(0)" ng-click="jobDiscussion()">Job Discussion</a>
+                  <!-- <a href="javascript:void(0)" ng-click="goTojobDetail()">Jobs</a> -->
+               </li>
+            </ul>
+            <div class="panel panel-default boxgtr">
+
+               <div class="panel-body">
+                  <div class="tab-content" id="scrollItem">
+                     <div id="w4-tab1" class="tab-pane active">
+                        <div ng-repeat="it in itemList" class="alternateGrayColor">
+                           <form id="item-form{{it.itemId}}">
+                              <!--   TAB1 -->
+                              <div class="row">
+                                 <div class="col-sm-12">
+                                    <div class="panel panel-default">
+                                       <div class="panel-heading font-bold">
+                                          <h4>
+                                             Scoop -
+                                             <span id="itemCode" class="itemCode{{it.itemId}}"
+                                                ng-bind="projectOrderName"></span>
+                                             <span class="itemClient{{it.itemId}}">{{indirectCustomerName}}</span>
+                                             <span>{{it.item_number | numberFixedLen:3}}</span>
+                                             <a href="javascript:void(0)"
+                                                ng-click="deleteItemsId(it.itemId,it.item_number)" title="delete"
+                                                style="margin-right:40px;float:right;">
+                                                <i class="iconDelete glyph-icon fa-times"></i>
+                                             </a>
+                                          </h4>
+                                       </div>
+                                       <div class="panel-body p-0">
+                                          <div class="col-sm-12 p-0">
+                                             <table class="pl-0 pr-0 table m-b-none default footable-loaded footable">
+                                                <thead>
+                                                   <th width="5%">Scoop</th>
+                                                   <th width="40%"><span style="padding: 30px;">Scoop Name</span></th>
+                                                   <th width="20%">Amount in <span id="currency"></span></th>
+                                                   <th width="30%">Further information</th>
+                                                </thead>
+                                                <tbody>
+                                                   <tr>
+                                                      <td id="item_number{{it.itemId}}" style="width: 12%;">
+                                                         {{it.item_number | numberFixedLen:3}}</td>
+                                                      <td colspan="2" style="border-right: 1px solid #eaeff0;">
+                                                         <div style="max-height: 502px; overflow-y: auto;">
+                                                            <div class="col-sm-12">
+                                                               <div class="col-sm-8">
+                                                                  <div class="form-group">
+                                                                     <!-- <label class="control-label">Item Name</label> -->
+                                                                     <!-- <textarea class="form-control" id="item_name" name="item_name" value="{{item.source_lang}}" ng-model="item.item_name" style="resize: none;" required readonly=""></textarea> -->
+                                                                     <div id="item_name{{it.itemId}}"
+                                                                        name="item_name{{it.itemId}}"
+                                                                        ng-model="it.item_name">{{it.item_name}}</div>
+                                                                  </div>
+                                                               </div>
+                                                               <div class="col-sm-4">
+                                                                  <span>{{ClientCurrency}}</span> <span
+                                                                     id="totalItemPrice">{{it.total_price |
+                                                                     NumbersCommaformat}}</span>
+                                                               </div>
+                                                            </div>
+                                                            <div class="col-sm-12 itemsheader">
+                                                               <div class="col-sm-2 ">Quantity</div>
+                                                               <div class="col-sm-4">Price Unit</div>
+                                                               <div class="col-sm-2">Unit Price</div>
+                                                               <div class="col-sm-2">Prices</div>
+                                                            </div>
+                                                            <div ng-repeat="it1 in itemPriceUni[it.itemId] track by $index"
+                                                               class="col-sm-12" id="totalItem_{{it.itemId}}">
+                                                               <div class="col-sm-2">
+                                                                  <div class="form-group">
+                                                                     <input type="text" class="form-control"
+                                                                        name="itemQuantity" id="itemQuantity{{it.itemId}}"
+                                                                        ng-change="changeItemField(it.itemId,$index,$parent.$index)"
+                                                                        ng-model="it1.quantity" numbers-only />
+                                                                  </div>
+                                                               </div>
+                                                               <div class="col-sm-4" style="margin-top:1%;">
+                                                                  <label class="summeryColor"
+                                                                     id="priceList{{it.itemId}}">{{it1.pricelist}}</label>
+                                                               </div>
+                                                               <div class="col-sm-2">
+                                                                  <div class="form-group">
+                                                                     <input type="text" class="form-control price"
+                                                                        name="itemPrice" id="itemPrice{{it.itemId}}"
+                                                                        ng-change="changeItemField(it.itemId,$index,$parent.$index)"
+                                                                        ng-model="it1.itemPrice"
+                                                                        allow-decimal-comma-number />
+                                                                  </div>
+                                                               </div>
+                                                               <div class="col-sm-2"
+                                                                  style="padding-left:5px;padding-right:5px;">
+                                                                  <div class="form-group">
+                                                                     <input type="text" class="form-control price"
+                                                                        name="itemTotal" id="itemTotal{{it.itemId}}"
+                                                                        ng-change="changeItemField(it.itemId,$index,$parent.$index,1)"
+                                                                        ng-model="it1.itemTotal"
+                                                                        allow-decimal-comma-number />
+                                                                     <span name="amtSum" id="amtSum{{it.itemId}}"
+                                                                        ng-model="it1.amtSum"
+                                                                        style="visibility: hidden;">{{it1.itemTotal
+                                                                        |customNumber}}</span>
+                                                                  </div>
+                                                               </div>
+
+                                                               <!-- <div class="col-sm-2" style="margin-top:1%;">
+                                                            <span id="itemTotal{{it.itemId}}">{{it1.itemTotal |customNumber}}</span>
+                                                         </div> -->
+                                                               <!-- <div class="col-sm-2">
+                                                            <input type="text" select2-item-tax class="form-control" id="itemTaxP{{index+1}}" name="itemTaxP" ng-model="it.itemTaxP"/>
+                                                         </div> -->
+                                                               <div class="col-sm-1" style="margin-top:1%;">
+                                                                  <a href="javascript:void(0);"
+                                                                     ng-click="itemQuentityDelete(it.itemId,$index,$parent.$index)"><i
+                                                                        class="iconDelete glyph-icon fa-times"
+                                                                        aria-hidden="true"></i></a>
+                                                               </div>
+                                                            </div>
+                                                            <div class="col-sm-12 put_row">
+                                                               <div class="col-sm-2">
+                                                                  <div class="form-group">
+                                                                     <!-- <label class="control-label">Total amount</label>  -->
+                                                                     <input type="text" numbers-only class="form-control"
+                                                                        name="Quantity" id="Quantity{{it.itemId}}"
+                                                                        ng-model="quantity" min="0"
+                                                                        placeholder="Quantity" />
+                                                                  </div>
+                                                               </div>
+                                                               <div class="col-sm-4">
+                                                                  <div class="form-group">
+                                                                     <items-add2>
+                                                                        <select class="form-control m-b"
+                                                                           ng-init="priceUnit = '0'"
+                                                                           id="priceUnit{{it.itemId}}" name="priceUnit"
+                                                                           ng-model="priceUnit" required>
+                                                                           <option value="0">--Please Select--</option>
+                                                                           <optgroup ng-repeat="master in masterPrice"
+                                                                              label="{{master.name}}">
+                                                                              <option ng-repeat="child in childPrice"
+                                                                                 ng-if="child.master_price_id == master.master_price_id"
+                                                                                 value="{{master.name}} {{child.name}},{{child.rate}}">
+                                                                                 {{child.name}}</option>
+                                                                           </optgroup>
+                                                                        </select>
+                                                                     </items-add2>
+                                                                  </div>
+                                                               </div>
+                                                               <!--
+                                                         <div class="col-sm-1" style="margin-top:4px">
+                                                            <items-add><i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i></items-add>
+                                                         </div> -->
+                                                               <div class="col-sm-1">
+                                                               </div>
+                                                               <!-- <div class="col-sm-3">
+                                                            <input type="text" ng-init="itemTax='2'" select2-item-tax class="form-control" id="itemTax" name="itemTax" ng-model="itemTax" required/>
+                                                         </div> -->
+                                                            </div>
+                                                         </div>
+                                                      </td>
+                                                      <!-- <td style="border-right: 1px solid #eaeff0;"></td> -->
+                                                      <td style="width: 30%;">
+                                                         <div class="col-sm-5">
+                                                            <div class="form-group">
+                                                               <label>Source language</label>
+                                                               <!-- <input select2-languages-data id="source_lang" type="text" name="sourcelang" ng-model="item.source_lang" class="form-control sourcelanguages" ng-change="itemsNamechange()" required /> -->
+                                                               <div id="source_lang{{it.itemId}}" style="display:none">
+                                                               </div>
+                                                               <pls id="plsSourceLang{{it.itemId}}" open-mode="hover"
+                                                                  grid-columns="4" show-flag="true"
+                                                                  selected-lang="en_US" items="plsModel.languages40"
+                                                                  language-changed-callback="onLanguageChanged(lang,$index)"
+                                                                  class="allsourcelang"></pls>
+
+                                                               <div id="indexItemSource{{it.itemId}}"
+                                                                  style="display: none;">{{$index}}</div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-sm-5">
+                                                            <div class="form-group">
+                                                               <label>Target language</label>
+                                                               <!-- <input type="text" select2-languages-data class="form-control targetlanguages" id="target_lang" name="targetlang" ng-model="item.target_lang" ng-change="itemsNamechange()" required/> -->
+                                                               <div id="target_lang{{it.itemId}}" style="display:none">
+                                                               </div>
+                                                               <pls style="z-index:1 !important"
+                                                                  id="plsTargetLang{{it.itemId}}" open-mode="hover"
+                                                                  grid-columns="2" show-flag="true"
+                                                                  selected-lang="en_US" items="plsModel.languages40"
+                                                                  language-changed-callback="onLanguageChanged(lang)"
+                                                                  class="alltargetlang"></pls>
+                                                               <div id="indexItemTarget{{it.itemId}}"
+                                                                  style="display: none;">{{$index}}</div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-sm-2" style="margin-top: 20px;">
+                                                            <a href="javascript:void(0);"
+                                                               ng-click="itemfolderOpen(it.itemId)"
+                                                               style="float: left;"><i class="itemFolder"
+                                                                  title="Item file folder"></i></a>
+                                                            <p id="filescount{{it.itemId}}"
+                                                               style="background-color: #3615a0; border: 2px solid #fff; float: right;    position:absolute;margin: -5px 0 0 -11px"
+                                                               class="badge"></p>
+                                                         </div>
+                                                         <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                               <label class="control-label">Project Type:</label>
+                                                               <input select2-proj-type type="text" class="form-control"
+                                                                  name="project_type" ng-model="it.project_type"
+                                                                  id="project_type{{it.itemId}}" required>
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                               <label class="control-label">Due Date</label>
+                                                               <input ng-Datepicker2
+                                                                  id="showEditedByName_date{{it.itemId}}" type="text"
+                                                                  class="form-control end_date" name="end_date"
+                                                                  ng-model="it.due_date" required autocomplete=""
+                                                                  onkeydown="return false" />
+
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                               <label>Due Time</label>
+                                                               <input timepicker1 id="due_time{{$index}}" type="text"
+                                                                  class="form-control" name="due_time"
+                                                                  ng-model="due_time" required onkeydown="return true"
+                                                                  allowtimefrmt />
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                               <label>PO number</label>
+                                                               <input type="text" class="form-control"
+                                                                  id="po_number{{it.itemId}}"
+                                                                  name="po_number{{it.itemId}}"
+                                                                  ng-model="it.po_number" />
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                               <label>Client Contact</label>
+                                                               <input type="text" select2-contact-person
+                                                                  class="form-control contactperson"
+                                                                  id="contactPerson{{it.itemId}}"
+                                                                  name="contact_person{{it.itemId}}"
+                                                                  ng-model="it.contact_person" required />
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                               <label class="control-label">Email Subject</label>
+                                                               <input type="text" class="form-control"
+                                                                  id="EmailSub{{it.itemId}}"
+                                                                  name="item_email_subject{{it.itemId}}"
+                                                                  ng-model="it.item_email_subject" required />
+                                                            </div>
+                                                         </div>
+                                                         <div class="col-sm-12">
+                                                            <label class="control-label">Add new job/workflow</label>
+                                                            <select class="form-control m-b "
+                                                               ng-init="jobi.jobSummery = 'select'"
+                                                               name="jobchainName{{it.itemId}}"
+                                                               ng-model="jobi.jobSummery" id="jobchainName{{it.itemId}}"
+                                                               required>
+                                                               <option value="select">--Please Select--</option>
+                                                               <optgroup label="Job Chain">
+                                                                  <option class="summertablebc "
+                                                                     ng-repeat="jobdc in jobchainoption"
+                                                                     value="c{{jobdc.job_chain_id}}">{{jobdc.job_name}}
+                                                                  </option>
+                                                                  <option ng-if="jobchainoption.length < 1"
+                                                                     class="summertablebc " value="nochain"
+                                                                     ng-disabled="jobchainoption.length < 1">Not
+                                                                     available</option>
+                                                               </optgroup>
+                                                               <optgroup label="Job">
+                                                                  <option ng-repeat="jobd in joboption"
+                                                                     value="j{{jobd.job_id}}">{{jobd.service_name + ' ('
+                                                                     + jobd.job_code + ')'}}</option>
+                                                               </optgroup>
+                                                            </select>
+                                                            <!-- <input type="text" select2-workflow
+                                                                  class="form-control jobchainName"
+                                                                  id="jobchainName{{it.itemId}}"
+                                                                  name="jobchainName{{it.itemId}}"
+                                                                  ng-init="it.jobSummery = 'select'" ng-model="it.jobSummery"   required /> -->
+                                                         </div>
+                                                         <div class="col-sm-12">
+                                                            <div class="form-group">
+                                                               <label class="control-label">Scoop status</label>
+                                                               <!-- <input type="text" select2-job-detailitm-status
+                                                                  class="form-control" id="itemstatus" name="status"
+                                                                  ng-model="it.item_status" disabled required /> -->
+                                                                  <input type="text" select2-scoop-detailitm-status
+                                                                  class="form-control" id="itemstatus" name="status"
+                                                                  ng-model="it.item_status" required />   
+                                                            </div>
+                                                         </div>
+                                                        
+                                                      </td>
+                                                   </tr>
+                                                   <tr>
+                                                      <td colspan="3" class="p-0" style="border-top: 0">
+                                                         <div style="margin-top: -98px;">
+                                                            <table class="pl-0 pr-0 table m-b-none default footable-loaded footable">
+                                                               <tr>
+                                                                  <td class="pl-0">
+                                                                     <div class="form-group">
+                                                                        <label class="control-label">Scoop start date</label>
+                                                                        <input ng-datetimepicker1 id="start_date{{it.itemId}}"
+                                                                           type="text" class="form-control start-date"
+                                                                           name="start_date{{it.itemId}}"
+                                                                           ng-model="it.start_date" required
+                                                                           onkeydown="return false" readonly="" />
+                                                                     </div>
+                                                                  </td>
+                                                                  <td>
+                                                                     <div class="form-group">
+                                                                        <label class="control-label ">Project Manager</label>
+                                                                        <input type="text" id="manager{{it.itemId}}"
+                                                                           class="form-control ProManager" name="vProjectManager"
+                                                                           select2-manager ng-model="it.manager" disabled />
+                                                                     </div>
+                                                                  </td>
+                                                                  <td>
+                                                                     <div class="form-group">
+                                                                        <label class="control-label">Project Coordinator</label>
+                                                                        <input type="text" class="form-control ProCoordinator"
+                                                                           name="Coordinator" id="coordinator{{it.itemId}}"
+                                                                           select2-coordinator ng-model="it.coordinator"
+                                                                           disabled />
+                                                                     </div>
+                                                                  </td>
+                                                               </tr>
+                                                            </table>
+                                                         </div>
+                                                      </td>
+                                                   </tr>
+                                                   <tr>
+                                                      <td colspan="4">
+                                                         <button class="btn btn-info"
+                                                            ng-click="saveitems(it.itemId,$index);"><i
+                                                               class="fa fa-floppy-o" aria-hidden="true"></i>
+                                                            Save</button>
+
+                                                         <!-- <button class="btn btn-info"
+                                                      ng-click="closeItem('item-form');"><i class="fa fa-floppy-o" aria-hidden="true"></i> Close</button> -->
+                                                      </td>
+                                                   </tr>
+                                                </tbody>
+                                             </table>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </form>
+                        </div>
+                     </div>
+                     <table class="table m-b-none default footable-loaded footable">
+                        <thead>
+                           <th>#</th>
+                           <th>Scoop Number</th>
+                           <!-- <th>Project Name</th> -->
+                           <th>Due Date</th>
+                           <th>Scoop Status</th>
+                           <th>Job Status</th>
+                           <th>Price</th>
+                           <th>Action</th>
+                        </thead>
+                        <tbody>
+                           <tr ng-repeat="it2 in TblItemList" id="trRowId{{it2.itemId}}">
+                              <td id="poitemli">{{$index + 1}}</td>
+                              <td>{{it2.item_number| numberFixedLen:3}}</td>
+                              <!-- <td>{{it2.project_name}}</td> -->
+                              <td>
+                                 <span ng-if="it2.due_date"
+                                    id="dynamicFilrtDueSet{{it2.itemId}}">{{it2.due_date}}</span>
+                                 <span ng-if="!it2.due_date">Not set yet</span>
+                              </td>
+                              <td ng-bind="it2.item_status"></td>
+                              <td>
+                                 <div>
+                                    <a href="javascript:void(0)" ng-click="jobitemsIdStatus(it2.itemId)">
+                                       <span class="summeryColor" id="sumimg{{$index}}"></span>
+                                       <span class="summeryColor" id="itemPer{{$index}}"></span><span
+                                          class="summeryColor" id="progress{{$index}}">% Progress</span>
+                                    </a>
+                                    <span id="noJob{{$index}}" class="jbClassDel{{it2.itemId}}"></span>
+                                 </div>
+                              </td>
+                              <td ng-if="!it2.total_amount">{{0 |customNumber}}</td>
+                              <td ng-if="it2.total_amount">{{it2.total_amount |customNumber}}</td>
+                              <td>
+                                 <!--  <a href="javascript:void(0)" ng-click="getitemsId(it2.itemId, 'scrollItem')" title="edit">
+                              <i class="glyph-icon fa-edit"></i></a> / -->
+                                 <a href="javascript:void(0)" ng-click="deleteItemsId(it2.itemId,it2.item_number)"
+                                    title="delete">
+                                    <i class="glyph-icon iconDelete fa-times"></i>
+                                 </a>
+                              </td>
+                           </tr>
+                           <tr ng-show="projectItemEmpty">
+                              <td colspan="4" ng-bind="dataNotFound"></td>
+                           </tr>
+                           <tr ng-show="!projectItemEmpty">
+
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td><strong><span id="crnt1Cur"></span> {{totalPrice | customNumber}}</strong></td>
+                              <td colspan="2"></td>
+                           </tr>
+                        </tbody>
+                     </table>
+
+                  </div>
+               </div>
+            </div>
+         <!-- footer copy right -->
+         <div data-ng-include="'tpl/copyRight.html'"></div>
+         </div>
+      </div>
+      
+   </div>
+</div>
+</div>

@@ -1,0 +1,75 @@
+  <div ng-init="app.settings.container = false;" class="md-navbar navbar blue md-whiteframe-z1" data-ng-include=" 'tpl/material.header.html' " >
+  </div>
+  <div layout="row">
+    <div flex class="bg-white md-whiteframe-z0 md-aside md-content hidden-xs" data-ng-include=" 'tpl/material.aside.html' ">
+    </div>
+    <div flex layout="column">
+      <div ui-butterbar></div>
+      <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".md-aside" ></a>
+      <div class="md-content page_content_wrapper" id="top">
+      <div class="content_head bg-light lter b-b wrapper-md ng-scope d-flex justify-space-between">
+          <h1 class="m-n font-thin h3">Master Price Unit</h1>
+          <div>            
+        <a href="#/master-price" class="btn btn-info active">Master Price</a>
+        <a href="#/child-price" class="btn btn-info">Child Price</a>
+        <a href="#/rounding-price" class="btn btn-info">Rounding Price</a>
+          </div>
+        </div>
+        <div class="wrapper-md ng-scope">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <form id="master-price-form">
+                  <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label>Name</label>
+                                                <input type="text" class="form-control" placeholder="Enter Master price Name" name="MasterPriceName" ng-model="master.name" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="checkbox">
+                                                <label class="i-checks i-checks-sm" style="padding-top: 20px;">
+                                                    <input type="checkbox" name="is_active" ng-true-value="1" ng-false-value="0" ng-model="master.is_active" ng-checked="master.is_active == 1">
+                                                    <i></i>
+                                                    Active(check to active)
+                                                </label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="panel-footer pl-0 pr-0">
+                                    <button class="btn btn-info btnSave" ng-click="save('master-price-form');"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+                                </div>
+              </form>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <table class="table table-striped b-t b-b table-bordered" datatable="ng" id="masterPriceList">
+              <thead>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="mp in masterList" ng-class="(mp.master_price_id == master.master_price_id) ? 'rowactivate' : ''">
+                                                <td ng-bind="$index + 1"></td>
+                                                <td ng-bind="mp.name"></td>
+                                                <td ng-if="mp.is_active == '1'">
+                                                  <span class="label bg-success" title="active">Active</span>
+                                                </td>
+                                                <td ng-if="mp.is_active == '0'">
+                                                  <span class="label bg-danger" title="   Inactive">Inactive</span>
+                                                </td> 
+                                                <td><a href="javascript:void(0)" ng-click="getMasterPrice(mp.master_price_id, 'top');" title="edit"><i class="glyph-icon fa-edit"></i></a>  <a href="javascript:void(0)" ng-click="deleteMasterprice(mp.master_price_id)" title="delete"><i class="iconDelete glyph-icon fa-times"></i></a></td>
+                                            </tr>
+                                             
+                                        </tbody>
+            </table>
+          </div>
+        <!-- footer copy right -->
+        <div data-ng-include="'tpl/copyRight.html'"></div>
+
+        </div>
+    </div>
+  </div>
